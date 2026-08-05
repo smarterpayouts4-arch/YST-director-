@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+:root {
+  --rail: #0f1c2e;
+  --rail-muted: #9fb0c5;
+  --canvas: #f7f4ef;
+  --ink: #171412;
+  --accent: #3730a3;
+  --border: #e4ddd3;
+  --ok: #166534;
+  --warn: #b45309;
+  --danger: #b91c1c;
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-instrument);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--canvas);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+.editorial {
+  font-family: var(--font-instrument), Georgia, serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
