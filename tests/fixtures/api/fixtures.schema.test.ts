@@ -14,7 +14,7 @@ import { makeCompanyUnderstanding } from "./company-understanding";
 import { makeConfirmedProfile } from "./confirmed-profile";
 import { makeInterviewAnswer, makeInterviewQuestion } from "./interview-question";
 import { makeResearchBrief } from "./research-brief";
-import { makeFinalPrompt } from "./final-prompt";
+import { makeFinalPrompt, makeFormattedPrompt } from "./final-prompt";
 import { makeSupportingContext } from "./supporting-context";
 
 /**
@@ -50,5 +50,10 @@ describe("API fixtures stay schema-valid", () => {
     const lint = lintPromptContract(formatResearchPrompt(prompt));
     expect(lint.issues).toEqual([]);
     expect(lint.ok).toBe(true);
+  });
+
+  it("makeFormattedPrompt matches the real formatter byte-for-byte", () => {
+    const prompt = makeFinalPrompt();
+    expect(makeFormattedPrompt(prompt)).toBe(formatResearchPrompt(prompt));
   });
 });
