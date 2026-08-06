@@ -21,10 +21,12 @@ import {
 
 const CONDITIONAL_CAP_ISSUE = `Conditional question cap reached (max ${MAX_CONDITIONAL_QUESTIONS}). Return a non-conditional question targeting an unresolved core decision, or done:true with a completionReason if every core decision is resolved.`;
 
+// OpenAI structured outputs require every property to be present: use
+// `.nullable()` (not bare `.optional()`) for fields that may be empty.
 const NextQuestionResponseSchema = z.object({
   done: z.boolean(),
-  completionReason: z.string().min(5).max(500).optional(),
-  question: InterviewQuestionSchema.optional(),
+  completionReason: z.string().min(5).max(500).nullable(),
+  question: InterviewQuestionSchema.nullable(),
 });
 
 const CORE = [
