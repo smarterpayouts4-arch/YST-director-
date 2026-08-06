@@ -47,7 +47,10 @@ export type ResearchPromptProject = {
   /** Formal workflow state machine value (legacy AppStage strings migrate on load). */
   currentStage: import("@/features/research-prompt-builder/state/workflow-states").WorkflowState;
   currentQuestionIndex: number;
+  /** Real operation failures only (model/ingest/validation). */
   lastFailureCode?: string;
+  /** Last rejected illegal transition; cleared on any legal transition. */
+  lastDiagnostic?: import("@/features/research-prompt-builder/state/workflow-states").WorkflowDiagnostic;
   createdAt: string;
   updatedAt: string;
 };

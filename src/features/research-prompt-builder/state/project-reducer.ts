@@ -11,6 +11,7 @@ import {
   canTransition,
   COMPLETE,
   type FailureWorkflowState,
+  type WorkflowDiagnostic,
   type WorkflowState,
 } from "@/features/research-prompt-builder/state/workflow-states";
 
@@ -29,6 +30,35 @@ function clearDownstream(
     else (patch as Record<string, unknown>)[key] = undefined;
   }
   return patch;
+}
+
+/**
+ * Hard transition gate. Same-state moves are always legal; anything else must
+ * be listed in TRANSITION_META.allowedNext. Illegal attempts keep the current
+ * stage and project data untouched, recording only a WorkflowDiagnostic.
+ */
+function gateTransition(
+  state: ResearchPromptProject,
+  to: WorkflowState,
+  action: string,
+):
+  | { ok: true; stage: WorkflowState }
+  | { ok: false; rejected: ResearchPromptProject } {
+  const from = state.currentStage;
+  if (from === to || canTransition(from, to)) {
+    return { ok: true, stage: to };
+  }
+  const diagnostic: WorkflowDiagnostic = {
+    code: "ILLEGAL_TRANSITION",
+    from,
+    attemptedTo: to,
+    action,
+    occurredAt: now(),
+  };
+  return {
+    ok: false,
+    rejected: { ...state, lastDiagnostic: diagnostic, updatedAt: now() },
+  };
 }
 
 export function createEmptyProject(): ResearchPromptProject {
@@ -83,6 +113,8 @@ export function projectReducer(
     case "RESET":
       return createEmptyProject();
     case "INGESTION_SUCCESS":
+      // A successful upload starts a fresh project (RESET semantics), so the
+      // effective transition is always INGESTING → UNDERSTANDING_REVIEW.
       return {
         ...createEmptyProject(),
         projectId: state.projectId,
@@ -101,9 +133,12 @@ export function projectReducer(
         companyUnderstanding: action.understanding,
         currentStage: "UNDERSTANDING_REVIEW",
         lastFailureCode: undefined,
+        lastDiagnostic: undefined,
         updatedAt: now(),
       };
-    case "SET_CONFIRMED_PROFILE":
+    case "SET_CONFIRMED_PROFILE": {
+      const gate = gateTransition(state, "INTERVIEWING", action.type);
+      if (!gate.ok) return gate.rejected;
       return {
         ...state,
         confirmedProfile: action.profile,
@@ -116,23 +151,29 @@ export function projectReducer(
         ]),
         questions: [],
         answers: [],
-        currentStage: "INTERVIEWING",
+        currentStage: gate.stage,
         currentQuestionIndex: 0,
         lastFailureCode: undefined,
+        lastDiagnostic: undefined,
         updatedAt: now(),
       };
-    case "ADD_QUESTION":
+    }
+    case "ADD_QUESTION": {
+      const gate = gateTransition(state, "INTERVIEWING", action.type);
+      if (!gate.ok) return gate.rejected;
       return {
         ...state,
         questions: [...state.questions, action.question],
         currentQuestionIndex: state.questions.length,
-        currentStage: "INTERVIEWING",
+        currentStage: gate.stage,
         ...clearDownstream(state, ["researchBrief", "finalPrompt", "formattedPrompt"]),
         researchBrief: undefined,
         finalPrompt: undefined,
         formattedPrompt: undefined,
+        lastDiagnostic: undefined,
         updatedAt: now(),
       };
+    }
     case "SAVE_ANSWER": {
       const answers = [
         ...state.answers.filter((a) => a.questionId !== action.answer.questionId),
@@ -148,22 +189,30 @@ export function projectReducer(
         updatedAt: now(),
       };
     }
-    case "INTERVIEW_COMPLETE":
+    case "INTERVIEW_COMPLETE": {
+      const gate = gateTransition(state, "BRIEF_REVIEW", action.type);
+      if (!gate.ok) return gate.rejected;
       return {
         ...state,
-        currentStage: "BRIEF_REVIEW",
+        currentStage: gate.stage,
+        lastDiagnostic: undefined,
         updatedAt: now(),
       };
-    case "SET_BRIEF":
+    }
+    case "SET_BRIEF": {
+      const gate = gateTransition(state, "BRIEF_REVIEW", action.type);
+      if (!gate.ok) return gate.rejected;
       return {
         ...state,
         researchBrief: action.brief,
         finalPrompt: undefined,
         formattedPrompt: undefined,
-        currentStage: "BRIEF_REVIEW",
+        currentStage: gate.stage,
         lastFailureCode: undefined,
+        lastDiagnostic: undefined,
         updatedAt: now(),
       };
+    }
     case "EDIT_BRIEF":
       return {
         ...state,
@@ -172,41 +221,50 @@ export function projectReducer(
         formattedPrompt: undefined,
         updatedAt: now(),
       };
-    case "BEGIN_PROMPT_GENERATION":
+    case "BEGIN_PROMPT_GENERATION": {
+      const gate = gateTransition(state, "GENERATING_PROMPT", action.type);
+      if (!gate.ok) return gate.rejected;
       return {
         ...state,
-        currentStage: "GENERATING_PROMPT",
+        currentStage: gate.stage,
+        lastDiagnostic: undefined,
         updatedAt: now(),
       };
-    case "SET_FINAL_PROMPT":
+    }
+    case "SET_FINAL_PROMPT": {
+      const gate = gateTransition(state, COMPLETE, action.type);
+      if (!gate.ok) return gate.rejected;
       return {
         ...state,
         finalPrompt: action.prompt,
         formattedPrompt: action.formattedPrompt,
-        currentStage: COMPLETE,
+        currentStage: gate.stage,
         lastFailureCode: undefined,
-        updatedAt: now(),
-      };
-    case "SET_STAGE": {
-      if (
-        state.currentStage !== action.stage &&
-        !canTransition(state.currentStage, action.stage)
-      ) {
-        // Soft-allow for recovery navigation from UI; still record the target.
-      }
-      return {
-        ...state,
-        currentStage: action.stage,
+        lastDiagnostic: undefined,
         updatedAt: now(),
       };
     }
-    case "SET_FAILURE":
+    case "SET_STAGE": {
+      const gate = gateTransition(state, action.stage, action.type);
+      if (!gate.ok) return gate.rejected;
       return {
         ...state,
-        currentStage: action.state,
-        lastFailureCode: action.code,
+        currentStage: gate.stage,
+        lastDiagnostic: undefined,
         updatedAt: now(),
       };
+    }
+    case "SET_FAILURE": {
+      const gate = gateTransition(state, action.state, action.type);
+      if (!gate.ok) return gate.rejected;
+      return {
+        ...state,
+        currentStage: gate.stage,
+        lastFailureCode: action.code,
+        lastDiagnostic: undefined,
+        updatedAt: now(),
+      };
+    }
     default:
       return state;
   }

@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { SUPPORTING_ACCEPT_ATTR } from "@/config/upload-policy";
 import type {
   InterviewAnswer,
   InterviewQuestion,
@@ -109,7 +110,7 @@ export function InterviewQuestionView({
         <input
           ref={fileRef}
           type="file"
-          accept=".pdf,.docx,.txt,.md,.csv,.json"
+          accept={SUPPORTING_ACCEPT_ATTR}
           className="sr-only"
           onChange={async (e) => {
             const file = e.target.files?.[0];

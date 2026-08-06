@@ -1,12 +1,10 @@
-const CSV_EXTENSIONS = new Set([".csv"]);
-const SUPPORTING_EXTENSIONS = new Set([
-  ".pdf",
-  ".docx",
-  ".txt",
-  ".md",
-  ".csv",
-  ".json",
-]);
+import {
+  ALLOWED_CSV_EXTENSIONS,
+  ALLOWED_SUPPORTING_EXTENSIONS,
+} from "@/config/upload-policy";
+
+const CSV_EXTENSIONS = new Set<string>(ALLOWED_CSV_EXTENSIONS);
+const SUPPORTING_EXTENSIONS = new Set<string>(ALLOWED_SUPPORTING_EXTENSIONS);
 
 export function getExtension(fileName: string): string {
   const idx = fileName.lastIndexOf(".");
