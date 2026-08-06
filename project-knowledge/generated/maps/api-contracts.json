@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-08-06T02:19:48.530Z",
+  "commitSha": "958df514ae72d8ff27e11bf8a1ffa7e3b6ea77f3",
+  "generatorVersion": "1.0.0",
+  "sourcePaths": [
+    "src/app/api"
+  ],
+  "warnings": [],
+  "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
+  "endpoints": [
+    {
+      "route": "/api/company/understand",
+      "sourceFile": "src/app/api/company/understand/route.ts",
+      "methodHints": [
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/documents/extract",
+      "sourceFile": "src/app/api/documents/extract/route.ts",
+      "methodHints": [
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/interview/next",
+      "sourceFile": "src/app/api/interview/next/route.ts",
+      "methodHints": [
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/research-brief",
+      "sourceFile": "src/app/api/research-brief/route.ts",
+      "methodHints": [
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/research-prompt",
+      "sourceFile": "src/app/api/research-prompt/route.ts",
+      "methodHints": [
+        "POST"
+      ]
+    }
+  ]
+}

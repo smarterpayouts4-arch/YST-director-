@@ -1,6 +1,8 @@
 # Research Prompt Builder
 
-Upload company information, confirm what the system understood, answer a few material questions, and receive one professional ChatGPT market/social-content research prompt.
+> **The current product ends after generating, validating, and exporting one company-specific ChatGPT research prompt. All architecture and AI operations must directly support the quality, safety, traceability, or usability of that prompt.**
+
+Upload company information, confirm what the system understood, answer a few material questions, and receive one professional ChatGPT market/social-content research prompt — then STOP.
 
 ## MVP scope
 
@@ -10,7 +12,11 @@ Upload company information, confirm what the system understood, answer a few mat
 4. Editable research brief  
 5. Copy-ready eight-section research prompt  
 
-Not included: research execution, topic generation, scripts, video prompts, auth, or database.
+**Out of MVP:** research execution, topic generation, scripts, video prompts, auth, database.
+
+## Four outcomes
+
+Accuracy · Specificity · Research Depth · Repeatability
 
 ## Setup
 
@@ -26,30 +32,66 @@ OPENAI_MODEL=gpt-5.6-terra
 OPENAI_REASONING_EFFORT=medium
 ```
 
+Copy MCP example for Cursor (optional):
+
+```bash
+copy .cursor\mcp.json.example .cursor\mcp.json
+```
+
 ## Run
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+`dev` runs `doctor` first, then starts Next.js. If health checks fail, the server does not start.
 
-Use **Use sample ZYNAVA CSV** or upload your own `.csv`.
+Escape hatch when you only need a hot reload (skip doctor):
+
+```bash
+npm run dev:fast
+```
+
+Production-style start after `npm run build`:
+
+```bash
+npm run start:safe
+```
+
+Open [http://localhost:3000](http://localhost:3000). Use **Use sample ZYNAVA CSV** or upload your own `.csv`.
 
 ## Verify
 
 ```bash
-npm run typecheck
-npm test
-npm run build
+npm run verify
 ```
 
-## Architecture
+Fast pre-commit heuristic:
 
-- `src/app` — Next.js App Router pages and API routes  
-- `src/features/research-prompt-builder` — schemas, ingestion, prompts, services, state, UI  
-- `Reference/` — read-only archive of prior research and MarketMonth Agent OS materials  
-- Runtime product prompts live under `src/features/.../prompts/` and are separate from any Agent OS docs  
+```bash
+npm run precommit:fast
+```
+
+## Architecture (three planes)
+
+| Plane | Role |
+|-------|------|
+| Product | State machine UI ending at `PROMPT_EXPORTED` |
+| AI Control | Contracts, context compiler, prompts, ops registry, traces, evals |
+| Engineering Intelligence | `project-knowledge/`, Guardian, APS, read-only `rpb_*` MCP, CI |
+
+Canonical docs: [`project-knowledge/`](project-knowledge/) · Agent entry: [`AGENTS.md`](AGENTS.md) · Hardening prompt: [`docs/ai/CURSOR_FOUNDATION_HARDENING_PROMPT.md`](docs/ai/CURSOR_FOUNDATION_HARDENING_PROMPT.md) · MCP profiles: [`docs/ai/mcp-profiles.yaml`](docs/ai/mcp-profiles.yaml)
+
+## Key trees
+
+- `src/features/research-prompt-builder` — product feature  
+- `src/ai` — contracts, context compiler, operations, traces  
+- `src/config` — typed policies  
+- `project-knowledge/` — live RPB truth  
+- `agent-prompt-system/` — Cursor agent OS (lean)  
+- `mcp/` — host stdio Project Intelligence MCP  
+- `agent-learning/` — candidates requiring human approval  
+- `Reference/` — advisory only (never project truth)
 
 ## Privacy
 

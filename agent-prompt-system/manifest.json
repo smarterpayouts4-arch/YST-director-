@@ -1,0 +1,105 @@
+{
+  "name": "Agent Prompt System",
+  "systemVersion": "1.0.0",
+  "schemaVersion": 1,
+  "description": "Lean RPB Cursor task-routing kit. Distinct from runtime product prompts and Next.js APIs.",
+  "core": [
+    "core/request-router.md",
+    "core/spec-builder.md",
+    "core/verification-contract.md",
+    "core/context-selection.md",
+    "core/safety-and-scope.md"
+  ],
+  "projectContext": [
+    "PRODUCT.md",
+    "ARCHITECTURE.md",
+    "CURRENT_STATE.md",
+    "PROMPT_CONTRACT.md",
+    "SECURITY.md",
+    "UX.md",
+    "TOOLING.md",
+    "DEFINITION-OF-DONE.md"
+  ],
+  "adapter": {
+    "cursor": {
+      "template": "adapters/cursor/agent-prompt-router.mdc",
+      "installTarget": ".cursor/rules/agent-prompt-router.mdc",
+      "bootstrapTemplate": "adapters/cursor/agent-bootstrap.mdc",
+      "bootstrapInstallTarget": ".cursor/rules/agent-bootstrap.mdc",
+      "skillTemplate": "adapters/cursor/skills/aps-router/SKILL.md",
+      "skillInstallTarget": ".cursor/skills/aps-router/SKILL.md"
+    }
+  },
+  "workflows": [
+    {
+      "id": "investigate-codebase",
+      "version": "1.0.0",
+      "path": "workflows/investigate-codebase/WORKFLOW.md",
+      "title": "Investigate Codebase",
+      "description": "Map owners and sources of truth before changing code.",
+      "categories": ["investigation"],
+      "compatible_with": ["plan-feature", "audit-existing-system"],
+      "required_context": ["ARCHITECTURE.md", "CURRENT_STATE.md"]
+    },
+    {
+      "id": "plan-feature",
+      "version": "1.0.0",
+      "path": "workflows/plan-feature/WORKFLOW.md",
+      "title": "Plan Feature",
+      "description": "Clarify scope and acceptance before implementation.",
+      "categories": ["planning"],
+      "compatible_with": ["investigate-codebase", "implement-feature"],
+      "required_context": ["PRODUCT.md", "DEFINITION-OF-DONE.md"]
+    },
+    {
+      "id": "implement-feature",
+      "version": "1.0.0",
+      "path": "workflows/implement-feature/WORKFLOW.md",
+      "title": "Implement Feature",
+      "description": "Ship surgical changes within an approved task spec.",
+      "categories": ["implementation"],
+      "compatible_with": ["plan-feature", "test-and-verify"],
+      "required_context": ["ARCHITECTURE.md", "CURRENT_STATE.md", "PROMPT_CONTRACT.md"]
+    },
+    {
+      "id": "test-and-verify",
+      "version": "1.0.0",
+      "path": "workflows/test-and-verify/WORKFLOW.md",
+      "title": "Test and Verify",
+      "description": "Run appropriate verification; label evidence honestly.",
+      "categories": ["testing", "verification"],
+      "compatible_with": ["implement-feature", "daily-project-closeout"],
+      "required_context": ["TOOLING.md", "DEFINITION-OF-DONE.md"]
+    },
+    {
+      "id": "audit-existing-system",
+      "version": "1.0.0",
+      "path": "workflows/audit-existing-system/WORKFLOW.md",
+      "title": "Audit Existing System",
+      "description": "Findings-first audit with evidence.",
+      "categories": ["audit"],
+      "compatible_with": ["investigate-codebase", "review-security-and-privacy"],
+      "required_context": ["PRODUCT.md", "CURRENT_STATE.md", "ARCHITECTURE.md"]
+    },
+    {
+      "id": "review-security-and-privacy",
+      "version": "1.0.0",
+      "path": "workflows/review-security-and-privacy/WORKFLOW.md",
+      "title": "Review Security and Privacy",
+      "description": "Check untrusted uploads, classification, logging, and MCP boundaries.",
+      "categories": ["security"],
+      "compatible_with": ["audit-existing-system", "test-and-verify"],
+      "required_context": ["SECURITY.md", "TOOLING.md"]
+    },
+    {
+      "id": "daily-project-closeout",
+      "version": "1.0.0",
+      "path": "workflows/daily-project-closeout/WORKFLOW.md",
+      "title": "Daily Project Closeout",
+      "description": "End-of-day gates: typecheck, tests, knowledge, MCP, honesty report.",
+      "categories": ["verification", "audit"],
+      "compatible_with": ["test-and-verify"],
+      "required_context": ["TOOLING.md", "DEFINITION-OF-DONE.md", "CURRENT_STATE.md"]
+    }
+  ]
+}

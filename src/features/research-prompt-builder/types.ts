@@ -15,6 +15,12 @@ export type {
   AppStage,
 } from "@/features/research-prompt-builder/config/constants";
 
+export type {
+  WorkflowState,
+  FailureWorkflowState,
+  HappyWorkflowState,
+} from "@/features/research-prompt-builder/state/workflow-states";
+
 export type FieldStatus = "confirmed" | "corrected" | "rejected" | "unresolved";
 
 export type ResearchPromptProject = {
@@ -38,8 +44,10 @@ export type ResearchPromptProject = {
   researchBrief?: import("@/features/research-prompt-builder/schemas").ResearchBrief;
   finalPrompt?: import("@/features/research-prompt-builder/schemas").FinalResearchPrompt;
   formattedPrompt?: string;
-  currentStage: import("@/features/research-prompt-builder/config/constants").AppStage;
+  /** Formal workflow state machine value (legacy AppStage strings migrate on load). */
+  currentStage: import("@/features/research-prompt-builder/state/workflow-states").WorkflowState;
   currentQuestionIndex: number;
+  lastFailureCode?: string;
   createdAt: string;
   updatedAt: string;
 };

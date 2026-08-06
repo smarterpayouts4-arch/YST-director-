@@ -1,11 +1,11 @@
-import type { CsvEvidencePacket } from "@/features/research-prompt-builder/schemas";
+import type { CompanyAnalysisContextPacket } from "@/ai/context";
 import { RUNTIME_PROMPT_VERSION } from "@/features/research-prompt-builder/prompts/prompt-version";
 import {
   SHARED_ANALYST_PERSONA,
   wrapUntrustedJson,
 } from "@/features/research-prompt-builder/prompts/shared-guardrails";
 
-export function buildCompanyAnalystPrompt(evidence: CsvEvidencePacket) {
+export function buildCompanyAnalystPrompt(contextPacket: CompanyAnalysisContextPacket) {
   const instructions = [
     SHARED_ANALYST_PERSONA,
     "",
@@ -20,12 +20,9 @@ export function buildCompanyAnalystPrompt(evidence: CsvEvidencePacket) {
   const input = [
     "Task: Analyze this company evidence packet and return only the structured company understanding.",
     wrapUntrustedJson("EVIDENCE_PACKET", {
-      fileName: evidence.fileName,
-      headers: evidence.headers,
-      columnSummaries: evidence.columnSummaries,
-      evidenceRows: evidence.evidenceRows,
-      warnings: evidence.warnings,
-      wasTruncated: evidence.wasTruncated,
+      packet: contextPacket.packet,
+      provenanceNotes: contextPacket.provenanceNotes,
+      truncationWarnings: contextPacket.truncationWarnings,
     }),
   ].join("\n\n");
 

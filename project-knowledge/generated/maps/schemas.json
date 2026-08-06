@@ -1,0 +1,16 @@
+{
+  "generatedAt": "2026-08-06T02:19:48.358Z",
+  "commitSha": "958df514ae72d8ff27e11bf8a1ffa7e3b6ea77f3",
+  "generatorVersion": "1.0.0",
+  "sourcePaths": [
+    "src/features"
+  ],
+  "warnings": [],
+  "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
+  "schemas": [
+    {
+      "path": "src/features/research-prompt-builder/schemas/index.ts",
+      "lines": 231
+    }
+  ]
+}

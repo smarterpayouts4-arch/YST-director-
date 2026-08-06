@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "product": "research-prompt-builder",
+  "owners": {
+    "app-shell": ["src/app/layout.tsx", "src/app/page.tsx", "src/app/globals.css"],
+    "rpb-ui": ["src/features/research-prompt-builder/components/**"],
+    "rpb-state": ["src/features/research-prompt-builder/state/**", "src/features/research-prompt-builder/hooks/**"],
+    "rpb-ingestion": ["src/features/research-prompt-builder/ingestion/**", "src/app/api/documents/**"],
+    "rpb-understanding": ["src/app/api/company/**", "src/features/research-prompt-builder/services/analyze-company.ts"],
+    "rpb-interview": ["src/app/api/interview/**", "src/features/research-prompt-builder/services/generate-next-question.ts", "src/features/research-prompt-builder/validation/**"],
+    "rpb-brief": ["src/app/api/research-brief/**", "src/features/research-prompt-builder/services/build-research-brief.ts"],
+    "rpb-final-prompt": ["src/app/api/research-prompt/**", "src/features/research-prompt-builder/services/generate-research-prompt.ts", "src/features/research-prompt-builder/formatters/**"],
+    "rpb-prompts": ["src/features/research-prompt-builder/prompts/**"],
+    "rpb-schemas": ["src/features/research-prompt-builder/schemas/**"],
+    "ai-control": ["src/ai/**"],
+    "shared-ui": ["src/components/**"],
+    "lib": ["src/lib/**"],
+    "knowledge": ["project-knowledge/**"],
+    "aps": ["agent-prompt-system/**"],
+    "mcp": ["mcp/**"],
+    "agent-learning": ["agent-learning/**"],
+    "tests": ["tests/**"]
+  },
+  "independenceRules": [
+    {
+      "id": "client-no-server-only",
+      "from": "src/features/**/components/**",
+      "disallow": ["server-only"],
+      "note": "Client UI must not import server-only modules"
+    },
+    {
+      "id": "runtime-no-mcp",
+      "from": "src/**",
+      "disallow": ["mcp/**"],
+      "note": "Next.js runtime must not depend on MCP"
+    },
+    {
+      "id": "knowledge-generated-write-only",
+      "note": "Scripts may write only under project-knowledge/generated/"
+    }
+  ]
+}

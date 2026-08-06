@@ -1,0 +1,315 @@
+High-level workflow: how the whole thing works as one cohesive piece
+Step 1: Start with the story spine
+
+Before writing prompts, decide the story arc across all selected scenes.
+
+Your current visuals already suggest a strong arc:
+
+Hook — Why is magnesium getting attention?
+Social proof — Someone I trust mentioned it
+Discovery — Not all magnesium is the same
+Problem / confusion — I tried it but still felt nothing
+Reframe / context — Same bottle, different routine/context
+Alternative path — Food-based approach
+Experiment / takeaway — Track your own pattern
+
+That’s already basically a story.
+
+So the first thing you need to do is:
+
+Lock the scene order + purpose of each scene
+
+Not prompts first.
+Story first, then prompts.
+
+Step 2: Set the timing budget
+
+You want the Short under 52–53 seconds.
+
+You currently have 7 scene visuals shown here.
+That means a good target is roughly:
+
+6–8 seconds per scene
+total around 49–52 seconds
+
+A clean split could be:
+
+Scene 1 — 6s
+Scene 2 — 7s
+Scene 3 — 7s
+Scene 4 — 7s
+Scene 5 — 8s
+Scene 6 — 7s
+Scene 7 — 8s
+
+Total = 50 seconds
+
+That’s a very workable structure.
+
+Step 3: Decide which scenes stay image vs become video
+
+You said about 3 scenes will become image-to-video using your video model.
+
+That’s smart. Don’t make everything video.
+
+Good candidates for video
+
+Choose scenes where motion actually adds value:
+
+Best video candidates from your set:
+Scene 2 (social proof / coffee conversation)
+Natural hand gestures, mouth movement, café energy
+Scene 5 (same bottle, different context / split comparison)
+Nice opportunity for subtle contrast and motion between calm vs stressed versions
+Scene 7 (track the pattern / experiment)
+Great for small hand motion, writing, phone movement, candle flicker
+Likely keep as images
+Hook scene
+Forms comparison
+Food route
+Confusion scene
+
+Those can work well as stills with slight motion later if needed.
+
+Step 4: Write each scene in the right order
+
+For each scene, write in this order:
+
+A. Scene purpose
+
+What job is this scene doing?
+
+Examples:
+
+Hook
+Proof
+Clarification
+Reframe
+Takeaway
+B. Narration
+
+What exact line is spoken?
+
+This is the most important part because it controls:
+
+timing
+story logic
+voiceover
+C. On-screen text
+
+This should be shorter and punchier than narration.
+
+Rule of thumb:
+
+Narration explains
+On-screen text highlights
+Visual shows
+D. Visual prompt
+
+Describe the image/video needed to support that line.
+
+E. Asset type
+
+Choose image or video
+
+Practical rule: narration, text, and visual should each do different jobs
+
+A lot of people make them all say the same thing.
+That gets repetitive.
+
+Better:
+
+Narration
+
+Full idea:
+
+“A friend mentioned magnesium, so I started paying attention to why so many people were talking about it.”
+
+On-screen text
+
+Compressed idea:
+
+“My friend said it helped.
+So I listened.”
+
+Visual
+
+Emotional context:
+
+Two women talking in a café, supplement bottle on table, warm daytime social setting.
+
+That’s the structure you want.
+
+The stack you should think in
+
+Since you asked “what should the stack be,” here’s the practical stack for your workflow.
+
+Content planning stack
+Global Visual Style
+Scene order
+Duration per scene
+Narration
+On-screen text
+Visual prompt
+Asset type
+Production stack
+Save scenes in Manual mode
+Generate scene image/video
+Generate TTS from narration
+Overlay on-screen text per scene
+Assemble timeline
+Export final Short
+In your MarketMonth model, keep it simple
+
+For now, each scene should store:
+
+visualPrompt
+narration
+onScreenText
+assetType
+
+And at the project level:
+
+globalVisualStyle
+
+That’s enough.
+
+If you need video-specific motion behavior later, put it inside the visualPrompt for now.
+
+Example:
+
+“If rendered as video, add subtle hand movement, gentle blinking, steam rising from the cup, and natural conversational motion.”
+
+That avoids inventing extra fields too early.
+
+Recommended workflow for you right now
+Phase A — Story setup
+
+Make a simple scene table.
+
+Use columns like:
+
+Scene #
+Purpose
+Seconds
+Asset type
+Narration
+On-screen text
+Visual prompt
+Phase B — Fill the narration first
+
+Because timing comes from narration.
+
+If narration is too long, the Short will run over.
+
+Phase C — Write the text overlays second
+
+Keep them concise and readable.
+
+Phase D — Write the visual prompts third
+
+Use the visuals you already selected as references.
+
+Phase E — Mark which 3 become video
+
+Only where motion helps.
+
+Very important: keep the health language careful
+
+Because this is wellness-related, your copy should avoid strong medical claims.
+
+Safer style:
+
+“people are paying attention to”
+“often chosen for”
+“part of an evening routine”
+“some people prefer”
+“track your own pattern”
+
+Avoid:
+
+“this fixes sleep”
+“this treats anxiety”
+“this works for everyone”
+
+Your existing “Educational only • not medical advice” overlay is a good pattern.
+
+A good 7-scene structure for your current set
+
+Here’s a high-level version of how I’d structure this story:
+
+Scene 1 — Hook
+
+Purpose: attention
+Narration: Why is magnesium suddenly getting so much attention, especially before bed?
+On-screen text: Why is magnesium attracting attention? / Especially before bed.
+Asset: image
+
+Scene 2 — Social proof
+
+Purpose: relatability
+Narration: It first got on my radar because a friend mentioned it, and I started looking into why people keep bringing it up.
+On-screen text: My friend said it helped. / So I listened.
+Asset: video
+
+Scene 3 — Forms
+
+Purpose: education
+Narration: Then I realized magnesium isn’t just one thing — different forms are often chosen for different reasons.
+On-screen text: Not all magnesium is the same. / Different forms. Different reasons.
+Asset: image
+
+Scene 4 — Confusion
+
+Purpose: tension
+Narration: But here’s the part that confused me: changing the bottle didn’t automatically change how I felt.
+On-screen text: But I still felt nothing. / The bottle changed. My routine didn’t.
+Asset: image
+
+Scene 5 — Context
+
+Purpose: reframe
+Narration: The bigger difference was the context around it — calm evenings feel very different from stress, caffeine, and late-night scrolling.
+On-screen text: Same bottle. Different context. / Calm routine vs. overstimulated routine.
+Asset: video
+
+Scene 6 — Food route
+
+Purpose: widen options
+Narration: And for some people, it also makes sense to look at food sources first — like seeds, nuts, beans, and leafy greens.
+On-screen text: Try the food route. / Seeds • nuts • beans • greens
+Asset: image
+
+Scene 7 — Experiment / takeaway
+
+Purpose: close with action
+Narration: So instead of guessing, track the pattern: bedtime, caffeine, stress, food, and sleep — then notice what actually changes over time.
+On-screen text: Track the pattern. / Bedtime • caffeine • stress • sleep
+Asset: video
+
+That structure should fit cleanly under ~50–52 seconds if read naturally.
+
+The simplest possible operating system for you
+Think of each scene like this:
+Scene package template
+Purpose: Why this scene exists
+Duration: 6–8 sec
+Asset type: image or video
+Narration: full spoken sentence
+On-screen text: short overlay
+Visual prompt: what to render
+
+That’s it.
+
+What you should do first, in order
+Do this next:
+Finalize the scene order
+Assign a target duration to each scene
+Write all narration lines
+Trim narration until total runtime is under 52 sec
+Write on-screen text
+Write visual prompts
+Choose which 3 scenes become video
+Save each scene package in Manual mode
+
+That is the right order.

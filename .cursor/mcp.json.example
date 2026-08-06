@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "rpb-project-intelligence": {
+      "command": "npx",
+      "args": ["tsx", "mcp/src/stdio-server.ts"],
+      "cwd": "${workspaceFolder}"
+    }
+  }
+}

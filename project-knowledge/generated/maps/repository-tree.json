@@ -1,0 +1,1093 @@
+{
+  "generatedAt": "2026-08-06T02:19:47.965Z",
+  "commitSha": "958df514ae72d8ff27e11bf8a1ffa7e3b6ea77f3",
+  "generatorVersion": "1.0.0",
+  "sourcePaths": [
+    "."
+  ],
+  "warnings": [
+    "Reference/ not expanded in tree"
+  ],
+  "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
+  "tree": {
+    "name": "YTS Prompt Director",
+    "children": [
+      {
+        "name": ".cursor",
+        "children": [
+          {
+            "name": "mcp.json.example",
+            "file": true
+          },
+          {
+            "name": "rules",
+            "children": [
+              {
+                "name": "agent-bootstrap.mdc",
+                "file": true
+              },
+              {
+                "name": "agent-prompt-router.mdc",
+                "file": true
+              },
+              {
+                "name": "rpb-north-star.mdc",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "skills",
+            "children": [
+              {
+                "name": "aps-router",
+                "children": [
+                  {
+                    "name": "SKILL.md",
+                    "file": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": ".env.example",
+        "file": true
+      },
+      {
+        "name": ".env.local",
+        "file": true
+      },
+      {
+        "name": ".github",
+        "children": [
+          {
+            "name": "workflows",
+            "children": [
+              {
+                "name": "ci.yml",
+                "file": true
+              },
+              {
+                "name": "dependency-review.yml",
+                "file": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": ".gitignore",
+        "file": true
+      },
+      {
+        "name": "agent-learning",
+        "children": [
+          {
+            "name": "approved",
+            "children": [
+              {
+                "name": "coding-rules.md",
+                "file": true
+              },
+              {
+                "name": "prompt-rules.md",
+                "file": true
+              },
+              {
+                "name": "security-rules.md",
+                "file": true
+              },
+              {
+                "name": "ux-rules.md",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "candidates.ndjson",
+            "file": true
+          },
+          {
+            "name": "README.md",
+            "file": true
+          },
+          {
+            "name": "rejected.ndjson",
+            "file": true
+          },
+          {
+            "name": "reports",
+            "children": [
+              {
+                "name": "conflicts.md",
+                "file": true
+              },
+              {
+                "name": "duplicates.md",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "scripts",
+            "children": [
+              {
+                "name": "propose.mjs",
+                "file": true
+              },
+              {
+                "name": "review.mjs",
+                "file": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "agent-prompt-system",
+        "children": [
+          {
+            "name": "adapters",
+            "children": [
+              {
+                "name": "cursor",
+                "children": [
+                  {
+                    "name": "agent-bootstrap.mdc",
+                    "file": true
+                  },
+                  {
+                    "name": "agent-prompt-router.mdc",
+                    "file": true
+                  },
+                  {
+                    "name": "skills",
+                    "truncated": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "core",
+            "children": [
+              {
+                "name": "context-selection.md",
+                "file": true
+              },
+              {
+                "name": "request-router.md",
+                "file": true
+              },
+              {
+                "name": "safety-and-scope.md",
+                "file": true
+              },
+              {
+                "name": "spec-builder.md",
+                "file": true
+              },
+              {
+                "name": "verification-contract.md",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "manifest.json",
+            "file": true
+          },
+          {
+            "name": "project-context",
+            "children": [
+              {
+                "name": "ARCHITECTURE.md",
+                "file": true
+              },
+              {
+                "name": "CURRENT_STATE.md",
+                "file": true
+              },
+              {
+                "name": "DEFINITION-OF-DONE.md",
+                "file": true
+              },
+              {
+                "name": "PRODUCT.md",
+                "file": true
+              },
+              {
+                "name": "PROMPT_CONTRACT.md",
+                "file": true
+              },
+              {
+                "name": "SECURITY.md",
+                "file": true
+              },
+              {
+                "name": "TOOLING.md",
+                "file": true
+              },
+              {
+                "name": "UX.md",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "README.md",
+            "file": true
+          },
+          {
+            "name": "scripts",
+            "children": [
+              {
+                "name": "install.mjs",
+                "file": true
+              },
+              {
+                "name": "validate.mjs",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "SYSTEM.md",
+            "file": true
+          },
+          {
+            "name": "workflows",
+            "children": [
+              {
+                "name": "audit-existing-system",
+                "children": [
+                  {
+                    "name": "WORKFLOW.md",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "daily-project-closeout",
+                "children": [
+                  {
+                    "name": "WORKFLOW.md",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "implement-feature",
+                "children": [
+                  {
+                    "name": "WORKFLOW.md",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "investigate-codebase",
+                "children": [
+                  {
+                    "name": "WORKFLOW.md",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "plan-feature",
+                "children": [
+                  {
+                    "name": "WORKFLOW.md",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "review-security-and-privacy",
+                "children": [
+                  {
+                    "name": "WORKFLOW.md",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "test-and-verify",
+                "children": [
+                  {
+                    "name": "WORKFLOW.md",
+                    "file": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "AGENTS.md",
+        "file": true
+      },
+      {
+        "name": "ARCHITECTURE.md",
+        "file": true
+      },
+      {
+        "name": "docs",
+        "children": [
+          {
+            "name": "ai",
+            "children": [
+              {
+                "name": "CURSOR_FOUNDATION_HARDENING_PROMPT.md",
+                "file": true
+              },
+              {
+                "name": "mcp-profiles.yaml",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "FOUNDATION_DEFINITION_OF_DONE.md",
+            "file": true
+          }
+        ]
+      },
+      {
+        "name": "eslint.config.mjs",
+        "file": true
+      },
+      {
+        "name": "mcp",
+        "children": [
+          {
+            "name": "README.md",
+            "file": true
+          },
+          {
+            "name": "scripts",
+            "children": [
+              {
+                "name": "doctor.mjs",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "src",
+            "children": [
+              {
+                "name": "contracts",
+                "children": [
+                  {
+                    "name": "envelope.ts",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "create-server.ts",
+                "file": true
+              },
+              {
+                "name": "lib",
+                "children": [
+                  {
+                    "name": "log.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "repo.ts",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "security",
+                "children": [
+                  {
+                    "name": "docs-registry.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "paths.ts",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "stdio-server.ts",
+                "file": true
+              },
+              {
+                "name": "tools",
+                "children": [
+                  {
+                    "name": "context",
+                    "truncated": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "test",
+            "children": [
+              {
+                "name": "allowlist-drift.ts",
+                "file": true
+              },
+              {
+                "name": "smoke.ts",
+                "file": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "next-env.d.ts",
+        "file": true
+      },
+      {
+        "name": "next.config.ts",
+        "file": true
+      },
+      {
+        "name": "package-lock.json",
+        "file": true
+      },
+      {
+        "name": "package.json",
+        "file": true
+      },
+      {
+        "name": "postcss.config.mjs",
+        "file": true
+      },
+      {
+        "name": "project-knowledge",
+        "children": [
+          {
+            "name": "ARCHITECTURE.md",
+            "file": true
+          },
+          {
+            "name": "CURRENT_STATE.md",
+            "file": true
+          },
+          {
+            "name": "DECISIONS",
+            "children": [
+              {
+                "name": "0001-three-plane-separation.md",
+                "file": true
+              },
+              {
+                "name": "0002-read-only-mcp.md",
+                "file": true
+              },
+              {
+                "name": "0003-learning-approval-gate.md",
+                "file": true
+              },
+              {
+                "name": "0004-no-auto-rewrite-canon.md",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "DEFINITION-OF-DONE.md",
+            "file": true
+          },
+          {
+            "name": "FEATURES",
+            "children": [
+              {
+                "name": "final-prompt.md",
+                "file": true
+              },
+              {
+                "name": "ingestion.md",
+                "file": true
+              },
+              {
+                "name": "interview.md",
+                "file": true
+              },
+              {
+                "name": "research-brief.md",
+                "file": true
+              },
+              {
+                "name": "understanding.md",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "generated",
+            "children": [
+              {
+                "name": "indexes",
+                "children": [
+                  {
+                    "name": ".gitkeep",
+                    "file": true
+                  },
+                  {
+                    "name": "agent-bootstrap.json",
+                    "file": true
+                  },
+                  {
+                    "name": "docs-index.json",
+                    "file": true
+                  },
+                  {
+                    "name": "reference-index.json",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "manifest.json",
+                "file": true
+              },
+              {
+                "name": "maps",
+                "children": [
+                  {
+                    "name": ".gitkeep",
+                    "file": true
+                  },
+                  {
+                    "name": "api-contracts.json",
+                    "file": true
+                  },
+                  {
+                    "name": "dependencies.json",
+                    "file": true
+                  },
+                  {
+                    "name": "mcp-tools.json",
+                    "file": true
+                  },
+                  {
+                    "name": "ownership.json",
+                    "file": true
+                  },
+                  {
+                    "name": "repository-tree.json",
+                    "file": true
+                  },
+                  {
+                    "name": "routes.json",
+                    "file": true
+                  },
+                  {
+                    "name": "runtime-prompts.json",
+                    "file": true
+                  },
+                  {
+                    "name": "schemas.json",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "reports",
+                "children": [
+                  {
+                    "name": ".gitkeep",
+                    "file": true
+                  },
+                  {
+                    "name": "CURRENT_STATE_GAPS.md",
+                    "file": true
+                  },
+                  {
+                    "name": "guardian.json",
+                    "file": true
+                  },
+                  {
+                    "name": "GUARDIAN.md",
+                    "file": true
+                  },
+                  {
+                    "name": "LARGE_FILES.md",
+                    "file": true
+                  },
+                  {
+                    "name": "STRUCTURE_WARNINGS.md",
+                    "file": true
+                  },
+                  {
+                    "name": "update-summary.json",
+                    "file": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "ownership-rules.json",
+            "file": true
+          },
+          {
+            "name": "PRODUCT.md",
+            "file": true
+          },
+          {
+            "name": "PROMPT_CONTRACT.md",
+            "file": true
+          },
+          {
+            "name": "quality-rules.json",
+            "file": true
+          },
+          {
+            "name": "README.md",
+            "file": true
+          },
+          {
+            "name": "scripts",
+            "children": [
+              {
+                "name": "check.mjs",
+                "file": true
+              },
+              {
+                "name": "guardian",
+                "children": [
+                  {
+                    "name": "codes.mjs",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "guardian.mjs",
+                "file": true
+              },
+              {
+                "name": "lib",
+                "children": [
+                  {
+                    "name": "envelope.mjs",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "update.mjs",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "SECURITY.md",
+            "file": true
+          },
+          {
+            "name": "templates",
+            "children": [
+              {
+                "name": "FEATURE.md",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "TOOLING.md",
+            "file": true
+          },
+          {
+            "name": "UX.md",
+            "file": true
+          }
+        ]
+      },
+      {
+        "name": "public",
+        "children": [
+          {
+            "name": "samples",
+            "children": [
+              {
+                "name": "zynava-company.csv",
+                "file": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "README.md",
+        "file": true
+      },
+      {
+        "name": "Reference",
+        "note": "advisory — not expanded"
+      },
+      {
+        "name": "REFERENCE_PORTING_NOTES.md",
+        "file": true
+      },
+      {
+        "name": "scripts",
+        "children": [
+          {
+            "name": "doctor.mjs",
+            "file": true
+          },
+          {
+            "name": "precommit-fast.mjs",
+            "file": true
+          }
+        ]
+      },
+      {
+        "name": "src",
+        "children": [
+          {
+            "name": "ai",
+            "children": [
+              {
+                "name": "context",
+                "children": [
+                  {
+                    "name": "assemble-brief-context.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "assemble-company-analysis-context.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "assemble-interview-context.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "assemble-prompt-context.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "budgets.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "index.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "redact.ts",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "contracts",
+                "children": [
+                  {
+                    "name": "registry.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "types.ts",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "operations",
+                "children": [
+                  {
+                    "name": "registry.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "types.ts",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "traces",
+                "children": [
+                  {
+                    "name": "record-trace.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "types.ts",
+                    "file": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "app",
+            "children": [
+              {
+                "name": "api",
+                "children": [
+                  {
+                    "name": "company",
+                    "truncated": true
+                  },
+                  {
+                    "name": "documents",
+                    "truncated": true
+                  },
+                  {
+                    "name": "interview",
+                    "truncated": true
+                  },
+                  {
+                    "name": "research-brief",
+                    "truncated": true
+                  },
+                  {
+                    "name": "research-prompt",
+                    "truncated": true
+                  }
+                ]
+              },
+              {
+                "name": "globals.css",
+                "file": true
+              },
+              {
+                "name": "layout.tsx",
+                "file": true
+              },
+              {
+                "name": "page.tsx",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "components",
+            "children": [
+              {
+                "name": "ui",
+                "children": [
+                  {
+                    "name": "button.tsx",
+                    "file": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "config",
+            "children": [
+              {
+                "name": "architecture-policy.ts",
+                "file": true
+              },
+              {
+                "name": "feature-policy.ts",
+                "file": true
+              },
+              {
+                "name": "model-policy.ts",
+                "file": true
+              },
+              {
+                "name": "retention-policy.ts",
+                "file": true
+              },
+              {
+                "name": "upload-policy.ts",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "features",
+            "children": [
+              {
+                "name": "research-prompt-builder",
+                "children": [
+                  {
+                    "name": "components",
+                    "truncated": true
+                  },
+                  {
+                    "name": "config",
+                    "truncated": true
+                  },
+                  {
+                    "name": "formatters",
+                    "truncated": true
+                  },
+                  {
+                    "name": "hooks",
+                    "truncated": true
+                  },
+                  {
+                    "name": "ingestion",
+                    "truncated": true
+                  },
+                  {
+                    "name": "lib",
+                    "truncated": true
+                  },
+                  {
+                    "name": "prompts",
+                    "truncated": true
+                  },
+                  {
+                    "name": "schemas",
+                    "truncated": true
+                  },
+                  {
+                    "name": "services",
+                    "truncated": true
+                  },
+                  {
+                    "name": "state",
+                    "truncated": true
+                  },
+                  {
+                    "name": "types.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "validation",
+                    "truncated": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "lib",
+            "children": [
+              {
+                "name": "env.ts",
+                "file": true
+              },
+              {
+                "name": "openai.ts",
+                "file": true
+              },
+              {
+                "name": "request-id.ts",
+                "file": true
+              },
+              {
+                "name": "safe-log.ts",
+                "file": true
+              },
+              {
+                "name": "utils.ts",
+                "file": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "tests",
+        "children": [
+          {
+            "name": "evals",
+            "children": [
+              {
+                "name": "fixtures",
+                "children": [
+                  {
+                    "name": "b2b-software.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "contractor.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "ecommerce.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "professional-service.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "restaurant.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "supplement.ts",
+                    "file": true
+                  }
+                ]
+              },
+              {
+                "name": "injection-redteam.test.ts",
+                "file": true
+              },
+              {
+                "name": "prompt-contract.eval.test.ts",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "formatters",
+            "children": [
+              {
+                "name": "format-research-prompt.test.ts",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "ingestion",
+            "children": [
+              {
+                "name": "parse-csv.test.ts",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "setup.ts",
+            "file": true
+          },
+          {
+            "name": "state",
+            "children": [
+              {
+                "name": "project-reducer.test.ts",
+                "file": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "tsconfig.json",
+        "file": true
+      },
+      {
+        "name": "tsconfig.tsbuildinfo",
+        "file": true
+      },
+      {
+        "name": "vitest.config.ts",
+        "file": true
+      }
+    ]
+  }
+}

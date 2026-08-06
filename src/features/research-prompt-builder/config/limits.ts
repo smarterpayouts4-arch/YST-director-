@@ -1,13 +1,13 @@
-import { getEnv } from "@/lib/env";
+import { getUploadPolicy } from "@/config/upload-policy";
 
 export function getUploadLimits() {
-  const env = getEnv();
+  const policy = getUploadPolicy();
   return {
-    maxCsvBytes: env.MAX_CSV_BYTES,
-    maxCsvRows: env.MAX_CSV_ROWS,
-    maxCsvColumns: env.MAX_CSV_COLUMNS,
-    maxSupportingFileBytes: env.MAX_SUPPORTING_FILE_BYTES,
-    maxSupportingFilesPerQuestion: env.MAX_SUPPORTING_FILES_PER_QUESTION,
-    maxCellChars: 2000,
+    maxCsvBytes: policy.maxCsvBytes,
+    maxCsvRows: policy.maxCsvRows,
+    maxCsvColumns: policy.maxCsvColumns,
+    maxSupportingFileBytes: policy.maxSupportingFileBytes,
+    maxSupportingFilesPerQuestion: policy.maxSupportingFilesPerQuestion,
+    maxCellChars: policy.maxCellChars,
   };
 }

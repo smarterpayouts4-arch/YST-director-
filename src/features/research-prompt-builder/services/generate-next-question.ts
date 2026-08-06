@@ -1,6 +1,8 @@
 import "server-only";
 
 import { z } from "zod";
+import { assembleInterviewContext } from "@/ai/context";
+import { getContractSchemaVersion } from "@/ai/contracts/registry";
 import {
   ConfirmedCompanyProfileSchema,
   InterviewAnswerSchema,
@@ -57,17 +59,22 @@ export async function generateNextQuestion(input: {
   }
 
   const remainingSlots = MAX_TOTAL_QUESTIONS - input.previousQuestions.length;
-  const prompt = buildNextQuestionPrompt({
+  const contextPacket = assembleInterviewContext({
     ...input,
     remainingSlots,
   });
+  const prompt = buildNextQuestionPrompt({ contextPacket });
 
   const result = await parseStructuredOutput({
-    operation: "interview.next",
+    operation: "generate-next-question",
     schemaName: "next_interview_question",
     schema: NextQuestionResponseSchema,
     instructions: prompt.instructions,
     input: prompt.input,
+    inputSchemaVersion: getContractSchemaVersion("confirmed-profile"),
+    outputSchemaVersion: getContractSchemaVersion("interview-question"),
+    charBudgetUsed: contextPacket.charCount,
+    truncationWarningCount: contextPacket.truncationWarnings.length,
     validate: (value) => {
       if (value.done) {
         return value.completionReason ? [] : ["completionReason is required when done."];

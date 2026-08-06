@@ -16,10 +16,12 @@ const eslintConfig = [
       "Reference/**",
       "node_modules/**",
       ".next/**",
+      "next-env.d.ts",
       "mcp/**",
       "agent-prompt-system/**",
       "project-knowledge/scripts/**",
       "project-knowledge/generated/**",
+      "scripts/**",
     ],
   },
 ];

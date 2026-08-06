@@ -31,7 +31,7 @@ export async function extractSupportingContext(input: {
   });
 
   const supportingContext = await parseStructuredOutput({
-    operation: "documents.extract",
+    operation: "extract-supporting-context",
     schemaName: "supporting_context",
     schema: SupportingContextSchema,
     instructions: prompt.instructions,

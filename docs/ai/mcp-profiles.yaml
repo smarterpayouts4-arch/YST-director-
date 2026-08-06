@@ -1,0 +1,87 @@
+# Docker / Cursor MCP profiles for Research Prompt Builder
+# RPB Project Intelligence MCP runs on host stdio (not Docker).
+# Copy relevant servers into .cursor/mcp.json (gitignored) as needed.
+
+profiles:
+  rpb-development:
+    enabled: true
+    description: Developer tooling for Cursor while building the Research Prompt Builder MVP
+    servers:
+      - id: rpb-project-intelligence
+        transport: stdio
+        command: npx
+        args: ["tsx", "mcp/src/stdio-server.ts"]
+        classification: read-only
+        owner: engineering
+        notes: Primary project truth. Document IDs only. Never product runtime dependency.
+
+      - id: context7
+        classification: read-only
+        owner: engineering
+        purpose: Version-specific library docs (Next.js, React, Tailwind, OpenAI SDK, Zod, Vitest, Playwright, MCP SDK)
+        never_use_for:
+          - product strategy
+          - company information
+          - marketing research
+          - canonical project decisions
+
+      - id: github-readonly
+        enabled_when: ci-exists
+        classification: read-only
+        owner: engineering
+        allow:
+          - read_repository
+          - read_commits
+          - read_pull_requests
+          - read_workflow_runs
+          - read_issues
+        disable:
+          - merge_pull_request
+          - push_code
+          - create_releases
+          - modify_workflows
+          - delete_anything
+        auth: fine-grained PAT scoped to this repository only
+
+      - id: playwright-on-demand
+        classification: read-only-browser
+        owner: engineering
+        load: on-demand
+        notes: Use Playwright Test/CLI for regression; MCP only for interactive diagnosis.
+
+  rpb-research-future:
+    enabled: false
+    description: Future research-ingestion tooling — do not enable for MVP
+    servers:
+      - id: youtube-data-readonly
+        classification: read-only
+        owner: research
+        notes: Custom thin wrapper over YouTube Data API. Search results are signals, not proof of demand.
+        tools_planned:
+          - youtube_search_videos
+          - youtube_get_video_metadata
+          - youtube_get_channel
+          - youtube_list_channel_videos
+          - youtube_get_video_statistics
+          - youtube_get_comments_summary
+          - youtube_compare_channels
+
+# Explicit non-goals for MVP MCP surface
+do_not_install:
+  - generic filesystem MCP
+  - generic shell or Docker-control MCP
+  - general Google Search MCP as product capability
+
+# Security
+security:
+  pin_image_digests: true
+  per_server_credentials: true
+  least_privilege: true
+  write_tools_default: disabled
+  log: [tool_name, request_id, result_status]
+  never_log: [secrets, api_keys, company_content]
+  tests: [mcp:test, mcp:doctor, allowlist-drift]
+
+# Application-owned future research (not Docker MCP)
+application_tools_future:
+  - openai_responses_web_search

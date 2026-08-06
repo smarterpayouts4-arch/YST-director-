@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "authority": "advisory",
+  "generated": false,
+  "updatedAt": "2026-08-05",
+  "records": [
+    {
+      "id": "ref-agent-loop-001",
+      "title": "Observe–Think–Act Agent Loop",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["agents", "orchestration", "context", "tool-use"],
+      "applies_to": ["agent-prompt-system", "project-knowledge", "mcp"],
+      "date_added": "2026-08-05",
+      "source_file": "agent-systems/agent-loop-observe-think-act.jpg",
+      "concept_file": "concepts/observe-think-act.md"
+    },
+    {
+      "id": "ref-learning-001",
+      "title": "Progressive Learning (Safe Path)",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["agents", "learning", "approval"],
+      "applies_to": ["agent-learning", "agent-prompt-system"],
+      "date_added": "2026-08-05",
+      "source_file": "agent-systems/progressive-agent-learning-loop.jpg",
+      "concept_file": "concepts/progressive-learning.md"
+    },
+    {
+      "id": "ref-foundations-001",
+      "title": "AI Agent Foundations",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["agents", "tools", "loops"],
+      "applies_to": ["agent-prompt-system"],
+      "date_added": "2026-08-05",
+      "source_file": "agent-systems/ai-agent-foundations.txt"
+    },
+    {
+      "id": "ref-mcp-course-001",
+      "title": "Agentic AI and MCP Concepts",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["mcp", "agents", "orchestration"],
+      "applies_to": ["mcp", "agent-prompt-system"],
+      "date_added": "2026-08-05",
+      "source_file": "agent-systems/agentic-ai-and-mcp.txt",
+      "notes": "Many multi-agent / Chrome-farm ideas are explicitly do-not-adopt for MVP."
+    },
+    {
+      "id": "ref-rpb-spec-001",
+      "title": "Research Prompt Builder MVP Spec",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["product", "mvp", "prompts"],
+      "applies_to": ["research-prompt-builder", "project-knowledge"],
+      "date_added": "2026-08-04",
+      "source_file": "product-specs/research-prompt-builder-mvp.md"
+    },
+    {
+      "id": "ref-system-flow-001",
+      "title": "System Flow",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["product", "interview", "ux"],
+      "applies_to": ["research-prompt-builder"],
+      "date_added": "2026-08-04",
+      "source_file": "product-specs/system-flow.txt"
+    },
+    {
+      "id": "ref-agent-os-001",
+      "title": "Innovative Tech — Agent OS Patterns",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["knowledge", "aps", "mcp"],
+      "applies_to": ["project-knowledge", "agent-prompt-system", "mcp"],
+      "date_added": "2026-08-03",
+      "source_file": "product-specs/innovative-tech-agent-os.txt"
+    },
+    {
+      "id": "ref-tari-001",
+      "title": "Ethical TARI Interview UX",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["ux", "interview", "hooked"],
+      "applies_to": ["research-prompt-builder"],
+      "date_added": "2026-08-05",
+      "source_file": "advisory-sources/narrative/hooked-principles-extract.txt",
+      "concept_file": "concepts/ethical-tari-interview-ux.md"
+    },
+    {
+      "id": "ref-story-001",
+      "title": "Story and Hook for Research Prompts",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["storytelling", "prompt-quality"],
+      "applies_to": ["research-prompt-builder"],
+      "date_added": "2026-08-05",
+      "source_file": "advisory-sources/narrative/storytelling-part-2.txt",
+      "concept_file": "concepts/story-and-hook-for-research-prompts.md"
+    },
+    {
+      "id": "ref-marketing-hook-001",
+      "title": "Marketing Hook Source",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["hooks", "short-form"],
+      "applies_to": ["research-prompt-builder"],
+      "date_added": "2026-08-05",
+      "source_file": "advisory-sources/narrative/marketing-hook.txt",
+      "notes": "Use for audience-first framing only. Scroll-retention tactics are out of MVP."
+    },
+    {
+      "id": "ref-short-video-001",
+      "title": "Short Video Workflow Source",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["video", "story-spine"],
+      "applies_to": ["research-prompt-builder"],
+      "date_added": "2026-08-05",
+      "source_file": "advisory-sources/narrative/short-video-workflow.txt",
+      "notes": "Story-before-prompts analogy only. Video production is out of MVP."
+    },
+    {
+      "id": "ref-prompt-quality-001",
+      "title": "Compelling Master Prompt Quality",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["prompt-quality", "evaluation"],
+      "applies_to": ["research-prompt-builder"],
+      "date_added": "2026-08-05",
+      "source_file": "product-specs/system-flow.txt",
+      "concept_file": "concepts/compelling-master-prompt-quality.md"
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 import "server-only";
 
+import { assembleCompanyAnalysisContext } from "@/ai/context";
+import { getContractSchemaVersion } from "@/ai/contracts/registry";
 import { buildEvidencePacket } from "@/features/research-prompt-builder/ingestion/build-evidence-packet";
 import { assertCsvUpload, sanitizeFileName } from "@/features/research-prompt-builder/ingestion/sanitize-upload";
 import { getUploadLimits } from "@/features/research-prompt-builder/config/limits";
@@ -22,13 +24,18 @@ export async function analyzeCompanyFromCsv(file: File) {
     maxCellChars: limits.maxCellChars,
   });
 
-  const prompt = buildCompanyAnalystPrompt(evidencePacket);
+  const contextPacket = assembleCompanyAnalysisContext(evidencePacket);
+  const prompt = buildCompanyAnalystPrompt(contextPacket);
   const companyUnderstanding = await parseStructuredOutput({
-    operation: "company.understand",
+    operation: "analyze-company",
     schemaName: "company_understanding",
     schema: CompanyUnderstandingSchema,
     instructions: prompt.instructions,
     input: prompt.input,
+    inputSchemaVersion: getContractSchemaVersion("evidence-packet"),
+    outputSchemaVersion: getContractSchemaVersion("company-understanding"),
+    charBudgetUsed: contextPacket.charCount,
+    truncationWarningCount: contextPacket.truncationWarnings.length,
   });
 
   return {
@@ -41,10 +48,13 @@ export async function analyzeCompanyFromCsv(file: File) {
       warnings: evidencePacket.warnings,
       wasTruncated: evidencePacket.wasTruncated,
     },
-    // Keep packet server-side only for this response path's model call;
-    // client receives metadata + understanding.
     companyUnderstanding,
     promptVersion: RUNTIME_PROMPT_VERSION,
     evidencePacket,
+    contextMeta: {
+      provenanceNotes: contextPacket.provenanceNotes,
+      truncationWarnings: contextPacket.truncationWarnings,
+      charCount: contextPacket.charCount,
+    },
   };
 }

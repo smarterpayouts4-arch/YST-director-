@@ -9,6 +9,9 @@ import {
 } from "@/lib/openai";
 import { buildRepairPrompt } from "@/features/research-prompt-builder/prompts/repair-output";
 import { safeLog } from "@/lib/safe-log";
+import { recordTrace } from "@/ai/traces/record-trace";
+import { RUNTIME_PROMPT_VERSION } from "@/features/research-prompt-builder/prompts/prompt-version";
+import { CONTRACT_SCHEMA_VERSION } from "@/ai/contracts/registry";
 
 type ParseArgs<T extends z.ZodTypeAny> = {
   operation: string;
@@ -17,6 +20,12 @@ type ParseArgs<T extends z.ZodTypeAny> = {
   instructions: string;
   input: string;
   validate?: (value: z.infer<T>) => string[];
+  projectId?: string;
+  inputSchemaVersion?: string;
+  outputSchemaVersion?: string;
+  charBudgetUsed?: number;
+  truncationWarningCount?: number;
+  meta?: Record<string, string | number | boolean | null>;
 };
 
 export async function parseStructuredOutput<T extends z.ZodTypeAny>(
@@ -25,6 +34,9 @@ export async function parseStructuredOutput<T extends z.ZodTypeAny>(
   const client = getOpenAIClient();
   const model = getOpenAIModel();
   const started = Date.now();
+  const startedAt = new Date(started).toISOString();
+  let repaired = false;
+  let validationIssueCount = 0;
 
   const runOnce = async (instructions: string, input: string) => {
     const effort = getReasoningEffort();
@@ -51,9 +63,17 @@ export async function parseStructuredOutput<T extends z.ZodTypeAny>(
     return parsed as z.infer<T>;
   };
 
+  const inputFingerprint = {
+    operation: args.operation,
+    schemaName: args.schemaName,
+    inputChars: args.input.length,
+    instructionChars: args.instructions.length,
+  };
+
   try {
     let value = await runOnce(args.instructions, args.input);
     let issues = args.validate?.(value) ?? [];
+    validationIssueCount = issues.length;
     if (issues.length) {
       const repair = buildRepairPrompt({
         schemaName: args.schemaName,
@@ -61,8 +81,28 @@ export async function parseStructuredOutput<T extends z.ZodTypeAny>(
         previousOutput: value,
       });
       value = await runOnce(repair.instructions, repair.input);
+      repaired = true;
       issues = args.validate?.(value) ?? [];
+      validationIssueCount = issues.length;
       if (issues.length) {
+        recordTrace({
+          operationId: args.operation,
+          model,
+          promptVersion: RUNTIME_PROMPT_VERSION,
+          inputSchemaVersion: args.inputSchemaVersion ?? CONTRACT_SCHEMA_VERSION,
+          outputSchemaVersion: args.outputSchemaVersion ?? CONTRACT_SCHEMA_VERSION,
+          input: inputFingerprint,
+          output: { validationIssues: issues.length },
+          startedAt,
+          status: "validation_failed",
+          repaired,
+          validationIssueCount,
+          charBudgetUsed: args.charBudgetUsed,
+          truncationWarningCount: args.truncationWarningCount,
+          errorCode: "MODEL_OUTPUT_INVALID",
+          projectId: args.projectId,
+          meta: args.meta,
+        });
         throw Object.assign(
           new Error(`Structured output failed validation: ${issues.join("; ")}`),
           { code: "MODEL_OUTPUT_INVALID" as const },
@@ -70,10 +110,29 @@ export async function parseStructuredOutput<T extends z.ZodTypeAny>(
       }
     }
 
+    recordTrace({
+      operationId: args.operation,
+      model,
+      promptVersion: RUNTIME_PROMPT_VERSION,
+      inputSchemaVersion: args.inputSchemaVersion ?? CONTRACT_SCHEMA_VERSION,
+      outputSchemaVersion: args.outputSchemaVersion ?? CONTRACT_SCHEMA_VERSION,
+      input: inputFingerprint,
+      output: { schemaName: args.schemaName },
+      startedAt,
+      status: repaired ? "repaired" : "ok",
+      repaired,
+      validationIssueCount,
+      charBudgetUsed: args.charBudgetUsed,
+      truncationWarningCount: args.truncationWarningCount,
+      projectId: args.projectId,
+      meta: args.meta,
+    });
+
     safeLog("openai.structured.ok", {
       operation: args.operation,
       model,
       latencyMs: Date.now() - started,
+      repaired,
     });
     return value;
   } catch (error) {
@@ -87,6 +146,27 @@ export async function parseStructuredOutput<T extends z.ZodTypeAny>(
         : message.toLowerCase().includes("timeout")
           ? "REQUEST_TIMEOUT"
           : "OPENAI_ERROR";
+
+    if (code !== "MODEL_OUTPUT_INVALID") {
+      recordTrace({
+        operationId: args.operation,
+        model,
+        promptVersion: RUNTIME_PROMPT_VERSION,
+        inputSchemaVersion: args.inputSchemaVersion ?? CONTRACT_SCHEMA_VERSION,
+        outputSchemaVersion: args.outputSchemaVersion ?? CONTRACT_SCHEMA_VERSION,
+        input: inputFingerprint,
+        startedAt,
+        status: "error",
+        repaired,
+        validationIssueCount,
+        charBudgetUsed: args.charBudgetUsed,
+        truncationWarningCount: args.truncationWarningCount,
+        errorCode: code,
+        projectId: args.projectId,
+        meta: args.meta,
+      });
+    }
+
     safeLog("openai.structured.error", {
       operation: args.operation,
       model,

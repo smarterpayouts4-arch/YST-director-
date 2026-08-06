@@ -1,0 +1,40 @@
+---
+description: USE WHEN any Cursor Agent task starts — Agent Prompt System preflight before substantial edits
+alwaysApply: true
+---
+
+<!-- BEGIN GENERATED: agent-prompt-system/adapters/cursor/agent-prompt-router.mdc — do not hand-edit; re-run scripts/install.mjs -->
+
+# Agent Prompt System — preflight
+
+For **substantial** tasks complete this checklist before large edits:
+
+## APS brief (first user-visible paragraph)
+
+```text
+Selected workflows: <id-1>, <id-2?>
+```
+
+Then a short task-spec block (goal / in-out / acceptance / verification).
+
+## Preflight checklist
+
+1. Read `agent-prompt-system/core/request-router.md` and `manifest.json`.
+2. Select **1–3** workflow IDs.
+3. Resolve `project-context/` pointers → read canonical `project-knowledge/` (or `rpb_read_project_doc`).
+4. Implement only within that scope.
+5. End with evidence labels: **Verified** / **Partially verified** / **Not verified** / **Blocked** / **Assumed**.
+
+## Bypass
+
+Simple explanations, locate-a-file, isolated typos, one-line fixes → no full routing.
+
+## Precedence
+
+User instruction → safety/security → product boundaries → this router → selected workflows.
+
+## Not this system
+
+Runtime product prompts under `src/features/**/prompts/` and Next.js API routes are separate from APS.
+
+<!-- END GENERATED -->

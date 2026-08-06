@@ -7,9 +7,28 @@ import type {
   ResearchBrief,
   ResearchPromptProject,
 } from "@/features/research-prompt-builder/types";
+import {
+  canTransition,
+  COMPLETE,
+  type FailureWorkflowState,
+  type WorkflowState,
+} from "@/features/research-prompt-builder/state/workflow-states";
 
 function now() {
   return new Date().toISOString();
+}
+
+function clearDownstream(
+  state: ResearchPromptProject,
+  keys: Array<keyof ResearchPromptProject>,
+): Partial<ResearchPromptProject> {
+  const patch: Partial<ResearchPromptProject> = {};
+  for (const key of keys) {
+    if (key === "questions") patch.questions = [];
+    else if (key === "answers") patch.answers = [];
+    else (patch as Record<string, unknown>)[key] = undefined;
+  }
+  return patch;
 }
 
 export function createEmptyProject(): ResearchPromptProject {
@@ -20,7 +39,7 @@ export function createEmptyProject(): ResearchPromptProject {
     ingestion: {},
     questions: [],
     answers: [],
-    currentStage: "ingestion",
+    currentStage: "INGESTING",
     currentQuestionIndex: 0,
     createdAt: stamp,
     updatedAt: stamp,
@@ -47,7 +66,9 @@ export type ProjectAction =
       prompt: FinalResearchPrompt;
       formattedPrompt: string;
     }
-  | { type: "SET_STAGE"; stage: ResearchPromptProject["currentStage"] }
+  | { type: "SET_STAGE"; stage: WorkflowState }
+  | { type: "SET_FAILURE"; state: FailureWorkflowState; code?: string }
+  | { type: "BEGIN_PROMPT_GENERATION" }
   | { type: "INTERVIEW_COMPLETE" }
   | { type: "RESET" }
   | { type: "HYDRATE"; project: ResearchPromptProject };
@@ -78,20 +99,26 @@ export function projectReducer(
           },
         },
         companyUnderstanding: action.understanding,
-        currentStage: "understanding",
+        currentStage: "UNDERSTANDING_REVIEW",
+        lastFailureCode: undefined,
         updatedAt: now(),
       };
     case "SET_CONFIRMED_PROFILE":
       return {
         ...state,
         confirmedProfile: action.profile,
+        ...clearDownstream(state, [
+          "questions",
+          "answers",
+          "researchBrief",
+          "finalPrompt",
+          "formattedPrompt",
+        ]),
         questions: [],
         answers: [],
-        researchBrief: undefined,
-        finalPrompt: undefined,
-        formattedPrompt: undefined,
-        currentStage: "interview",
+        currentStage: "INTERVIEWING",
         currentQuestionIndex: 0,
+        lastFailureCode: undefined,
         updatedAt: now(),
       };
     case "ADD_QUESTION":
@@ -99,7 +126,8 @@ export function projectReducer(
         ...state,
         questions: [...state.questions, action.question],
         currentQuestionIndex: state.questions.length,
-        currentStage: "interview",
+        currentStage: "INTERVIEWING",
+        ...clearDownstream(state, ["researchBrief", "finalPrompt", "formattedPrompt"]),
         researchBrief: undefined,
         finalPrompt: undefined,
         formattedPrompt: undefined,
@@ -113,6 +141,7 @@ export function projectReducer(
       return {
         ...state,
         answers,
+        ...clearDownstream(state, ["researchBrief", "finalPrompt", "formattedPrompt"]),
         researchBrief: undefined,
         finalPrompt: undefined,
         formattedPrompt: undefined,
@@ -122,7 +151,7 @@ export function projectReducer(
     case "INTERVIEW_COMPLETE":
       return {
         ...state,
-        currentStage: "brief",
+        currentStage: "BRIEF_REVIEW",
         updatedAt: now(),
       };
     case "SET_BRIEF":
@@ -131,7 +160,8 @@ export function projectReducer(
         researchBrief: action.brief,
         finalPrompt: undefined,
         formattedPrompt: undefined,
-        currentStage: "brief",
+        currentStage: "BRIEF_REVIEW",
+        lastFailureCode: undefined,
         updatedAt: now(),
       };
     case "EDIT_BRIEF":
@@ -142,18 +172,39 @@ export function projectReducer(
         formattedPrompt: undefined,
         updatedAt: now(),
       };
+    case "BEGIN_PROMPT_GENERATION":
+      return {
+        ...state,
+        currentStage: "GENERATING_PROMPT",
+        updatedAt: now(),
+      };
     case "SET_FINAL_PROMPT":
       return {
         ...state,
         finalPrompt: action.prompt,
         formattedPrompt: action.formattedPrompt,
-        currentStage: "prompt",
+        currentStage: COMPLETE,
+        lastFailureCode: undefined,
         updatedAt: now(),
       };
-    case "SET_STAGE":
+    case "SET_STAGE": {
+      if (
+        state.currentStage !== action.stage &&
+        !canTransition(state.currentStage, action.stage)
+      ) {
+        // Soft-allow for recovery navigation from UI; still record the target.
+      }
       return {
         ...state,
         currentStage: action.stage,
+        updatedAt: now(),
+      };
+    }
+    case "SET_FAILURE":
+      return {
+        ...state,
+        currentStage: action.state,
+        lastFailureCode: action.code,
         updatedAt: now(),
       };
     default:

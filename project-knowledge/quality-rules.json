@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "1.0.0",
+  "fileSize": {
+    "warningLines": 500,
+    "hardLimitLines": 850
+  },
+  "requiredDocs": [
+    "README.md",
+    "PRODUCT.md",
+    "ARCHITECTURE.md",
+    "CURRENT_STATE.md",
+    "UX.md",
+    "PROMPT_CONTRACT.md",
+    "SECURITY.md",
+    "TOOLING.md",
+    "DEFINITION-OF-DONE.md",
+    "ownership-rules.json",
+    "quality-rules.json"
+  ],
+  "generatedMarker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
+  "promptVersionHeuristics": {
+    "runtimePromptGlob": "src/features/**/prompts/**/*.{ts,tsx}",
+    "expectVersionExport": true
+  }
+}

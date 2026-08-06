@@ -9,6 +9,7 @@ import { InterviewQuestionView } from "@/features/research-prompt-builder/compon
 import { ResearchBriefEditor } from "@/features/research-prompt-builder/components/research-brief-editor";
 import { FinalPromptViewer } from "@/features/research-prompt-builder/components/final-prompt-viewer";
 import { useResearchPromptProject } from "@/features/research-prompt-builder/hooks/use-research-prompt-project";
+import { toAppStage } from "@/features/research-prompt-builder/state/workflow-states";
 import type {
   ConfirmedCompanyProfile,
   InterviewAnswer,
@@ -33,22 +34,28 @@ export function AppShell() {
   const currentQuestion = state.questions[state.currentQuestionIndex];
   const unanswered =
     currentQuestion && !state.answers.some((a) => a.questionId === currentQuestion.questionId);
+  const uiStage = toAppStage(state.currentStage, {
+    hasUnderstanding: !!state.companyUnderstanding,
+    hasConfirmedProfile: !!state.confirmedProfile,
+    hasBrief: !!state.researchBrief,
+    hasFinalPrompt: !!state.finalPrompt,
+  });
 
   const why = useMemo(() => {
-    if (state.currentStage === "interview" && currentQuestion) {
+    if (uiStage === "interview" && currentQuestion) {
       return currentQuestion.whyThisMatters;
     }
-    if (state.currentStage === "understanding") {
+    if (uiStage === "understanding") {
       return "Owner confirmation prevents invented strategy from entering the research prompt.";
     }
-    if (state.currentStage === "brief") {
+    if (uiStage === "brief") {
       return "The brief is the contract for the final prompt. Edit anything that feels wrong.";
     }
-    if (state.currentStage === "prompt") {
+    if (uiStage === "prompt") {
       return "Copy this into ChatGPT or another capable research model.";
     }
     return undefined;
-  }, [state.currentStage, currentQuestion]);
+  }, [uiStage, currentQuestion]);
 
   const analyze = async (file: File) => {
     setBusy(true);
@@ -69,6 +76,11 @@ export function AppShell() {
         understanding: data.companyUnderstanding,
       });
     } catch (err) {
+      dispatch({
+        type: "SET_FAILURE",
+        state: "INGESTION_FAILED",
+        code: "INGESTION_FAILED",
+      });
       setError(err instanceof Error ? err.message : "Analysis failed");
     } finally {
       setBusy(false);
@@ -114,6 +126,11 @@ export function AppShell() {
         dispatch({ type: "ADD_QUESTION", question: data.question });
       }
     } catch (err) {
+      dispatch({
+        type: "SET_FAILURE",
+        state: "MODEL_OUTPUT_INVALID",
+        code: "MODEL_OUTPUT_INVALID",
+      });
       setError(err instanceof Error ? err.message : "Interview failed");
     } finally {
       setBusy(false);
@@ -142,6 +159,11 @@ export function AppShell() {
       const data = await res.json();
       dispatch({ type: "SET_BRIEF", brief: data.researchBrief });
     } catch (err) {
+      dispatch({
+        type: "SET_FAILURE",
+        state: "MODEL_OUTPUT_INVALID",
+        code: "MODEL_OUTPUT_INVALID",
+      });
       setError(err instanceof Error ? err.message : "Brief generation failed");
     } finally {
       setBusy(false);
@@ -152,6 +174,7 @@ export function AppShell() {
     if (!state.confirmedProfile || !state.researchBrief) return;
     setBusy(true);
     setError(null);
+    dispatch({ type: "BEGIN_PROMPT_GENERATION" });
     try {
       const res = await fetch("/api/research-prompt", {
         method: "POST",
@@ -169,7 +192,13 @@ export function AppShell() {
         formattedPrompt: data.formattedPrompt,
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Prompt generation failed");
+      const message = err instanceof Error ? err.message : "Prompt generation failed";
+      const failure =
+        /PROMPT_VALIDATION_FAILED|Prompt contract/i.test(message)
+          ? ("PROMPT_VALIDATION_FAILED" as const)
+          : ("MODEL_OUTPUT_INVALID" as const);
+      dispatch({ type: "SET_FAILURE", state: failure, code: failure });
+      setError(message);
     } finally {
       setBusy(false);
     }
@@ -182,10 +211,10 @@ export function AppShell() {
   return (
     <div className="min-h-screen md:flex">
       <StageRail
-        stage={state.currentStage}
+        stage={uiStage}
         whyThisMatters={why}
         questionProgress={
-          state.currentStage === "interview" && currentQuestion
+          uiStage === "interview" && currentQuestion
             ? `Question ${currentQuestion.sequenceNumber}`
             : undefined
         }
@@ -202,7 +231,7 @@ export function AppShell() {
           </Button>
         </div>
 
-        {state.currentStage === "ingestion" ? (
+        {uiStage === "ingestion" ? (
           <IngestionDropzone
             busy={busy}
             error={error}
@@ -211,7 +240,7 @@ export function AppShell() {
           />
         ) : null}
 
-        {state.currentStage === "understanding" && state.companyUnderstanding ? (
+        {uiStage === "understanding" && state.companyUnderstanding ? (
           <CompanyUnderstandingView
             understanding={state.companyUnderstanding}
             warnings={state.ingestion.meta?.warnings}
@@ -222,7 +251,7 @@ export function AppShell() {
           />
         ) : null}
 
-        {state.currentStage === "interview" ? (
+        {uiStage === "interview" ? (
           unanswered && currentQuestion ? (
             <InterviewQuestionView
               question={currentQuestion}
@@ -238,7 +267,14 @@ export function AppShell() {
                   method: "POST",
                   body: form,
                 });
-                if (!res.ok) throw new Error(await readError(res));
+                if (!res.ok) {
+                  dispatch({
+                    type: "SET_FAILURE",
+                    state: "DOCUMENT_EXTRACTION_FAILED",
+                    code: "DOCUMENT_EXTRACTION_FAILED",
+                  });
+                  throw new Error(await readError(res));
+                }
                 const data = await res.json();
                 return {
                   ...(data.supportingContext as SupportingContext),
@@ -274,7 +310,7 @@ export function AppShell() {
           )
         ) : null}
 
-        {state.currentStage === "brief" ? (
+        {uiStage === "brief" ? (
           state.researchBrief ? (
             <ResearchBriefEditor
               brief={state.researchBrief}
@@ -294,7 +330,17 @@ export function AppShell() {
           )
         ) : null}
 
-        {state.currentStage === "prompt" && state.finalPrompt && state.formattedPrompt ? (
+        {uiStage === "prompt" && state.currentStage === "GENERATING_PROMPT" ? (
+          <div className="space-y-4">
+            <p className="text-stone-700">Compiling your research prompt…</p>
+            {error ? <p className="text-sm text-red-700">{error}</p> : null}
+          </div>
+        ) : null}
+
+        {uiStage === "prompt" &&
+        state.currentStage === "PROMPT_EXPORTED" &&
+        state.finalPrompt &&
+        state.formattedPrompt ? (
           <FinalPromptViewer
             prompt={state.finalPrompt}
             formatted={state.formattedPrompt}

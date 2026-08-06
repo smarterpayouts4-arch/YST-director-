@@ -47,6 +47,9 @@ next-env.d.ts
 .cursor/hooks/.aps-routed-ack.json
 .cursor/hooks/.aps-session.json
 
+# local AI traces (optional file sink)
+.rpb-traces/
+
 # ide
 .idea
 .vscode/*

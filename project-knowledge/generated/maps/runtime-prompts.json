@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-08-06T02:19:48.724Z",
+  "commitSha": "958df514ae72d8ff27e11bf8a1ffa7e3b6ea77f3",
+  "generatorVersion": "1.0.0",
+  "sourcePaths": [
+    "src/features"
+  ],
+  "warnings": [
+    "some prompt modules lack version export (see prompt-version.ts)"
+  ],
+  "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
+  "prompts": [
+    {
+      "path": "src/features/research-prompt-builder/prompts/company-analyst.ts",
+      "lines": 31,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/research-prompt-builder/prompts/next-question.ts",
+      "lines": 50,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/research-prompt-builder/prompts/prompt-version.ts",
+      "lines": 2,
+      "exportsVersion": true,
+      "versionLiteral": "rpb-runtime-1.0.0"
+    },
+    {
+      "path": "src/features/research-prompt-builder/prompts/repair-output.ts",
+      "lines": 20,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/research-prompt-builder/prompts/research-brief.ts",
+      "lines": 33,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/research-prompt-builder/prompts/research-prompt.ts",
+      "lines": 46,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/research-prompt-builder/prompts/shared-guardrails.ts",
+      "lines": 14,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/research-prompt-builder/prompts/supporting-context.ts",
+      "lines": 33,
+      "exportsVersion": false,
+      "versionLiteral": null
+    }
+  ]
+}

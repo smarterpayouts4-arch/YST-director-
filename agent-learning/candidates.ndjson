@@ -1,0 +1,1 @@
+{"id":"ex-001","createdAt":"2026-08-05T00:00:00.000Z","area":"prompt","summary":"Keep exported prompt headings deterministic; never let the model reorder sections.","status":"pending","example":true}

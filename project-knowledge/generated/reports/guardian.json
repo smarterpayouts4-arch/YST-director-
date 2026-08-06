@@ -1,0 +1,16 @@
+{
+  "generatedAt": "2026-08-06T02:19:54.586Z",
+  "commitSha": "958df514ae72d8ff27e11bf8a1ffa7e3b6ea77f3",
+  "generatorVersion": "1.0.0",
+  "sourcePaths": [
+    "project-knowledge/",
+    "src/",
+    "mcp/",
+    "tests/"
+  ],
+  "warnings": [],
+  "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
+  "hardCount": 0,
+  "warnCount": 0,
+  "findings": []
+}

@@ -1,0 +1,293 @@
+{
+  "auditVersion": "1.0.0",
+  "generatedAt": "2026-08-06T02:24:00Z",
+  "commitSha": "958df514ae72d8ff27e11bf8a1ffa7e3b6ea77f3",
+  "branch": "main",
+  "workingTree": "dirty",
+  "decision": "READY WITH KNOWN LIMITATIONS",
+  "overallScore": 6.4,
+  "scores": {
+    "productCompleteness": 7.5,
+    "endToEndTestability": 4.5,
+    "promptIntelligence": 7.0,
+    "promptEvaluation": 5.5,
+    "architectureClarity": 8.0,
+    "llmReadability": 7.5,
+    "diagnosability": 7.5,
+    "security": 6.5,
+    "mcpGovernance": 3.5,
+    "ciAndReleaseReadiness": 6.0,
+    "overallFoundationReadiness": 6.4,
+    "masterPromptSystem": 6.5
+  },
+  "capabilities": [
+    {
+      "id": "ingestion",
+      "status": "Live",
+      "verification": "Partially verified",
+      "sourceEvidence": ["src/features/research-prompt-builder/components/ingestion-dropzone.tsx", "src/features/research-prompt-builder/ingestion/parse-csv.ts", "src/config/upload-policy.ts"],
+      "testEvidence": ["tests/ingestion/parse-csv.test.ts"],
+      "runtimeEvidence": ["GET / 200"],
+      "blockingIssue": null,
+      "nextAction": "Add API upload tests"
+    },
+    {
+      "id": "company-understanding",
+      "status": "Live",
+      "verification": "Partially verified",
+      "sourceEvidence": ["src/app/api/company/understand/route.ts", "src/features/research-prompt-builder/services/analyze-company.ts"],
+      "testEvidence": [],
+      "runtimeEvidence": ["prior-session POST /api/company/understand 200"],
+      "blockingIssue": "OWNER_CORRECTION_REQUIRED unused; material gate allows all-rejected",
+      "nextAction": "Owner smoke + tighten material gate"
+    },
+    {
+      "id": "interview",
+      "status": "Live",
+      "verification": "Partially verified",
+      "sourceEvidence": ["src/app/api/interview/next/route.ts", "src/features/research-prompt-builder/services/generate-next-question.ts"],
+      "testEvidence": [],
+      "runtimeEvidence": [],
+      "blockingIssue": "Conditional question max not code-enforced",
+      "nextAction": "Owner smoke + enforce conditional cap"
+    },
+    {
+      "id": "documents-extract",
+      "status": "Live",
+      "verification": "Partially verified",
+      "sourceEvidence": ["src/app/api/documents/extract/route.ts"],
+      "testEvidence": [],
+      "runtimeEvidence": [],
+      "blockingIssue": "upload-policy allowlist drift for csv/json",
+      "nextAction": "Align allowlists"
+    },
+    {
+      "id": "research-brief",
+      "status": "Live",
+      "verification": "Partially verified",
+      "sourceEvidence": ["src/app/api/research-brief/route.ts"],
+      "testEvidence": ["tests/state/project-reducer.test.ts"],
+      "runtimeEvidence": [],
+      "blockingIssue": null,
+      "nextAction": "Owner edit smoke"
+    },
+    {
+      "id": "final-prompt",
+      "status": "Live",
+      "verification": "Partially verified",
+      "sourceEvidence": ["src/app/api/research-prompt/route.ts", "src/features/research-prompt-builder/validation/prompt-contract.ts", "src/features/research-prompt-builder/components/final-prompt-viewer.tsx"],
+      "testEvidence": ["tests/formatters/format-research-prompt.test.ts", "tests/evals/prompt-contract.eval.test.ts"],
+      "runtimeEvidence": [],
+      "blockingIssue": null,
+      "nextAction": "Owner copy/download verify"
+    },
+    {
+      "id": "workflow-state-machine",
+      "status": "Partial",
+      "verification": "Partially verified",
+      "sourceEvidence": ["src/features/research-prompt-builder/state/workflow-states.ts", "src/features/research-prompt-builder/state/project-reducer.ts"],
+      "testEvidence": ["tests/state/project-reducer.test.ts"],
+      "runtimeEvidence": [],
+      "blockingIssue": "Soft illegal transitions",
+      "nextAction": "Enforce canTransition"
+    },
+    {
+      "id": "decision-ledger",
+      "status": "Prototype",
+      "verification": "Verified",
+      "sourceEvidence": ["src/features/research-prompt-builder/state/decision-ledger.ts"],
+      "testEvidence": [],
+      "runtimeEvidence": [],
+      "blockingIssue": "No production callers; CURRENT_STATE overclaim",
+      "nextAction": "Wire or downgrade CURRENT_STATE"
+    },
+    {
+      "id": "rpb-mcp",
+      "status": "Live",
+      "verification": "Verified in repo; Blocked in Cursor connection",
+      "sourceEvidence": ["mcp/src/create-server.ts", "mcp/test/smoke.ts", "mcp/test/allowlist-drift.ts"],
+      "testEvidence": ["npm run mcp:test"],
+      "runtimeEvidence": [],
+      "blockingIssue": ".cursor/mcp.json missing; not in Cursor tool catalog",
+      "nextAction": "Copy mcp.json.example and reload Cursor"
+    },
+    {
+      "id": "e2e",
+      "status": "Broken",
+      "verification": "Verified",
+      "sourceEvidence": ["package.json test:e2e"],
+      "testEvidence": ["npm run test:e2e exit 1"],
+      "runtimeEvidence": [],
+      "blockingIssue": "No playwright.config; Playwright picks Vitest files",
+      "nextAction": "Add Playwright project or remove script"
+    }
+  ],
+  "commands": [
+    { "command": "npm run doctor", "exitCode": 0, "durationMs": 3326, "result": "pass", "notes": "13 PASS" },
+    { "command": "npm run lint", "exitCode": 0, "durationMs": 22246, "result": "pass", "notes": "" },
+    { "command": "npm run typecheck", "exitCode": 0, "durationMs": 11881, "result": "pass", "notes": "" },
+    { "command": "npm test", "exitCode": 0, "durationMs": 13250, "result": "pass", "notes": "16 tests; no OpenAI calls" },
+    { "command": "npm run knowledge:update", "exitCode": 0, "durationMs": 4464, "result": "pass", "notes": "writes only under generated/" },
+    { "command": "npm run knowledge:check", "exitCode": 0, "durationMs": 2366, "result": "pass", "notes": "" },
+    { "command": "npm run knowledge:guardian", "exitCode": 0, "durationMs": 2841, "result": "pass", "notes": "0 hard, 0 warn" },
+    { "command": "npm run agent:validate", "exitCode": 0, "durationMs": 2850, "result": "pass", "notes": "3 adapters in sync" },
+    { "command": "npm run mcp:test", "exitCode": 0, "durationMs": 15126, "result": "pass", "notes": "smoke + allowlist 13 tools" },
+    { "command": "npm run mcp:doctor", "exitCode": 0, "durationMs": 11489, "result": "pass", "notes": "healthy; Cursor catalog not observable" },
+    { "command": "npm run build", "exitCode": 0, "durationMs": 81658, "result": "pass", "notes": "5 API routes" },
+    { "command": "npm run validate:cursor-context", "exitCode": 1, "durationMs": null, "result": "missing_script", "notes": "Not in package.json" },
+    { "command": "npm run test:e2e", "exitCode": 1, "durationMs": 5319, "result": "fail", "notes": "Vitest CJS import / No tests found; no playwright.config" },
+    { "command": "GET http://localhost:3000/", "exitCode": 0, "durationMs": null, "result": "pass", "notes": "HTTP 200 UI markers" }
+  ],
+  "blockers": [
+    {
+      "id": "B1",
+      "severity": "high",
+      "affectedStage": "mcp-governance",
+      "evidence": "Cursor GetMcpTools: user-MCP_DOCKER includes create_or_update_file, push_files, merge_pull_request; docs/ai/mcp-profiles.yaml do_not_install Docker-control",
+      "userImpact": "Agents may mutate remotes/repos via MCP",
+      "rootCause": "Enabled MCP profile ≠ rpb-development policy",
+      "minimumSafeFix": "Disable GitHub write tools / MCP_DOCKER; connect RPB stdio MCP",
+      "verificationCommand": "Re-inventory MCP tools after config change"
+    },
+    {
+      "id": "B2",
+      "severity": "medium",
+      "affectedStage": "git",
+      "evidence": "git status: large untracked foundation; only commit 958df51",
+      "userImpact": "Foundation work can be lost",
+      "rootCause": "Foundation not committed",
+      "minimumSafeFix": "Owner-approved commit of foundation trees",
+      "verificationCommand": "git status --short"
+    },
+    {
+      "id": "B3",
+      "severity": "medium",
+      "affectedStage": "e2e",
+      "evidence": "npm run test:e2e exit 1; no playwright.config.*",
+      "userImpact": "No automated browser confidence",
+      "rootCause": "Script without Playwright project",
+      "minimumSafeFix": "Add Playwright config or remove script from verify",
+      "verificationCommand": "npm run test:e2e"
+    },
+    {
+      "id": "B4",
+      "severity": "medium",
+      "affectedStage": "docs",
+      "evidence": "CURRENT_STATE claims Decision ledger Live; CI three-tier Live; MCP Live as if connected",
+      "userImpact": "Agents over-trust incomplete wiring",
+      "rootCause": "Doctrine ahead of enforcement",
+      "minimumSafeFix": "Correct CURRENT_STATE vocabulary",
+      "verificationCommand": "Human review of CURRENT_STATE.md"
+    },
+    {
+      "id": "B5",
+      "severity": "low",
+      "affectedStage": "state-machine",
+      "evidence": "project-reducer soft-allows illegal SET_STAGE/SET_FAILURE; OWNER_CORRECTION_REQUIRED unused",
+      "userImpact": "Odd recovery paths",
+      "rootCause": "Transition meta not enforced",
+      "minimumSafeFix": "Enforce canTransition in reducer",
+      "verificationCommand": "npm test -- tests/state"
+    }
+  ],
+  "highPriority": [
+    "Connect RPB MCP; disable MCP_DOCKER write capabilities",
+    "Commit foundation checkpoint (owner-approved)",
+    "Fix or quarantine test:e2e",
+    "Correct CURRENT_STATE overclaims",
+    "Add mocked API integration tests",
+    "Enforce interview conditional max + material rejection gate",
+    "Align supporting document allowlists"
+  ],
+  "mediumPriority": [
+    "Wire decision ledger or downgrade status",
+    "Hard-enforce workflow transitions",
+    "Expand adversarial eval fixtures",
+    "Hook precommit:fast",
+    "Implement or drop validate:cursor-context",
+    "Expose evidenceSummary in brief editor"
+  ],
+  "safeDeferrals": [
+    "Auth/DB/multi-user",
+    "Research execution / YouTube MCP / product web search",
+    "LLM-as-judge merge gates",
+    "Docker packaging of RPB MCP",
+    "agent-learning approve automation",
+    "Full Playwright suite after config exists",
+    "Microservices/Redis/RAG/multi-agent"
+  ],
+  "mcpServers": [
+    {
+      "name": "user-MCP_DOCKER",
+      "connectionStatus": "ready",
+      "toolCountApprox": 100,
+      "purpose": "Docker MCP gateway (GitHub, Playwright, Context7, YouTube, mcp-* control)",
+      "readWrite": "write-capable",
+      "belongsInProject": false,
+      "mode": "needs-owner-review-disable-writes",
+      "notes": "Conflicts with mcp-profiles.yaml do_not_install Docker-control; GitHub writes present"
+    },
+    {
+      "name": "user-perplexity",
+      "connectionStatus": "ready",
+      "toolCountApprox": 4,
+      "purpose": "Developer web research",
+      "readWrite": "read-only-web",
+      "belongsInProject": true,
+      "mode": "on-demand",
+      "notes": "Must not become product runtime or canon"
+    },
+    {
+      "name": "user-repobrain",
+      "connectionStatus": "ready",
+      "toolCountApprox": 20,
+      "purpose": "Vault search/import/analyze",
+      "readWrite": "mixed",
+      "belongsInProject": false,
+      "mode": "on-demand-review",
+      "notes": "Duplicates RPB project intelligence; not in rpb-development profile"
+    },
+    {
+      "name": "cursor-ide-browser",
+      "connectionStatus": "ready",
+      "toolCountApprox": 15,
+      "purpose": "IDE browser automation",
+      "readWrite": "browser",
+      "belongsInProject": true,
+      "mode": "on-demand",
+      "notes": ""
+    },
+    {
+      "name": "rpb-project-intelligence",
+      "connectionStatus": "implemented-not-connected",
+      "toolCountApprox": 13,
+      "purpose": "Allowlisted project docs + inventories",
+      "readWrite": "read-only",
+      "belongsInProject": true,
+      "mode": "always-on",
+      "notes": "mcp:test/doctor pass; .cursor/mcp.json missing"
+    }
+  ],
+  "securityRisks": [
+    { "severity": "high", "id": "S1", "summary": "MCP_DOCKER GitHub write + gateway control enabled against policy" },
+    { "severity": "high", "id": "S2", "summary": "Uncommitted foundation; ensure .env.local never staged (currently ignored)" },
+    { "severity": "medium", "id": "S3", "summary": "Prompt injection defenses Partial" },
+    { "severity": "medium", "id": "S4", "summary": "Material field rejection still allows Continue" },
+    { "severity": "medium", "id": "S5", "summary": "CI generated-maps bot has contents:write on main push" },
+    { "severity": "low", "id": "S6", "summary": "No dangerouslySetInnerHTML; store:false present (good)" }
+  ],
+  "evidence": [
+    { "claim": "Doctor clean", "ref": "npm run doctor exit 0" },
+    { "claim": "Unit tests no OpenAI", "ref": "tests/ grep; npm test 16/16" },
+    { "claim": "Knowledge writes only generated", "ref": "project-knowledge/scripts/update.mjs" },
+    { "claim": "RPB MCP not in Cursor", "ref": "GetMcpTools catalog absent rpb_" },
+    { "claim": "env.local ignored", "ref": "git check-ignore .env.local" },
+    { "claim": "mcp.json ignored when present", "ref": "git check-ignore .cursor/mcp.json" },
+    { "claim": "UI loads", "ref": "GET / status 200" },
+    { "claim": "Markdown report", "ref": "docs/audits/FOUNDATION_READINESS_AUDIT.md" }
+  ],
+  "productCodeModified": false,
+  "nodeVersion": "v24.14.0",
+  "npmVersion": "11.9.0",
+  "packageManager": "npm"
+}

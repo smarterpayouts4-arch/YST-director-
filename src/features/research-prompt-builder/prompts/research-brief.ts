@@ -1,8 +1,4 @@
-import type {
-  ConfirmedCompanyProfile,
-  InterviewAnswer,
-  InterviewQuestion,
-} from "@/features/research-prompt-builder/schemas";
+import type { BriefContextPacket } from "@/ai/context";
 import { RUNTIME_PROMPT_VERSION } from "@/features/research-prompt-builder/prompts/prompt-version";
 import {
   SHARED_ANALYST_PERSONA,
@@ -10,9 +6,7 @@ import {
 } from "@/features/research-prompt-builder/prompts/shared-guardrails";
 
 export function buildResearchBriefPrompt(input: {
-  confirmedProfile: ConfirmedCompanyProfile;
-  questions: InterviewQuestion[];
-  answers: InterviewAnswer[];
+  contextPacket: BriefContextPacket;
 }) {
   const instructions = [
     SHARED_ANALYST_PERSONA,
@@ -27,7 +21,11 @@ export function buildResearchBriefPrompt(input: {
 
   const user = [
     "Compile the research brief from the confirmed profile and interview answers.",
-    wrapUntrustedJson("BRIEF_INPUT", input),
+    wrapUntrustedJson("BRIEF_INPUT", {
+      packet: input.contextPacket.packet,
+      provenanceNotes: input.contextPacket.provenanceNotes,
+      truncationWarnings: input.contextPacket.truncationWarnings,
+    }),
   ].join("\n\n");
 
   return { instructions, input: user };

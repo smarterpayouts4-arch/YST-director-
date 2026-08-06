@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-08-06T02:19:49.339Z",
+  "commitSha": "958df514ae72d8ff27e11bf8a1ffa7e3b6ea77f3",
+  "generatorVersion": "1.0.0",
+  "sourcePaths": [
+    "src/app",
+    "src/features",
+    "tests",
+    "mcp",
+    "Reference/manifest.json",
+    "project-knowledge",
+    "package.json"
+  ],
+  "warnings": [],
+  "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
+  "counts": {
+    "appFiles": 8,
+    "featureFiles": 42,
+    "testFiles": 12,
+    "mcpFiles": 19,
+    "documents": 21,
+    "largeFiles": 0,
+    "missingStateAreas": 0
+  }
+}

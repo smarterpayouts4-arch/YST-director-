@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-08-06T02:19:48.868Z",
+  "commitSha": "958df514ae72d8ff27e11bf8a1ffa7e3b6ea77f3",
+  "generatorVersion": "1.0.0",
+  "sourcePaths": [
+    "mcp"
+  ],
+  "warnings": [],
+  "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
+  "tools": [
+    "rpb_architecture_map",
+    "rpb_current_state",
+    "rpb_find_project_doc",
+    "rpb_get_agent_bootstrap",
+    "rpb_get_guardian_report",
+    "rpb_get_prompt_inventory",
+    "rpb_get_reference_concept",
+    "rpb_get_repository_tree",
+    "rpb_get_route_inventory",
+    "rpb_get_schema_inventory",
+    "rpb_list_project_docs",
+    "rpb_product_overview",
+    "rpb_read_project_doc"
+  ]
+}

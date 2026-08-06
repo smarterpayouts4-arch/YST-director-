@@ -1,0 +1,856 @@
+
+0:00
+Everybody is talking about AI agents, but almost nobody explains what it is and how you build it.
+0:05
+You get these videos where people talk about AI agents like they think and reason
+0:09
+and make decisions like there's some little brain doing a bunch of magic.
+0:13
+And that's exactly why all of this feels like a lot of hype and not very practical.
+0:17
+So let me give you the honest one sentence version here, which is that an AI agent is simply
+0:22
+just a language model that can use tools that's running in a loop until it finishes a job.
+0:27
+That's it.
+0:28
+That's literally all in AI agent is everything else is just a small detail.
+0:32
+So in this video I'm going to break down what's actually happening
+0:35
+under the hood, the real building blocks and none of the fluff.
+0:38
+And I'm going to show you how you can build the same age and in four completely different ways,
+0:42
+from no code all the way down to writing it yourself in pure Python.
+0:46
+Now, by the end of the video,
+0:47
+you're going to understand agents better than most people that are posting about them.
+0:50
+So let's dive in.
+What Are Agents
+0:52
+So first, let's clear up the most common confusion that I see,
+0:55
+which is the difference between a chat bot and an agent.
+0:58
+Now regular chat bot, or just a plain language model or LLM can only do one thing.
+1:04
+It talks okay.
+1:05
+You send a message, it sends text back.
+1:08
+Now that's the entire interaction, right?
+1:10
+It can't check your email, it can't search the web, it can't book anything or update a database.
+1:14
+It just generates words and predicts text.
+1:17
+Now, an agent is what you get when you give this model two new abilities.
+1:21
+Now the first ability is to take actions in the real world, which we call tool calling.
+1:26
+And the second ability is to keep going on its own.
+1:29
+So step by step, instead of stopping after just a single reply.
+1:33
+Now that's the loop that we're talking about.
+1:35
+So a chatbot answers the question was an agent can be told a goal and then go in.
+1:39
+Actually accomplish it by taking multiple steps and using the tools provided.
+1:43
+Now, once you understand that, the whole thing really stops becoming magic and it starts
+1:47
+becoming something you can actually build because you know the foundation.
+1:50
+So with that said, let's look at these pieces specifically.
+The Key Building Blocks
+1:53
+Now the first part here is the LM or the brain.
+1:56
+Now at the center of every agent is a large language model or LM.
+2:00
+Now this is what we consider the brain.
+2:01
+But I want to be really clear about what this actually does.
+2:04
+Now all that a model does is predict text.
+2:07
+That's literally it.
+2:08
+You give it some input and it's just predicting what should come next based on how it's been trained.
+2:13
+Now it has no hands, it has no memory.
+2:15
+It can't do anything other than just generate text.
+2:18
+So on its own, it's really just a text predictor that's sitting inside of a box.
+2:22
+Now the tool calling is the next part, which we can kind of refer to as the hands of the model.
+2:27
+So how does the brain actually do something.
+2:29
+Well effectively what it does is it generates text
+2:32
+that tells whatever software it's working inside of to call a tool.
+2:36
+So you tell the model ahead of time, hey, there's these tools that you're allowed to use.
+2:40
+For example, you have access to a web search tool.
+2:42
+Now when the model wants to search, it doesn't magically go online and search.
+2:47
+It can't do that. It can just predict text.
+2:49
+So what it does, is it out puts a structured message that kind of looks like code that says, hey,
+2:53
+I want to use this search tool.
+2:55
+Now, what will happen in the background is the code that's running that model.
+2:58
+We'll see that result. It will run the search tool.
+3:01
+It will get the result and it will give that back to the model so it can process it.
+3:05
+So the model reads the result and then it keeps going and it takes multiple steps.
+3:10
+So all the model is doing
+3:11
+is just giving text to a system that says, hey, I want to call this thing and it doesn't.
+3:15
+Now that hand off is essentially the whole way that AI agents work at scale.
+3:19
+The model decides what to do, but the code that's running this model is
+3:23
+what's actually doing the commands, triggering the search tools, etc.
+3:26
+and that's what we call an agent harness.
+3:29
+Now the context window is the next piece to look at here.
+3:31
+And that is the working memory of an agent.
+3:33
+Now the model needs to keep track of what's going on.
+3:36
+And it does this through something called a context window.
+3:38
+Now think of this as the model short term working memory.
+3:41
+It's everything the model can see at one time, like your instructions,
+3:45
+the conversation tool calls, or the result of a tool call.
+3:48
+You get the idea.
+3:49
+But there's a catch here and that's that. This has a limit.
+3:52
+So you cannot just dump your entire code base or a thousand page
+3:55
+document into the context, because it can only hold so much.
+3:58
+As I started to get quite large, being able to hold, for example, a million tokens.
+4:02
+But even that is not good enough for like a massive enterprise code base.
+4:05
+So a huge part of building good agents is being smart about what you put in that window.
+4:10
+And that can be referred to as context engineering.
+4:12
+Now the next piece to look at is system prompt and message rules.
+4:16
+So what goes in there?
+4:17
+Well it's organized into messages with different roles.
+4:20
+The system prompt is where you set the rules.
+4:22
+So you tell the agent who it is, how to behave, general rules, things that it should do.
+4:27
+For example, you can say you are research assistant all we set your sources, then you have user messages.
+4:33
+Now this is effectively the input from the person or the system.
+4:36
+And then you also have assistant messages which is what the model sets back.
+4:40
+So that structure you have system user assistant is kind of the backbone of every interaction.
+4:45
+And you can pass multiple of these messages.
+4:47
+So the agent understands okay these are the general instructions.
+4:50
+This is what the user asked me to do.
+4:52
+This is what I said in the previous turn.
+4:54
+The user then asked me this and you get a full log of what's going on in.
+4:58
+All of that can sit inside of the context,
+4:59
+but I want you to remember that the model itself has no memory on its own.
+5:03
+If you don't keep track of the conversation and you ask a model another question,
+5:07
+it will forget what you said previously
+5:09
+because it's just not storing that unless it's inside of the context.
+5:12
+So how does a model remember what actually happened in previous steps?
+5:15
+Well, it remembers that because you feed that information back in.
+5:19
+So for every turn or every time you run the model, you send the whole conversation
+5:23
+far back into the context window.
+5:25
+Now that's how the agent can stay coherent across multiple steps.
+5:28
+It's literally rereading everything that happened every single time.
+5:32
+Now, the issue is that sometimes conversation history can get quite large,
+5:35
+and it can actually not fit inside of the current context window.
+5:39
+So that means that you could start forgetting things,
+5:41
+or you're pruning previous steps, which would lead to poor performance.
+5:44
+So for longer term memory or giving the agent access to documents
+5:47
+or different facts, we use something called a vector database.
+5:51
+Now the short version is that you can take your data and you can convert it into embeddings,
+5:54
+which are just numerical representations or kind of meaning of data.
+5:58
+And then you can store them, and then you can give the agent a tool
+6:01
+where it can search through that database and pull information
+6:04
+that it needs only the relevant information based on what you're asking it to do.
+6:08
+This is a super common pattern, and it's called Rag or retrieval augmented generation.
+6:13
+It's how agents can answer questions about documents or Shaz, or how they can remember
+6:17
+long term facts, especially if the context window is filled up with the current conversation history.
+6:23
+So now we move on to the loop.
+6:24
+And this is where we can kind of put everything together.
+6:26
+And this is what a lot of people skip.
+6:28
+Now you start with a system prompt and a goal.
+6:31
+Now the model will think and decide to maybe call tool for example.
+6:34
+So your code will run and the tool feeds the result back in.
+6:37
+Now the model will look at the result and it will decide what to do next.
+6:41
+So maybe it's going to call another tool.
+6:43
+Maybe it's done. Maybe it's going to look in the memory.
+6:45
+Maybe it's going to go and give you a message back.
+6:47
+Right. It's kind of taking that decision on its own.
+6:50
+And it will keep cycling like this where it's thinking, acting, observing the result
+6:55
+and then thinking, acting and observing sorry until it eventually hits the goal.
+6:59
+Now that's an a gentle loop. Okay. You have an LLM.
+7:03
+You have two calls context and then cycling until it finishes what the goal was.
+7:08
+Now everything else from here that I'm going to show you is really just a different way
+7:11
+of building this type of loop, but that's how an AI agent operates.
+The Landscape/Options
+7:15
+So now you know what an agent is.
+7:17
+The question is how do you actually build?
+7:19
+There's a lot of ways to do this.
+7:21
+So what I want to do is map it out for you.
+7:22
+And there's kind of four tiers that I've come up with based on how much of that agent
+7:26
+you're going to be building yourself.
+7:28
+Now at the top, you've got no code platforms.
+7:30
+This is where you can build an agent by filling out forms or kind of dragging blocks around.
+7:34
+No programing.
+7:35
+You don't need to be technical.
+7:36
+Now, below that you have what I consider low code tools.
+7:39
+That's where you can write parts of the agent you're using, like a visual canvas, etc.
+7:44
+then you have agent harnesses.
+7:46
+This is where you can install a complete powerful agent and customize it.
+7:49
+And then fully at the bottom here we have full code where you're effectively
+7:53
+just writing the entire thing in a programing language like Python.
+7:56
+Okay, so no matter which tier you pick here, you're always going to be making pretty much
+7:59
+the same decisions when you build an agent, which is you're picking your platform or framework.
+8:03
+You pick a model like GPT, Claude, Gemini, whatever, you engineer the context.
+8:08
+So what information do you want this to have access to?
+8:10
+Should have access to a database.
+8:11
+And then lastly you define the control flow, the decision tree
+8:15
+and the types of tools that these agents are going to see.
+8:18
+Okay.
+8:18
+So if you keep that in your head, you're going to be able to build agents
+8:21
+in pretty much any platform, because those are really the key decisions that you're making.
+DataCamp
+8:25
+Okay.
+8:25
+So I promise I'm going to get into some demos and show you how you actually build agents on your own.
+8:29
+But really quickly, I want to cover the obvious question, which is,
+8:33
+how do you actually get good at this stuff and understand it better?
+8:36
+Now the answer is not by watching videos like this one.
+8:39
+I'm going to be honest with you.
+8:40
+You can watch me explain agents all day, and you're probably gonna forget most of it by tomorrow.
+8:44
+The stuff only sticks when you actually build it yourself.
+8:47
+And that's just how all of this works, right?
+8:49
+Especially when it comes to computer programing.
+8:51
+So if you want to actually learn this, I recommend Data Camp.
+8:54
+Now I've partnered with them for this video because I personally use Data Camp myself
+8:58
+to publish my own Python an AI skills, and I've been using them for years.
+9:02
+Why I like it and what makes it click for me is that it's extremely hands on, so you're writing
+9:06
+real code in your browser and getting feedback right away, instead of just watching someone else do it.
+9:11
+Now they have an AI Agent Fundamentals track, which maps almost exactly to the building blocks
+9:16
+that I just walked you through.
+9:17
+Like tool calling, context memory, the loop.
+9:20
+You get the idea where you actually build everything with real exercises, and when you want to go further
+9:24
+and get job ready.
+9:26
+They have the associate AI engineer track for developers, which takes you into a deeper
+9:30
+kind of engineering side where you build real applications
+9:33
+and get them working reliably, which is the part that employers actually pay for.
+9:37
+And this also lines up with an industry recognized certification
+9:40
+that you can put straight on your resume and LinkedIn.
+9:42
+They can get 25% off with my link down below in the description.
+9:45
+So if you want to turn what you're about to watch into a real skill that you can actually own,
+9:49
+check it out. Okay, so now let's build some agents.
+Tier 1 - No Code
+9:52
+So let's start at the very top of the ladder here, which is no code.
+9:56
+Now this method is for people who don't want to write a single line of code.
+9:59
+And you just want to use a platform
+10:00
+that pretty much handles everything for you, and you just do a bit of configuration.
+10:03
+Now, there are a bunch of these tools out there, and honestly, they're pretty good.
+10:07
+But you've got things like Lindi Gum, Loop stack,
+10:10
+AI relevance, AI bot press, things like Gen
+10:13
+Spark and Voice Flow, and there's tons of other ones which are agents specific.
+10:17
+You can even use something like OpenAI's agent builder.
+10:19
+What I'm going to use here is something called Gen Spark, which I've used quite a lot.
+10:22
+And basically what I'm going to do is just build a super simple research agent
+10:26
+and just kind of show you that process and how it works.
+10:28
+And remember, again, the key decisions here were, what you want to do
+10:31
+is you want to connect the tools, right.
+10:33
+You want to have kind of the system prompt.
+10:35
+You want to know the model you're using. You get the idea.
+10:37
+Let me show you what it might look like.
+10:39
+So Gen Spark is kind of this like AI platform.
+10:41
+And anyways, just to give you an example, because there's tons of them like this,
+10:44
+you don't have to use this.
+10:45
+If you wanted to make an agent, you could go new, you could go to custom
+10:49
+because this is how you can kind of make custom agents in the platform.
+10:52
+And if it loads, you'll see that I can press this create new button from here.
+10:56
+What it's going to do is bring me to kind of this agent builder where I have some configuration,
+11:00
+like I can give a name, description, general instructions I want the agent to have.
+11:04
+I can drag in different files here and I can have like different conversation starters.
+11:08
+And I can also just give this a prompt.
+11:10
+And from the prompt you can just build the agent for me.
+11:12
+Now you'll also notice that when it comes to model, they don't let you pick the exact one.
+11:15
+But you can do like a small model standard ultra depending on how many credits you want to use here.
+11:19
+So let's just go with ultra.
+11:20
+And what I'll do is just dump this a prompt and have a build me a simple agent.
+11:23
+You'll see what it looks like.
+11:24
+Okay. So you can see here that I just told it.
+11:26
+Build me a research agent.
+11:27
+This is the role.
+11:28
+These are kind of the tools that I wanted to use.
+11:31
+And then I wanted to have this output format where it gives me 2 to 3 sentence
+11:34
+answering the questions gives me key findings and then the sources.
+11:37
+So basically I just want some kind of structure to my specific output.
+11:41
+It then built this for me.
+11:42
+I really didn't have to do anything.
+11:44
+And I can now ask you a question.
+11:45
+So say something like research the top AI and tech YouTubers in 2026
+11:50
+right now that are covering AI agents.
+11:53
+Okay, because this is my research assistant
+11:55
+and we'll just let it run and it should just follow what we told it.
+11:58
+And we now have an agent that's designed to work specifically how we want.
+12:01
+Okay. And you can see that it followed the format that we asked you for.
+12:04
+And then it kind of gave us a response with the sources and the key findings like we wanted here.
+12:09
+And there you go.
+12:09
+We have the agent.
+12:10
+And you'll notice if I scroll up here, it was doing kind of like web searches and using these tools.
+12:13
+And you can see what it was actually searching in order to find this info.
+12:17
+So this is definitely the simplest way to make an AI agent.
+12:20
+But you'll notice that we don't have a lot of configuration, we don't have that much control.
+12:24
+And it's really fairly basic.
+12:26
+And to be honest, you can just use a general agent and connect
+12:28
+some tools to it and you're going to get a pretty similar result.
+12:31
+So let's go a step down the ladder to something a little bit more advanced, which is where most of
+12:35
+you are probably going to land. Okay.
+Tier 2 - Low Code
+12:37
+So the next method that we're looking at here is low code.
+12:39
+Now this can have a lot of different meanings, but for me I typically mean working something
+12:44
+that's a little bit technical, where you kind of have to have some understanding of what you're doing.
+12:48
+You're working with like a drag and drop editor.
+12:50
+You may be able to build in some code blocks or something like that, but it's not working
+12:54
+like fully in an IDE.
+12:56
+So the big examples here are going to be platforms like and then flow wise lang flow
+13:00
+for using the visual editor, DeFi active pieces, Knime.
+13:05
+There's a bunch of other ones right now.
+13:07
+Naden is one of the most popular ones.
+13:08
+So I'm going to show it to you right here.
+13:10
+And while it's mostly used for automations, it's kind of a simple way for me to show you
+13:13
+what this would look like.
+13:15
+Keep in mind, there's so many platforms
+13:16
+that I'm trying to give you kind of a lay of the land as opposed to a specific recommendation.
+13:20
+So what I have here is an edit and workflow, okay.
+13:23
+The idea is that you can send a chat.
+13:25
+It goes to this research agent which is configured with a bunch of properties.
+13:29
+You can see there's like a bunch of stuff here. I can open it up.
+13:32
+You can see the system message, the max number of terms, you know, input that's going in here.
+13:36
+Right.
+13:36
+Like you can modify this quite heavily like you can't do inside of something like Gen Spark.
+13:41
+And then we have these different tools and models and stuff connected up to the research agent.
+13:46
+So in this case I've connected perplexity.
+13:48
+This is going to allow me to do a really good high quality web search.
+13:51
+I've connected Wikipedia so I can go and find the facts if it's accurate from Wikipedia.
+13:56
+And I've also attached conversation memory so that while I chat with this over time,
+14:00
+it can store it inside of there. And we don't forget the previous chat.
+14:03
+So we can kind of iterate on our research.
+14:05
+So if I want to use this, I can do something like go study the top
+14:09
+AI YouTubers right now, tell me the ones that are performing the best in 2026.
+14:13
+And by the way, if you guys are wondering what I'm using to dictate here, using a pretty cool
+14:17
+tool called Whisper Flow, just want to show you the UI because it's quite cool.
+14:21
+You can see that I have 163,000 words.
+14:23
+You can see that I speak much faster than I type, and it's just the best
+14:27
+AI voice dictation tool really on the market in my opinion.
+14:30
+I do have a partnership with them, so I'll leave a link to the description
+14:33
+in case you guys want to check it out
+14:34
+anyway, so you can see that this is going to give me the response now.
+14:37
+And if we scroll through here, we get the same kind of research assist
+14:40
+that we had before where we get the sources and we get actually a very similar result
+14:43
+that we had previously, as well as the summary. Okay.
+14:47
+So just kind of a more consistent way to build this where we have a lot more control,
+14:51
+we build in the tools. We can now go into a more advanced loop.
+14:54
+We can have multiple agents, and we can build something that's a little bit more consistent
+14:58
+than something like Gen Spark, where you're kind of just relying on the platform to set it up for you.
+Tier 3 - Agent Harness
+15:02
+So now we move to the third tier, which is the agent harness.
+15:06
+Now, this one is a little bit different because instead of building an agent from multiple parts,
+15:10
+you just install a complete, already powerful agent and then you customize it for your needs.
+15:15
+Now the two leading harnesses right now are kind of agent.
+15:18
+Platforms are open Claw and Hermes.
+15:20
+Now there's also letter if you really want one that's focused on long term memory.
+15:24
+But Hermes agent is one that most people are using.
+15:26
+So I'm just going to show you kind of a quick demo of how that works.
+15:29
+Now the thing here to watch is that I'm not building this agent loop.
+15:32
+It already exists. It's already good.
+15:34
+It already has memory and stuff.
+15:35
+My job is kind of just to extend it, customize it,
+15:38
+give it the right instructions, and connect any tools that I need to use.
+15:42
+So I'm inside of Hermes.
+15:43
+This is kind of what the user interface looks like.
+15:45
+If we go to the left side you can see there's skills, memory spaces, profiles to dos, insights.
+15:50
+You can connect MCP servers, you can add tools. Right.
+15:53
+There's a bunch of stuff you can do here.
+15:55
+You can attach files whatever.
+15:57
+And you'll notice that what I've done here is I just told it, hey, I want to create a research assistant.
+16:02
+I used a really similar kind of prompt to what I did in Gen Spark.
+16:05
+And now what it's done is it's created a skill for me.
+16:08
+And I can invoke that research assistant by using slash research assistant.
+16:11
+Now built into this is already a web search that's able to go search the web and give information to me.
+16:17
+But if I wanted to add Wikipedia, I wanted to add perplexity.
+16:20
+I wanted to add other tools.
+16:21
+I would do that directly in Hermes, then instruct the model how to perform.
+16:25
+And I get kind of this general agent, which can do my specific tasks.
+16:29
+And this is a really common workflow for people that use agents a lot.
+16:32
+They build it into something like this,
+16:34
+because there's a lot of different things that they want to do.
+16:36
+And again, they're not building the full harness, but they're customizing it to their use case.
+16:41
+I have a bunch of tutorials on this on my channel.
+16:43
+I'm just going to show you a quick example.
+16:45
+So I built this skill called Research Assistant.
+16:48
+This is a custom skill that we built.
+16:50
+And same thing I can say go study the top
+16:52
+AI YouTubers in 2026, the ones that are performing the best on YouTube.
+16:56
+Okay, if I press enter here, we give it a second.
+16:59
+It should invoke this skill that we created, which is going to instruct
+17:02
+it, kind of perform in this manner, and then it should start using
+17:05
+the web search tool to go and find the information and give us the response.
+17:09
+Okay, so just finished here.
+17:10
+Now notably it took a little bit longer than some of the other ones, but it did do a lot
+17:13
+more web searches and kind of more critical thinking because the loop here is a little bit better,
+17:17
+and you can see that we get the summary key findings and these sources.
+17:21
+So if you're going to build something that you want to be more production
+17:24
+ready, you're okay with a little bit of setup.
+17:25
+Because Hermes does require installing setting it up, running on a PS for example.
+17:29
+Then this is a good option to go with.
+17:31
+But if you just want a super reliable,
+17:33
+consistent flow, probably you go with something more kind of automated like n8n.
+17:37
+If you want to just a super quick agent to test things out, you can use something like Gen Spark.
+17:41
+But now let's go to the last option which is full code.
+Tier 4 - Full Code
+17:44
+Now this is where you write
+17:45
+the agent yourself in something like Python and you control every single piece.
+17:50
+Now I just want to show you what this looks like, because this obviously gives you the most amount of
+17:54
+control and also shows you kind of behind the scenes what the loop actually looks like.
+17:58
+You don't need to be an engineer to understand this.
+18:00
+I'm just going to give you a high level explanation so you can see that I bring in some imports.
+18:04
+Right? I have kind of some logging stuff.
+18:05
+I have my system prompt, what I want it to do, I have tools.
+18:09
+Notice that the tool is really just in the form of kind of a JSON object.
+18:12
+And like this is what the tool looks like and how the agent can call it.
+18:16
+I have this web search where I'm using a tool like Fire Crawl to go and actually
+18:20
+grab the information that I'm looking for,
+18:22
+and I'm manually parsing out the response and then giving it to the agent.
+18:26
+And you can see this run agent.
+18:28
+This is the full loop where I'm running through multiple turns.
+18:31
+I'm doing a call seeing if the agent wants to call the tool.
+18:33
+If it does, I call it, I get the response, I give it to it, and I'm controlling everything you'd see.
+18:38
+Okay, if it wants to call tools, I'm going to call the tool myself here.
+18:42
+I'm going to get the response and I'm going to give it to the agent as a rule tool.
+18:46
+Right. So we can see it.
+18:47
+And that's what's happening behind the scenes in all of those frameworks that we looked at.
+18:51
+Same thing, the main loop.
+18:53
+You get the idea here.
+18:54
+So if I run this you can see let's go up here.
+18:57
+I'm going to say go study the top AI YouTubers in 2026.
+19:01
+Tell me who's performing well on YouTube.
+19:03
+Okay, let's hit enter and you're going to see that.
+19:06
+It shows me the full loop running so you can see that it says, okay,
+19:09
+turn one model requested a tool call wants to search for the top AI YouTubers.
+19:13
+Let's do a web search. Here's the results that we get.
+19:16
+Turn two sending the context of GPT four zero.
+19:19
+And then it immediately gives us the summary.
+19:20
+Now at this point, the model decided it was finished.
+19:22
+It didn't need to call any more tools.
+19:24
+And then it gave us the final answer.
+19:26
+If you wanted more tools, we would have kept looping.
+19:28
+And this is that dynamic process that we've engineered and we've built ourself.
+19:32
+You of course, can force a dilute multiple times.
+19:34
+You can make it call different tools.
+19:36
+You can force inject the context.
+19:38
+And here right, you'll notice like I just want to quickly show you
+19:41
+that I'm engineering the context because I'm appending these different messages.
+19:45
+Notice we talked about user messages assistant messages system messages.
+19:49
+Right.
+19:49
+Like I'm putting all of that into the model and controlling what it can see at what time.
+How to Pick?
+19:54
+So now that we've looked at all four tiers, the question becomes which should you actually use?
+19:58
+Now here's my honest take. Right?
+20:00
+I don't really care if you use any of these tools.
+20:02
+I'm not getting paid to promote them.
+20:03
+But if you just want to get something working and you're not technical, use a no code tool.
+20:07
+Use Genspark, use OpenAI.
+20:09
+Use even like a cloud code where you set up your own tools and stuff inside of there.
+20:12
+If you need real logic, branching and connecting to a bunch of services,
+20:17
+but you don't want to manage a code base, or you don't want to kind of deploy something,
+20:21
+Then I would use a low code platform, something like n8n.
+20:24
+There's a lot of other examples Macomb, whatever those are again
+20:27
+more automation platforms, but they're really good for simple agents.
+20:31
+If you want a genuinely powerful agent that you can use for yourself that
+20:34
+works in production and that you can kind of set up and add all of the features
+20:38
+you want, use a harness like Open Claw or Hermes agent.
+20:42
+Okay, it's super powerful, and it's not as much work as building something yourself.
+20:45
+And if you need the full control, you're integrating something deep into your own product,
+20:49
+or you want to actually understand every single piece, then
+20:52
+use an AI framework, something like Land Graph and write it in full code.
+20:56
+That's exactly what we did here.
+20:58
+I just did it a little bit more manually so you could get the idea.
+21:00
+Now the point is here that you're using the same age in our LLM and the same
+21:04
+loop underneath all of these, you're just choosing how much of it
+21:07
+you want to build yourself versus how much you want handed to you and the control that you have.
+21:11
+So that's really the real decision.
+21:12
+And even me as a technical guy, a lot of times I reach for something
+21:15
+that's a lot easier to use because it's faster and I don't need the full control.
+21:19
+So that's AI agents explained.
+21:21
+Let me know what you think in the comments down below and enjoy building your agents.

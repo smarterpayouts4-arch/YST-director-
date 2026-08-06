@@ -1,0 +1,90 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Doctor
+        run: npm run doctor
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Knowledge update
+        run: npm run knowledge:update
+
+      - name: Knowledge check
+        run: npm run knowledge:check
+
+      - name: Guardian
+        run: npm run knowledge:guardian
+
+      - name: Agent validate
+        run: npm run agent:validate
+
+      - name: MCP test
+        run: npm run mcp:test
+
+      - name: MCP doctor
+        run: npm run mcp:doctor
+
+      - name: Production build
+        run: npm run build
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY || 'sk-test-placeholder-for-build' }}
+          OPENAI_MODEL: gpt-5.6-terra
+
+  generated-maps-bot-pr:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci
+      - run: npm run knowledge:update
+
+      - name: Open PR for generated map updates
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "chore: regenerate project-knowledge inventories"
+          title: "chore: regenerate living inventories"
+          body: |
+            Automated regeneration of `project-knowledge/generated/**`.
+            Review before merge. No silent commits to main.
+          branch: chore/generated-inventories
+          delete-branch: true

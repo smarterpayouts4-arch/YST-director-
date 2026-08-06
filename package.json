@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run doctor && next dev",
+    "dev:fast": "next dev",
     "build": "next build",
     "start": "next start",
+    "start:safe": "npm run doctor && next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -13,12 +15,15 @@
     "test:e2e": "playwright test",
     "knowledge:update": "node project-knowledge/scripts/update.mjs",
     "knowledge:check": "node project-knowledge/scripts/check.mjs",
+    "knowledge:guardian": "node project-knowledge/scripts/guardian.mjs",
     "agent:install": "node agent-prompt-system/scripts/install.mjs",
     "agent:validate": "node agent-prompt-system/scripts/validate.mjs",
     "mcp:server": "tsx mcp/src/stdio-server.ts",
-    "mcp:test": "tsx mcp/test/smoke.ts",
+    "mcp:test": "tsx mcp/test/smoke.ts && tsx mcp/test/allowlist-drift.ts",
     "mcp:doctor": "node mcp/scripts/doctor.mjs",
-    "verify": "npm run lint && npm run typecheck && npm run test && npm run knowledge:check && npm run agent:validate && npm run mcp:test && npm run mcp:doctor && npm run build"
+    "doctor": "node scripts/doctor.mjs",
+    "precommit:fast": "node scripts/precommit-fast.mjs",
+    "verify": "npm run doctor && npm run lint && npm run typecheck && npm run test && npm run knowledge:update && npm run knowledge:check && npm run knowledge:guardian && npm run agent:validate && npm run mcp:test && npm run mcp:doctor && npm run build"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",

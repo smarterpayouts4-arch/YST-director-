@@ -1,0 +1,180 @@
+{
+  "generatedAt": "2026-08-06T02:19:47.603Z",
+  "commitSha": "958df514ae72d8ff27e11bf8a1ffa7e3b6ea77f3",
+  "generatorVersion": "1.0.0",
+  "sourcePaths": [
+    "project-knowledge/"
+  ],
+  "warnings": [],
+  "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
+  "documents": [
+    {
+      "id": "ARCHITECTURE",
+      "path": "project-knowledge/ARCHITECTURE.md",
+      "title": "ARCHITECTURE — Three Planes",
+      "description": "ARCHITECTURE — Three Planes",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "CURRENT_STATE",
+      "path": "project-knowledge/CURRENT_STATE.md",
+      "title": "CURRENT_STATE — Research Prompt Builder MVP",
+      "description": "CURRENT_STATE — Research Prompt Builder MVP",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "DECISIONS__0001-three-plane-separation",
+      "path": "project-knowledge/DECISIONS/0001-three-plane-separation.md",
+      "title": "ADR 0001 — Three-plane separation",
+      "description": "ADR 0001 — Three-plane separation",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "DECISIONS__0002-read-only-mcp",
+      "path": "project-knowledge/DECISIONS/0002-read-only-mcp.md",
+      "title": "ADR 0002 — Read-only MCP",
+      "description": "ADR 0002 — Read-only MCP",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "DECISIONS__0003-learning-approval-gate",
+      "path": "project-knowledge/DECISIONS/0003-learning-approval-gate.md",
+      "title": "ADR 0003 — Learning approval gate",
+      "description": "ADR 0003 — Learning approval gate",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "DECISIONS__0004-no-auto-rewrite-canon",
+      "path": "project-knowledge/DECISIONS/0004-no-auto-rewrite-canon.md",
+      "title": "ADR 0004 — No auto-rewrite of canon",
+      "description": "ADR 0004 — No auto-rewrite of canon",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "DEFINITION-OF-DONE",
+      "path": "project-knowledge/DEFINITION-OF-DONE.md",
+      "title": "DEFINITION OF DONE",
+      "description": "DEFINITION OF DONE",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "FEATURES__final-prompt",
+      "path": "project-knowledge/FEATURES/final-prompt.md",
+      "title": "Feature — Final research prompt",
+      "description": "Feature — Final research prompt",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "FEATURES__ingestion",
+      "path": "project-knowledge/FEATURES/ingestion.md",
+      "title": "Feature — Ingestion",
+      "description": "Feature — Ingestion",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "FEATURES__interview",
+      "path": "project-knowledge/FEATURES/interview.md",
+      "title": "Feature — Adaptive interview",
+      "description": "Feature — Adaptive interview",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "FEATURES__research-brief",
+      "path": "project-knowledge/FEATURES/research-brief.md",
+      "title": "Feature — Research brief",
+      "description": "Feature — Research brief",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "FEATURES__understanding",
+      "path": "project-knowledge/FEATURES/understanding.md",
+      "title": "Feature — Company understanding",
+      "description": "Feature — Company understanding",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "ownership-rules",
+      "path": "project-knowledge/ownership-rules.json",
+      "title": "ownership-rules",
+      "description": "ownership-rules",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "PRODUCT",
+      "path": "project-knowledge/PRODUCT.md",
+      "title": "PRODUCT — Research Prompt Builder",
+      "description": "PRODUCT — Research Prompt Builder",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "PROMPT_CONTRACT",
+      "path": "project-knowledge/PROMPT_CONTRACT.md",
+      "title": "PROMPT_CONTRACT — Exported Research Prompt",
+      "description": "PROMPT_CONTRACT — Exported Research Prompt",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "quality-rules",
+      "path": "project-knowledge/quality-rules.json",
+      "title": "quality-rules",
+      "description": "quality-rules",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "README",
+      "path": "project-knowledge/README.md",
+      "title": "Project Knowledge — Research Prompt Builder",
+      "description": "Project Knowledge — Research Prompt Builder",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "SECURITY",
+      "path": "project-knowledge/SECURITY.md",
+      "title": "SECURITY — Research Prompt Builder",
+      "description": "SECURITY — Research Prompt Builder",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "templates__FEATURE",
+      "path": "project-knowledge/templates/FEATURE.md",
+      "title": "Feature — {{name}}",
+      "description": "Feature — {{name}}",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "TOOLING",
+      "path": "project-knowledge/TOOLING.md",
+      "title": "TOOLING — Doctor, Verify, MCP, APS",
+      "description": "TOOLING — Doctor, Verify, MCP, APS",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "UX",
+      "path": "project-knowledge/UX.md",
+      "title": "UX — Stage Rail and Ethical TARI Interview",
+      "description": "UX — Stage Rail and Ethical TARI Interview",
+      "status": "canonical",
+      "authority": "canonical"
+    }
+  ]
+}

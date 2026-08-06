@@ -50,11 +50,19 @@ describe("project reducer invalidation", () => {
       formattedPrompt: "# Prompt",
     });
     expect(state.finalPrompt).toBeTruthy();
+    expect(state.currentStage).toBe("PROMPT_EXPORTED");
     state = projectReducer(state, {
       type: "EDIT_BRIEF",
       brief: { ...brief, companyTruth: "updated company truth that is long enough" },
     });
     expect(state.finalPrompt).toBeUndefined();
     expect(state.formattedPrompt).toBeUndefined();
+  });
+
+  it("starts in INGESTING and moves to BRIEF_REVIEW on SET_BRIEF", () => {
+    const empty = createEmptyProject();
+    expect(empty.currentStage).toBe("INGESTING");
+    const next = projectReducer(empty, { type: "SET_BRIEF", brief });
+    expect(next.currentStage).toBe("BRIEF_REVIEW");
   });
 });

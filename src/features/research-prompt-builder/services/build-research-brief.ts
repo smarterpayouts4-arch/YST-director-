@@ -1,5 +1,7 @@
 import "server-only";
 
+import { assembleBriefContext } from "@/ai/context";
+import { getContractSchemaVersion } from "@/ai/contracts/registry";
 import {
   ConfirmedCompanyProfileSchema,
   InterviewAnswerSchema,
@@ -21,13 +23,18 @@ export async function buildResearchBrief(input: {
   input.questions.forEach((q) => InterviewQuestionSchema.parse(q));
   input.answers.forEach((a) => InterviewAnswerSchema.parse(a));
 
-  const prompt = buildResearchBriefPrompt(input);
+  const contextPacket = assembleBriefContext(input);
+  const prompt = buildResearchBriefPrompt({ contextPacket });
   return parseStructuredOutput({
-    operation: "research.brief",
+    operation: "build-research-brief",
     schemaName: "research_brief",
     schema: ResearchBriefSchema,
     instructions: prompt.instructions,
     input: prompt.input,
+    inputSchemaVersion: getContractSchemaVersion("confirmed-profile"),
+    outputSchemaVersion: getContractSchemaVersion("research-brief"),
+    charBudgetUsed: contextPacket.charCount,
+    truncationWarningCount: contextPacket.truncationWarnings.length,
     validate: (brief) => {
       const issues: string[] = [];
       if (/all platforms/i.test(brief.primaryPlatform.value)) {

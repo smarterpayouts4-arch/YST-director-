@@ -1,0 +1,53 @@
+Below the lessons, I have included a strategy for how you can prompt an AI to script your content using these exact principles.
+
+Table of Contents
+The Philosophy of Short-Form Storytelling
+
+The 6 Storytelling Techniques
+
+How to Make AI Script Your Content
+
+The Philosophy of Short-Form Storytelling
+To make videos perform better, you must move away from simply listing facts and start crafting engaging narratives. The goal is to hook the viewer instantly, keep their brain engaged through conflict loops, and deliver a conversational experience that feels like a one-on-one interaction.
+
+The 6 Storytelling Techniques
+If you want to construct a script that retains viewers, it needs to utilize these six methods:
+
+The Dance (Context & Conflict): Replace the words "and then" in your script with "therefore" or "but." This creates open loops (conflict) and closed loops (context) that keep the viewer locked in, rather than boring them with a list of details.
+
+Rhythm: Vary your sentence lengths. Combining short, medium, and long sentences creates an unpredictable, musical rhythm that is soothing to the ear. Write each sentence on a new line in your script doc to visually ensure they are different lengths.
+
+Tone: Speak exactly as if you are talking to one close friend. This breaks down the barrier of the camera and makes the viewer feel like they are in the room with you, preventing them from feeling like they are being pitched to.
+
+Direction: Write the end of your script first. The last line (the "last dab") should be so memorable that people want to share it, and it must seamlessly set up the first line so the short-form video loops perfectly.
+
+Story Lenses: Differentiate yourself by finding a unique angle on a common topic. If everyone is covering the obvious details of an event or tool, find the hidden business impact or a unique prediction to put yourself in a "category of one."
+
+The Hook: Start with a punchy line that immediately indicates the plot—do not use opaque phrases like "wait till you see this." Pair this with a Visual Hook showing the subject matter on screen before you even finish your first sentence, as eyes perceive faster than ears hear.
+
+How to Make AI Script Your Content
+To get an AI to write a high-retention script using this framework, provide your raw topic and strictly constrain its output using the six rules above.
+
+Step 1: Feed the Raw Context
+Provide the AI with the unformatted facts of what you want the video to be about.
+
+I need you to write a script for a short-form vertical video. Here is the raw context: I spent the last few months doing focused work to build an internal content management tool called Social Copilot. I use it to manage all my platform-native posts and video assets across TikTok, Reels, and Shorts. It's built on a modern stack with Next.js, TypeScript, and Tailwind CSS.
+
+Step 2: Assign the Story Lens
+Tell the AI the exact unique angle you want to take so the video doesn't sound like a generic coding tutorial.
+
+Your Story Lens is the "hidden time-saver." Don't just make this a technical breakdown. Frame the narrative around the sheer amount of hours saved by having one centralized dashboard for vertical video automation.
+
+Step 3: Mandate the Scripting Rules
+Give the AI the exact formatting constraints from the transcript.
+
+Format this script using these specific rules:
+1. The Hook: The opening line must be punchy and tell them exactly what the video is about. Include a bracketed direction for a strong Visual Hook to put on screen instantly.
+2. The Dance: Connect the plot points exclusively using the concepts of "but" and "therefore." Do not use "and then" plotting.
+3. Rhythm: Strictly alternate between very short punchy sentences, medium sentences, and one long, flowing sentence.
+4. Tone: Keep the vocabulary completely conversational, as if you are texting a close friend.
+
+Step 4: Force the Direction (The Loop)
+Ensure the AI ends the script by intentionally setting up the beginning.
+
+Start by writing the final line first. Make sure the final sentence of the script perfectly leads back into the opening hook, creating a seamless loop for the viewer.

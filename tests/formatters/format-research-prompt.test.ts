@@ -8,15 +8,24 @@ import type { FinalResearchPrompt } from "@/features/research-prompt-builder/sch
 const sample: FinalResearchPrompt = {
   title: "ZYNAVA Research Prompt",
   roleAndExpertise: "A".repeat(120),
-  companyContext: "B".repeat(220),
-  ownerConfirmedDecisions: "C".repeat(120),
-  workingHypotheses: "D".repeat(120),
-  researchQuestions: "E".repeat(220),
+  companyContext:
+    "Open with the customer moment and audience tension before any company promotion. " +
+    "B".repeat(200),
+  ownerConfirmedDecisions:
+    "Label each item as observed fact, owner-confirmed decision, or restriction. " +
+    "C".repeat(80),
+  workingHypotheses:
+    "Keep working hypotheses separate from research questions. " + "D".repeat(80),
+  researchQuestions:
+    "Ask singular material research questions about the audience and customer moment. " +
+    "E".repeat(160),
   evidenceAndRedTeamRequirements:
-    "Seek disconfirming evidence and classify competitors carefully. Challenge assumptions.",
+    "Seek disconfirming evidence and classify competitors as direct, adjacent, or aspirational. Challenge assumptions.",
   requiredReportStructure:
-    "Include 3 content pillars and 2 experiments per pillar with one primary platform.",
-  qualityCheckBeforeSubmission: "F".repeat(160),
+    "Include 3 content pillars with 2 experiments each (6 experiments), one primary platform, one CTA hypothesis, and clear success/failure criteria.",
+  qualityCheckBeforeSubmission:
+    "Return the completed research output only; do not propose additional workflows. " +
+    "F".repeat(80),
   metadata: {
     promptVersion: "1.0.0",
     companyProfileVersion: "p1",

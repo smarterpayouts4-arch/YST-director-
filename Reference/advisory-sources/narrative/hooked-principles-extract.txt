@@ -1,0 +1,1080 @@
+===== PAGE 1 =====
+
+
+===== PAGE 2 =====
+
+
+===== PAGE 3 =====
+PORTFOLIO	/	PENGUIN
+Published	by	the	Penguin	Group
+Penguin	Group	(USA)	LLC
+375	Hudson	Street
+New	York,	New	York	10014
+USA	|	Canada	|	UK	|	Ireland	|	Australia	|	New	Zealand	|	India	|	South	Africa	|	China
+penguin.com
+A	Penguin	Random	House	Company
+Published	by	Portfolio	/	Penguin,	a	member	of	Penguin	Group	(USA)	LLC,	2014
+Copyright	©	2014	by	Nir	Eyal
+Penguin	supports	copyright.	Copyright	fuels	creativity,	encourages	diverse	voices,	promotes	free	speech,	and	creates	a	vibrant	culture.
+Thank	you	for	buying	an	authorized	edition	of	this	book	and	for	complying	with	copyright	laws	by	not	reproducing,	scanning,	or
+distributing	any	part	of	it	in	any	form	without	permission.	You	are	supporting	writers	and	allowing	Penguin	to	continue	to	publish
+books	for	every	reader.
+Hooked
+	was	previously	published	by	the	author.
+LIBRARY	OF	CONGRESS	CATALOGING-
+IN-PUBLICATION	DATA
+Eyal,	Nir.
+Hooked	:	how	to	build	habit-forming	products	/	Nir	Eyal	with	Ryan	Hoover.
+pages	cm
+Includes	bibliographical	references.
+eBook	ISBN	978-0-698-19066-5
+1.	New	products.	2.	Consumer	behavior.	3.	Consumers’	preferences.	I.	Title.
+HF5415.153.E93	2014
+658.5'75—dc23
+2014022222
+Version_1
+
+===== PAGE 4 =====
+contents
+Title	Page
+Copyright
+Dedication
+Introduction
+1:	The	Habit	Zone
+2:	Trigger
+3:	Action
+4:	Variable	Reward
+5:	Investment
+6:	What	Are	You	Going	to	Do	with	This?
+7:	Case	Study:	The	Bible	App
+8:	Habit	Testing	and	Where	to	Look	for	Habit-Forming
+Opportunities
+Acknowledgments
+Appendix
+Notes
+
+===== PAGE 5 =====
+For	Julie
+
+===== PAGE 6 =====
+introduction
+Seventy-nine	percent	of	
+smartphone	owners	check	their	device	within	fifteen
+minutes	of	waking	up	every	morning.
+1
+	Perhaps	more	startling,	fully	one-third	of
+Americans	say	they	would	rather	give	up	sex	than	lose	their	cell	phones.
+2
+A	2011	university	study	suggested	people	check	their	phones	thirty-four
+times	per	day.
+3
+	However,	industry	insiders	believe	that	number	is	closer	to	an
+astounding	150	daily	sessions.
+4
+Face	it:	We’re	hooked.
+The	technologies	we	use	have	turned	into	compulsions,	if	not	full-fledged
+addictions.	It’s	the	impulse	to	check	a	message	notification.	It’s	the	pull	to	visit
+YouTube,	Facebook,	or	Twitter	for	just	a	few	minutes,	only	to	find	yourself	still
+tapping	and	scrolling	an	hour	later.	It’s	the	urge	you	likely	feel	throughout	your
+day	but	hardly	notice.
+Cognitive	psychologists	define	
+habits
+	as	“automatic	behaviors	triggered	by
+situational	cues”:	things	we	do	with	little	or	no	conscious	thought.
+5
+	The	products
+and	services	we	use	habitually	alter	our	everyday	behavior,	just	as	their
+designers	intended.
+6
+	Our	actions	have	been	engineered.
+How	do	companies,	producing	little	more	than	bits	of	code	displayed	on	a
+screen,	seemingly	control	users’	minds?	What	makes	some	products	so	habit
+forming?
+Forming	habits	is	imperative	for	the	survival	of	many	products.	As	infinite
+distractions	compete	for	our	attention,	companies	are	learning	to	master	novel
+tactics	to	stay	relevant	in	users’	minds.	Amassing	millions	of	users	is	no	longer
+good	enough.	Companies	increasingly	find	that	their	economic	value	is	a
+function	of	the	strength	of	the	habits	they	create.	In	order	to	win	the	loyalty	of
+their	users	and	create	a	product	that’s	regularly	used,	companies	must	learn	not
+only	what	compels	users	to	click	but	also	what	makes	them	tick.
+
+===== PAGE 7 =====
+Although	some	companies	are	just	waking	up	to	this	new	reality,	others	are
+already	cashing	in.	By	mastering	habit-forming	product	design,	the	companies
+profiled	in	this	book	make	their	goods	indispensable.
+FIRST	TO	MIND	WINS
+Companies	that	form	strong	user	habits	enjoy	several	benefits	to	their	bottom	line.
+These	companies	attach	their	product	to	
+internal	triggers
+.	As	a	result,	users	show
+up	without	any	external	prompting.
+Instead	of	relying	on	expensive	marketing,	habit-forming	companies	link	their
+services	to	the	users’	daily	routines	and	emotions.
+7
+	A	habit	is	at	work	when	users
+feel	a	tad	bored	and	instantly	open	Twitter.	They	feel	a	pang	of	loneliness	and
+before	rational	thought	occurs,	they	are	scrolling	through	their	Facebook	feeds.	A
+question	comes	to	mind	and	before	searching	their	brains,	they	query	Google.	The
+first-to-mind	solution	wins.	In	chapter	1	of	this	book,	we	explore	the	competitive
+advantages	of	habit-forming	products.
+How	do	products	create	habits?	The	answer:	They	manufacture	them.	While
+fans	of	the	television	show	
+Mad	Men
+	are	familiar	with	how	the	ad	industry	once
+created	consumer	desire	during	Madison	Avenue’s	golden	era,	those	days	are
+long	gone.	A	multiscreen	world	of	ad-wary	consumers	has	rendered	Don	Draper’s
+big-budget	brainwashing	useless	to	all	but	the	biggest	brands.
+Today,	small	start-up	teams	can	profoundly	change	behavior	by	guiding	users
+through	a	series	of	experiences	I	call	
+hooks
+.	The	more	often	users	run	through
+these	hooks,	the	more	likely	they	are	to	form	habits.
+How	I	Got	Hooked
+In	2008	I	was	among	a	team	of	Stanford	MBAs	starting	a	company	backed	by
+some	of	the	brightest	investors	in	Silicon	Valley.	Our	mission	was	to	build	a
+platform	for	placing	advertising	into	the	booming	world	of	online	social	games.
+Notable	companies	were	making	hundreds	of	millions	of	dollars	selling
+virtual	cows	on	digital	farms	while	advertisers	were	spending	huge	sums	of
+money	to	influence	people	to	buy	whatever	they	were	peddling.	I	admit	I	didn’t
+get	it	at	first	and	found	myself	standing	at	the	water’s	edge	wondering,	“How	do
+they	do	it?”
+At	the	intersection	of	these	two	industries	dependent	on	mind	manipulation,
+I	embarked	upon	a	journey	to	learn	how	products	change	our	actions	and,	at
+times,	create	compulsions.	How	did	these	companies	engineer	user	behavior?
+
+===== PAGE 8 =====
+What	were	the	moral	implications	of	building	potentially	addictive	products?
+Most	important,	could	the	same	forces	that	made	these	experiences	so
+compelling	also	be	used	to	build	products	to	improve	people’s	lives?
+Where	could	I	find	the	blueprints	for	forming	habits?	To	my	disappointment,
+I	found	no	guide.	Businesses	skilled	in	behavior	design	guarded	their	secrets,
+and	although	I	uncovered	books,	white	papers,	and	blog	posts	tangentially
+related	to	the	topic,	there	was	no	how-to	manual	for	building	habit-forming
+products.
+I	began	documenting	my	observations	of	hundreds	of	companies	to	uncover
+patterns	in	user-experience	designs	and	functionality.	Although	every	business
+had	its	unique	flavor,	I	sought	to	identify	the	commonalities	behind	the	winners
+and	understand	what	was	missing	among	the	losers.
+I	looked	for	insights	from	academia,	drawing	upon	consumer	psychology,
+human-computer	interaction,	and	behavioral	economics	research.	In	2011	I
+began	sharing	what	I	learned	and	started	working	as	a	consultant	to	a	host	of
+Silicon	Valley	companies,	from	small	start-ups	to	Fortune	500	enterprises.	Each
+client	provided	an	opportunity	to	test	my	theories,	draw	new	insights,	and	refine
+my	thinking.	I	began	blogging	about	what	I	learned	at	NirAndFar.com,	and	my
+essays	were	syndicated	to	other	sites.	Readers	soon	began	writing	in	with	their
+own	observations	and	examples.
+In	the	fall	of	2012	Dr.	Baba	Shiv	and	I	designed	and	taught	a	class	at	the
+Stanford	Graduate	School	of	Business	on	the	science	of	influencing	human
+behavior.	The	next	year,	I	partnered	with	Dr.	Steph	Habif	to	teach	a	similar
+course	at	the	Hasso	Plattner	Institute	of	Design.
+These	years	of	distilled	research	and	real-world	experience	resulted	in	the
+creation	of	the	Hook	Model:	a	four-phase	process	companies	use	to	forms	habits.
+Through	consecutive	Hook	cycles,	successful	products	reach	their
+ultimate	goal	of	unprompted	user	engagement,	bringing	users	back
+repeatedly,	without	depending	on	costly	advertising	or	aggressive
+messaging.
+While	I	draw	many	examples	from	technology	companies	given	my	industry
+background,	hooks	are	everywhere—in	apps,	sports,	movies,	games,	and	even
+our	jobs.	Hooks	can	be	found	in	virtually	any	experience	that	burrows	into	our
+minds	(and	often	our	wallets).	The	four	steps	of	the	Hook	Model	provide	the
+framework	for	the	chapters	of	this	book.
+
+===== PAGE 9 =====
+The	Hook	Model
+1.	Trigger
+A	
+trigger
+	is	the	actuator	of	behavior—the	spark	plug	in	the	engine.	Triggers
+come	in	two	types:	external	and	internal.
+8
+	Habit-forming	products	start	by
+alerting	users	with	external	triggers	like	an	e-mail,	a	Web	site	link,	or	the	app
+icon	on	a	phone.
+For	example,	suppose	Barbra,	a	young	woman	in	Pennsylvania,	happens	to
+see	a	photo	in	her	Facebook	News	Feed	taken	by	a	family	member	from	a	rural
+part	of	the	state.	It’s	a	lovely	picture	and	because	she	is	planning	a	trip	there	with
+her	brother	Johnny,	the	external	trigger’s	call	to	action	(in	marketing	and
+advertising	lingo)	intrigues	her	and	she	clicks.	By	cycling	through	successive
+
+===== PAGE 10 =====
+hooks,	users	begin	to	form	associations	with	internal	triggers,	which	attach	to
+existing	behaviors	and	emotions.
+When	users	start	to	automatically	cue	their	next	behavior,	the	new	habit
+becomes	part	of	their	everyday	routine.	Over	time,	Barbra	associates	Facebook
+with	her	need	for	social	connection.	Chapter	2	explores	external	and	internal
+triggers,	answering	the	question	of	how	product	designers	determine	which
+triggers	are	most	effective.
+2.	Action
+Following	the	trigger	comes	the	action:	the	behavior	done	in	anticipation	of	a
+reward.	The	simple	action	of	clicking	on	the	interesting	picture	in	her	news	feed
+takes	Barbra	to	a	Web	site	called	Pinterest,	a	“social	bookmarking	site	with	a
+virtual	pinboard.”
+9
+This	phase	of	the	Hook,	as	described	in	chapter	3,	draws	upon	the	art	and
+science	of	usability	design	to	reveal	how	products	drive	specific	user	actions.
+Companies	leverage	two	basic	pulleys	of	human	behavior	to	increase	the
+likelihood	of	an	action	occurring:	the	ease	of	performing	an	action	and	the
+psychological	motivation	to	do	it.
+10
+Once	Barbra	completes	the	simple	action	of	clicking	on	the	photo,	she	is
+dazzled	by	what	she	sees	next.
+3.	Variable	Reward
+What	distinguishes	the	Hook	Model	from	a	plain	vanilla	feedback	loop	is	the
+Hook’s	ability	to	create	a	craving.	Feedback	loops	are	all	around	us,	but
+predictable	ones	don’t	create	desire.	The	unsurprising	response	of	your	fridge
+light	turning	on	when	you	open	the	door	doesn’t	drive	you	to	keep	opening	it
+again	and	again.	However,	add	some	variability	to	the	mix—suppose	a	different
+treat	magically	appears	in	your	fridge	every	time	you	open	it—and	voilà,
+intrigue	is	created.
+Variable	rewards	are	one	of	the	most	powerful	tools	companies	implement	to
+hook	users;	chapter	4	explains	them	in	further	detail.	Research	shows	that	levels
+of	the	neurotransmitter	dopamine	surge	when	the	brain	is	expecting	a	reward.
+11
+Introducing	variability	multiplies	the	effect,	creating	a	focused	state,	which
+suppresses	the	areas	of	the	brain	associated	with	judgment	and	reason	while
+
+===== PAGE 11 =====
+activating	the	parts	associated	with	wanting	and	desire.
+12
+	Although	classic
+examples	include	slot	machines	and	lotteries,	variable	rewards	are	prevalent	in
+many	other	habit-forming	products.
+When	Barbra	lands	on	Pinterest,	not	only	does	she	see	the	image	she
+intended	to	find,	but	she	is	also	served	a	multitude	of	other	glittering	objects.
+The	images	are	related	to	what	she	is	generally	interested	in—namely	things	to
+see	on	her	upcoming	trip	to	rural	Pennsylvania—but	there	are	other	things	that
+catch	her	eye	as	well.	The	exciting	juxtaposition	of	relevant	and	irrelevant,
+tantalizing	and	plain,	beautiful	and	common,	sets	her	brain’s	dopamine	system
+aflutter	with	the	promise	of	reward.	Now	she’s	spending	more	time	on	Pinterest,
+hunting	for	the	next	wonderful	thing	to	find.	Before	she	knows	it,	she’s	spent
+forty-five	minutes	scrolling.
+Chapter	4	also	explores	why	some	people	eventually	lose	their	taste	for
+certain	experiences	and	how	variability	impacts	their	retention.
+4.	Investment
+The	last	phase	of	the	Hook	Model	is	where	the	user	does	a	bit	of	work.	The
+investment	phase	increases	the	odds	that	the	user	will	make	another	pass	through
+the	Hook	cycle	in	the	future.	The	investment	occurs	when	the	user	puts
+something	into	the	product	of	service	such	as	time,	data,	effort,	social	capital,	or
+money.
+However,	the	investment	phase	isn’t	about	users	opening	up	their	wallets	and
+moving	on	with	their	day.	Rather,	the	investment	implies	an	action	that	improves
+the	service	for	the	next	go-around.	Inviting	friends,	stating	preferences,	building
+virtual	assets,	and	learning	to	use	new	features	are	all	investments	users	make	to
+improve	their	experience.	These	commitments	can	be	leveraged	to	make	the
+trigger	more	engaging,	the	action	easier,	and	the	reward	more	exciting	with
+every	pass	through	the	Hook	cycle.	Chapter	5	delves	into	how	investments
+encourage	users	to	cycle	through	successive	hooks.
+As	Barbra	enjoys	endlessly	scrolling	through	the	Pinterest	cornucopia,	she
+builds	a	desire	to	keep	the	things	that	delight	her.	By	collecting	items,	she	gives
+the	site	data	about	her	preferences.	Soon	she	will	follow,	pin,	repin,	and	make
+other	investments,	which	serve	to	increase	her	ties	to	the	site	and	prime	her	for
+future	loops	through	the	Hook.
+
+===== PAGE 12 =====
+A	New	Superpower
+Habit-forming	technology	is	already	here,	and	it	is	being	used	to	mold	our	lives.
+The	fact	that	we	have	greater	access	to	the	web	through	our	various	connected
+devices—smartphones	and	tablets,	televisions,	game	consoles,	and	wearable
+technology—gives	companies	far	greater	ability	to	affect	our	behavior.
+As	companies	combine	their	increased	connectivity	to	consumers,	with	the
+ability	to	collect,	mine,	and	process	customer	data	at	faster	speeds,	we	are	faced
+with	a	future	where	everything	becomes	potentially	more	habit	forming.	As
+famed	Silicon	Valley	investor	Paul	Graham	writes,	“Unless	the	forms	of
+technological	progress	that	produced	these	things	are	subject	to	different	laws
+than	technological	progress	in	general,	the	world	will	get	more	addictive	in	the
+next	40	years	than	it	did	in	the	last	40.”
+13
+	Chapter	6	explores	this	new	reality	and
+discusses	the	morality	of	manipulation.
+Recently,	a	blog	reader	e-mailed	me,	“If	it	can’t	be	used	for	evil,	it’s	not	a
+superpower.”	He’s	right.	And	under	this	definition,	building	habit-forming
+products	is	indeed	a	superpower.	If	used	irresponsibly,	bad	habits	can	quickly
+degenerate	into	mindless,	zombielike	addictions.
+Did	you	recognize	Barbra	and	her	brother	Johnny	from	the	previous
+example?	Zombie	film	buffs	likely	did.	They	are	characters	from	the	classic
+horror	flick	
+Night	of	the	Living	Dead
+,	a	story	about	people	possessed	by	a
+mysterious	force,	which	compels	their	every	action.
+14
+No	doubt	you’ve	noticed	the	resurgence	of	the	zombie	genre	over	the	past
+several	years.	Games	like	
+Resident	Evil
+,	television	shows	like	
+The	Walking
+Dead
+,	and	movies	including	
+World	War	Z
+	are	a	testament	to	the	creatures’
+growing	appeal.	But	why	are	zombies	suddenly	so	fascinating?	Perhaps
+technology’s	unstoppable	progress—ever	more	pervasive	and	persuasive—has
+grabbed	us	in	a	fearful	malaise	at	the	thought	of	being	involuntarily	controlled.
+Although	the	fear	is	palpable,	we	are	like	the	heroes	in	every	zombie	film—
+threatened	but	ultimately	more	powerful.	I	have	come	to	learn	that	habit-forming
+products	can	do	far	more	good	than	harm.	Choice	architecture,	a	concept
+described	by	famed	scholars	Thaler,	Sunstein,	and	Balz	in	their	same-titled
+scholarly	paper,	offers	techniques	to	influence	people’s	decisions	and	affect
+behavioral	outcomes.	Ultimately,	though,	the	practice	should	be	“used	to	help
+nudge	people	to	make	better	choices	(as	judged	by	themselves).”
+15
+	Accordingly,
+this	book	teaches	innovators	how	to	buil
+
+===== PAGE 13 =====
+Hooked
+	seeks	to	unleash	the	tremendous	new	powers	innovators	and
+entrepreneurs	have	to	influence	the	everyday	lives	of	billions	of	people.	I	believe
+the	trinity	of	access,	data,	and	speed	presents	unprecedented	opportunities	to
+create	positive	habits.
+When	harnessed	correctly,	technology	can	enhance	lives	through
+healthful	behaviors	that	improve	our	relationships,	make	us	smarter,	and
+increase	productivity.
+The	Hook	Model	explains	the	rationale	behind	the	design	of	many	successful
+habit-forming	products	and	services	we	use	daily.	Although	not	exhaustive	given
+the	vast	amount	of	academic	literature	available,	the	model	is	intended	to	be	a
+practical	tool	(rather	than	a	theoretical	one)	made	for	entrepreneurs	and
+innovators	who	aim	to	use	habits	for	good.	In	this	book	I	have	compiled	the	most
+relevant	research,	shared	actionable	insights,	and	provided	a	practical	framework
+designed	to	increase	the	innovator’s	odds	of	success.
+Hooks	connect	the	user’s	problem	with	a	company’s	solution	frequently
+enough	to	form	a	habit.	My	goal	is	to	provide	you	with	a	deeper	understanding
+of	how	certain	products	change	what	we	do	and,	by	extension,	who	we	are.
+HOW	TO	USE	THIS	BOOK
+At	the	end	of	each	section,	you’ll	find	a	few	bulleted	takeaways.	Reviewing	them,
+jotting	them	down	in	a	notebook,	or	sharing	them	on	a	social	network	is	a	great
+way	to	pause,	reflect,	and	reinforce	what	you	have	read.
+Building	a	habit-forming	product	yourself?	If	so,	the	“Do	This	Now”	sections	at
+the	end	of	subsequent	chapters	will	help	guide	your	next	steps.
+REMEMBER	&	SHARE
+Habits
+	are	defined	as	“behaviors	done	with	little	or	no	conscious
+thought.”
+The	convergence	of	access,	data,	and	speed	is	making	the
+world	a	more	habit-forming	place.
+Businesses	that	create	customer	habits	gain	a	significant
+competitive	advantage.
+
+===== PAGE 14 =====
+The	Hook	Model	describes	an	experience	designed	to	connect
+the	user’s	problem	to	a	solution	frequently	enough	to	form	a
+habit.
+The	Hook	Model	has	four	phases:	
+trigger
+,	
+action
+,	
+variable
+reward
+,	and	
+investment
+.
+
+===== PAGE 15 =====
+1
+The	Habit	Zone
+When	I	run,	
+I	zone	out.	I	don’t	think	about	what	my	body	is	doing	and	my	mind
+usually	wanders	elsewhere.	I	find	it	relaxing	and	refreshing,	and	run	about	three
+mornings	each	week.	Recently,	I	needed	to	take	an	overseas	client	call	during	my
+usual	morning	run	time.	“No	biggie,”	I	thought.	“I	can	run	in	the	evening
+instead.”	However,	the	time	shift	created	some	peculiar	behaviors	that	night.
+I	left	the	house	for	my	run	at	dusk	and	as	I	was	about	to	pass	a	woman	taking
+out	her	trash,	she	made	eye	contact	and	smiled.	I	politely	saluted	her	with	“Good
+morning!”	and	then	caught	my	mistake:	“I	mean,	good	evening!	Sorry!”	I
+corrected	myself,	realizing	I	was	about	ten	hours	off.	She	furrowed	her	brow	and
+cracked	a	nervous	smile.
+Slightly	embarrassed,	I	noted	how	my	mind	had	been	oblivious	to	the	time
+of	day.	I	chided	myself	not	to	do	it	again,	but	within	a	few	minutes	I	passed
+another	runner	and	again—as	if	possessed—I	blurted	out,	“Good	morning!”
+What	was	going	on?
+Back	home,	during	my	normal	post-run	shower,	my	mind	began	to	wander
+again	as	it	often	does	when	I	bathe.	My	brain’s	autopilot	switch	turned	on	and	I
+proceeded	with	my	daily	routine,	unaware	of	my	actions.
+It	wasn’t	until	I	felt	the	nick	of	the	razor	cutting	my	face	that	I	realized	I	had
+lathered	up	and	started	shaving.	Although	it	is	something	I	do	every	morning,
+shaving	was	painfully	unnecessary	in	the	evening.	And	yet	I’d	done	it	anyway,
+unknowingly.
+The	evening	version	of	my	morning	run	had	triggered	a	behavioral	script
+that	instructed	my	body	to	carry	out	my	usual	run-related	activities—all	without
+mindful	awareness.	Such	is	the	nature	of	ingrained	habits—behaviors	done	with
+
+===== PAGE 16 =====
+little	or	no	conscious	thought—which,	by	some	estimates,	guide	nearly	half	of
+our	daily	actions.
+1
+Habits	are	one	of	the	ways	the	brain	learns	complex	behaviors.
+Neuroscientists	believe	habits	give	us	the	ability	to	focus	our	attention	on	other
+things	by	storing	automatic	responses	in	the	basal	ganglia,	an	area	of	the	brain
+associated	with	involuntary	actions.
+2
+Habits	form	when	the	brain	takes	a	shortcut	and	stops	actively	deliberating
+over	what	to	do	next.
+3
+	The	brain	quickly	learns	to	codify	behaviors	that	provide
+a	solution	to	whatever	situation	it	encounters.
+For	example,	nail	biting	is	a	common	behavior	that	occurs	with	little	or	no
+conscious	thought.	Initially,	the	biter	might	start	chomping	on	her	fingernail	for	a
+reason—to	remove	an	unsightly	hangnail,	for	example.	However,	when	the
+behavior	occurs	for	no	conscious	purpose—simply	as	an	automatic	response	to	a
+cue—the	habit	is	in	control.	For	many	persistent	nail-biters,	the	unconscious
+trigger	is	the	unpleasant	feeling	of	stress.	The	more	the	biter	associates	the	act	of
+nail	chomping	with	the	temporary	relief	it	provides,	the	harder	it	becomes	to
+change	the	conditioned	response.
+Like	nail	biting,	many	of	our	daily	decisions	are	made	simply	because	that
+was	the	way	we	have	found	resolution	in	the	past.	The	brain	automatically
+deduces	that	if	the	decision	was	a	good	one	yesterday,	then	it	is	a	safe	bet	again
+today	and	the	action	becomes	a	routine.
+On	my	run	my	brain	had	associated	making	eye	contact	with	another	person
+during	my	run	with	the	standard	“Good	morning!”	greeting;	thus	I	automatically
+uttered	these	words	no	matter	how	inappropriately	timed.
+WHY	HABITS	ARE	GOOD	FOR	BUSINESS
+If	our	programmed	behaviors	are	so	influential	in	guiding	our	everyday	actions,
+surely	harnessing	the	same	power	of	habits	can	be	a	boon	for	industry.	Indeed,	for
+those	able	to	shape	them	in	an	effective	way,	habits	can	be	very	good	for	the
+bottom	line.
+Habit-forming	products	change	user	behavior	and	create	unprompted	user
+engagement.	The	aim	is	to	influence	customers	to	use	your	product	on	their	own,
+again	and	again,	without	relying	on	overt	calls	to	action	such	as	ads	or
+promotions.	Once	a	habit	is	formed,	the	user	is	automatically	triggered	to	use	the
+product	during	routine	events	such	as	wanting	to	kill	time	while	waiting	in	line.
+However,	the	framework	and	practices	explored	in	this	book	are	not	“one	size
+fits	all”	and	do	not	apply	to	every	business	or	industry.	Entrepreneurs	should
+
+===== PAGE 17 =====
+evaluate	how	user	habits	impact	their	particular	business	model	and	goals.	While
+the	viability	of	some	products	depends	on	habit-formation	to	thrive,	that	is	not
+always	the	case.
+For	example,	companies	selling	infrequently	bought	or	used	products	or
+services	do	not	require	habitual	users—at	least,	not	in	the	sense	of	everyday
+engagement.	Life	insurance	companies,	for	instance,	leverage	salespeople,
+advertising,	and	word-of-mouth	referrals	and	recommendations	to	prompt
+consumers	to	buy	policies.	Once	the	policy	is	bought,	there	is	nothing	more	the
+customer	needs	to	do.
+In	this	book	I	refer	to	products	in	the	context	of	businesses	that	require
+ongoing,	unprompted	user	engagement	and	therefore	need	to	build	user	habits.	I
+exclude	companies	that	compel	customers	to	take	action	through	other	means.
+Before	diving	into	the	mechanics	of	how	habits	are	made,	we	must	first
+understand	their	general	importance	and	competitive	benefits	for	businesses.
+Habit	formation	is	good	for	business	in	several	ways.
+Increasing	Customer	Lifetime	Value
+MBAs	are	taught	that	a	business	is	worth	the	sum	of	its	future	profits.	This
+benchmark	is	how	investors	calculate	the	fair	price	of	a	company’s	shares.
+CEOs	and	their	management	teams	are	evaluated	by	their	ability	to	increase
+the	value	of	their	stocks—and	therefore	care	deeply	about	the	ability	of	their
+companies	to	generate	free	cash	flow.	Management’s	job,	in	the	eyes	of
+shareholders,	is	to	implement	strategies	to	grow	future	profits	by	increasing
+revenues	or	decreasing	expenses.
+Fostering	consumer	habits	is	an	effective	way	to	increase	the	value	of	a
+company	by	driving	higher	customer	lifetime	value	(CLTV):	the	amount	of
+money	made	from	a	customer	before	that	person	switches	to	a	competitor,	stops
+using	the	product,	or	dies.	User	habits	increase	how	long	and	how	frequently
+customers	use	a	product,	resulting	in	higher	CLTV.
+Some	products	have	a	very	high	CLTV.	For	example,	credit	card	customers
+tend	to	stay	loyal	for	a	very	long	time	and	are	worth	a	bundle.	Hence,	credit	card
+companies	are	willing	to	spend	a	considerable	amount	of	money	acquiring	new
+customers.	This	explains	why	you	receive	so	many	promotional	offers,	ranging
+from	free	gifts	to	airline	bonus	miles,	to	entice	you	to	add	another	card	or
+upgrade	your	current	one.	Your	potential	CLTV	justifies	a	credit	card	company’s
+marketing	investment.
+
+===== PAGE 18 =====
+Providing	Pricing	Flexibility
+Renowned	investor	and	Berkshire	Hathaway	CEO	Warren	Buffett	once	said,
+“You	can	determine	the	strength	of	a	business	over	time	by	the	amount	of	agony
+they	go	through	in	raising	prices.”
+4
+	Buffett	and	his	partner,	Charlie	Munger,
+realized	that	as	customers	form	routines	around	a	product,	they	come	to	depend
+upon	it	and	become	less	sensitive	to	price.	The	duo	have	pointed	to	consumer
+psychology	as	the	rationale	behind	their	famed	investments	in	companies	like
+See’s	Candies	and	Coca-Cola.
+5
+	Buffett	and	Munger	understand	that	habits	give
+companies	greater	flexibility	to	increase	prices.
+For	example,	in	the	free-to-play	video	game	business,	it	is	standard	practice
+for	game	developers	to	delay	asking	users	to	pay	money	until	they	have	played
+consistently	and	habitually.	Once	the	compulsion	to	play	is	in	place	and	the
+desire	to	progress	in	the	game	increases,	converting	users	into	paying	customers
+is	much	easier.	The	real	money	lies	in	selling	virtual	items,	extra	lives,	and
+special	powers.
+As	of	December	2013,	more	than	500	million	people	have	downloaded
+Candy	Crush	Saga
+,	a	game	played	mostly	on	mobile	devices.	The	game’s
+“freemium”	model	converts	some	of	those	users	into	paying	customers,	netting
+the	game’s	maker	nearly	$1	million	per	day.
+6
+This	pattern	also	applies	to	other	services.	For	example,	take	Evernote,	the
+popular	note-taking	and	archiving	software:	It	is	free	to	use	but	the	company
+offers	upgraded	features,	such	as	offline	viewing	and	collaboration	tools,	for	a
+price—which	many	devoted	users	are	happy	to	pay.
+Evernote’s	CEO	Phil	Libin	shared	some	revealing	insights	about	how	the
+company	turns	nonpaying	users	into	revenue-generating	ones.
+7
+	In	2011	Libin
+published	a	chart	now	known	as	the	“smile	graph.”	With	the	percentage	of	sign-
+ups	represented	on	the	y-axis	and	time	spent	on	the	service	on	the	x-axis,	the
+chart	showed	that,	although	usage	plummeted	at	first,	it	rocketed	upward	as
+people	formed	a	habit	of	using	the	service.	The	resulting	down-and-up	curve
+gave	the	chart	its	emblematic	smile	shape	(and	Evernote’s	CEO	a	matching
+grin).
+In	addition,	as	usage	increased	over	time,	so	did	customers’	willingness	to
+pay.	Libin	noted	that	after	the	first	month,	only	0.5	percent	of	users	paid	for	the
+service;	however,	this	rate	gradually	increased.	By	month	thirty-three,	11	percent
+of	users	had	started	paying.	At	month	forty-two,	a	remarkable	26	percent	of
+customers	were	paying	for	something	they	had	previously	used	for	fre
+
+===== PAGE 19 =====
+Supercharging	Growth
+Users	who	continuously	find	value	in	a	product	are	more	likely	to	tell	their
+friends	about	it.	Frequent	usage	creates	more	opportunities	to	encourage	people
+to	invite	their	friends,	broadcast	content,	and	share	through	word	of	mouth.
+Hooked	users	become	brand	evangelists—megaphones	for	your	company,
+bringing	in	new	users	at	little	or	no	cost.
+Products	with	higher	user	engagement	also	have	the	potential	to	grow	faster
+than	their	rivals.	Case	in	point:	Facebook	leapfrogged	its	competitors,	including
+MySpace	and	Friendster,	even	though	it	was	relatively	late	to	the	social
+networking	party.	Although	its	competitors	both	had	healthy	growth	rates	and
+millions	of	users	by	the	time	Mark	Zuckerberg’s	fledgling	site	launched	beyond
+the	closed	doors	of	academia,	his	company	came	to	dominate	the	industry.
+Facebook’s	success	was,	in	part,	a	result	of	what	I	call	the	
+more	is	more
+principle—more	frequent	usage	drives	more	viral	growth.	As	David	Skok,	tech
+entrepreneur	turned	venture	capitalist,	points	out,	“The	most	important	factor	to
+increasing	growth	is	.	.	.	Viral	Cycle	Time.”
+9
+	Viral	Cycle	Time	is	the	amount	of
+time	it	takes	a	user	to	invite	another	user,	and	it	can	have	a	massive	impact.	“For
+example,	after	20	days	with	a	cycle	time	of	two	days,	you	will	have	20,470
+users,”	Skok	writes.	“But	if	you	halved	that	cycle	time	to	one	day,	you	would
+have	over	20	million	users!	It	is	logical	that	it	would	be	better	to	have	more
+cycles	occur,	but	it	is	less	obvious	just	how	much	better.”
+Having	a	greater	proportion	of	users	daily	returning	to	a	service	dramatically
+decreases	Viral	Cycle	Time	for	two	reasons:	First,	daily	users	initiate	loops	more
+often	(think	tagging	a	friend	in	a	Facebook	photo);	second,	more	daily	active
+users	means	more	people	to	respond	and	react	to	each	invitation.	The	cycle	not
+only	perpetuates	the	process—with	higher	and	higher	user	engagement,	it
+accelerates	it.
+Sharpening	the	Competitive	Edge
+User	habits	are	a	competitive	advantage.	Products	that	change	customer	routines
+are	less	susceptible	to	attacks	from	other	companies.
+Many	entrepreneurs	fall	into	the	trap	of	building	products	that	are	only
+marginally	better	than	existing	solutions,	hoping	their	innovation	will	be	good
+enough	to	woo	customers	away	from	existing	products.	But	when	it	comes	to
+shaking	consumers’	old	habits,	these	naive	entrepreneurs	often	find	that	better
+
+===== PAGE 20 =====
+products	don’t	always	win—especially	if	a	large	number	of	users	have	already
+adopted	a	competing	product.
+A	classic	paper	by	John	Gourville,	a	professor	of	marketing	at	Harvard
+Business	School,	stipulates	that	“many	innovations	fail	because	consumers
+irrationally	overvalue	the	old	while	companies	irrationally	overvalue	the	new.”
+10
+Gourville	claims	that	for	new	entrants	to	stand	a	chance,	they	can’t	just	be
+better,	they	must	be	nine	times	better.	Why	such	a	high	bar?	Because	old	habits
+die	hard	and	new	products	or	services	need	to	offer	dramatic	improvements	to
+shake	users	out	of	old	routines.	Gourville	writes	that	products	that	require	a	high
+degree	of	behavior	change	are	doomed	to	fail	even	if	the	benefits	of	using	the
+new	product	are	clear	and	substantial.
+For	example,	the	technology	I	am	using	to	write	this	book	is	inferior	to
+existing	alternatives	in	many	ways.	I’m	referring	to	the	QWERTY	keyboard
+which	was	first	developed	in	the	1870s	for	the	now-ancient	typewriter.
+QWERTY	was	designed	with	commonly	used	characters	spaced	far	apart.	This
+layout	prevented	typists	from	jamming	the	metal	type	bars	of	early	machines.
+11
+This	physical	limitation	is	an	anachronism	in	the	digital	age,	yet	QWERTY
+keyboards	remain	the	standard	despite	the	invention	of	far	better	layouts.
+Professor	August	Dvorak’s	keyboard	design,	for	example,	placed	vowels	in	the
+center	row,	increasing	typing	speed	and	accuracy.	Though	patented	in	1932,	the
+Dvorak	Simplified	Keyboard	was	written	off.	QWERTY	survives	due	to	the	high
+costs	of	changing	user	behavior.	When	first	introduced	to	the	keyboard,	we	use
+the	hunt-and-peck	method.	After	months	of	practice,	we	instinctively	learn	to
+activate	all	our	fingers	in	response	to	our	thoughts	with	little-to-no	conscious
+effort,	and	the	words	begin	to	flow	effortlessly	from	mind	to	screen.	But
+switching	to	an	unfamiliar	keyboard—even	if	more	efficient—would	force	us	to
+relearn	how	to	type.	Fat	chance!
+As	we	will	learn	in	chapter	5,	users	also	increase	their	dependency	on	habit-
+forming	products	by
+	storing	value
+	in	them—further	reducing	the	likelihood	of
+switching	to	an	alternative.	For	example,	every	e-mail	sent	and	received	using
+Google’s	Gmail	is	stored	indefinitely,	providing	users	with	a	lasting	repository	of
+past	conversations.	New	followers	on	Twitter	increase	users’	clout	and	amplify
+their	ability	to	transmit	messages	to	their	communities.	Memories	and
+experiences	captured	on	Instagram	are	added	to	one’s	digital	scrapbook.
+Switching	to	a	n
+
+===== PAGE 21 =====
+Ultimately,	user	habits	increase	a	business’s	return	on	investment.	Higher
+customer	lifetime	value,	greater	pricing	flexibility,	supercharged	growth,	and	a
+sharpened	competitive	edge	together	equal	a	more	powerful	bang	for	the
+company’s	buck.
+Building	the	Mind	Monopoly
+While	user	habits	are	a	boon	to	companies	fortunate	enough	to	engender	them,
+their	existence	inherently	makes	success	less	likely	for	new	innovations	and
+start-ups	trying	to	disrupt	the	status	quo.	The	fact	is	that	successfully	changing
+long-term	user	habits	is	exceptionally	rare.
+Altering	behavior	requires	not	only	an	understanding	of	how	to	persuade
+people	to	act—for	example,	the	first	time	they	land	on	a	web	page—but	also
+necessitates	getting	them	to	repeat	behaviors	for	long	periods,	ideally	for	the	rest
+of	their	lives.
+Companies	that	succeed	in	building	a	habit-forming	business	are	often
+associated	with	game-changing,	wildly	successful	innovation.	But	like	any
+discipline,	habit	design	has	rules	and	caveats	that	define	and	explain	why	some
+products	change	lives	while	others	do	not.
+For	one,	new	behaviors	have	a	short	half-life,	as	our	minds	tend	to	revert	to
+our	old	ways	of	thinking	and	doing.	Experiments	show	that	lab	animals
+habituated	to	new	behaviors	tend	to	regress	to	their	first	learned	behaviors	over
+time.
+12
+	To	borrow	a	term	from	accounting,	behaviors	are	LIFO—“last	in,	first
+out.”	In	other	words,	the	habits	you’ve	most	recently	acquired	are	also	the	ones
+most	likely	to	go	soonest.
+This	helps	explain	the	overwhelming	evidence	that	people	rarely	change
+their	habits	for	long.	Two-thirds	of	alcoholics	who	complete	a	rehabilitation
+program	will	pick	up	the	bottle,	and	their	old	habits,	within	a	year’s	time.
+13
+Research	shows	that	nearly	everyone	who	loses	weight	on	a	diet	gains	back	the
+pounds	within	two	years.
+14
+The	enemy	of	forming	new	habits	is	past	behaviors,	and	research	suggests
+that	old	habits	die	hard.	Even	when	we	change	our	routines,	neural	pathways
+remain	etched	in	our	brains,	ready	to	be	reactivated	when	we	lose	focus.
+15
+	This
+presents	an	especially	difficult	challenge	for	product	designers	trying	to	create
+new	lines	or	businesses	based	on	forming	new	habits.
+For	new	behaviors	to	really	take	hold,	they	must	occur	often.	In	a	recent
+
+===== PAGE 22 =====
+study	at	the	University	College	London,	researchers	followed	participants	as
+they	attempted	to	form	a	habit	of	flossing	their	teeth.
+16
+	As	one	of	its	findings,	the
+study	concluded	that	the	more	frequently	the	new	behavior	occurred,	the
+stronger	the	habit	became.	Like	flossing,	frequent	engagement	with	a	product—
+especially	over	a	short	period	of	time—increases	the	likelihood	of	forming	new
+routines.
+Google	Search	provides	an	example	of	a	service	built	upon	a	frequent
+behavior	that	helped	create	users’	habits.	If	you’re	skeptical	that	Google	is	habit
+forming	(and	you	are	a	frequent	Google	user),	just	try	using	Bing.	In	a	head-to-
+head	comparison	of	the	efficacy	of	an	incognito	search,	the	products	are	nearly
+identical.
+17
+	Even	if	the	geniuses	at	Google	have	in	fact	perfected	a	faster
+algorithm,	the	time	saved	is	imperceptible	to	everyone	but	robots	and	Mr.	Spock.
+Milliseconds	matter,	but	they	don’t	hook	users.
+So	why	haven’t	more	Google	users	switched	to	Bing?	Habits	keep	users
+loyal.	If	a	user	is	familiar	with	the	Google	interface,	switching	to	Bing	requires
+cognitive	effort.	Although	many	aspects	of	Bing	are	similar	to	Google,	even	a
+slight	change	in	pixel	placement	forces	the	would-be	user	to	learn	a	new	way	of
+interacting	with	the	site.	Adapting	to	the	differences	in	the	Bing	interface	is	what
+actually	slows	down	regular	Google	users	and	makes	Bing	feel	inferior,	not	the
+technology	itself.
+Internet	searches	occur	so	frequently	that	Google	is	able	to	cement	itself	as
+the	one	and	only	solution	in	the	habituated	user’s	mind.	Users	no	longer	need	to
+think	about	whether	or	not	to	use	Google;	they	just	do.	Furthermore,	whenever
+the	company	can	identify	the	user	through	tracking	technology,	it	improves
+search	results	based	on	past	behaviors	to	deliver	a	more	accurate	and
+personalized	experience,	reinforcing	the	user’s	connection	with	the	search
+engine.	The	more	the	product	is	used,	the	better	the	algorithm	gets,	and	thus	the
+more	it	is	used.	The	result	is	a	virtuous	cycle	of	habit-driven	behavior	resulting
+in	Google’s	market	domination.
+18
+HABIT	AS	STRATEGY
+Sometimes	a	behavior	does	not	occur	as	frequently	as	flossing	or	Googling,	but	it
+still	becomes	a	habit.	For	an	infrequent	action	to	become	a	habit,	the	user	must
+perceive	a	high	degree	of	utility,	either	from	gaining	pleasure	or	avoiding	pain.
+Take	Amazon	as	an	example:	The	e-tailer	has	its	sights	set	on	becoming	the
+
+===== PAGE 23 =====
+world’s	one-stop	shop.	Amazon	is	so	confident	in	its	ability	to	form	user	habits	that
+it	sells	and	runs	ads	for	directly	competitive	products	on	its	site.
+19
+	Customers	often
+see	the	item	they	are	about	to	buy	listed	at	a	cheaper	price	and	can	click	away	to
+transact	elsewhere.	To	some,	this	sounds	like	a	formula	for	disaster.	But	to
+Amazon,	it	is	a	shrewd	business	strategy.
+Not	only	does	Amazon	make	money	from	the	ads	it	runs	from	competing
+businesses,	it	also	utilizes	other	companies’	marketing	dollars	to	form	a	habit	in
+the	shopper’s	mind.	Amazon	seeks	to	become	the	solution	to	a	frequently
+occurring	pain	point—the	customer’s	desire	to	find	the	items	they	want.
+By	addressing	shoppers’	price	concerns,	Amazon	earns	loyalty	even	if	it
+doesn’t	make	the	sale	and	comes	across	as	trustworthy	in	the	process.	The	tactic
+is	backed	by	a	2003	study,	which	demonstrated	that	consumers’	preference	for	an
+online	retailer	increases	when	they	are	offered	competitive	price	information.
+20
+The	technique	has	also	been	used	by	Progressive,	the	car	insurance	company,	to
+drive	over	$15	billion	of	annual	insurance	sales,	up	from	just	$3.4	billion	before	the
+tactic	was	implemented.
+By	allowing	users	to	comparison	shop	from	within	the	site,	Amazon	provides
+tremendous	perceived	utility	to	its	customers.	Although	shopping	on	Amazon	may
+not	occur	as	frequently	as	searching	on	Google,	the	company	solidifies	its	place
+as	the	default	solution	to	customers’	purchasing	needs	with	each	successful
+transaction.	In	fact,	people	are	so	comfortable	comparison	shopping	on	Amazon
+that	they	frequently	use	the	company’s	mobile	app	to	check	prices	when	standing
+in	the	aisles	of	real	stores—often	making	a	purchase	from	inside	a	competing
+retailer.
+21
+In	the	Habit	Zone
+A	company	can	begin	to	determine	its	product’s	habit-forming	potential	by
+plotting	two	factors:	
+frequency
+	(how	often	the	behavior	occurs)	and	
+perceived
+utility
+	(how	useful	and	rewarding	the	behavior	is	in	the	user’s	mind	over
+alternative	solutions).
+Googling	occurs	multiple	times	per	day,	but	any	particular	search	is
+negligibly	better	than	rival	services	like	Bing.	Conversely,	using	Amazon	may	be
+a	less	frequent	occurrence,	but	users	receive	great	value	knowing	they’ll	find
+whatever	they	need	at	the	one	and	only	“everything	store.”
+22
+
+===== PAGE 24 =====
+FIGURE
+	1
+As	represented	in	figure	1,	a	behavior	that	occurs	with	enough	frequency	and
+perceived	utility	enters	the	
+Habit	Zone
+,	helping	to	make	it	a	default	behavior.	If
+either	of	these	factors	falls	short	and	the	behavior	lies	below	the	threshold,	it	is
+less	likely	that	the	desired	behavior	will	become	a	habit.
+Note	that	the	line	slopes	downward	but	never	quite	reaches	the	perceived
+utility	axis.	Some	behaviors	never	become	habits	because	they	do	not	occur
+frequently	enough.	No	matter	how	much	utility	is	involved,	infrequent	behaviors
+remain	conscious	actions	and	never	create	the	automatic	response	that	is
+characteristic	of	habits.	On	the	other	axis,	however,	even	a	behavior	that
+provides	minimal	perceived	benefit	can	become	a	habit	simply	because	it	occurs
+frequently.
+This	concept	is	meant	to	be	a	guiding	theory,	and	the	scale	of	the	illustration
+is	intentionally	left	blank.	Unfortunately	for	companies,	research	thus	far	has	not
+found	a	universal	timescale	for	turning	all	behaviors	into	habits.	A	2010	study
+
+===== PAGE 25 =====
+found	that	some	habits	can	be	formed	in	a	matter	of	weeks	while	others	can	take
+more	than	five	months.
+23
+	The	researchers	also	found	that	the	complexity	of	the
+behavior	and	how	important	the	habit	was	to	the	person	greatly	affected	how
+quickly	the	routine	was	formed.
+There	are	few	rules	when	it	comes	to	answering	“How	frequent	is	frequent
+enough?”	and	the	answer	is	likely	specific	to	each	business	and	behavior.
+However,	as	the	previously	mentioned	flossing	study	demonstrates,	we	know
+that	higher	frequency	is	better.
+Think	of	the	products	and	services	you	would	identify	as	habit	forming.
+Most	of	these	are	used	daily,	if	not	multiple	times	per	day.	Let’s	explore	why	we
+use	these	products	so	frequently.
+Vitamins	Versus	Painkillers
+It’s	never	been	easier	to	launch	a	new	product	or	service,	yet	most	new
+endeavors	fail.	Why?	Products	fail	for	a	variety	of	reasons:	Companies	run	out
+of	funding,	products	enter	markets	too	early	or	too	late,	the	marketplace	doesn’t
+need	what	companies	are	offering,	or	founders	simply	give	up.	Just	as	failure	has
+many	causes,	success	too	can	be	attributed	to	a	variety	of	factors.	However,	one
+aspect	is	common	to	all	successful	innovations—they	solve	problems.	That	may
+seem	obvious,	but	understanding	the	kind	of	problem	a	new	product	solves	can
+be	a	topic	of	much	debate.
+“Are	you	building	a	vitamin	or	painkiller?”	is	a	common,	almost	clichéd
+question	many	investors	ask	founders	eager	to	cash	their	first	venture	capital
+check.	The	correct	answer,	from	the	perspective	of	most	investors,	is	the	latter:	a
+painkiller.	Likewise,	innovators	in	companies	big	and	small	are	constantly	asked
+to	prove	their	idea	is	important	enough	to	merit	the	time	and	money	needed	to
+build	it.	Gatekeepers	such	as	investors	and	managers	want	to	invest	in	solving
+real	problems	or	meeting	immediate	needs	by	backing	painkillers.
+Painkillers	solve	an	obvious	need,	relieving	a	specific	pain,	and	often
+have	quantifiable	markets.
+Think	Tylenol,	the	brand-name	version	of	acetaminophen,	and	the	product’s
+promise	of	reliable	relief.	It’s	the	kind	of	ready-made	solution	for	which	people
+are	happy	to	pay.
+
+===== PAGE 27 =====
+Seeking	pleasure	and	avoiding	pain	are	two	key	motivators	in	all	species.
+When	we	feel	discomfort,	we	seek	to	escape	the	uncomfortable	sensation.	In	the
+next	chapter,	we	will	explore	how	emotions,	often	negative	ones,	trigger	users	to
+reach	for	solutions.	For	now,	the	important	thing	to	remember	is	that	habit-
+forming	products	create	associations	in	users’	minds—and	that	the	solution	to
+their	pain	may	be	found	in	your	product’s	use.
+We’ll	discuss	the	morality	of	manipulation	in	chapter	8;	however,	it	is	worth
+noting	that	although	some	people	use	the	terms	interchangeably,	
+habits
+	are	not
+the	same	things	as	
+addictions
+.	The	latter	word	means	persistent,	compulsive
+dependencies	on	a	behavior	or	substance.	Addictions,	by	definition,	are	self-
+destructive.	Thus,	it	is	irresponsible	to	make	products	that	rely	on	creating	and
+maintaining	user	addictions	because	doing	so	would	mean	intentionally	harming
+people.
+A	habit,	on	the	other	hand,	is	a	behavior	that	can	have	a	positive	influence	on
+a	person’s	life.	Habits	can	be	healthy	or	unhealthy,	and	you	likely	have	several
+helpful	habits	you	carry	out	throughout	your	day.	Did	you	brush	your	teeth
+today?	Take	a	shower?	Did	you	express	gratitude	by	saying	“Thanks”?	Or	in	my
+case,	use	the	greeting	“Good	morning”	while	on	an	
+evening
+	jog?	These	are
+common	behaviors	done	with	little	or	no	deliberation—they	are	habits.
+Diving	into	the	Hook	Model
+Ready	to	learn	more	about	creating	positive	user	habits?	Read	on	to	gain	a
+deeper	understanding	of	the	Hook	Model,	a	simple	yet	powerful	way	to	help
+your	customers	form	habits	that	connect	their	problem	with	your	solution.
+In	the	next	chapters	we	dive	into	each	phase	of	the	Hook	Model.	Along	the
+way	I	will	provide	examples	you	can	use	in	the	design	of	your	own	product	or
+service.	By	learning	a	few	fundamentals	of	how	the	mind	works,	you	will
+increase	your	odds	of	building	the	right	product	faster.
+By	progressing	users	through	the	four	steps	of	the	Hook	Model—trigger,
+action,	variable	reward,	and	investment—hooks	form	habits.
+REMEMBER	&	SHARE
+For	some	businesses,	forming	habits	is	a	critical	component	to
+
+===== PAGE 31 =====
+become	such	an	important	part	of	her	life?	As	we	will	soon	learn,	habits	like
+Yin’s	are	formed	over	time,	but	the	chain	reaction	that	forms	a	habit	always
+starts	with	a	trigger.
+HABITS	ARE	NOT	CREATED,	THEY	ARE	BUILT
+UPON
+Habits	are	like	pearls.	Oysters	create	natural	pearls	by	accumulating	layer	upon
+layer	of	a	nacre	called	mother-of-pearl,	eventually	forming	the	smooth	treasure
+over	several	years.	But	what	causes	the	nacre	to	begin	forming	a	pearl?	The
+arrival	of	a	tiny	irritant,	such	as	a	piece	of	grit	or	an	unwelcome	parasite,	triggers
+the	oyster’s	system	to	begin	blanketing	the	invader	with	layers	of	shimmery
+coating.
+Similarly,	new	habits	need	a	foundation	upon	which	to	build.	Triggers	provide
+the	basis	for	sustained	behavior	change.
+Reflect	on	your	own	life	for	a	moment.	What	woke	you	up	this	morning?	What
+caused	you	to	brush	your	teeth?	What	brought	you	to	read	this	book?
+Triggers	take	the	form	of	obvious	cues	like	the	morning	alarm	clock	but	also
+come	as	more	subtle,	sometimes	subconscious	signals	that	just	as	effectively
+influence	our	daily	behavior.	A	trigger	is	the	actuator	of	behavior—the	grit	in	the
+oyster	that	precipitates	the	pearl.	Whether	we	are	cognizant	of	them	or	not,
+triggers	move	us	to	take	action.
+Triggers	come	in	two	types:	
+external
+	and	
+internal
+.
+External	Triggers
+Habit-forming	technologies	start	changing	behavior	by	first	cueing	users	with	a
+call	to	action.	This	sensory	stimuli	is	delivered	through	any	number	of	things	in
+our	environment.
+External	triggers	are	embedded	with	information,	which	tells	the	user
+what	to	do	next.
+An	external	trigger	communicates	the	next	action	the	user	should	take.
+Often,	the	desired	action	is	made	explicitly	clear.	For	example,	what	external
+triggers	do	you	see	in	this	Coca-Cola	vending	machine	in	figure	2?
+Take	a	close	look	at	the	welcoming	man	in	the	image.	He	is	offering	you	a
+
+===== PAGE 34 =====
+we’ve	all	learned	that	Web	site	links	are	for	clicking	and	app	icons	are	for
+tapping.	The	only	purpose	for	these	common	visual	triggers	is	to	prompt	the	user
+to	action.	As	a	readily	accepted	aspect	of	interface	design,	these	calls	to	action
+don’t	need	to	tell	people	how	to	use	them;	the	information	is	embedded.
+Types	of	External	Triggers
+Companies	can	utilize	four	types	of	external	triggers	to	move	users	to	complete
+desired	actions:
+1.	Paid	Triggers
+Advertising,	search	engine	marketing,	and	other	paid	channels	are	commonly
+used	to	get	users’	attention	and	prompt	them	to	act.	Paid	triggers	can	be	effective
+but	costly	ways	to	keep	users	coming	back.	Habit-forming	companies	tend	not	to
+rely	on	paid	triggers	for	very	long,	if	at	all.	Imagine	if	Facebook	or	Twitter
+needed	to	buy	an	ad	to	prompt	users	to	revisit	their	sites—these	companies
+would	soon	go	broke.
+Because	paying	for	reengagement	is	unsustainable	for	most	business	models,
+companies	generally	use	paid	triggers	to	acquire	new	users	and	then	leverage
+other	triggers	to	bring	them	back.
+2.	Earned	Triggers
+Earned	triggers	are	free	in	that	they	cannot	be	bought	directly,	but	they	often
+require	investment	in	the	form	of	time	spent	on	public	and	media	relations.
+Favorable	press	mentions,	hot	viral	videos,	and	featured	app	store	placements
+are	all	effective	ways	to	gain	attention.	Companies	may	be	lulled	into	thinking
+that	related	downloads	or	sales	spikes	signal	long-term	success,	yet	awareness
+generated	by	earned	triggers	can	be	short-lived.
+For	earned	triggers	to	drive	ongoing	user	acquisition,	companies	must	keep
+their	products	in	the	limelight—a	difficult	and	unpredictable	task.
+3.	Relationship	Triggers
+
+===== PAGE 41 =====
+design	our	solution	to	help	calm	Julie’s	fear.	Naturally,	we	might	have	come	to
+another	conclusion	by	starting	with	a	different	persona,	varying	the	narrative,	or
+coming	up	with	different	hypothetical	answers	along	the	chain	of	whys.	Only	an
+accurate	understanding	of	our	user’s	underlying	needs	can	inform	the	product
+requirements.
+Now	that	we	have	an	understanding	of	the	user’s	pain,	we	can	move	on	to
+the	next	step	of	testing	our	product	to	see	if	it	solves	his	problem.
+Unpacking	Instagram’s	Triggers
+A	large	component	of	Instagram’s	success—and	what	brings	its	millions	of	users
+back	nearly	every	day—is	the	company’s	ability	to	understand	its	users’	triggers.
+For	people	like	Yin,	Instagram	is	a	harbor	for	emotions	and	inspirations,	a	virtual
+memoir	preserved	in	pixels.
+Yin’s	habitual	use	of	the	service	started	with	an	external	trigger—a
+recommendation	from	a	friend	and	weeks	of	repetitious	use	before	she	became	a
+regular	user.
+Every	time	Yin	snaps	a	picture,	she	shares	it	with	her	friends	on	Facebook
+and	Twitter.	Consider	the	first	time	you	saw	an	Instagram	photo.	Did	it	catch
+your	attention?	Did	it	make	you	curious?	Did	it	call	you	to	action?
+These	photos	serve	as	a	
+relationship	external	trigger
+,	raising	awareness	and
+serving	as	a	cue	for	others	to	install	and	use	the	app.	But	Instagram	photos
+shared	on	Facebook	and	Twitter	were	not	the	only	external	triggers	driving	new
+users.	Others	learned	of	the	app	from	the	media	and	bloggers,	or	through	the
+featured	placement	Apple	granted	Instagram	in	its	App	Store—all	
+earned
+external	triggers
+.
+Once	installed,	Instagram	benefited	from	
+owned	external	
+triggers.	The	app
+icon	on	users’	phone	screens	and	push	notifications	about	their	friends’	postings
+served	to	call	them	back.
+With	repeated	use,	Instagram	formed	strong	associations	with	internal
+triggers,	and	what	was	once	a	brief	distraction	became	an	intraday	routine	for
+many	users.
+It	is	the	fear	of	losing	a	special	moment	that	instigates	a	pang	of	stress.	This
+negative	emotion	is	the	internal	trigger	that	brings	Instagram	users	back	to	the
+app	to	alleviate	this	pain	by	capturing	a	photo.	As	users	continue	to	use	the
+service,	new	internal	triggers	form.
+
+===== PAGE 51 =====
+FIGURE
+	7
+In	the	late	1990s	blogging	changed	the	web.	Before	this	era,	amateur	writers
+had	to	purchase	their	own	domain,	fiddle	with	DNS	settings,	find	a	web	host,
+and	set	up	a	content-management	system	to	present	their	writing.	Suddenly,	new
+companies	such	as	Blogger	eliminated	most	of	these	steps	by	allowing	users	to
+simply	register	an	account	and	start	posting.
+Evan	Williams,	cofounder	of	Blogger	and	Twitter,	echoes	Hauptly’s	formula
+for	innovation	when	he	describes	his	own	approach	to	building	two	massively
+successful	companies:
+“Take	a	human	desire,	preferably	one	that	has	been	around	for	a	really
+long	time	.	.	.	Identify	that	desire	and	use	modern	technology	to	take	out
+steps.”
+Blogger	made	posting	content	online	dramatically	easier.	The	result?	The
+percentage	of	users	creating	content	online,	as	opposed	to	simply	consuming	it,
+
+===== PAGE 59 =====
+FIGURE
+	13
+MOTIVATION	OR	ABILITY:	WHICH	SHOULD	YOU
+INCREASE	FIRST?
+After	uncovering	the	triggers	that	prompt	user	actions	and	deciding	which	actions
+you	want	to	turn	into	habits,	you	can	increase	motivation	and	ability	to	spark	the
+likelihood	of	your	users	taking	a	desired	behavior.	But	which	should	you	invest	in
+first,	motivation	or	ability?	Where	is	your	time	and	money	better	spent?	The
+answer	is	always	to	start	with	ability.
+Naturally,	all	three	parts	of	B	=	MAT	must	be	present	for	a	singular	user	action
+to	occur;	without	a	clear	trigger	and	sufficient	motivation	there	will	be	no	behavior.
+However,	for	companies	building	technology	solutions,	the	greatest	return	on
+investment	generally	comes	from	increasing	a	product’s	ease	of	use.
+The	fact	is,	increasing	motivation	is	expensive	and	time	consuming.	Web	site
+visitors	tend	to	ignore	instructional	text;	they	are	often	multitasking	and	have	little
+patience	for	explanations	about	why	or	how	they	should	do	something.	Influencing
+behavior	by	reducing	the	effort	required	to	perform	an	action	is	more	effective	than
+increasing	someone’s	desire	to	do	it.	Make	your	product	so	simple	that	users
+already	know	how	to	use	it,	and	you’ve	got	a	winner.
+
+===== PAGE 61 =====
+goal,	the	company	decided	to	make	another	switch.
+FIGURE
+	15—
+THE
+	
+TWITTER
+	
+HOME
+	
+PAGE
+	
+IN
+	2010
+During	the	company’s	period	of	hyper-growth,	the	Twitter	home	page
+became	radically	simpler	(figure	16).	The	product	description	is	itself	only	140
+characters	long	and	has	evolved	from	the	cognitively	difficult	request	that	users
+broadcast	their	information	(as	seen	in	2009)	to	the	less	taxing	“find	out	what’s
+happening,	right	now,	with	the	people	and	organizations	you	care	about.”
+The	big,	bold	image	of	people	looking	into	some	kind	of	light-emanating
+event,	like	a	concert	or	a	soccer	match,	metaphorically	communicates	the	value
+of	the	service	while	piquing	curiosity.	Most	strikingly,	the	page	has	two	very
+clear	calls	to	action:	sign	in	or	sign	up.	The	company	made	the	desired	action	as
+simple	as	possible,	knowing	that	getting	users	to	experience	the	service	would
+yield	better	results	than	trying	to	persuade	them	to	use	it	while	still	on	the	home
+page.
+
+===== PAGE 71 =====
+	
+4
+Variable	Reward
+Ultimately,	all	businesses	
+help	users	achieve	an	objective.	As	we	learned	in
+the	previous	chapter,	reducing	the	steps	needed	to	complete	the	intended
+outcome	increases	the	likelihood	of	that	outcome.	But	to	keep	users	engaged,
+products	need	to	deliver	on	their	promises.	To	form	the	learned	associations	we
+discussed	in	chapter	2,	the	trigger	phase,	users	must	come	to	depend	on	the
+product	as	a	reliable	solution	to	their	problem—the	salve	for	the	itch	they	came
+to	scratch.
+The	third	step	in	the	Hook	Model	is	the	
+variable	reward	phase
+,	in	which	you
+reward	your	users	by	solving	a	problem,	reinforcing	their	motivation	for	the
+action	taken	in	the	previous	phase.	To	understand	why	rewards—and	variable
+rewards	in	particular—are	so	powerful,	we	must	first	take	a	trip	deep	inside	the
+brain.
+Understanding	Rewards
+In	the	1940s	two	researchers,	James	Olds	and	Peter	Milner,	accidentally
+discovered	how	a	special	area	of	the	brain	is	the	source	of	our	cravings.	The
+researchers	implanted	electrodes	in	the	brains	of	lab	mice	that	enabled	the	mice
+to	give	themselves	tiny	electric	shocks	to	a	small	area	of	the	brain,	the	nucleus
+accumbens.
+1
+	The	mice	quickly	became	hooked	on	the	sensation.
+Olds	and	Milner	demonstrated	that	the	lab	mice	would	forgo	food,	water,
+and	even	run	across	a	painful	electrified	grid	for	the	opportunity	to	continue
+pressing	the	lever	that	administered	the	shocks.	A	few	years	later,	other
+
+===== PAGE 72 =====
+researchers	tested	the	human	response	to	self-administered	stimulus	in	the	same
+area	of	the	brain.	The	results	were	just	as	dramatic	as	in	the	mouse	trial—
+subjects	wanted	to	do	nothing	but	press	the	brain-stimulating	button.	Even	when
+the	machine	was	turned	off,	people	continued	pressing	the	button.	Researchers
+had	to	forcibly	take	the	devices	from	subjects	who	refused	to	relinquish	them.
+Given	the	responses	they	had	earlier	found	in	lab	animals,	Olds	and	Milner
+concluded	that	they	had	discovered	the	brain’s	pleasure	center.	In	fact,	we	now
+know	other	things	that	feel	good	also	activate	the	same	neural	region.	Sex,
+delicious	food,	a	bargain,	and	even	our	digital	devices	all	tap	into	this	deep
+recess	of	the	brain,	providing	the	impetus	for	many	of	our	behaviors.
+However,	more	recent	research	has	shown	that	these	two	researchers’
+experiments	were	not	stimulating	pleasure	per	se.	Stanford	professor	Brian
+Knutson	conducted	a	study	exploring	blood	flow	in	the	brains	of	people
+wagering	while	inside	an	fMRI	machine.
+2
+	The	test	subjects	played	a	gambling
+game	while	Knutson	and	his	team	looked	at	which	areas	of	their	brains	became
+more	active.	The	startling	results	showed	that	the	nucleus	accumbens	was	not
+activating	when	the	reward	(in	this	case	a	monetary	payout)	was	received,	but
+rather	in	anticipation	of	it.
+The	study	revealed	that	what	draws	us	to	act	is	not	the	sensation	we
+receive	from	the	reward	itself,	but	the	need	to	alleviate	the	craving	for
+that	reward.
+The	stress	of	desire	in	the	brain	appears	to	compel	us,	just	as	it	did	in	Olds’s
+and	Milner’s	lab	mouse	experiments.
+UNDERSTANDING	VARIABILITY
+If	you’ve	never	watched	a	YouTube	video	of	a	baby’s	first	encounter	with	a	dog,
+it’s	worth	doing.	Not	only	are	these	videos	incredibly	cute,	but	they	help
+demonstrate	something	important	about	our	mental	wiring.
+At	first	the	expression	on	the	baby’s	face	seems	to	ask,	“What	is	this	hairy
+monster	doing	in	my	house?	Will	it	hurt	me?	What	will	it	do	next?”	The	child	is
+filled	with	curiosity,	uncertain	if	this	creature	might	cause	harm.	But	soon	the	child
+figures	out	Rover	is	not	a	threat.	What	follows	is	an	explosion	of	infectious	giggles.
+Researchers	believe	laughter	may	in	fact	be	a	release	valve	when	we	experience
+the	discomfort	and	excitement	of	uncertainty,	but	without	fear	of	harm.
+3
+
+===== PAGE 81 =====
+FIGURE
+	23
+3.	Pinterest
+Pinterest,	a	company	that	has	grown	to	reach	over	50	million	monthly	users
+worldwide,	also	employs	a	feed,	but	with	a	visual	twist.
+17
+	The	online
+pinboarding	site	is	a	virtual	smorgasbord	of	objects	of	desire.	The	site	is	curated
+by	its	community	of	users	who	ensure	that	a	high	degree	of	intriguing	content
+appears	on	each	page.
