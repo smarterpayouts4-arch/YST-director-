@@ -17,7 +17,7 @@ The current product ends after generating, validating, and exporting one company
 | Adaptive interview (one question) | Live | Next-question API + ethical TARI UX |
 | Research brief | Live | Build + owner edit path |
 | Final prompt generate/validate/export | Live | Eight-section formatter + prompt-contract lint |
-| Workflow state machine | Live | Ends at `PROMPT_EXPORTED` / `COMPLETE` |
+| Workflow state machine | Partial | Transition meta exists; reducer enforcement in progress (hardening pass) |
 | Auth / multi-user / DB | Planned | Explicit non-goal for MVP |
 | Research execution / topics / video | Planned / Out of MVP | Owner runs prompt in ChatGPT |
 
@@ -30,7 +30,7 @@ The current product ends after generating, validating, and exporting one company
 | Versioned contract registry | Live | `src/ai/contracts/` |
 | Context compiler | Live | `src/ai/context/` assemblers + budgets + redact |
 | AI operation registry + AiTrace | Live | `src/ai/operations/` + `src/ai/traces/` |
-| Decision ledger | Live | Built from confirmed profile + answers |
+| Decision ledger | Prototype | `buildDecisionLedger` exists; not yet consumed by brief/prompt compilers |
 | Config modules + storage migrations | Live | `src/config/` + envelope migrations |
 | Prompt contract lint | Live | Semantic validators on formatted Markdown |
 | Industry eval fixtures (6) | Live | `tests/evals/` |
@@ -42,11 +42,11 @@ The current product ends after generating, validating, and exporting one company
 |------|--------|-------|
 | Live `project-knowledge/` doctrine | Live | This tree |
 | Knowledge update/check/guardian | Live | Writes only under `generated/` |
-| Lean RPB MCP (`rpb_*`) | Live | Host stdio, read-only, document IDs |
+| Lean RPB MCP (`rpb_*`) | Live in repo / Partial in Cursor | Smoke + allowlist tests pass; connect via `.cursor/mcp.json` (copy example) |
 | Agent Prompt System (lean) | Live | Cursor adapters via `agent:install` |
-| `agent-learning/` approval path | Live | Candidates only; human approval required |
-| MCP profiles (`docs/ai/mcp-profiles.yaml`) | Live | `rpb-development` on; research-future disabled |
-| CI three-tier | Live | precommit-fast, GitHub Actions verify, generated-maps bot PR |
+| `agent-learning/` approval path | Partial | Propose/review scripts only; approval is manual (by design), no approve automation |
+| MCP profiles (`docs/ai/mcp-profiles.yaml`) | Live (policy) | `rpb-development` on paper; owner must align Cursor MCP settings |
+| CI three-tier | Partial | GitHub Actions verify + generated-maps bot PR are Live; precommit-fast exists but is not hook-wired |
 | Docker packaging of RPB MCP | Planned | Not required; host stdio preferred |
 
 ## Verification
@@ -54,13 +54,18 @@ The current product ends after generating, validating, and exporting one company
 | Area | Status | Notes |
 |------|--------|-------|
 | Unit + eval tests (vitest) | Live | Ingestion, formatter, reducer, prompt contract evals |
+| API route tests | Planned | No route-level tests yet (hardening pass adds them) |
 | `npm run doctor` | Live | Architecture health report |
 | `npm run verify` | Live | lint + typecheck + test + knowledge + APS + MCP + build |
-| E2E (playwright) | Partial | Script present; interactive coverage TBD |
+| E2E (playwright) | Broken | `test:e2e` script exists but no `playwright.config`; fails on Vitest files |
 
 ## Honest gaps
 
 - Full LLM-backed evals against live models are not a merge gate (deterministic contract lint is).
 - Copy `.cursor/mcp.json.example` → `.cursor/mcp.json` locally to load RPB MCP in Cursor.
+- Cursor's currently enabled MCP servers (Docker gateway with GitHub write tools, Perplexity, RepoBrain) do not match the `rpb-development` policy; see `docs/ai/MCP_LOCKDOWN.md`.
+- Illegal workflow transitions are currently soft-allowed in the reducer; the hardening pass enforces `canTransition`.
+- The interview's two-conditional-question maximum is prompt-guidance only; code enforcement lands in the hardening pass.
+- Supporting-document allowlists differ between `src/config/upload-policy.ts` and `sanitize-upload.ts` until unified.
 - Root-level duplicate files under `Reference/` are legacy copies; prefer organized paths.
 - Do not treat `Reference/archives/marketmonth` as live product truth.
