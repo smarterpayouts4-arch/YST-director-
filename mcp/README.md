@@ -35,3 +35,11 @@ npm run mcp:doctor
 - `rpb_get_reference_concept`
 
 Logs go to **stderr** only (stdout is MCP protocol).
+
+## Version pinning
+
+`@modelcontextprotocol/sdk` is pinned through `package.json` + `package-lock.json`.
+The MCP spec evolves (authorization hardening, stateless operation, breaking
+protocol revisions) — never take an SDK major bump or protocol upgrade without
+running `npm run mcp:test` (smoke + allowlist drift) and `npm run mcp:doctor`.
+Owner lockdown checklist: `docs/ai/MCP_LOCKDOWN.md`.
