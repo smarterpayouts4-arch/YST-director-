@@ -1,6 +1,6 @@
 # CURRENT_STATE — Research Prompt Builder MVP
 
-Freshness: `current` · Last reviewed: 2026-08-05
+Freshness: `current` · Last reviewed: 2026-08-06 (foundation-9 hardening pass)
 
 Use vocabulary literally: Live · Partial · Prototype · Mocked · Planned · Blocked · Deprecated.
 
@@ -17,7 +17,7 @@ The current product ends after generating, validating, and exporting one company
 | Adaptive interview (one question) | Live | Next-question API + ethical TARI UX |
 | Research brief | Live | Build + owner edit path |
 | Final prompt generate/validate/export | Live | Eight-section formatter + prompt-contract lint |
-| Workflow state machine | Partial | Transition meta exists; reducer enforcement in progress (hardening pass) |
+| Workflow state machine | Live | Reducer hard-enforces `canTransition`; illegal moves rejected with `WorkflowDiagnostic` (tested) |
 | Auth / multi-user / DB | Planned | Explicit non-goal for MVP |
 | Research execution / topics / video | Planned / Out of MVP | Owner runs prompt in ChatGPT |
 
@@ -30,7 +30,7 @@ The current product ends after generating, validating, and exporting one company
 | Versioned contract registry | Live | `src/ai/contracts/` |
 | Context compiler | Live | `src/ai/context/` assemblers + budgets + redact |
 | AI operation registry + AiTrace | Live | `src/ai/operations/` + `src/ai/traces/` |
-| Decision ledger | Prototype | `buildDecisionLedger` exists; not yet consumed by brief/prompt compilers |
+| Decision ledger | Live (derived) | Rebuilt-on-read inside brief + prompt context compilers; never persisted separately (tested) |
 | Config modules + storage migrations | Live | `src/config/` + envelope migrations |
 | Prompt contract lint | Live | Semantic validators on formatted Markdown |
 | Industry eval fixtures (6) | Live | `tests/evals/` |
@@ -53,19 +53,20 @@ The current product ends after generating, validating, and exporting one company
 
 | Area | Status | Notes |
 |------|--------|-------|
-| Unit + eval tests (vitest) | Live | Ingestion, formatter, reducer, prompt contract evals |
-| API route tests | Planned | No route-level tests yet (hardening pass adds them) |
+| Unit + eval tests (vitest) | Live | Ingestion, formatter, reducer, ledger, prompt contract + scope-boundary evals |
+| API route tests | Live | Five route suites (mocked services) + structured-openai service tests + schema-valid fixtures |
 | `npm run doctor` | Live | Architecture health report |
-| `npm run verify` | Live | lint + typecheck + test + knowledge + APS + MCP + build |
-| E2E (playwright) | Broken | `test:e2e` script exists but no `playwright.config`; fails on Vitest files |
+| `npm run verify` | Live | lint + typecheck + test + knowledge + APS + MCP + build + E2E |
+| E2E (playwright) | Live (mocked) | `playwright.config.ts` on port 3100; full owner journey with all model APIs mocked; prod server in CI |
+| Dependabot | Live | Weekly npm + github-actions updates; MCP SDK majors held back by policy |
 
 ## Honest gaps
 
 - Full LLM-backed evals against live models are not a merge gate (deterministic contract lint is).
 - Copy `.cursor/mcp.json.example` → `.cursor/mcp.json` locally to load RPB MCP in Cursor.
-- Cursor's currently enabled MCP servers (Docker gateway with GitHub write tools, Perplexity, RepoBrain) do not match the `rpb-development` policy; see `docs/ai/MCP_LOCKDOWN.md`.
-- Illegal workflow transitions are currently soft-allowed in the reducer; the hardening pass enforces `canTransition`.
-- The interview's two-conditional-question maximum is prompt-guidance only; code enforcement lands in the hardening pass.
-- Supporting-document allowlists differ between `src/config/upload-policy.ts` and `sanitize-upload.ts` until unified.
+- Cursor's currently enabled MCP servers (Docker gateway with GitHub write tools, Perplexity, RepoBrain) do not match the `rpb-development` policy; owner action required — see `docs/ai/MCP_LOCKDOWN.md`.
+- The conditional-question cap (max 2) is code-enforced with one targeted repair; a persistent violation ends the interview only when all core decisions are resolved, otherwise `MODEL_OUTPUT_INVALID`.
+- E2E mocks all model APIs by design; no test exercises live OpenAI (deterministic contract lint is the gate).
+- Branch protection on `main` requires the first remote CI run before the check name can be required (owner-approved action).
 - Root-level duplicate files under `Reference/` are legacy copies; prefer organized paths.
 - Do not treat `Reference/archives/marketmonth` as live product truth.

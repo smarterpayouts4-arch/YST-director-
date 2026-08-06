@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-06T02:19:47.965Z",
-  "commitSha": "958df514ae72d8ff27e11bf8a1ffa7e3b6ea77f3",
+  "generatedAt": "2026-08-06T03:10:52.229Z",
+  "commitSha": "9248331e4f9ca2797296f7e5ed30763435f72408",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "."
@@ -63,6 +63,10 @@
       {
         "name": ".github",
         "children": [
+          {
+            "name": "dependabot.yml",
+            "file": true
+          },
           {
             "name": "workflows",
             "children": [
@@ -349,11 +353,33 @@
               {
                 "name": "mcp-profiles.yaml",
                 "file": true
+              },
+              {
+                "name": "MCP_LOCKDOWN.md",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "audits",
+            "children": [
+              {
+                "name": "FOUNDATION_READINESS_AUDIT.md",
+                "file": true
               }
             ]
           },
           {
             "name": "FOUNDATION_DEFINITION_OF_DONE.md",
+            "file": true
+          }
+        ]
+      },
+      {
+        "name": "e2e",
+        "children": [
+          {
+            "name": "happy-path.spec.ts",
             "file": true
           }
         ]
@@ -464,6 +490,10 @@
       },
       {
         "name": "package.json",
+        "file": true
+      },
+      {
+        "name": "playwright.config.ts",
         "file": true
       },
       {
@@ -609,6 +639,10 @@
                   },
                   {
                     "name": "CURRENT_STATE_GAPS.md",
+                    "file": true
+                  },
+                  {
+                    "name": "foundation-readiness.json",
                     "file": true
                   },
                   {
@@ -999,8 +1033,55 @@
         ]
       },
       {
+        "name": "test-results",
+        "children": [
+          {
+            "name": ".last-run.json",
+            "file": true
+          }
+        ]
+      },
+      {
         "name": "tests",
         "children": [
+          {
+            "name": "ai",
+            "children": [
+              {
+                "name": "decision-ledger-context.test.ts",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "api",
+            "children": [
+              {
+                "name": "company-understand.route.test.ts",
+                "file": true
+              },
+              {
+                "name": "documents-extract.route.test.ts",
+                "file": true
+              },
+              {
+                "name": "helpers.ts",
+                "file": true
+              },
+              {
+                "name": "interview-next.route.test.ts",
+                "file": true
+              },
+              {
+                "name": "research-brief.route.test.ts",
+                "file": true
+              },
+              {
+                "name": "research-prompt.route.test.ts",
+                "file": true
+              }
+            ]
+          },
           {
             "name": "evals",
             "children": [
@@ -1040,6 +1121,48 @@
               {
                 "name": "prompt-contract.eval.test.ts",
                 "file": true
+              },
+              {
+                "name": "scope-boundary.test.ts",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "fixtures",
+            "children": [
+              {
+                "name": "api",
+                "children": [
+                  {
+                    "name": "company-understanding.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "confirmed-profile.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "final-prompt.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "fixtures.schema.test.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "interview-question.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "research-brief.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "supporting-context.ts",
+                    "file": true
+                  }
+                ]
               }
             ]
           },
@@ -1057,6 +1180,15 @@
             "children": [
               {
                 "name": "parse-csv.test.ts",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "services",
+            "children": [
+              {
+                "name": "structured-openai.test.ts",
                 "file": true
               }
             ]

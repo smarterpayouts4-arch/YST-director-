@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-06T02:19:49.339Z",
-  "commitSha": "958df514ae72d8ff27e11bf8a1ffa7e3b6ea77f3",
+  "generatedAt": "2026-08-06T03:10:53.347Z",
+  "commitSha": "9248331e4f9ca2797296f7e5ed30763435f72408",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "src/app",
@@ -16,7 +16,7 @@
   "counts": {
     "appFiles": 8,
     "featureFiles": 42,
-    "testFiles": 12,
+    "testFiles": 28,
     "mcpFiles": 19,
     "documents": 21,
     "largeFiles": 0,
