@@ -15,8 +15,11 @@ import { buildNextQuestionPrompt } from "@/features/research-prompt-builder/prom
 import { parseStructuredOutput } from "@/features/research-prompt-builder/services/structured-openai";
 import { validateInterviewQuestion } from "@/features/research-prompt-builder/validation/interview";
 import {
+  MAX_CONDITIONAL_QUESTIONS,
   MAX_TOTAL_QUESTIONS,
 } from "@/features/research-prompt-builder/config/constants";
+
+const CONDITIONAL_CAP_ISSUE = `Conditional question cap reached (max ${MAX_CONDITIONAL_QUESTIONS}). Return a non-conditional question targeting an unresolved core decision, or done:true with a completionReason if every core decision is resolved.`;
 
 const NextQuestionResponseSchema = z.object({
   done: z.boolean(),
@@ -58,6 +61,11 @@ export async function generateNextQuestion(input: {
     };
   }
 
+  const conditionalCount = input.previousQuestions.filter(
+    (q) => q.isConditional,
+  ).length;
+  const conditionalCapReached = conditionalCount >= MAX_CONDITIONAL_QUESTIONS;
+
   const remainingSlots = MAX_TOTAL_QUESTIONS - input.previousQuestions.length;
   const contextPacket = assembleInterviewContext({
     ...input,
@@ -65,31 +73,53 @@ export async function generateNextQuestion(input: {
   });
   const prompt = buildNextQuestionPrompt({ contextPacket });
 
-  const result = await parseStructuredOutput({
-    operation: "generate-next-question",
-    schemaName: "next_interview_question",
-    schema: NextQuestionResponseSchema,
-    instructions: prompt.instructions,
-    input: prompt.input,
-    inputSchemaVersion: getContractSchemaVersion("confirmed-profile"),
-    outputSchemaVersion: getContractSchemaVersion("interview-question"),
-    charBudgetUsed: contextPacket.charCount,
-    truncationWarningCount: contextPacket.truncationWarnings.length,
-    validate: (value) => {
-      if (value.done) {
-        return value.completionReason ? [] : ["completionReason is required when done."];
-      }
-      if (!value.question) return ["question is required when done is false."];
-      const issues = validateInterviewQuestion(value.question);
-      if (
-        covered.has(value.question.decisionCategory) &&
-        !value.question.isConditional
-      ) {
-        issues.push("Decision category already covered.");
-      }
-      return issues;
-    },
-  });
+  let result: z.infer<typeof NextQuestionResponseSchema>;
+  try {
+    result = await parseStructuredOutput({
+      operation: "generate-next-question",
+      schemaName: "next_interview_question",
+      schema: NextQuestionResponseSchema,
+      instructions: prompt.instructions,
+      input: prompt.input,
+      inputSchemaVersion: getContractSchemaVersion("confirmed-profile"),
+      outputSchemaVersion: getContractSchemaVersion("interview-question"),
+      charBudgetUsed: contextPacket.charCount,
+      truncationWarningCount: contextPacket.truncationWarnings.length,
+      validate: (value) => {
+        if (value.done) {
+          return value.completionReason ? [] : ["completionReason is required when done."];
+        }
+        if (!value.question) return ["question is required when done is false."];
+        const issues = validateInterviewQuestion(value.question);
+        if (
+          covered.has(value.question.decisionCategory) &&
+          !value.question.isConditional
+        ) {
+          issues.push("Decision category already covered.");
+        }
+        // Deterministic cap: with 2 conditionals already asked, a third
+        // conditional is rejected. parseStructuredOutput performs exactly one
+        // targeted repair asking for a non-conditional question.
+        if (conditionalCapReached && value.question.isConditional) {
+          issues.push(CONDITIONAL_CAP_ISSUE);
+        }
+        return issues;
+      },
+    });
+  } catch (error) {
+    // If the single repair still violated the conditional cap, end the
+    // interview only when every core decision is resolved; otherwise the
+    // model output stays invalid — never silently end an incomplete interview.
+    const message = error instanceof Error ? error.message : "";
+    if (message.includes(CONDITIONAL_CAP_ISSUE) && coresResolved) {
+      return {
+        done: true as const,
+        completionReason:
+          "Core decisions are resolved and the conditional question limit was reached.",
+      };
+    }
+    throw error;
+  }
 
   if (result.done) {
     return {

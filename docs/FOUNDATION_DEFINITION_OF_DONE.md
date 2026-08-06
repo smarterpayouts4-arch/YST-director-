@@ -1,6 +1,10 @@
 # Three-Plane Foundation — Definition of Done
 
 Checked against the Living Project Intelligence plan (2026-08-05).
+Honesty pass 2026-08-06: unchecked items reflect the foundation-readiness audit
+(`docs/audits/FOUNDATION_READINESS_AUDIT.md`).
+Hardening pass 2026-08-06 (`chore/foundation-9-hardening`) closed the
+transition-enforcement, ledger, API-test, and E2E gaps below.
 
 ## Product boundary
 
@@ -12,8 +16,10 @@ Checked against the Living Project Intelligence plan (2026-08-05).
 ## Product plane
 
 - [x] Explicit workflow state machine ending at PROMPT_EXPORTED / COMPLETE
+- [x] Transitions hard-enforced in the reducer (illegal moves rejected + WorkflowDiagnostic)
 - [x] Failure / degraded modes documented in workflow-states
 - [x] Decision Ledger type + helpers
+- [x] Decision Ledger consumed by brief/prompt compilers (derived, rebuild-on-read)
 
 ## AI control plane
 
@@ -31,12 +37,16 @@ Checked against the Living Project Intelligence plan (2026-08-05).
 - [x] Live project-knowledge canon (not MarketMonth doctrine)
 - [x] Living scanner → generated indexes/maps/reports with envelopes
 - [x] Guardian hard/warn codes
-- [x] agent-learning approval pipeline
+- [ ] agent-learning approval pipeline (propose/review only; approval is manual)
 - [x] Lean APS + Cursor adapters
-- [x] Read-only `rpb_*` MCP (host stdio)
+- [x] Read-only `rpb_*` MCP (host stdio) — implemented and tested; Cursor connection is a local owner step
 - [x] MCP profiles YAML (development on; research-future disabled)
-- [x] doctor / verify / precommit-fast
-- [x] GitHub Actions CI + generated-maps bot PR workflow
+- [x] doctor / verify scripts
+- [ ] precommit-fast wired as an actual git hook (currently manual `npm run precommit:fast`)
+- [x] GitHub Actions CI + generated-maps bot PR workflow (unproven on remote until first run)
+- [x] API route integration tests (five suites + structured-openai service tests)
+- [x] Playwright E2E (config + mocked happy path + scope-boundary tests)
+- [x] Dependabot (npm + actions, weekly; MCP SDK majors held back)
 - [x] CURSOR_FOUNDATION_HARDENING_PROMPT.md
 - [x] Honest CURRENT_STATE.md
 

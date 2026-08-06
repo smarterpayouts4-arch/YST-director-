@@ -23,7 +23,7 @@
     "mcp:doctor": "node mcp/scripts/doctor.mjs",
     "doctor": "node scripts/doctor.mjs",
     "precommit:fast": "node scripts/precommit-fast.mjs",
-    "verify": "npm run doctor && npm run lint && npm run typecheck && npm run test && npm run knowledge:update && npm run knowledge:check && npm run knowledge:guardian && npm run agent:validate && npm run mcp:test && npm run mcp:doctor && npm run build"
+    "verify": "npm run doctor && npm run lint && npm run typecheck && npm run test && npm run knowledge:update && npm run knowledge:check && npm run knowledge:guardian && npm run agent:validate && npm run mcp:test && npm run mcp:doctor && npm run build && npm run test:e2e"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",

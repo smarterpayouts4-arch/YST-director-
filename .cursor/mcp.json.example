@@ -1,9 +1,13 @@
 {
+  "$comment": "Copy to .cursor/mcp.json (gitignored) and reload Cursor. Matches the rpb-development profile in docs/ai/mcp-profiles.yaml. RPB Project Intelligence is the only always-on project MCP; Context7 is technical-library docs only (never product truth). Do NOT add filesystem, shell, Docker-control, or write-capable MCP servers — see docs/ai/MCP_LOCKDOWN.md.",
   "mcpServers": {
     "rpb-project-intelligence": {
       "command": "npx",
       "args": ["tsx", "mcp/src/stdio-server.ts"],
       "cwd": "${workspaceFolder}"
+    },
+    "context7": {
+      "url": "https://mcp.context7.com/mcp"
     }
   }
 }

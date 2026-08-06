@@ -10,6 +10,11 @@ import {
   truncateString,
 } from "@/ai/context/budgets";
 import { redactDeep } from "@/ai/context/redact";
+import {
+  buildDecisionLedger,
+  summarizeDecisionLedger,
+  type DecisionOrigin,
+} from "@/features/research-prompt-builder/state/decision-ledger";
 
 export type BriefContextPacket = {
   operationId: "build-research-brief";
@@ -37,6 +42,18 @@ export type BriefContextPacket = {
       usedSuggestion: boolean;
       supportingDocumentSummaries: string[];
     }>;
+    /** Derived provenance (rebuild-on-read; never persisted separately). */
+    decisionLedger: {
+      profileVersion: string;
+      counts: Record<DecisionOrigin, number>;
+      records: Array<{
+        decisionId: string;
+        category: string;
+        origin: DecisionOrigin;
+        confidence: string;
+        sourceQuestionId?: string;
+      }>;
+    };
   };
   provenanceNotes: string[];
   truncationWarnings: string[];
@@ -91,6 +108,16 @@ export function assembleBriefContext(input: {
     };
   });
 
+  const ledger = buildDecisionLedger({
+    confirmedProfile: input.confirmedProfile,
+    questions: input.questions,
+    answers: input.answers,
+  });
+  const ledgerSummary = summarizeDecisionLedger(ledger);
+  provenanceNotes.push(
+    `decisionLedger: ${ledgerSummary.total} records (owner_confirmed=${ledgerSummary.byOrigin.owner_confirmed}, owner_corrected=${ledgerSummary.byOrigin.owner_corrected}, interview_answer=${ledgerSummary.byOrigin.interview_answer}, restriction=${ledgerSummary.byOrigin.restriction})`,
+  );
+
   const packet = {
     confirmedProfile: {
       profileVersion: input.confirmedProfile.profileVersion,
@@ -98,6 +125,19 @@ export function assembleBriefContext(input: {
       fields,
     },
     acceptedAnswers,
+    decisionLedger: {
+      profileVersion: ledger.profileVersion,
+      counts: ledgerSummary.byOrigin,
+      records: ledger.records.slice(0, 40).map((record) => ({
+        decisionId: record.decisionId,
+        category: record.category,
+        origin: record.origin,
+        confidence: record.confidence,
+        ...(record.sourceQuestionId
+          ? { sourceQuestionId: record.sourceQuestionId }
+          : {}),
+      })),
+    },
   };
 
   while (

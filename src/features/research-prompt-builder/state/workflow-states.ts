@@ -273,6 +273,19 @@ export function canTransition(from: WorkflowState, to: WorkflowState): boolean {
   return TRANSITION_META[from].allowedNext.includes(to);
 }
 
+/**
+ * Recorded when an action attempts an illegal transition. Kept separate from
+ * `lastFailureCode`, which is reserved for real operation failures
+ * (model/ingest/validation), so diagnostics never mask a user-facing failure.
+ */
+export type WorkflowDiagnostic = {
+  code: "ILLEGAL_TRANSITION";
+  from: WorkflowState;
+  attemptedTo: WorkflowState;
+  action: string;
+  occurredAt: string;
+};
+
 export function getInvalidateDownstream(from: WorkflowState, to: WorkflowState) {
   if (!canTransition(from, to) && from !== to) {
     return TRANSITION_META[to].invalidateDownstream;

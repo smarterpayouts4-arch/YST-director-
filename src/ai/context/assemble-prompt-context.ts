@@ -9,6 +9,12 @@ import {
   truncateString,
 } from "@/ai/context/budgets";
 import { redactDeep } from "@/ai/context/redact";
+import {
+  buildDecisionLedger,
+  decisionsByOrigin,
+  summarizeDecisionLedger,
+  type DecisionOrigin,
+} from "@/features/research-prompt-builder/state/decision-ledger";
 
 export type PromptContextPacket = {
   operationId: "compile-research-prompt";
@@ -23,6 +29,17 @@ export type PromptContextPacket = {
       classification: string;
     }>;
     restrictions: string[];
+    /** Derived provenance (rebuild-on-read; never persisted separately). */
+    decisionProvenance: {
+      profileVersion: string;
+      counts: Record<DecisionOrigin, number>;
+      records: Array<{
+        decisionId: string;
+        category: string;
+        origin: DecisionOrigin;
+        confidence: string;
+      }>;
+    };
     metadataHints: {
       model: string;
       promptVersion: string;
@@ -59,15 +76,20 @@ export function assemblePromptContext(input: {
       classification: field.originalClassification,
     }));
 
+  // Restrictions derive from the decision ledger (single provenance source)
+  // plus brief trust boundaries.
+  const ledger = buildDecisionLedger({
+    confirmedProfile: input.confirmedProfile,
+  });
+  const ledgerSummary = summarizeDecisionLedger(ledger);
+  provenanceNotes.push(
+    `decisionLedger: ${ledgerSummary.total} records (restriction=${ledgerSummary.byOrigin.restriction})`,
+  );
   const restrictions = [
-    ...input.researchBrief.trustBoundaries,
-    ...Object.entries(input.confirmedProfile.fields)
-      .filter(
-        ([key, field]) =>
-          /restrict|claim|regulat|compliance|disclaimer/i.test(key) ||
-          /restrict|cannot|must not|prohibited/i.test(field.value),
-      )
-      .map(([, field]) => field.value),
+    ...new Set([
+      ...input.researchBrief.trustBoundaries,
+      ...decisionsByOrigin(ledger, "restriction").map((record) => record.value),
+    ]),
   ]
     .slice(0, 30)
     .map((item) => truncateString(item, 400).value);
@@ -77,6 +99,16 @@ export function assemblePromptContext(input: {
     researchBrief,
     confirmedDecisions,
     restrictions,
+    decisionProvenance: {
+      profileVersion: ledger.profileVersion,
+      counts: ledgerSummary.byOrigin,
+      records: ledger.records.slice(0, 40).map((record) => ({
+        decisionId: record.decisionId,
+        category: record.category,
+        origin: record.origin,
+        confidence: record.confidence,
+      })),
+    },
     metadataHints: {
       model: input.model,
       promptVersion: input.promptVersion,
