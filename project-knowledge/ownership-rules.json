@@ -12,6 +12,11 @@
     "rpb-final-prompt": ["src/app/api/research-prompt/**", "src/features/research-prompt-builder/services/generate-research-prompt.ts", "src/features/research-prompt-builder/formatters/**"],
     "rpb-prompts": ["src/features/research-prompt-builder/prompts/**"],
     "rpb-schemas": ["src/features/research-prompt-builder/schemas/**"],
+    "content-intelligence": [
+      "src/features/content-intelligence/**",
+      "src/app/content-intelligence/**",
+      "src/app/api/content-intelligence/**"
+    ],
     "ai-control": ["src/ai/**"],
     "shared-ui": ["src/components/**"],
     "lib": ["src/lib/**"],

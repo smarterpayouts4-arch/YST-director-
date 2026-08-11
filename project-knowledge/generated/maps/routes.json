@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-11T03:14:18.773Z",
-  "commitSha": "b26e6afc0c152e06f362688937812613bb4f628f",
+  "generatedAt": "2026-08-11T21:18:39.185Z",
+  "commitSha": "df8bbbe0730eb40cdae26b5df60ea9b028b03446",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "src/app"
@@ -8,6 +8,10 @@
   "warnings": [],
   "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
   "pages": [
+    {
+      "route": "/content-intelligence",
+      "sourceFile": "src/app/content-intelligence/page.tsx"
+    },
     {
       "route": "/",
       "sourceFile": "src/app/page.tsx"
@@ -17,6 +21,13 @@
     {
       "route": "/api/company/understand",
       "sourceFile": "src/app/api/company/understand/route.ts",
+      "methodHints": [
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/content-intelligence/extract",
+      "sourceFile": "src/app/api/content-intelligence/extract/route.ts",
       "methodHints": [
         "POST"
       ]

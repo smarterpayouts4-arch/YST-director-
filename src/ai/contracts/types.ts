@@ -13,7 +13,8 @@ export type ContractProducer =
   | "interview-answer"
   | "build-research-brief"
   | "compile-research-prompt"
-  | "extract-supporting-context";
+  | "extract-supporting-context"
+  | "extract-content-intelligence";
 
 export type ContractConsumer =
   | "analyze-company"
@@ -21,10 +22,12 @@ export type ContractConsumer =
   | "build-research-brief"
   | "compile-research-prompt"
   | "extract-supporting-context"
+  | "extract-content-intelligence"
   | "ui-understanding-review"
   | "ui-interview"
   | "ui-brief-review"
   | "ui-prompt-export"
+  | "ui-content-intelligence-review"
   | "decision-ledger"
   | "context-compiler"
   | "prompt-contract-lint";
@@ -37,7 +40,8 @@ export type ContractId =
   | "interview-answer"
   | "supporting-context"
   | "research-brief"
-  | "final-research-prompt";
+  | "final-research-prompt"
+  | "content-intelligence-extract";
 
 export type ContractDefinition<TSchema extends z.ZodTypeAny = z.ZodTypeAny> = {
   contractId: ContractId;

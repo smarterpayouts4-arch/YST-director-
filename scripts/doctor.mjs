@@ -3,7 +3,7 @@
  * Fast architecture health diagnostics for humans and Cursor agents.
  * First instruction to any coding agent: run `npm run doctor`, read the report, continue.
  */
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
 
@@ -77,30 +77,37 @@ check("Prompt registry / operations", () => {
   const missing = promptPaths.filter((p) => !existsSync(join(root, p)));
   if (missing.length) return fail(`Missing prompt modules: ${missing.join(", ")}`);
 
-  const servicesDir = join(
-    root,
-    "src/features/research-prompt-builder/services",
-  );
-  const serviceFiles = [
-    "analyze-company.ts",
-    "generate-next-question.ts",
-    "extract-supporting-context.ts",
-    "build-research-brief.ts",
-    "generate-research-prompt.ts",
-    "structured-openai.ts",
+  /** Walk feature + AI service trees so ops need not live under RPB only. */
+  function collectTsFiles(dir, out = []) {
+    if (!existsSync(dir)) return out;
+    for (const name of readdirSync(dir)) {
+      const full = join(dir, name);
+      const st = statSync(full);
+      if (st.isDirectory()) collectTsFiles(full, out);
+      else if (name.endsWith(".ts") && !name.endsWith(".d.ts")) out.push(full);
+    }
+    return out;
+  }
+
+  const serviceRoots = [
+    join(root, "src/features"),
+    join(root, "src/ai/structured-output"),
   ];
-  const serviceBlob = serviceFiles
-    .map((f) => readFileSync(join(servicesDir, f), "utf8"))
+  const serviceBlob = serviceRoots
+    .flatMap((d) => collectTsFiles(d))
+    .map((f) => readFileSync(f, "utf8"))
     .join("\n");
   if (serviceBlob.includes("compile-research-prompt-contract")) {
     return fail("Phantom operationId compile-research-prompt-contract still present");
   }
+
   const publicOps = [
     "analyze-company",
     "generate-next-question",
     "extract-supporting-context",
     "build-research-brief",
     "compile-research-prompt",
+    "extract-content-intelligence",
   ];
   const missingOps = publicOps.filter(
     (op) => !new RegExp(`operation:\\s*"${op}"`).test(serviceBlob),
@@ -111,10 +118,15 @@ check("Prompt registry / operations", () => {
   if (!existsSync(join(root, "src/ai/README.md"))) {
     return fail("src/ai/README.md missing (thin ops map)");
   }
+  if (!existsSync(join(root, "src/ai/structured-output/parse-structured-output.ts"))) {
+    return fail("Shared structured-output gateway missing under src/ai/structured-output/");
+  }
   if (existsSync(join(root, "src/config/model-policy.ts"))) {
     return fail("Dead dual-truth src/config/model-policy.ts must stay deleted");
   }
-  return pass(`${promptPaths.length} prompt modules; public ops wired`);
+  return pass(
+    `${promptPaths.length} prompt modules; public ops wired; shared gateway present`,
+  );
 });
 
 check("Project Knowledge", () => {

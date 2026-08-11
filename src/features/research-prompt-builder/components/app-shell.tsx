@@ -281,6 +281,7 @@ export function AppShell() {
             questions={state.questions}
             answers={state.answers}
             researchBrief={state.researchBrief}
+            projectId={state.projectId}
           />
         ) : null}
       </main>

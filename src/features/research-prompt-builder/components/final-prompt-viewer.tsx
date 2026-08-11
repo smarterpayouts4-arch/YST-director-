@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { ResearchHandoffPanel } from "@/features/research-prompt-builder/components/research-handoff-panel";
 import { buildTransformationSummary } from "@/features/research-prompt-builder/lib/transformation-summary";
 import type {
   ConfirmedCompanyProfile,
@@ -21,6 +22,7 @@ export function FinalPromptViewer({
   questions,
   answers,
   researchBrief,
+  projectId,
 }: {
   prompt: FinalResearchPrompt;
   formatted: string;
@@ -31,6 +33,7 @@ export function FinalPromptViewer({
   questions: InterviewQuestion[];
   answers: InterviewAnswer[];
   researchBrief: ResearchBrief;
+  projectId: string;
 }) {
   const [copied, setCopied] = useState(false);
   const [showFull, setShowFull] = useState(false);
@@ -133,6 +136,8 @@ export function FinalPromptViewer({
       ) : null}
 
       {error ? <p className="text-sm text-red-700">{error}</p> : null}
+
+      <ResearchHandoffPanel projectId={projectId} />
     </div>
   );
 }

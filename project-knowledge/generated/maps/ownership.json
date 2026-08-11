@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-11T03:14:19.033Z",
-  "commitSha": "b26e6afc0c152e06f362688937812613bb4f628f",
+  "generatedAt": "2026-08-11T21:18:39.835Z",
+  "commitSha": "df8bbbe0730eb40cdae26b5df60ea9b028b03446",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "project-knowledge/ownership-rules.json"
@@ -50,6 +50,11 @@
       ],
       "rpb-schemas": [
         "src/features/research-prompt-builder/schemas/**"
+      ],
+      "content-intelligence": [
+        "src/features/content-intelligence/**",
+        "src/app/content-intelligence/**",
+        "src/app/api/content-intelligence/**"
       ],
       "ai-control": [
         "src/ai/**"

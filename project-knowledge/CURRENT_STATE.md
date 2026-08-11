@@ -6,7 +6,7 @@ Use vocabulary literally: Live · Partial · Prototype · Mocked · Planned · B
 
 ## Governing sentence
 
-The current product ends after generating, validating, and exporting one company-specific ChatGPT research prompt. All architecture and AI operations must directly support the quality, safety, traceability, or usability of that prompt.
+Research Prompt Builder remains Live through research-prompt export. Content Intelligence is the next independent domain (Partial foundation): completed external research will be ingested by a Librarian into a governed library; Topic Engine is Planned and must consume only the published library DTO.
 
 ## Product journey
 
@@ -16,17 +16,19 @@ The current product ends after generating, validating, and exporting one company
 | Company understanding | Live | Structured analyst + five-section Looks right confirmation |
 | Adaptive interview (one question) | Live | Next-question API + ethical TARI UX; no target question count; strategy cards when strategic priorities unresolved (at most once) |
 | Research brief | Live | Build + owner edit path |
-| Final prompt generate/validate/export | Live | Eight-section formatter + Prompt Contract 1.1 lint (anchored research controls; section-7 opportunity-shaped experiments). Product still ends at export — ChatGPT research results are not ingested. |
-| Workflow state machine | Live | Reducer hard-enforces `canTransition`; illegal moves rejected with `WorkflowDiagnostic` (tested) |
-| Auth / multi-user / DB | Planned | Explicit non-goal for MVP |
-| Research execution / topics / video | Planned / Out of MVP | Owner runs prompt in ChatGPT |
+| Final prompt generate/validate/export | Live | Eight-section formatter + Prompt Contract 1.1 lint (anchored research controls; section-7 opportunity-shaped experiments). Hard stage boundary before Content Intelligence. |
+| Content Intelligence Librarian | Partial | PR1 structure accepted. Pipeline Live for paste→artifact→ExtractionRun→extract→curate→review→publish. **Acceptance smoke pending** (ZYNAVA + 2–3 diverse reports) before freeze. No upload/freshness yet. |
+| Topic Engine | Planned | Blocked on Librarian freeze after smoke. Consumes only `PublishedLibraryDto`; do not build yet; no empty `topics/` scaffold |
+| Workflow state machine (RPB) | Live | Reducer hard-enforces `canTransition`; illegal moves rejected with `WorkflowDiagnostic` (tested) |
+| Auth / multi-user / cloud DB | Planned | Explicit non-goal for current MVP development |
+| Research execution / video | Planned / Out of MVP | Owner runs prompt in ChatGPT externally |
 
 ## AI Control plane
 
 | Area | Status | Notes |
 |------|--------|-------|
 | Runtime prompts under `prompts/` | Live | Narrative governance + versioned |
-| Zod schemas + structured OpenAI | Live | Repair policy via `getRepairPolicy` (≤2 for final compile; ≤1 otherwise); null-parse not repaired |
+| Zod schemas + structured OpenAI | Live | Feature-neutral gateway at `src/ai/structured-output/`; RPB adapter injects RPB repair/version. Repair policy via `getRepairPolicy` (≤2 for final compile; ≤1 otherwise); null-parse not repaired |
 | Versioned contract registry | Live | `src/ai/contracts/` |
 | Context compiler | Live | `src/ai/context/` assemblers + budgets + redact |
 | AI operation registry + AiTrace | Live (catalog + mechanical doctor) | `AiOperationId` derived from registry keys; public ops declare `schemaName`; doctor/tests fail on drift. AiTrace typed (`repairAttempts`/`finalValidation`); in-memory only (no product UI) |

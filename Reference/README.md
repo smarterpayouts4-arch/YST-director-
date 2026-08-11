@@ -11,9 +11,12 @@ Reference/
 ├── README.md                 ← this file
 ├── manifest.json             ← machine-readable catalog
 ├── agent-systems/            ← agent loop diagrams + course transcripts
+│   └── prompt-engineering/   ← prompt/context engineering transcripts (advisory raw)
 ├── product-specs/            ← RPB MVP build prompt, System Flow, Agent OS guide
-│   └── fixtures/             ← design / demo company CSVs (advisory copies)
+│   ├── fixtures/             ← design / demo company CSVs (advisory copies)
+│   └── content-intelligence/ ← CI architecture discovery (advisory)
 ├── concepts/                 ← short distilled notes (preferred reading)
+│   └── content-intelligence/ ← Librarian principles + do-not-adopt fence
 ├── advisory-sources/
 │   └── narrative/            ← Hooked / storytelling / marketing hook / short-video sources
 └── archives/
@@ -38,4 +41,5 @@ Active design scratchpad (not Reference): `docs/working/INTERVIEW_UX_WORKING.md`
 - Do not auto-rewrite PRODUCT.md / ARCHITECTURE.md from Reference content.
 - Short-video production workflows are **out of MVP scope**.
 - Ethical TARI (Trigger→Action→Reward→Investment) applies to **owner interview UX**, not dark-pattern habit design.
-- MCP and Living Intelligence serve Cursor/developers; they do not expand the customer-facing product beyond one exported research prompt.
+- MCP and Living Intelligence serve Cursor/developers; they do not expand customer-facing product scope.
+- Do **not** runtime-import prompt-engineering transcripts into Content Intelligence or RPB prompts.

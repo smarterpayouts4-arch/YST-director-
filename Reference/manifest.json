@@ -2,8 +2,87 @@
   "schemaVersion": 1,
   "authority": "advisory",
   "generated": false,
-  "updatedAt": "2026-08-06",
+  "updatedAt": "2026-08-11",
   "records": [
+    {
+      "id": "ref-pe-concept-1",
+      "title": "Prompt Engineering Foundations (transcript)",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["prompt-engineering", "structured-output", "prompt-chaining"],
+      "applies_to": ["content-intelligence"],
+      "date_added": "2026-08-11",
+      "source_file": "agent-systems/prompt-engineering/concept-1-prompt-engineering.txt",
+      "concept_file": "concepts/content-intelligence/librarian-prompt-principles.md",
+      "notes": "Raw transcript. Do not runtime-import. Distill only."
+    },
+    {
+      "id": "ref-pe-concept-2",
+      "title": "Prompting Skill (transcript)",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["prompt-engineering", "role", "constraints"],
+      "applies_to": ["content-intelligence"],
+      "date_added": "2026-08-11",
+      "source_file": "agent-systems/prompt-engineering/concept-2-prompting-skill.txt",
+      "concept_file": "concepts/content-intelligence/librarian-prompt-principles.md",
+      "notes": "Raw transcript. Do not runtime-import."
+    },
+    {
+      "id": "ref-pe-concept-3",
+      "title": "Prompt and Context Engineering (transcript)",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["context-engineering", "prompt-templates", "evals"],
+      "applies_to": ["content-intelligence"],
+      "date_added": "2026-08-11",
+      "source_file": "agent-systems/prompt-engineering/concept-3-prompt-context-engineering.txt",
+      "concept_file": "concepts/content-intelligence/librarian-prompt-principles.md",
+      "notes": "Raw transcript. Reject agents/RAG/fine-tune for MVP — see do-not-adopt-for-mvp.md."
+    },
+    {
+      "id": "ref-pe-prompts-1",
+      "title": "Twenty-One Prompts Catalog (transcript)",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["prompt-templates"],
+      "applies_to": ["content-intelligence"],
+      "date_added": "2026-08-11",
+      "source_file": "agent-systems/prompt-engineering/prompts-1-twenty-one-prompts.txt",
+      "notes": "Marketing tip catalog. Extract structure only; do not paste into runtime prompts."
+    },
+    {
+      "id": "ref-ci-arch-001",
+      "title": "Content Intelligence Architecture Discovery",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["content-intelligence", "librarian", "architecture"],
+      "applies_to": ["content-intelligence", "project-knowledge"],
+      "date_added": "2026-08-11",
+      "source_file": "product-specs/content-intelligence/architecture-discovery.md",
+      "concept_file": "concepts/content-intelligence/librarian-prompt-principles.md"
+    },
+    {
+      "id": "ref-ci-principles-001",
+      "title": "Librarian Prompt Principles (distilled)",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["content-intelligence", "librarian", "prompt-engineering"],
+      "applies_to": ["content-intelligence"],
+      "date_added": "2026-08-11",
+      "source_file": "concepts/content-intelligence/librarian-prompt-principles.md"
+    },
+    {
+      "id": "ref-ci-donot-001",
+      "title": "Content Intelligence Do-Not-Adopt for MVP",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["content-intelligence", "scope"],
+      "applies_to": ["content-intelligence"],
+      "date_added": "2026-08-11",
+      "source_file": "concepts/content-intelligence/do-not-adopt-for-mvp.md"
+    },
+
     {
       "id": "ref-fixture-zynava-001",
       "title": "ZYNAVA Company CSV (design fixture)",

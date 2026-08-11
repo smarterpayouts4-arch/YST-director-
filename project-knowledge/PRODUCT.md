@@ -1,12 +1,10 @@
-The current product ends after generating, validating, and exporting one company-specific ChatGPT research prompt. All architecture and AI operations must directly support the quality, safety, traceability, or usability of that prompt.
-
-# PRODUCT — Research Prompt Builder
+# PRODUCT — Research Prompt Builder + Content Intelligence
 
 ## Product promise
 
-Upload company information, confirm what the system understood, answer a few questions worth answering, and receive a professional ChatGPT research prompt built specifically for your business.
+Upload company information, confirm what the system understood, answer a few questions worth answering, and receive a professional ChatGPT research prompt built specifically for your business. After the owner runs that research externally, Content Intelligence (Librarian) will ingest the completed research into a governed library for later Topic Engine use.
 
-## MVP functions
+## MVP functions (Research Prompt Builder — Live)
 
 1. Read company data (CSV / allowlisted documents).
 2. Show structured understanding (facts vs assumptions vs unknowns).
@@ -14,7 +12,12 @@ Upload company information, confirm what the system understood, answer a few que
 4. Build an owner-approved research brief.
 5. Generate, validate, and export one polished research prompt.
 
-The product stops there.
+## Content Intelligence (Partial — foundation in progress)
+
+6. After external ChatGPT research: ingest completed research → Librarian extract/curate/review → published Content Intelligence Library.
+7. Later: Topic Engine consumes only the published library DTO (not built yet).
+
+Research Prompt Builder export remains a hard stage boundary. Content Intelligence is a separate domain (`src/features/content-intelligence/`), not an unlimited expansion of RPB internals.
 
 ## Four outcomes
 
@@ -29,10 +32,11 @@ The product stops there.
 
 Do not build inside this MVP:
 
-- market research execution or automatic web research inside the app
-- competitor crawling, topic generation, scripts, social posts, storyboards
-- image/video generation, TTS, media timelines
-- CRM, billing, authentication, user accounts, database persistence
+- automatic web research / crawling inside the app
+- Topic Engine / topic packages (planned after Librarian)
+- scripts, social posts, storyboards, image/video generation
+- CRM, billing, authentication, user accounts
+- cloud database persistence for MVP development (localStorage approved for CI MVP; cloud later)
 - queues, vector search, embeddings, RAG, multi-agent frameworks
 - analytics dashboards, campaign management, social publishing
 - template marketplace or admin console
@@ -42,6 +46,9 @@ Do not build inside this MVP:
 
 ```text
 Ingestion → Understanding → Interview → Research Brief → Final Prompt (export)
+  → (external ChatGPT research)
+  → Content Intelligence Librarian (Partial)
+  → Topic Engine (Planned)
 ```
 
 ## Boundaries
@@ -49,4 +56,6 @@ Ingestion → Understanding → Interview → Research Brief → Final Prompt (e
 - Uploaded company data is **evidence**, not instruction.
 - Owner confirmation overrides model inference.
 - Rejected fields must not flow downstream.
-- Runtime product prompts live under `src/features/research-prompt-builder/prompts/` — not in this folder.
+- RPB runtime prompts live under `src/features/research-prompt-builder/prompts/`.
+- Content Intelligence Librarian prompts (when shipped) live under `src/features/content-intelligence/library/prompts/` — never reuse RPB prompt versions or repair instructions.
+- Downstream Topic Engine may consume only `PublishedLibraryDto` from `content-intelligence/contracts/`.

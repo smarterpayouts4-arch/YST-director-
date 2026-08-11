@@ -8,6 +8,7 @@ import {
   ResearchBriefSchema,
   SupportingContextSchema,
 } from "@/features/research-prompt-builder/schemas";
+import { ContentIntelligenceExtractSchema } from "@/features/content-intelligence/library/schemas/extract-draft";
 import type { ContractDefinition, ContractId, ContractRegistry } from "@/ai/contracts/types";
 
 export const CONTRACT_SCHEMA_VERSION = "1.0.0";
@@ -102,6 +103,16 @@ export const contractRegistry: ContractRegistry = {
     consumers: ["ui-prompt-export", "prompt-contract-lint"],
     description: "Typed Prompt IR for the copy-ready ChatGPT research prompt.",
     schema: FinalResearchPromptSchema,
+  },
+  "content-intelligence-extract": {
+    contractId: "content-intelligence-extract",
+    schemaVersion: "1.0.0",
+    owner: "ai-control-plane",
+    producer: "extract-content-intelligence",
+    consumers: ["extract-content-intelligence", "ui-content-intelligence-review"],
+    description:
+      "Structured Librarian extract draft from completed external research (pre-curation).",
+    schema: ContentIntelligenceExtractSchema,
   },
 };
 

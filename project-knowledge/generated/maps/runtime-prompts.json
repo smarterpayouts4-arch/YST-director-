@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-11T03:14:18.902Z",
-  "commitSha": "b26e6afc0c152e06f362688937812613bb4f628f",
+  "generatedAt": "2026-08-11T21:18:39.543Z",
+  "commitSha": "df8bbbe0730eb40cdae26b5df60ea9b028b03446",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "src/features"
@@ -10,6 +10,30 @@
   ],
   "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
   "prompts": [
+    {
+      "path": "src/features/content-intelligence/library/prompts/extract-content-intelligence.ts",
+      "lines": 29,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/content-intelligence/library/prompts/prompt-version.ts",
+      "lines": 3,
+      "exportsVersion": true,
+      "versionLiteral": "ci-librarian-1.0.0"
+    },
+    {
+      "path": "src/features/content-intelligence/library/prompts/repair-output.ts",
+      "lines": 29,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/content-intelligence/library/prompts/shared-guardrails.ts",
+      "lines": 14,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
     {
       "path": "src/features/research-prompt-builder/prompts/company-analyst.ts",
       "lines": 73,

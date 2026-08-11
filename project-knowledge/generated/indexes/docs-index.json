@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-11T03:14:18.646Z",
-  "commitSha": "b26e6afc0c152e06f362688937812613bb4f628f",
+  "generatedAt": "2026-08-11T21:18:38.889Z",
+  "commitSha": "df8bbbe0730eb40cdae26b5df60ea9b028b03446",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "project-knowledge/"
@@ -65,6 +65,14 @@
       "authority": "canonical"
     },
     {
+      "id": "FEATURES__content-intelligence",
+      "path": "project-knowledge/FEATURES/content-intelligence.md",
+      "title": "FEATURE — Content Intelligence",
+      "description": "FEATURE — Content Intelligence",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
       "id": "FEATURES__final-prompt",
       "path": "project-knowledge/FEATURES/final-prompt.md",
       "title": "Feature — Final research prompt",
@@ -115,8 +123,8 @@
     {
       "id": "PRODUCT",
       "path": "project-knowledge/PRODUCT.md",
-      "title": "PRODUCT — Research Prompt Builder",
-      "description": "PRODUCT — Research Prompt Builder",
+      "title": "PRODUCT — Research Prompt Builder + Content Intelligence",
+      "description": "PRODUCT — Research Prompt Builder + Content Intelligence",
       "status": "canonical",
       "authority": "canonical"
     },

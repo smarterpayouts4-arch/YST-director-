@@ -1,6 +1,6 @@
-# AGENTS.md — Research Prompt Builder
+# AGENTS.md — Research Prompt Builder + Content Intelligence
 
-The current product ends after generating, validating, and exporting one company-specific ChatGPT research prompt. All architecture and AI operations must directly support the quality, safety, traceability, or usability of that prompt.
+Research Prompt Builder remains Live through research-prompt export. Content Intelligence is the next independent domain (Librarian Partial; Topic Engine Planned). Do not expand into agents, RAG, video, or cloud DB during current MVP development.
 
 ## Cold-start order
 

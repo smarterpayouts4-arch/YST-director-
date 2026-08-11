@@ -8,6 +8,7 @@ export const AI_SCHEMA_NAMES = [
   "supporting_context",
   "research_brief",
   "final_research_prompt",
+  "content_intelligence_extract",
 ] as const;
 
 export type AiSchemaName = (typeof AI_SCHEMA_NAMES)[number];

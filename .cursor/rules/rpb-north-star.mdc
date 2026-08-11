@@ -1,22 +1,20 @@
 ---
-description: Research Prompt Builder north star and scope boundary
+description: Research Prompt Builder north star and Content Intelligence boundary
 alwaysApply: true
 ---
 
 # Research Prompt Builder — North Star
 
-The current product ends after generating, validating, and exporting one company-specific ChatGPT research prompt. All architecture and AI operations must directly support the quality, safety, traceability, or usability of that prompt.
+Research Prompt Builder remains Live through research-prompt export. Content Intelligence is the next independent domain: Librarian (Partial) ingests completed external research into a governed library; Topic Engine is Planned and must consume only `PublishedLibraryDto`.
 
-## Four outcomes
+RPB work must still support Accuracy · Specificity · Research Depth · Repeatability of the exported research prompt.
 
-Accuracy · Specificity · Research Depth · Repeatability
+## Do not expand into
 
-## Do not expand MVP into
-
-Research execution · topics · scripts · video · auth · DB · write MCP · auto-rewriting canon docs
+In-app research execution · Topic Engine (until its PR) · scripts · video · auth · cloud DB · RAG/multi-agent · write MCP · auto-rewriting canon docs · runtime-import of Reference transcripts
 
 ## First steps
 
 1. Prefer `npm run dev` (runs `doctor` then Next.js). Use `npm run doctor` alone for a one-shot check; `npm run verify` before merge.
 2. Read `AGENTS.md` and `project-knowledge/CURRENT_STATE.md`
-3. Prefer the smallest change that improves the exported prompt
+3. Prefer the smallest change that improves the exported prompt or the Librarian foundation without co-mingling domains

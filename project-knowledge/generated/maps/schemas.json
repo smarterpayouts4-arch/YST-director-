@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-11T03:14:18.815Z",
-  "commitSha": "b26e6afc0c152e06f362688937812613bb4f628f",
+  "generatedAt": "2026-08-11T21:18:39.294Z",
+  "commitSha": "df8bbbe0730eb40cdae26b5df60ea9b028b03446",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "src/features"
@@ -8,6 +8,34 @@
   "warnings": [],
   "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
   "schemas": [
+    {
+      "path": "src/features/content-intelligence/library/schemas/artifact.ts",
+      "lines": 13
+    },
+    {
+      "path": "src/features/content-intelligence/library/schemas/enums.ts",
+      "lines": 35
+    },
+    {
+      "path": "src/features/content-intelligence/library/schemas/extract-draft.ts",
+      "lines": 28
+    },
+    {
+      "path": "src/features/content-intelligence/library/schemas/extraction-run.ts",
+      "lines": 24
+    },
+    {
+      "path": "src/features/content-intelligence/library/schemas/index.ts",
+      "lines": 7
+    },
+    {
+      "path": "src/features/content-intelligence/library/schemas/library-item.ts",
+      "lines": 27
+    },
+    {
+      "path": "src/features/content-intelligence/library/schemas/library.ts",
+      "lines": 29
+    },
     {
       "path": "src/features/research-prompt-builder/schemas/index.ts",
       "lines": 290

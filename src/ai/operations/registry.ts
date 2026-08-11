@@ -80,6 +80,22 @@ export const operationRegistry = {
     retryable: true,
     failureStates: ["MODEL_OUTPUT_INVALID", "PROMPT_VALIDATION_FAILED"],
   },
+  "extract-content-intelligence": {
+    displayName: "Extract content intelligence",
+    description:
+      "Extract governed intelligence items from completed external research for Librarian review.",
+    visibility: "public",
+    inputContracts: ["content-intelligence-extract"],
+    outputContracts: ["content-intelligence-extract"],
+    promptModule: "extract-content-intelligence",
+    promptModulePath:
+      "src/features/content-intelligence/library/prompts/extract-content-intelligence.ts",
+    contextAssembler: "none",
+    schemaName: "content_intelligence_extract",
+    evalPath: "tests/evals/content-intelligence-contract.test.ts",
+    retryable: true,
+    failureStates: ["MODEL_OUTPUT_INVALID", "INGESTION_FAILED"],
+  },
   "repair-invalid-output": {
     displayName: "Repair invalid model output",
     description:

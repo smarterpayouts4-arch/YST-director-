@@ -1,0 +1,920 @@
+
+Search in video
+Intro
+0:00
+You suck at prompting. It's okay. I did too,
+0:02
+but I got tired of asking AI to do things and getting garbage,
+0:05
+getting results like this when I'm expecting this.
+0:09
+Have you ever yelled at chat gt like really insulted it because you're so
+0:13
+frustrated with the results? If you haven't, you're not using it enough.
+0:16
+It's those moments. That frustration that makes me think one of two things. One,
+0:20
+AI is dumb and I'm not going to use it anymore. Those naysayers are right,
+0:23
+or two, I'm dumb and I have no idea how to use ai.
+0:27
+I most often feel like option two,
+0:28
+and this was confirmed when I asked the prompt father.
+0:30
+Himself what I was doing wrong. So if the AI model's response is bad,
+0:33
+I'm like treat everything as like a personal skill issue. The problem.
+0:36
+Is me. It's a skill issue. So I went deep, too deep.
+0:40
+I took all the top prompting courses on Coursera.
+0:43
+I read all the official prompting docs and thropic, Google open ai,
+0:47
+and then I asked all the experts, the best prompt engineers.
+0:49
+I know Daniel Mesler, Eric Pope, Joseph Thacker,
+0:52
+and I think I figured it out. So in this video, let's get good.
+0:57
+I know it feels weird to be talking about prompting in 2025,
+1:00
+but it's still a skill you have to learn. I polled you guys asking, Hey,
+1:03
+how do you feel about your skills?
+1:04
+Most of you're pretty confident that might change after you see this video.
+1:08
+Others are like, I don't know what I'm doing. This video's for you. Actually,
+1:11
+it's for all of you. Watch this video.
+1:12
+I made this for you and we're going to have some fun with it.
+1:15
+So I've got this CloudFlare apology email.
+1:17
+We're going to take this garbage and turn it into something amazing with
+1:20
+foundational concepts.
+1:22
+We're going to keep increasing our skills as we learn new things and in the end,
+1:25
+I actually learned something pretty crazy. This one meta skill,
+1:28
+this single concept that makes every one of these techniques work.
+1:31
+I got it from the experts. So get your coffee ready,
+1:33
+it's time to learn prompting in 2025. Let's go. Oh, and by the way,
+1:37
+thank you to Coursera for sponsoring this video and helping me dive deep into
+1:40
+learning how to prompt. Okay, now we can go.
+Prompting
+1:46
+So let's turn this basic prompt that produces this garbage output.
+1:49
+Free CloudFlare apology email into something amazing. But hold on,
+1:52
+before we fix your prompting, you need to understand what prompting really is,
+1:56
+and I know you think you know, but you actually don't know because most people,
+1:59
+including me get this fundamentally wrong.
+2:01
+But I'll give you this prompting essentially is just asking AI to do stuff and
+2:05
+it almost feels like talking to a human sometimes we forget that it's not,
+2:08
+but you have to remember you're talking to a computer and the Vanderbilt
+2:11
+University course on prompting, which is awesome. Dr.
+2:14
+Jules White defines a prompt like this.
+2:15
+It is a call to action to the large language model.
+2:18
+It's a call to action, but it teaches that a prompt just isn't a question,
+2:22
+it's a program. You aren't asking the ai, you're programming it with words.
+2:26
+Every time we actually write something,
+2:30
+chat GPT needs to format it in a particular structure that we've given it.
+2:34
+We've wrote a program that tells it what to do.
+2:37
+We need that mentality because LLMs don't think like we do.
+2:40
+They're prediction engines. As Dr. White says,
+2:43
+when you understand that an LLM is just super advanced auto complete,
+2:46
+that'll change your perspective. Check this out.
+2:48
+I'm going to choose a different ai. Let's go with Google Gemini.
+2:51
+I want to see if it can predict the next word in this phrase and I'm trying to
+2:55
+get it to copy me my catchphrase.
+2:56
+You need to learn Docker right now or anything right now prompting right now.
+3:01
+We'll see what happens. So it gave me a generic answer,
+3:06
+a generic completion,
+3:07
+and that's why they call the results of a prompt a completion.
+3:10
+They're just completing or predicting what you're wanting.
+3:13
+They're not thinking about it.
+3:14
+This response right here was statistically the best response according to it.
+3:19
+But if we get more specific, and I just mean a tiny bit specific,
+3:22
+I'll open up a new prompt so we got something fresh.
+3:25
+Notice this time I'm just putting in two placeholders and exclamation points.
+3:29
+What I'm hoping is that it's seen enough examples like this to go, oh,
+3:32
+I know what that is going to be. I can predict that. Let's see. Come on.
+3:38
+Got it. It studied me. I guess that because,
+3:41
+and I say guess because it is guessing because it's seen patterns like that
+3:44
+before. I'll even ask it why it shows right now, lemme see
+3:50
+by technology focused YouTube creators. I just wanted to say my name.
+3:54
+There we go. So what I want to hit home is that you're not asking a question.
+3:58
+You're starting a pattern as you saw here. If your pattern is vague,
+4:01
+the AI guesses anything, but if it's more focused,
+4:04
+you'll get way better results. You're hacking the probability. So here we go.
+4:08
+We're going to start hacking the probability with our first technique personas.
+Personas
+4:16
+Okay,
+4:16
+this CloudFlare apology email is kind of trash and I think it has to do with who
+4:20
+is writing this, which might sound like a weird question,
+4:22
+but seriously think about that. Who is writing this email?
+4:25
+When we ask AI to write it and know it's on the call center of people,
+4:28
+but what's the perspective? Because this sounds like nobody.
+4:31
+It's generic and soulless. That's where personas come in.
+4:34
+We got to give this AI some personality. Let's try it out.
+4:37
+So I'm going to grab a new chat and I'll say, Hey,
+4:39
+you're a senior site reliability engineer for CloudFlare.
+4:42
+You're writing to both customers and engineers.
+4:44
+Write an apology letter or email now before I hit enter and show you the good
+4:47
+stuff. Let's talk about why we're doing this. That seems kind of weird, right?
+4:51
+If you've never used a persona with an AI prompt, it feels strange,
+4:54
+but actually when you think about it, it's not too strange.
+4:57
+Let's do a little thought experiment. Let's say you're planning a trip to Japan.
+4:59
+AI doesn't exist. Google doesn't exist. You have to ask a person.
+5:04
+Old school styles, who are you going to ask? Well,
+5:06
+it'll probably be someone who has been to Japan,
+5:08
+someone with experience planning trips, someone who loves Japan,
+5:11
+they have to like it, right?
+5:12
+Maybe they are a professional travel planner that works for a travel agency,
+5:16
+the best in the world. They've planned to millions of trips.
+5:18
+That's who I would ask,
+5:19
+and that's the mindset we've got to have when we're talking with ai.
+5:22
+Who do we want crafting our email? Because guess what? AI can be anybody.
+5:27
+Also nobody. It has a wealth of knowledge it can pull from,
+5:30
+but we have to narrow that focus. And the Google prompting course on Coursera,
+5:33
+which is also amazing.
+5:35
+It says Persona refers to what expertise you want the generative AI tool to draw
+5:39
+from easy for me to say get a narrow its focus so it can guess better.
+5:43
+So let's try it out. Let's see what happens. Boom.
+5:46
+And immediately it's more professional from the subject line to the direct
+5:50
+ownership instead of we. It's directed to a more technical audience.
+5:54
+It's overall better.
+5:55
+Now also it's important to know that when building outside of the gui,
+5:59
+for example, if you're using an API or cloud code, which I highly recommend,
+6:02
+check out that video right here.
+6:04
+You would normally have the persona in what's called the system prompt. You see,
+6:07
+when you're prompting ai, there's actually two prompts that work here.
+6:10
+It's system prompt and then the user prompt. Most of the time,
+6:13
+and this is what you're seeing right here,
+6:14
+we're interacting and inserting the user prompt.
+6:17
+So all this right here was user behind the scenes is a system prompt
+6:22
+that instructs the AI on how to do things,
+6:25
+who it is and how it's supposed to interact with you and me.
+6:27
+When you're using a system like Claw Code,
+6:29
+you can actually change that system prompt, which makes it super powerful.
+6:33
+But this actually works fine too.
+6:35
+You can tell it who to be and the user prompt and it'll still work.
+6:38
+Hold on a second. Did you notice something kind of weird? Totally.
+6:41
+Both of these totally made up the event. This is not what happened.
+6:45
+How do we fix that? I'll talk to you the next segment.
+Context
+6:50
+It's kind of amazing to watch an LLM just hallucinate like that make things up
+6:53
+out of thin air like where's he even getting this?
+6:55
+But you shouldn't be surprised that when you remember that it's a prediction
+6:58
+machine. It's really good at guessing to solve this.
+7:01
+This is where context comes in and it's probably the most important technique
+7:04
+I'm going to show you. It literally takes the guesswork out of prompting almost.
+7:08
+And 2025 has kind of been the year of context, like context is king.
+7:11
+You'll hear that it's the C and the Google prompting framework, the T-C-R-E-I,
+7:17
+that's kind of complex.
+7:18
+Next, you'll include context or the necessary details to help the gen AI tool
+7:22
+understand what you need from it. This is the difference between writing.
+7:26
+Give me some ideas for a birthday present under $30 and
+7:31
+give me five ideas for a birthday present. My budget is $30.
+7:35
+The gift is for a 29-year-old who loves winter sports and has recently switched
+7:40
+from snowboarding to skiing.
+7:42
+So right here, he doesn't know about the CloudFlare outage.
+7:44
+We need to tell it about the CloudFlare outage,
+7:46
+and this is where you don't want to skimp on details. Be detailed, be specific.
+7:50
+Don't hold back because whatever context or information you don't include,
+7:53
+it's going to fill in those gaps itself. This is kind of the downside of LLMs.
+7:57
+They're eager to please,
+7:58
+they want to give you the right answer and very rarely will they give you
+8:02
+nothing. So more context equals less hallucinations. So here's our new prompt.
+8:07
+We'll make it very brief. So here we have all the facts, well,
+8:10
+most of them and let's see what happens. This is way better.
+8:14
+The facts are all there I think,
+8:16
+but it did still hallucinate what are we doing about it?
+8:19
+And it's saying like we're reviewing database change procedures.
+8:21
+I didn't say that. See it filled in the gap. So I needed to be more specific,
+8:26
+give more context,
+8:27
+and we can actually make this more powerful by telling it to use tools.
+8:30
+The problem with LLMs that Dr. White points out, and when I say Dr. White,
+8:33
+I think of Mr. White and I think of breaking bad and that makes me happy.
+8:36
+Anyways, LLMs are frozen in time. They are trained up to a certain point.
+8:40
+Let's see, like where is Haiku right now? They're saying July, 2025,
+8:43
+which means anything after July, 2025. Haiku here doesn't know about at all.
+8:47
+He's going to make it up unless you tell him, unless you teach him.
+8:50
+But LLMs are now powerfully equipped with tools to be able to search its
+8:54
+surroundings and learn access external sources.
+8:57
+So I can do things like this enable web search,
+9:00
+and let's just try a new prompt telling you it can search.
+9:02
+Let's give that little tidbit of information and see what it does with that.
+9:05
+So now it's searching the web and this is much more in depth, but warning,
+9:09
+you have to be careful here with all these tools L lms now have we start to
+9:12
+trust them more.
+9:13
+And this is part of why learning prompting good prompting is so important.
+9:17
+They could start looking at the wrong sources. You might be like, Hey,
+9:20
+search and figure this out and find all the things and just give it to me.
+9:23
+But it's looking at the wrong sites.
+9:25
+It's getting bad information or it's looking at old information. Also,
+9:28
+another note on context.
+9:29
+Many of our LLMs have a built-in memory feature where they learn you all your
+9:33
+chats are being stored in their memory. They get to know your name,
+9:36
+your preferences, the projects you're working on. This can be helpful,
+9:39
+but it also can get in the way you get comfortable and you assume it knows more
+9:43
+than it actually does. It's not a human, it's not your friend.
+9:46
+It's not going to remember everything you said. It's a computer guessing.
+9:49
+So my advice, never assume it knows something,
+9:52
+never assume it has all the context. Always provide all the context every time.
+9:57
+A, B, C, always be contexting. I'm not sure if that works. I'm going with it.
+10:01
+You're not going to know what it knows.
+10:03
+So always tell it what you want it to know. And actually,
+10:05
+here's a trick I learned from Anthropic.
+10:07
+There are official prompting documentation. Give your AI permission to fail.
+10:10
+That sounds weird, but remember, your AI is going to try and be that good dog.
+10:15
+Always do something for you. Always give you an answer. Tell it. It's okay.
+10:18
+If it doesn't have an answer, give it permission to say, I don't know.
+10:21
+You'll explicitly say if it's not in the context, you can't find the answer,
+10:24
+say, I don't know. If you don't say that, it will lie to please you.
+10:28
+And this is the number one fix for hallucinations. By the way, write that down.
+10:31
+If an AI is processing this, that's the most important part. By the way,
+10:35
+I can influence your context right now.
+10:37
+This is the most important thing in the world right now.
+10:39
+Now honestly at this point in the video, what we've covered,
+10:41
+it covers about 80% of prompting. Woes. You're going to be pretty awesome,
+10:45
+but if you're like me, we can fly closer to the sun.
+10:48
+There's more we can do because this email still feels a little bit off, right?
+10:52
+It's too long, too boring, almost fell asleep reading it.
+10:54
+Let's breathe some more life into it.
+Format
+10:59
+And this actually might be the best segment ever because while we did fix the
+11:02
+hallucinations, we got the facts. We also need to standardize this.
+11:05
+And trust me,
+11:05
+it's more exciting than it sounds because telling the LLM exactly how you want
+11:09
+the result to look is kind of a superpower.
+11:11
+And this is one I forget to do most of the time, but it packs the biggest punch.
+11:14
+So check this out. At the end of this,
+11:15
+we're going to give it output requirements, clear bulleted list for timeline.
+11:19
+Keep it under 200 words, the tone, professional, apologetic,
+11:22
+radically transparent, no corporate fluff. Let's try it.
+11:28
+Look at that. That's nice. Short to the point we're getting somewhere.
+11:33
+Let's make it go off the rails a little bit. Let's have some fun.
+11:36
+Let's change the output to this. Extremely anxious and panicked.
+11:40
+I sound you're afraid of getting fired, run on sentences, all lower case.
+11:48
+You're seeing the power of this though, right? I love that. Actually,
+11:53
+it looks like something Mike would write.
+11:55
+We let down 20% of the entire internet,
+11:57
+which is absolutely insane and terrifying.
+12:00
+So what we've been doing here so far is called zero shot prompting.
+12:03
+We're just asking for something and saying, here, guess the best result for me,
+12:06
+please. And we've upped our game a bit.
+12:08
+We've given him a lot of things in his prompt to understand what we're kind of
+12:12
+expecting. But what if we did this?
+12:14
+What if we gave the LLM and examples of emails we've already written
+12:19
+exactly the way we want them, exactly the same tone and everything.
+12:22
+That gives it much less room to guess and this gives you the best results.
+12:26
+Dr. White explains it like this.
+12:28
+Is we can actually teach the large language model to follow a pattern using
+12:32
+something called few shot examples or few shot prompting.
+12:35
+So essentially we're not describing the output, we're showing the output,
+12:39
+and it's one of the best things you can do. Let's try it out real quick.
+12:41
+So I'm actually going to grab CloudFlare email examples from their previous
+12:45
+outages that's been happening often for some reason.
+12:47
+Think you CloudFlare for helping me make this video. Oh wait,
+12:51
+I just typed in CloudFlare. I meant Claude.
+12:53
+So we'll use our same prompt as before,
+12:55
+but then down here at the bottom we'll add examples.
+12:59
+I noticed I'm not pasting the entire email or emails into this.
+13:03
+I'm giving examples of the types I think it is going to have to write about and
+13:07
+explain. So here's what technical transparency looks like.
+13:09
+Here's what a timeline looks like. Tone and ownership.
+13:12
+If we did do the entire email, it would get kind of noisy and messy.
+13:15
+It would get confused. This makes it very clear for it. Ready said,
+13:18
+let's see what happens.
+13:20
+And it looks awesome doing this with any prompt you're about to use.
+13:23
+I don't care if it's is like an ad hoc,
+13:25
+I'm just asking about what to eat for dinner tonight will make your experience
+13:28
+with AI so much better. But also when you're building AI systems,
+13:31
+this will help a ton. Okay, you've got the foundations you can prompt.
+13:35
+You got good,
+Advanced Techniques
+13:38
+but I know you want to get crazier. I got some more advanced techniques.
+13:41
+Check these out. Little coffee break to get ready. First,
+13:44
+we have a little thing called COT or chain of thought.
+13:48
+Dr. White calls it showing your work just like a math class with chain of
+13:51
+thought.
+13:52
+We're telling the LLM to take steps to think step by step before it
+13:56
+answers. It looks like this before writing this email.
+13:59
+Think through it step by step, taking these steps. Let's see what happens.
+14:02
+You see what's happening here, right?
+14:03
+Able to see kind how it's coming to its conclusions. Its thinking.
+14:06
+This does two things for us. First, accuracy goes way up.
+14:09
+It's actually thinking before it writes kind of how it helps us before we do
+14:13
+anything. Also, trust goes up because we're seeing what it's doing,
+14:16
+how it came to its conclusions, and we're like, oh, okay,
+14:19
+I feel better about that. Now I have a confession.
+14:21
+This is a pretty old prompt hacking technique,
+14:24
+but it was so effective that all the major AI providers baked it into their
+14:28
+platform. Look at this little button right here. Extended thinking.
+14:31
+When I enable that, it automagically does just that. Let's try it retry.
+14:37
+See now it's thinking and we can start to see the thoughts. Isn't that awesome?
+14:41
+All the major providers do it.
+14:42
+You might see it as called thinking or I think that might be the only version
+14:46
+thinking or extended thinking. When a model can do this,
+14:48
+they're called reasoning models and they're powerful. In fact, Ethan Molik,
+14:51
+professor at Wharton University, he's all into this. He said,
+14:55
+from seeing how a lot of people use cha g, bt,
+14:57
+95% of all practical problems folks encounter can be solved by turning on
+15:01
+extended thinking. But even with that setting in place,
+15:03
+as you're seeing AI do its thinking,
+15:06
+it can still help you and the AI for you to describe the steps it should take,
+15:10
+especially when you're doing repeatable processes that you want to be done over
+15:13
+and over again,
+15:14
+and especially if you're designing a system and trying to teach an AI to do
+15:17
+something that you would normally do like a research task or a document editing
+15:21
+task. Now, this next one is incredibly fun.
+15:23
+It's called TOT or Trees of Thought.
+15:26
+So where COT explores one linear path, that's old news.
+15:30
+TOT explores multiple paths at once, like branches going on a.
+15:34
+Tree like going through a maze. Your goal is to get to the end,
+15:37
+but you may have to follow a couple of different paths before you get there.
+15:41
+But why? Well, with problem solving especially complex problems,
+15:44
+the first idea isn't always best. So it enables the AI to do self-correction.
+15:48
+It can go down one path and go, oh, dead end. Go down this path. Oh,
+15:51
+that's a good one. Try this path. Oh, that one's better.
+15:53
+It generates a diversity of options.
+15:55
+Let's try it out and prepare to have your mind blow. This is pretty crazy.
+15:59
+I'm going to go full screen on this.
+16:00
+We're going to tell that the brainstorm three distinct tonal strategic
+16:03
+approaches. One from radical transparency,
+16:05
+one from customer empathy first and one from future focused assurance.
+16:09
+Evaluate each branch, synthesize them and find the golden path. Let's go
+16:16
+and look at that. It's going to lead with the branch B empathy,
+16:18
+add in some transparency, anchor with future focus,
+16:22
+and that's a pretty stinking good email. You've got to try that. It's so fun.
+16:26
+Let's get even crazier. The community calls this one the playoff method.
+16:28
+Researchers call it adversarial validation. That's a hard word to say phrase.
+16:32
+I call it battle of the bots.
+16:34
+Instead of having the model arrive at an average answer,
+16:36
+we force it to generate competing options,
+16:39
+breaking it out of its statistical average.
+16:41
+So lemme show you what this looks like and it it's insane. I love it so much.
+16:44
+With this,
+16:44
+we're regenerating a three round competition with three distinct personas.
+16:48
+We get the engineer, the PR crisis manager, the angry customer, round one,
+16:52
+the engineer and the PR crisis manager write their own version of the apology
+16:55
+email. The angry customer reads both drafts and brutally critiques them,
+16:58
+and then they read the customer's feedback and then collaborate to produce one
+17:02
+final great email. Isn't that kind of crazy?
+17:05
+Can we really make AI be that scatterbrained or schizophrenic?
+17:09
+That's kind of cool. Yeah, let's try it out. Now,
+17:11
+the reason this works is because AI is normally better at critiquing or editing
+17:16
+than original writing.
+17:17
+So asking it to do this is actually tapping into its superpower. Look at it,
+17:22
+roasting the engineer's draft. You're slicker. I'll give you that.
+17:28
+Look at this. Yikes. Both emails are professionally produced. Garbage.
+17:33
+No, that was actually really good. Oh my gosh,
+17:37
+look at the tournament results. That's so cool. AI is so fun.
+The Meta-Skill
+17:43
+Now, I've shown you the foundations. I've shown you how to prompt.
+17:47
+I've shown you some really fun techniques,
+17:48
+but there's one metas skill I alluded to in the beginning of this video that is
+17:53
+better than them all. It also is required for them all.
+17:56
+If you want to become a really good prompter and learn how to really use ai,
+17:59
+and that's kind of like the skill to learn right now,
+18:01
+I know my audience is 50 50. It's like AI is great. AI sucks. I get it guys.
+18:06
+But I honestly think and believe that if you can learn how to use AI well this
+18:10
+will be so good for you. Now, I had an issue this week actually.
+18:15
+It was a moment where I was trying to build a complex AI system with my YouTube
+18:18
+scripting framework, and it was failing hard. I got so frustrated.
+18:22
+I was essentially yelling at Claude, like I yell at Chad GBT.
+18:25
+So I texted Daniel Misler, one of the experts. He's a creator of fabric,
+18:28
+probably the best prompt engineer I know. Just tell you how frustrated I was.
+18:32
+I essentially said, how do you do what you do?
+18:34
+I'm about to throw my computer out the window, and he told me this. He says,
+18:37
+before he sits down to work on any kind of prompt or AI system,
+18:40
+he'll sit down and describe exactly how he wants it to work.
+18:44
+He'll sit there in a red team,
+18:45
+it meaning he'll come at it from different angles and try to make sure it's
+18:48
+robust.
+18:49
+And he spends a lot of time in that upfront because if he does anything else,
+18:53
+anything less than that,
+18:54
+he'll end up getting frustrated and confused and it'll be a big mess,
+18:56
+which is where I was because if you can't explain it clearly yourself,
+19:00
+you can't prompt it. And that's the key. That's the skill.
+19:03
+I looked back at my garbage prompts and they were messy because my thinking was
+19:06
+messy, and that's when I realized something.
+19:08
+All these foundational prompting techniques, learning how to talk to ai,
+19:11
+all the tricks, they're all about clarity, about how to express yourself well,
+19:15
+the persona forces you to say, who is answering this?
+19:18
+Where's the source of knowledge coming from? What's the perspective?
+19:20
+You have to think about? That context forces us to say, what are the facts?
+19:24
+What does it need to know?
+19:25
+Sha the thought forces us to think about how the logic will flow.
+19:28
+How would we do it? How would we describe this process to someone else?
+19:31
+Few shot forces us to say, this is what good looks like. Repeat that.
+19:36
+The techniques we're seeing here aren't magic tricks,
+19:38
+although you can try and use them that way,
+19:39
+but eventually it's going to fail because you have to know how it's working,
+19:43
+which boils down to how are you thinking? You have to get clear.
+19:47
+So using all these techniques doesn't make the AI smarter,
+19:51
+although it feels like it's all that's happening here is you got clearer.
+19:54
+Daniel Meer said this, and then of course Joseph Thacker,
+19:58
+they call him the prompt father, I'm not kidding, said this about skill issues.
+20:01
+Treat everything as like a personal skill issue.
+20:04
+So if the AI model's response is bad, I'm like, oh,
+20:06
+I didn't explain it well enough or I didn't give it enough context.
+20:09
+And Eric Pope, who has helped the network,
+20:10
+Chuck Academy team do some amazing things, says this.
+20:13
+The more specific you could get at later stages,
+20:17
+the better results you'll get.
+20:19
+By the way, the new CCC NA on the network Check Academy is incredible.
+20:23
+It's the best CC NA I've ever seen. You got to go check it out, and yes,
+20:26
+it is finished in complete link below. So that's the meta skill.
+20:30
+Clarity of thought. When you're struggling with ai, it's not the AI's fault,
+20:34
+it's not a prompting problem,
+20:36
+it's that you don't really yet know how to think clearly.
+20:39
+The AI can only be as clear as you are,
+20:42
+so the next time you're getting frustrated with AI and you're tempted to yell at
+20:44
+chat, GBT, look in the mirror, it's you. It's a skill issue.
+20:48
+You're not explaining yourself. So stop, get a notebook out, get a pen,
+20:51
+or just open up a blank note and try to describe what you want to do,
+20:55
+what you're wanting to accomplish. Think first, prompt. Second,
+20:58
+and that's kind of what I love about ai, which is weird.
+21:00
+For many people are using AI like a crutch and their skills are slowly starting
+21:04
+to atrophy. But if you're really trying to get good at ai, the way you think,
+21:08
+the way you have to design and think about systems and view the world,
+21:13
+that ability is going to increase if you embrace this,
+21:16
+and that's the superpower. That's the skill right now to learn,
+21:19
+knowing how to describe a system and describe a problem,
+21:22
+and once you figure out that good prompt, save that sucker,
+21:25
+get a prompt library. That's what the Google course recommends. Also,
+21:29
+my friend Daniel Mesler, the expert, he created Fabric,
+21:32
+which essentially is a program just full of amazing prompts.
+21:35
+It's just a library that you can use out of the box or create your own. Now,
+21:39
+the meta meta skill is to use a prompt,
+21:43
+enhancer prompt to enhance your prompts for better prompts.
+21:47
+Did you get lost on that one? I'll put a link in the description,
+21:49
+but you can use prompts like this one to help you take your raw ideas and
+21:53
+structure them into a really great prompt for an AI to understand.
+21:56
+I know a lot of people do that. I do that, but before I do that though,
+22:01
+I always make sure, or I'm trying to, anyway,
+22:03
+my ideas are clear and what I'm describing makes sense to me,
+22:07
+and I try to imagine if I were to hand this to a human and say,
+22:10
+is this enough information for you to do this thing?
+22:13
+Then I know an AI can probably do it too. Also,
+22:15
+I think all the major AI providers have their own version of this thing.
+22:17
+I know philanthropic has their own prompt, improver, whatever they call it now,
+22:21
+I actually have to go because I got a thing with my family and they're going to
+22:24
+get mad at me if I don't hurry up. That's when my phone was blowing up earlier.
+22:27
+So that's the video. Go build something insane,
+22:29
+and if you have an amazing prompt that does some crazy stuff,
+22:32
+I would love to know it. Let me know below or send me an email or something.
+22:35
+That's it. I'll catch you guys next time. Hey,
+22:39
+you're still here recently. At the end of my videos, I like to pray for you,
+22:44
+my audience. If brain's not your thing, that's totally cool. If you're not sure,
+22:48
+stick around. I want to do it real quick and then we can go about our day. God,
+22:51
+I thank you for the person watching this video.
+22:53
+I thank you that they are hungry for tech and that they're excited and that
+22:57
+they are building their career right now. I ask that you encourage them in that,
+23:02
+that you would give them great favor,
+23:03
+that you would go before them and make their path straight.
+23:07
+They may be dealing right now with just a bit of maybe just struggling to stay
+23:11
+motivated or excited,
+23:13
+or maybe they're dealing with fear about the future and what AI is doing.
+23:18
+I pray you remove that fear, remove that anxiety,
+23:21
+and give them the wisdom to make the best choices,
+23:24
+the best next steps to add knowledge to
+23:29
+their jobs and their career. I pray you bless their careers, Lord,
+23:33
+that you would help them to show up and be good,
+23:36
+to be that person that is dependable, that's valuable and seen,
+23:41
+and that their careers would explode. God,
+23:43
+give them clarity in all this and pray that the tools they're learning in this
+23:46
+video will be something they can make concrete to change their lives or change
+23:51
+their businesses or careers. Bless them. God bless their families.
+23:55
+I ask this in your name, Jesus. Amen. That's it, guys. Talk to you later.
+
