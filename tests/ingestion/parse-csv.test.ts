@@ -43,4 +43,29 @@ describe("CSV ingestion", () => {
       parseCsvText("", { maxRows: 10, maxColumns: 10, maxCellChars: 100 }),
     ).toThrow(/empty|parse/i);
   });
+
+  it("removes exact duplicate rows and warns once", () => {
+    const csv = [
+      "field,value",
+      "slogan,Best deals every day",
+      "slogan,Best deals every day",
+      "slogan,Best deals every day",
+      "offer,Compare prices honestly",
+    ].join("\n");
+    const packet = buildEvidencePacket({
+      fileName: "dupes.csv",
+      bytes: Buffer.from(csv, "utf8"),
+      maxRows: 100,
+      maxColumns: 20,
+      maxCellChars: 2000,
+    });
+    expect(packet.evidenceRows).toHaveLength(2);
+    expect(packet.warnings.some((w) => /Removed 2 exact duplicate row/i.test(w))).toBe(
+      true,
+    );
+    const slogans = packet.evidenceRows.filter(
+      (r) => r.values.value === "Best deals every day",
+    );
+    expect(slogans).toHaveLength(1);
+  });
 });

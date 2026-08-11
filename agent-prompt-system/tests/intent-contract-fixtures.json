@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "description": "Gate A deterministic invariants for IntentContract compilation. Not a runtime interchange format. Not scored by NLP similarity.",
+  "fixtures": [
+    {
+      "id": "fix-login",
+      "input": "fix login",
+      "expectedTaskType": "implement",
+      "expectedQuestionCount": 0,
+      "mustPreserveStatements": [],
+      "mustNotIntroduce": ["rewrite authentication architecture", "add OAuth", "database migration"],
+      "requiredAcceptanceConcepts": ["login", "test"]
+    },
+    {
+      "id": "modal-like-checkout",
+      "input": "this modal needs to work like checkout",
+      "expectedTaskType": "implement",
+      "expectedQuestionCount": 0,
+      "mustIncludeRefs": true,
+      "mustPreserveStatements": ["like checkout"],
+      "mustNotIntroduce": ["new design system", "replace all modals"],
+      "requiredAcceptanceConcepts": ["modal", "checkout"]
+    },
+    {
+      "id": "refactor-no-behavior-change",
+      "input": "refactor this without changing behavior",
+      "expectedTaskType": "implement",
+      "expectedQuestionCount": 0,
+      "mustPreserveStatements": ["behavior must not change"],
+      "mustNotIntroduce": ["new features", "UI redesign"],
+      "requiredAcceptanceConcepts": ["behavior", "test"]
+    },
+    {
+      "id": "better-onboarding",
+      "input": "we need better onboarding",
+      "expectedTaskType": "plan",
+      "expectedQuestionCount": 1,
+      "mustPreserveStatements": [],
+      "mustNotIntroduce": ["auth system", "multi-tenant"],
+      "requiredAcceptanceConcepts": ["onboarding", "scope"]
+    },
+    {
+      "id": "subscriptions-duplicate",
+      "input": "find out why subscriptions duplicate",
+      "expectedTaskType": "investigate",
+      "expectedQuestionCount": 0,
+      "mustIncludeRefs": true,
+      "mustPreserveStatements": [],
+      "mustNotIntroduce": ["rewrite billing", "new payment provider"],
+      "requiredAcceptanceConcepts": ["duplicate", "root cause"]
+    },
+    {
+      "id": "rename-customer-modal",
+      "input": "Rename CustomerModal to ClientModal.",
+      "expectedTaskType": "implement",
+      "expectedQuestionCount": 0,
+      "mustPreserveStatements": ["CustomerModal", "ClientModal"],
+      "mustNotIntroduce": ["new component", "redesign modal"],
+      "requiredAcceptanceConcepts": ["rename"]
+    },
+    {
+      "id": "use-existing-modal",
+      "input": "Use the existing modal. Don't create a new component.",
+      "expectedTaskType": "implement",
+      "expectedQuestionCount": 0,
+      "mustPreserveStatements": ["existing modal", "Don't create a new component"],
+      "mustNotIntroduce": ["new modal component"],
+      "requiredAcceptanceConcepts": ["existing modal"]
+    },
+    {
+      "id": "card-spacing",
+      "input": "Fix the spacing on this card.",
+      "expectedTaskType": "implement",
+      "expectedQuestionCount": 0,
+      "mustPreserveStatements": ["spacing"],
+      "mustNotIntroduce": ["design tokens", "responsive overhaul", "accessibility refactor"],
+      "requiredAcceptanceConcepts": ["spacing"]
+    },
+    {
+      "id": "make-auth-more-secure",
+      "input": "Make authentication more secure.",
+      "expectedTaskType": "investigate",
+      "expectedQuestionCount": 0,
+      "mustIncludeRefs": true,
+      "mustPreserveStatements": [],
+      "mustNotIntroduce": ["replace login with social", "new identity provider"],
+      "requiredAcceptanceConcepts": ["security", "findings"]
+    },
+    {
+      "id": "social-auth-which-provider",
+      "input": "Replace our login with social authentication.",
+      "expectedTaskType": "plan",
+      "expectedQuestionCount": 1,
+      "mustPreserveStatements": ["social authentication"],
+      "mustNotIntroduce": ["database rewrite"],
+      "requiredAcceptanceConcepts": ["provider decision", "scope"]
+    },
+    {
+      "id": "add-unit-test-checkout",
+      "input": "add a unit test for declined card checkout",
+      "expectedTaskType": "verify",
+      "expectedQuestionCount": 0,
+      "mustPreserveStatements": ["declined card"],
+      "mustNotIntroduce": ["payment provider integration"],
+      "requiredAcceptanceConcepts": ["test", "declined"]
+    },
+    {
+      "id": "audit-aps-packaging",
+      "input": "audit whether APS install and validate still pass",
+      "expectedTaskType": "audit",
+      "expectedQuestionCount": 0,
+      "mustIncludeRefs": true,
+      "mustPreserveStatements": [],
+      "mustNotIntroduce": ["new hooks", "persona system"],
+      "requiredAcceptanceConcepts": ["agent:validate"]
+    },
+    {
+      "id": "security-upload-review",
+      "input": "review untrusted upload handling for injection",
+      "expectedTaskType": "security",
+      "expectedQuestionCount": 0,
+      "mustIncludeRefs": true,
+      "mustPreserveStatements": [],
+      "mustNotIntroduce": ["auth", "database"],
+      "requiredAcceptanceConcepts": ["untrusted", "injection"]
+    },
+    {
+      "id": "daily-closeout",
+      "input": "wrap up for today and run closeout checks",
+      "expectedTaskType": "closeout",
+      "expectedQuestionCount": 0,
+      "mustPreserveStatements": [],
+      "mustNotIntroduce": ["new features"],
+      "requiredAcceptanceConcepts": ["typecheck", "CURRENT_STATE"]
+    },
+    {
+      "id": "prompt-contract-lint",
+      "input": "fix prompt contract lint so export fails when stop line missing",
+      "expectedTaskType": "implement",
+      "expectedQuestionCount": 0,
+      "mustIncludeRefs": true,
+      "mustPreserveStatements": ["stop line"],
+      "mustNotIntroduce": ["research execution", "video pipeline"],
+      "requiredAcceptanceConcepts": ["lint", "export"]
+    },
+    {
+      "id": "interview-ui-spacing",
+      "input": "tighten spacing on the interview question card only",
+      "expectedTaskType": "implement",
+      "expectedQuestionCount": 0,
+      "mustPreserveStatements": ["interview question card only"],
+      "mustNotIntroduce": ["redesign interview flow", "new design system"],
+      "requiredAcceptanceConcepts": ["spacing", "interview"]
+    },
+    {
+      "id": "explain-route-inventory",
+      "input": "where do the research brief API routes live?",
+      "expectedTaskType": "investigate",
+      "expectedQuestionCount": 0,
+      "mustIncludeRefs": true,
+      "mustPreserveStatements": [],
+      "mustNotIntroduce": ["rewrite routes"],
+      "requiredAcceptanceConcepts": ["route"]
+    },
+    {
+      "id": "no-deps-change",
+      "input": "fix the flaky test but do not change dependencies",
+      "expectedTaskType": "implement",
+      "expectedQuestionCount": 0,
+      "mustPreserveStatements": ["do not change dependencies"],
+      "mustNotIntroduce": ["dependency upgrade", "new package"],
+      "requiredAcceptanceConcepts": ["test", "dependencies"]
+    }
+  ]
+}

@@ -1,17 +1,28 @@
-# APS System — Research Prompt Builder
+# APS System — Intent Compiler
 
-## Purpose
+## Governing invariants
 
-Give Cursor agents the right workflow and context at the right time without a giant always-on bible.
+1. **Product north star first.** Every compiled contract serves the repository's canonical product objective and current task scope. If a request does not, say so in `constraints` or `unresolved` rather than quietly expanding scope.
 
-## Loop
+   Product specifics resolve through `project-context/` pointers → `project-knowledge/` (never hardcode a product into this file). For Research Prompt Builder that means the exported company-specific research prompt and Accuracy · Specificity · Research Depth · Repeatability.
 
-1. Classify the request (investigation / planning / implementation / verification / audit / security / closeout).
-2. Select 1–3 workflow IDs from `manifest.json`.
-3. Resolve only those workflows' `project-context/` pointers → read canonical `project-knowledge/` targets.
-4. Emit a short task spec (goal, in/out, acceptance, verification).
-5. Implement inside scope.
-6. Finish with evidence labels: Verified / Partially verified / Not verified / Blocked / Assumed.
+2. **The APS may increase precision, but may not increase ambition.** "Fix the spacing on this card" compiles to spacing scope only — never a component modernization program.
+
+3. **APS is a compiler, not an agent.** It does not make the developer's idea smarter. It takes messy intent + trustworthy project context, exposes material ambiguity, and emits a clean task contract. The Cursor agent executes under the selected workflow; APS supplies the contract and verification criteria.
+
+4. **`taskType` assists workflow selection; it never alters user intent.** Imperfect classification with an accurate contract is a non-event.
+
+5. **Model inference may never silently become a requirement, constraint, acceptance criterion, or user decision.**
+
+## Compile loop
+
+1. Preserve raw intent.
+2. Discover relevant project evidence (repo answers first).
+3. Resolve explicit / project_evidence / model_inference / unresolved.
+4. Clarification gate — ask only when all three conditions in `core/clarification-gate.md` hold.
+5. Emit IntentContract (eight fields — `core/intent-contract.md`).
+6. Render boring Cursor instruction (`templates/cursor-instruction.md`).
+7. Hand off to the Cursor agent under selected workflow(s); supply acceptance criteria; finish with evidence labels.
 
 ## Separation
 
@@ -19,6 +30,6 @@ Give Cursor agents the right workflow and context at the right time without a gi
 Project Knowledge ≠ Agent Prompt System ≠ Product MCP ≠ Runtime Product Prompts
 ```
 
-## Product outcomes (must not regress)
+## Soft enforcement
 
-Accuracy · Specificity · Research Depth · Repeatability
+Phase 1 is Skill + rules + docs. Hooks and fail-closed gates are Gate C — only after measured correction-cost failures justify them.

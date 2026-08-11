@@ -286,21 +286,6 @@ export type WorkflowDiagnostic = {
   occurredAt: string;
 };
 
-export function getInvalidateDownstream(from: WorkflowState, to: WorkflowState) {
-  if (!canTransition(from, to) && from !== to) {
-    return TRANSITION_META[to].invalidateDownstream;
-  }
-  return TRANSITION_META[to].invalidateDownstream;
-}
-
-export function getRetryPolicy(state: WorkflowState): RetryPolicy {
-  return TRANSITION_META[state].retryPolicy;
-}
-
-export function getRecoveryHint(state: WorkflowState): string {
-  return TRANSITION_META[state].recoveryHint;
-}
-
 /** Normalize stored stage strings (legacy AppStage or WorkflowState). */
 export function normalizeWorkflowState(value: unknown): WorkflowState {
   if (isWorkflowState(value)) return value;

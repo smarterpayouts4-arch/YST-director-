@@ -1,0 +1,343 @@
+{
+  "fileName": "contractor.csv",
+  "promptVersion": "rpb-runtime-1.1.0",
+  "companyUnderstanding": {
+    "companyName": {
+      "value": "Ridge Line Remodeling",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-2",
+          "explanation": "The company_name field identifies the business as Ridge Line Remodeling."
+        }
+      ]
+    },
+    "industry": {
+      "value": "Residential remodeling / general contractor",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-3",
+          "explanation": "The industry field describes the company as a residential remodeling general contractor."
+        }
+      ]
+    },
+    "offer": {
+      "value": "Kitchen and bath remodels for homeowners, presented with fixed-scope proposals.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-4",
+          "explanation": "The offer explicitly states kitchen and bath remodels with fixed-scope proposals for homeowners."
+        }
+      ]
+    },
+    "customerProblem": {
+      "value": "Homeowners planning a major remodel may be concerned about surprise change orders and unclear project timelines.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-5",
+          "explanation": "The stated customer problem is fear of surprise change orders and unclear timelines."
+        },
+        {
+          "ref": "row-6",
+          "explanation": "The likely audience is owner-occupied households planning a major remodel."
+        }
+      ]
+    },
+    "likelyAudience": {
+      "value": "Owner-occupied households planning a major kitchen or bathroom remodel in the Greater Denver metro.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-6",
+          "explanation": "The likely audience is explicitly identified as owner-occupied households planning a major remodel."
+        },
+        {
+          "ref": "row-4",
+          "explanation": "The stated service focus is kitchen and bath remodels."
+        },
+        {
+          "ref": "row-8",
+          "explanation": "The listed geography is Greater Denver metro."
+        }
+      ]
+    },
+    "websiteAction": {
+      "value": "Book a free on-site estimate.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-7",
+          "explanation": "The website action is explicitly stated as booking a free on-site estimate."
+        }
+      ]
+    },
+    "geography": {
+      "value": "Greater Denver metro.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-8",
+          "explanation": "The geography field specifies Greater Denver metro."
+        }
+      ]
+    },
+    "differentiators": [
+      {
+        "value": "Line-item fixed scopes and photo progress updates may help make project scope and progress more visible to homeowners.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "The stated differentiator is line-item fixed scopes with photo progress updates."
+          }
+        ]
+      },
+      {
+        "value": "A fixed-scope proposal approach appears directly relevant to homeowners' concern about surprise change orders, though the evidence does not establish that changes will never occur.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "The offer includes fixed-scope proposals."
+          },
+          {
+            "ref": "row-5",
+            "explanation": "The stated customer concern is surprise change orders."
+          }
+        ]
+      }
+    ],
+    "expertiseSignals": [
+      {
+        "value": "The company claims to be licensed and bonded and to have completed 200+ kitchens.",
+        "classification": "observed_fact",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "This is a company-provided expertise signal; the packet contains no independent verification of licensure, bonding, or completed-project count."
+          }
+        ]
+      }
+    ],
+    "claimsAndRestrictions": [
+      {
+        "value": "Do not claim that permits are always included; permit inclusion must be determined after the project is scoped.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-11",
+            "explanation": "The stated restriction expressly prohibits always-included permit claims until scope is established."
+          }
+        ]
+      },
+      {
+        "value": "“Remodels without the headaches” is a marketing slogan, not substantiated proof that remodeling will be hassle-free or free of changes, delays, or disruption.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-12",
+            "explanation": "The phrase is presented as a slogan only; no supporting performance evidence is supplied."
+          }
+        ]
+      },
+      {
+        "value": "Licensing, bonding, and 200+ completed kitchens should be treated as company claims pending independent verification.",
+        "classification": "working_assumption",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "The packet supplies the claim but no license record, bond documentation, project records, or independent source."
+          }
+        ]
+      }
+    ],
+    "confirmedFacts": [
+      {
+        "value": "Ridge Line Remodeling operates in residential remodeling/general contracting.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-2",
+            "explanation": "Company identity is stated."
+          },
+          {
+            "ref": "row-3",
+            "explanation": "Industry is stated."
+          }
+        ]
+      },
+      {
+        "value": "The stated service focus is kitchen and bathroom remodeling with fixed-scope proposals.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "The offer is explicitly stated."
+          }
+        ]
+      },
+      {
+        "value": "The stated customer tension is uncertainty about change orders and timelines.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "The customer problem is explicitly stated."
+          }
+        ]
+      },
+      {
+        "value": "The stated next step is a free on-site estimate.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "The website action is explicitly stated."
+          }
+        ]
+      },
+      {
+        "value": "The stated service market is Greater Denver metro.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-8",
+            "explanation": "The geography is explicitly stated."
+          }
+        ]
+      }
+    ],
+    "workingAssumptions": [
+      {
+        "value": "Useful pre-estimate education may center on helping homeowners understand scope definition, potential change-order triggers, timeline expectations, and what an on-site estimate should clarify.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "These topics are logically related to the stated concerns about change orders and unclear timelines."
+          },
+          {
+            "ref": "row-7",
+            "explanation": "The intended next step is an on-site estimate."
+          },
+          {
+            "ref": "row-9",
+            "explanation": "Line-item scopes and photo updates suggest transparency is a relevant value theme."
+          }
+        ]
+      },
+      {
+        "value": "The most appropriate action after useful education is to book a free on-site estimate, where project-specific scope and permit requirements can be assessed.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "Booking a free on-site estimate is the stated website action."
+          },
+          {
+            "ref": "row-11",
+            "explanation": "Permit inclusion cannot be determined until the work is scoped."
+          }
+        ]
+      }
+    ],
+    "importantUnknowns": [
+      {
+        "value": "Whether the company serves all of Greater Denver metro or only particular municipalities, neighborhoods, or travel radii.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-8",
+            "explanation": "Only a broad metro-area geography is provided."
+          }
+        ]
+      },
+      {
+        "value": "Whether the company provides design, planning, material-selection, permit coordination, financing, emergency work, or services beyond kitchen and bathroom remodels.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "The packet identifies kitchen and bath remodels but does not define the full service scope."
+          }
+        ]
+      },
+      {
+        "value": "The exact terms of fixed-scope proposals, including exclusions, allowances, change-order process, schedule commitments, and how unforeseen conditions are handled.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "Fixed-scope proposals are stated, but their contractual and operational details are absent."
+          },
+          {
+            "ref": "row-5",
+            "explanation": "Change orders and timelines are central customer concerns, but no process details are supplied."
+          }
+        ]
+      },
+      {
+        "value": "Whether the licensing, bonding status, and 200+ completed-kitchen claim can be independently verified; relevant license numbers, jurisdictions, dates, and proof are not provided.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "The packet provides an unsupported company claim only."
+          }
+        ]
+      },
+      {
+        "value": "Whether the primary decision-maker is one homeowner, a household, or a broader set of stakeholders, and what budget, property, project stage, or renovation-readiness characteristics define the best-fit customer.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-6",
+            "explanation": "The audience is described broadly as owner-occupied households planning a major remodel, without further segmentation."
+          }
+        ]
+      }
+    ],
+    "ingestionSummary": "CSV-only evidence identifies Ridge Line Remodeling as a Greater Denver residential remodeling/general contractor focused on kitchen and bathroom projects. The strongest supported strategic foundation is a homeowner need for clearer scope and timeline visibility, with fixed-scope proposals and photo progress updates positioned as relevant company-provided mechanisms. The stated conversion action is a free on-site estimate. Licensing, bonding, and project-volume statements remain unverified company claims, and permit inclusion is explicitly conditional on scoping.",
+    "ingestionWarnings": [
+      "Source evidence is limited to 11 retained CSV rows and contains no independent verification, customer reviews, portfolio, contract terms, license records, service-area detail, or website content.",
+      "One exact duplicate row was removed during ingestion; repetition should not be treated as corroboration."
+    ]
+  },
+  "evidencePacketMeta": {
+    "fileName": "contractor.csv",
+    "fileHash": "1f08e024475be55f53814c93841f7f8596c76758b66ae6df8b9de48f675211ba",
+    "retainedRowCount": 11,
+    "warnings": [
+      "Removed 1 exact duplicate row(s)."
+    ],
+    "wasTruncated": false
+  }
+}

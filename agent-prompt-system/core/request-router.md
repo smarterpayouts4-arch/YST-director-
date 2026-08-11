@@ -1,21 +1,23 @@
 # Request router
 
-Classify substantial Cursor requests before large edits.
+Map user intent to a `taskType` and ≤3 workflow IDs. Keep this table small.
 
-## Categories
+**Principle:** `taskType` assists workflow selection. It does **not** alter user intent. An imperfect type with an accurate IntentContract is fine.
 
-| Signal | Prefer workflows |
-|--------|------------------|
-| Where does X live / ownership | `investigate-codebase` |
-| Should we build / options | `plan-feature` |
-| Implement / change code | `implement-feature` (+ `test-and-verify`) |
-| Tests / verify / CI | `test-and-verify` |
-| Audit / review findings | `audit-existing-system` |
-| Secrets / uploads / privacy | `review-security-and-privacy` |
-| Wrap up for today | `daily-project-closeout` |
+## taskType table
 
-Select **1–3** workflows. State: `Selected workflows: …`
+| User wants to… | taskType | Prefer workflows |
+|----------------|----------|------------------|
+| understand / find / explain | investigate | `investigate-codebase` |
+| decide / design / architect | plan | `plan-feature` |
+| change / build / fix / refactor | implement | `implement-feature` (+ `test-and-verify`) |
+| test / check / prove | verify | `test-and-verify` |
+| assess / review | audit | `audit-existing-system` |
+| security-specific assessment/change | security | `review-security-and-privacy` |
+| finish / document / clean up | closeout | `daily-project-closeout` |
+
+Select **1–3** workflows. State them in the APS brief, then compile the IntentContract.
 
 ## Bypass
 
-Typos, locate-a-file, one-line fixes — skip full routing.
+Typos, locate-a-file, explain-one-function, one-line fixes — skip full compile.

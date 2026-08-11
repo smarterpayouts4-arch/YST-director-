@@ -95,7 +95,8 @@ export const contractRegistry: ContractRegistry = {
   },
   "final-research-prompt": {
     contractId: "final-research-prompt",
-    schemaVersion: CONTRACT_SCHEMA_VERSION,
+    // 1.1.0: raised §6/§7 max lengths; Prompt Contract 1.1 research controls.
+    schemaVersion: "1.1.0",
     owner: "ai-control-plane",
     producer: "compile-research-prompt",
     consumers: ["ui-prompt-export", "prompt-contract-lint"],

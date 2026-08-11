@@ -16,6 +16,37 @@ import {
   type DecisionOrigin,
 } from "@/features/research-prompt-builder/state/decision-ledger";
 
+export type SuppliedAssumption = {
+  id: string;
+  text: string;
+  origin: "model_hypothesis" | "owner_selected_hypothesis";
+};
+
+const HYPOTHESIS_FIELDS = [
+  "contentHypothesis",
+  "challengeHypothesis",
+] as const;
+
+export function buildSuppliedAssumptions(
+  researchBrief: ResearchBrief,
+): SuppliedAssumption[] {
+  const out: SuppliedAssumption[] = [];
+  for (const key of HYPOTHESIS_FIELDS) {
+    const origin = researchBrief.fieldProvenance[key]?.origin;
+    if (origin !== "model_hypothesis" && origin !== "owner_selected_hypothesis") {
+      continue;
+    }
+    const text = researchBrief[key]?.trim();
+    if (!text) continue;
+    out.push({
+      id: `hypothesis:${key}`,
+      text: truncateString(text, 400).value,
+      origin,
+    });
+  }
+  return out;
+}
+
 export type PromptContextPacket = {
   operationId: "compile-research-prompt";
   contractIds: Array<"confirmed-profile" | "research-brief">;
@@ -29,6 +60,8 @@ export type PromptContextPacket = {
       classification: string;
     }>;
     restrictions: string[];
+    /** Deterministic targets for surprising-findings / red-team (stable ids). */
+    suppliedAssumptions: SuppliedAssumption[];
     /** Derived provenance (rebuild-on-read; never persisted separately). */
     decisionProvenance: {
       profileVersion: string;
@@ -76,8 +109,6 @@ export function assemblePromptContext(input: {
       classification: field.originalClassification,
     }));
 
-  // Restrictions derive from the decision ledger (single provenance source)
-  // plus brief trust boundaries.
   const ledger = buildDecisionLedger({
     confirmedProfile: input.confirmedProfile,
   });
@@ -94,11 +125,15 @@ export function assemblePromptContext(input: {
     .slice(0, 30)
     .map((item) => truncateString(item, 400).value);
 
+  const suppliedAssumptions = buildSuppliedAssumptions(input.researchBrief);
+  provenanceNotes.push(`suppliedAssumptions: ${suppliedAssumptions.length}`);
+
   let researchBrief = input.researchBrief;
   const packetBase = {
     researchBrief,
     confirmedDecisions,
     restrictions,
+    suppliedAssumptions,
     decisionProvenance: {
       profileVersion: ledger.profileVersion,
       counts: ledgerSummary.byOrigin,
@@ -131,6 +166,7 @@ export function assemblePromptContext(input: {
   const packet = {
     ...packetBase,
     researchBrief,
+    suppliedAssumptions: buildSuppliedAssumptions(researchBrief),
   };
 
   const redacted = redactDeep(packet);

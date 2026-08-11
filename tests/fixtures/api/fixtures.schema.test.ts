@@ -12,7 +12,11 @@ import { formatResearchPrompt } from "@/features/research-prompt-builder/formatt
 import { lintPromptContract } from "@/features/research-prompt-builder/validation/prompt-contract";
 import { makeCompanyUnderstanding } from "./company-understanding";
 import { makeConfirmedProfile } from "./confirmed-profile";
-import { makeInterviewAnswer, makeInterviewQuestion } from "./interview-question";
+import {
+  makeInterviewAnswer,
+  makeInterviewQuestion,
+  makeStrategicDirectionQuestion,
+} from "./interview-question";
 import { makeResearchBrief } from "./research-brief";
 import { makeFinalPrompt, makeFormattedPrompt } from "./final-prompt";
 import { makeSupportingContext } from "./supporting-context";
@@ -33,6 +37,9 @@ describe("API fixtures stay schema-valid", () => {
 
   it("interview question and answer", () => {
     expect(() => InterviewQuestionSchema.parse(makeInterviewQuestion())).not.toThrow();
+    expect(() =>
+      InterviewQuestionSchema.parse(makeStrategicDirectionQuestion()),
+    ).not.toThrow();
     expect(() => InterviewAnswerSchema.parse(makeInterviewAnswer())).not.toThrow();
   });
 

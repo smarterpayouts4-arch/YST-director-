@@ -32,13 +32,13 @@ beforeEach(() => {
 describe("POST /api/company/understand", () => {
   it("returns understanding for a valid CSV upload", async () => {
     mockedAnalyze.mockResolvedValue(serviceResult as never);
-    const file = new File(["name,industry\nBluebird,Plumbing"], "company.csv", {
+    const file = new File(["name,industry\nZYNAVA,Supplements"], "company.csv", {
       type: "text/csv",
     });
     const res = await POST(formRequest({ file }));
     expect(res.status).toBe(200);
     const body = await res.json();
-    expect(body.companyUnderstanding.companyName.value).toBe("Bluebird Plumbing Co.");
+    expect(body.companyUnderstanding.companyName.value).toBe("ZYNAVA");
     expect(body.promptVersion).toBe("1.0.0");
     expect(mockedAnalyze).toHaveBeenCalledWith(file);
   });

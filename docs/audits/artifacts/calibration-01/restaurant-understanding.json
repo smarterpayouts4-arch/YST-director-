@@ -1,0 +1,328 @@
+{
+  "fileName": "restaurant.csv",
+  "promptVersion": "rpb-runtime-1.1.0",
+  "companyUnderstanding": {
+    "companyName": {
+      "value": "Harbor Table",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-2",
+          "explanation": "Company name is provided directly in the source packet."
+        }
+      ]
+    },
+    "industry": {
+      "value": "Coastal restaurant and hospitality",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-3",
+          "explanation": "Industry is stated directly."
+        }
+      ]
+    },
+    "offer": {
+      "value": "Seasonal seafood and neighborhood dining, including weekly chef menus.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-4",
+          "explanation": "Offer is stated directly."
+        }
+      ]
+    },
+    "customerProblem": {
+      "value": "Local diners seek a dependable weeknight seafood option without perceived tourist-oriented pricing or uncertainty about freshness.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-5",
+          "explanation": "The stated customer problem names reliability, tourist markup, and freshness uncertainty."
+        }
+      ]
+    },
+    "likelyAudience": {
+      "value": "Neighborhood diners are the clearest primary audience; weekend visitors near the harbor are also named, though their needs may differ from local weeknight diners.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-5",
+          "explanation": "Locals are explicitly tied to the stated weeknight customer tension."
+        },
+        {
+          "ref": "row-6",
+          "explanation": "Neighborhood diners and weekend harbor visitors are explicitly named as the likely audience."
+        }
+      ]
+    },
+    "websiteAction": {
+      "value": "Reserve a table or join the waitlist.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-7",
+          "explanation": "The intended website action is stated directly."
+        }
+      ]
+    },
+    "geography": {
+      "value": "Portland, Maine waterfront.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-8",
+          "explanation": "Geography is stated directly."
+        }
+      ]
+    },
+    "differentiators": [
+      {
+        "value": "The restaurant says it posts same-day boat-to-table sourcing on a chalkboard, making daily seafood sourcing visible to diners.",
+        "classification": "observed_fact",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "This is presented as a differentiator in the company-provided evidence; it is a company claim rather than independently verified proof."
+          }
+        ]
+      },
+      {
+        "value": "Chef-owned operation with 12 years on the waterfront.",
+        "classification": "observed_fact",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "This is stated as an expertise signal, but the packet does not independently substantiate ownership or tenure."
+          }
+        ]
+      }
+    ],
+    "expertiseSignals": [
+      {
+        "value": "Chef-owned; 12 years on the waterfront.",
+        "classification": "observed_fact",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "The company evidence explicitly asserts chef ownership and waterfront experience; independent verification is not provided."
+          }
+        ]
+      },
+      {
+        "value": "Weekly chef menus suggest an active chef-led seasonal menu program.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "Weekly chef menus are stated, but the extent of chef involvement and seasonal adaptation is not otherwise documented."
+          }
+        ]
+      }
+    ],
+    "claimsAndRestrictions": [
+      {
+        "value": "Do not represent the kitchen as allergen-free; shared fryer use must be disclosed.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-11",
+            "explanation": "This is an explicit food-safety and allergy communication restriction."
+          }
+        ]
+      },
+      {
+        "value": "“Fresh fish done right” is a marketing tagline, not independently supported proof of freshness, quality, or sourcing practices.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-12",
+            "explanation": "The phrase is supplied as a tagline only."
+          }
+        ]
+      },
+      {
+        "value": "Same-day boat-to-table sourcing should be presented as a company claim unless substantiated with daily sourcing records or other independent documentation.",
+        "classification": "working_assumption",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "The packet supplies the sourcing statement but no independent corroboration."
+          }
+        ]
+      }
+    ],
+    "confirmedFacts": [
+      {
+        "value": "Harbor Table operates in the coastal restaurant and hospitality category on the Portland, Maine waterfront.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-2",
+            "explanation": "Names the company."
+          },
+          {
+            "ref": "row-3",
+            "explanation": "States the industry."
+          },
+          {
+            "ref": "row-8",
+            "explanation": "States the location."
+          }
+        ]
+      },
+      {
+        "value": "It offers seasonal seafood and neighborhood dining with weekly chef menus.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "Direct description of the offer."
+          }
+        ]
+      },
+      {
+        "value": "Its stated next step is table reservation or waitlist enrollment.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "Directly states the website action."
+          }
+        ]
+      }
+    ],
+    "workingAssumptions": [
+      {
+        "value": "Useful education can reduce local diners’ uncertainty by clarifying what is fresh or landed that day, what the weekly menu offers, and how to plan a dependable weeknight visit.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "Freshness uncertainty and reliable weeknight dining are stated customer tensions."
+          },
+          {
+            "ref": "row-4",
+            "explanation": "Seasonal seafood and weekly chef menus provide relevant subjects for clarification."
+          },
+          {
+            "ref": "row-9",
+            "explanation": "Visible sourcing is positioned as a differentiator."
+          }
+        ]
+      },
+      {
+        "value": "The appropriate research market is local and visitor restaurant dining around the Portland, Maine waterfront, with local weeknight diners likely more central to the stated customer problem than weekend visitors.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "The articulated problem specifically concerns locals and weeknight dining."
+          },
+          {
+            "ref": "row-6",
+            "explanation": "Both neighborhood diners and weekend visitors are named."
+          },
+          {
+            "ref": "row-8",
+            "explanation": "Provides the geographic market context."
+          }
+        ]
+      }
+    ],
+    "importantUnknowns": [
+      {
+        "value": "Whether neighborhood diners, weekend visitors, or another segment produces the most valuable reservations, repeat visits, or waitlist sign-ups.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "Locals are linked to a problem, but no segment value or behavior data is supplied."
+          },
+          {
+            "ref": "row-6",
+            "explanation": "Two audiences are named without prioritization."
+          }
+        ]
+      },
+      {
+        "value": "Whether tourist markup is a customer perception, a documented competitive price gap, or both; no pricing evidence is provided.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "Tourist markup appears in the stated customer problem, without price comparisons or market evidence."
+          }
+        ]
+      },
+      {
+        "value": "How same-day sourcing is verified, how often it occurs, which seafood items it applies to, and whether supply conditions can limit the claim.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "The sourcing statement lacks operational detail or substantiation."
+          }
+        ]
+      },
+      {
+        "value": "Whether reservations, waitlist enrollment, walk-ins, private dining, takeout, or another action is the primary business priority.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "Reservations and waitlist are named, but their relative importance and other conversion paths are not provided."
+          }
+        ]
+      },
+      {
+        "value": "Specific allergen procedures beyond shared fryer use, including cross-contact protocols and item-level accommodation capability.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-11",
+            "explanation": "The packet establishes a shared-fryer restriction but provides no broader allergy policy."
+          }
+        ]
+      }
+    ],
+    "ingestionSummary": "CSV-only packet with 11 retained evidence rows describing a Portland, Maine waterfront restaurant, its seafood dining offer, stated local-diner tension, reservation/waitlist action, sourcing claim, experience signal, and an allergy-related communication restriction.",
+    "ingestionWarnings": [
+      "One exact duplicate row was removed before analysis.",
+      "All evidence is company-provided CSV content; differentiator and expertise statements are not independently verified."
+    ]
+  },
+  "evidencePacketMeta": {
+    "fileName": "restaurant.csv",
+    "fileHash": "0f514ce5c15972c9afb145e35b3acde18c17f2685011f7ad95f8b9350b5be000",
+    "retainedRowCount": 11,
+    "warnings": [
+      "Removed 1 exact duplicate row(s)."
+    ],
+    "wasTruncated": false
+  }
+}

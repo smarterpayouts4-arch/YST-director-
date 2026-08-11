@@ -33,6 +33,12 @@ RPB MCP must never be a runtime dependency of the Next.js app.
 
 Agent Prompt System routes Cursor work: classify → ≤3 workflows → resolve `project-context/` pointers → task spec → evidence labels. Install with `npm run agent:install`.
 
+## Inventory vs AI Control authority
+
+- **Knowledge pipeline** (`knowledge:update` / `generated/**`, including `maps/runtime-prompts.json`) is **derived inventory** for navigation and MCP — not executable ops truth.
+- **AI Control authority** is `src/ai/operations/registry.ts` (`AiOperationId` from registry keys) plus relationship checks in `tests/ai/operations-registry.test.ts` (run via `npm test` / `verify`). Doctor keeps scaffold + string wiring hygiene; it does not replace the constitution suite.
+- Treat README operation tables and generated maps as pointers. If they disagree with the registry or constitution tests, the registry/tests win.
+
 ## Agent learning
 
 `agent-learning/` stores candidates only. Permanence requires human approval. Never auto-rewrite `AGENTS.md` or canonical doctrine.

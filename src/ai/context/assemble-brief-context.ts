@@ -36,10 +36,14 @@ export type BriefContextPacket = {
     acceptedAnswers: Array<{
       questionId: string;
       decisionCategory: string;
+      questionKind: string;
       question: string;
       whyThisMatters: string;
       answerText: string;
       usedSuggestion: boolean;
+      /** Owner-selected research priorities (ids only; card bodies live in answerText). */
+      selectedSuggestionIds: string[];
+      customDirection: string | null;
       supportingDocumentSummaries: string[];
     }>;
     /** Derived provenance (rebuild-on-read; never persisted separately). */
@@ -84,6 +88,8 @@ export function assembleBriefContext(input: {
     }));
 
   const answersById = new Map(input.answers.map((a) => [a.questionId, a]));
+  // Never pass full strategicSuggestions arrays into the brief — only the
+  // owner-composed answerText (selected + custom). Unselected cards stay out.
   const acceptedAnswers = input.questions.map((q) => {
     const answer = answersById.get(q.questionId);
     const answerCut = truncateString(
@@ -94,10 +100,13 @@ export function assembleBriefContext(input: {
     return {
       questionId: q.questionId,
       decisionCategory: q.decisionCategory,
+      questionKind: q.questionKind,
       question: q.question,
       whyThisMatters: truncateString(q.whyThisMatters, 320).value,
       answerText: answerCut.value,
       usedSuggestion: answer?.usedSuggestion ?? false,
+      selectedSuggestionIds: answer?.selectedSuggestionIds ?? [],
+      customDirection: answer?.customDirection ?? null,
       supportingDocumentSummaries: (answer?.supportingDocuments ?? []).map((doc) => {
         const cut = truncateString(doc.extractedSummary, CONTEXT_BUDGETS.documentSummaryChars);
         if (cut.truncated) {
@@ -115,7 +124,7 @@ export function assembleBriefContext(input: {
   });
   const ledgerSummary = summarizeDecisionLedger(ledger);
   provenanceNotes.push(
-    `decisionLedger: ${ledgerSummary.total} records (owner_confirmed=${ledgerSummary.byOrigin.owner_confirmed}, owner_corrected=${ledgerSummary.byOrigin.owner_corrected}, interview_answer=${ledgerSummary.byOrigin.interview_answer}, restriction=${ledgerSummary.byOrigin.restriction})`,
+    `decisionLedger: ${ledgerSummary.total} records (owner_confirmed=${ledgerSummary.byOrigin.owner_confirmed}, owner_corrected=${ledgerSummary.byOrigin.owner_corrected}, owner_authored_answer=${ledgerSummary.byOrigin.owner_authored_answer}, suggestion_accepted=${ledgerSummary.byOrigin.suggestion_accepted}, owner_selected_suggestion=${ledgerSummary.byOrigin.owner_selected_suggestion}, restriction=${ledgerSummary.byOrigin.restriction})`,
   );
 
   const packet = {

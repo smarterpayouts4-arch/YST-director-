@@ -20,13 +20,14 @@ export function buildSupportingContextPrompt(input: {
   ].join("\n");
 
   const user = [
-    `Current interview question: ${input.question}`,
+    wrapUntrustedJson("INTERVIEW_QUESTION", { question: input.question }),
+    "",
     wrapUntrustedJson("SUPPORTING_DOCUMENT", {
       fileName: input.fileName,
       documentType: input.documentType,
       extractedText: input.extractedText,
     }),
-  ].join("\n\n");
+  ].join("\n");
 
   return { instructions, input: user };
 }

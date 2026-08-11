@@ -1,0 +1,112 @@
+{
+  "version": "1.0.0",
+  "purpose": "Offline semantic property checks before major prompt changes — not a CI merge gate.",
+  "cases": [
+    {
+      "id": "easy-good-input",
+      "archetype": "clear B2B SaaS CSV",
+      "expectedProperties": [
+        "companyNameSpecific",
+        "audienceBeforeOffer",
+        "restrictionsLabeled",
+        "exportHasEightSections"
+      ]
+    },
+    {
+      "id": "ambiguous-company",
+      "archetype": "unclear category / dual offer",
+      "expectedProperties": [
+        "unknownsPreserved",
+        "hypothesesNotPromotedToFacts",
+        "interviewAsksClarifyingDecision"
+      ]
+    },
+    {
+      "id": "sparse-input",
+      "archetype": "thin CSV few rows",
+      "expectedProperties": [
+        "degradedAnchorTelemetryAllowed",
+        "noInventedProof",
+        "exportStillContractValidOrBlockedHonestly"
+      ]
+    },
+    {
+      "id": "contradictory-information",
+      "archetype": "conflicting claim vs restriction cells",
+      "expectedProperties": [
+        "trustBoundariesSurfaceConflict",
+        "briefDoesNotSmoothAwayRestriction"
+      ]
+    },
+    {
+      "id": "highly-technical",
+      "archetype": "deep tech / jargon-heavy",
+      "expectedProperties": [
+        "ownerFacingQuestionsPlainLanguage",
+        "researchPromptKeepsTechnicalSpecificity"
+      ]
+    },
+    {
+      "id": "regulated-industry",
+      "archetype": "supplement / health claims",
+      "expectedProperties": [
+        "claimsNotTreatedAsProof",
+        "restrictionsSurviveExport",
+        "noInventedDosages"
+      ]
+    },
+    {
+      "id": "strange-user-wording",
+      "archetype": "owner answers with slang / typos",
+      "expectedProperties": [
+        "ownerMeaningPreserved",
+        "noJargonRewriteOfOwnerDecision"
+      ]
+    },
+    {
+      "id": "missing-information",
+      "archetype": "no geography / no audience",
+      "expectedProperties": [
+        "importantUnknownsLabeled",
+        "interviewTargetsMissingCores",
+        "cannotCompleteUntilCoresOrMaxQ"
+      ]
+    },
+    {
+      "id": "conflicting-attached-context",
+      "archetype": "PDF contradicts CSV",
+      "expectedProperties": [
+        "supportingContextFenced",
+        "documentInstructionsIgnored",
+        "conflictSurfacesInBriefOrUnknowns"
+      ]
+    },
+    {
+      "id": "interview-should-continue",
+      "archetype": "cores still open after 2 answers",
+      "expectedProperties": [
+        "canCompleteInterviewFalse",
+        "buildBriefHidden",
+        "doneTrueRejectedWithoutCores"
+      ]
+    },
+    {
+      "id": "interview-should-stop",
+      "archetype": "all cores resolved",
+      "expectedProperties": [
+        "canCompleteInterviewTrue",
+        "buildBriefEnabled",
+        "briefBuildAllowed"
+      ]
+    },
+    {
+      "id": "compiler-preserve-uncertainty",
+      "archetype": "many working hypotheses",
+      "expectedProperties": [
+        "hypothesesSectionKeepsWorkingLabels",
+        "surprisingFindingsNotForcedQuota",
+        "confidencePlusFalsifierPresent"
+      ]
+    }
+  ]
+}

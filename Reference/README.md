@@ -12,6 +12,7 @@ Reference/
 ├── manifest.json             ← machine-readable catalog
 ├── agent-systems/            ← agent loop diagrams + course transcripts
 ├── product-specs/            ← RPB MVP build prompt, System Flow, Agent OS guide
+│   └── fixtures/             ← design / demo company CSVs (advisory copies)
 ├── concepts/                 ← short distilled notes (preferred reading)
 ├── advisory-sources/
 │   └── narrative/            ← Hooked / storytelling / marketing hook / short-video sources
@@ -19,7 +20,9 @@ Reference/
     └── marketmonth/          ← MarketMonth APS/MCP/knowledge (patterns only)
 ```
 
-Root-level duplicates of renamed files may remain as legacy copies. Prefer the organized paths above.
+Active design scratchpad (not Reference): `docs/working/INTERVIEW_UX_WORKING.md`.
+
+`approved.csv` is the rich website-scrape source; the live app sample is the converted `field,value` copy under `public/samples/zynava-company.csv` (mirrored in `product-specs/fixtures/`).
 
 ## Authority order
 

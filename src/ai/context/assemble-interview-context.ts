@@ -9,6 +9,10 @@ import {
   measureJsonChars,
   truncateString,
 } from "@/ai/context/budgets";
+import {
+  buildEvidenceAllowlist,
+  type EvidenceAllowlistEntry,
+} from "@/ai/context/evidence-allowlist";
 import { redactDeep } from "@/ai/context/redact";
 
 export type InterviewContextPacket = {
@@ -23,6 +27,8 @@ export type InterviewContextPacket = {
       classification: string;
       confidence: string;
     }>;
+    /** Non-rejected profile field keys — the only legal evidenceRefs for strategy cards. */
+    evidenceAllowlist: EvidenceAllowlistEntry[];
     priorQa: Array<{
       questionId: string;
       decisionCategory: string;
@@ -33,6 +39,15 @@ export type InterviewContextPacket = {
     }>;
     unresolvedUnknowns: string[];
     remainingSlots: number;
+    /** True when this call should produce the strategic_direction first question. */
+    requireStrategicDirection: boolean;
+    /** CORE items already satisfied by answers, selected hypotheses, or profile. */
+    coreResolutions: Array<{
+      category: string;
+      source: string;
+      sourceKey: string;
+    }>;
+    unresolvedCoreCategories: string[];
   };
   provenanceNotes: string[];
   truncationWarnings: string[];
@@ -45,6 +60,12 @@ export function assembleInterviewContext(input: {
   previousAnswers: InterviewAnswer[];
   unresolvedUnknowns: string[];
   remainingSlots: number;
+  coreResolutions?: Array<{
+    category: string;
+    source: string;
+    sourceKey: string;
+  }>;
+  unresolvedCoreCategories?: string[];
 }): InterviewContextPacket {
   const truncationWarnings: string[] = [];
   const provenanceNotes = [
@@ -94,6 +115,13 @@ export function assembleInterviewContext(input: {
     truncationWarnings.push("Truncated unresolved unknowns list.");
   }
 
+  const evidenceAllowlist = buildEvidenceAllowlist(input.confirmedProfile).map(
+    (entry) => ({
+      ...entry,
+      value: truncateString(entry.value, 400).value,
+    }),
+  );
+
   const packet = {
     profileSummary: fieldEntries.map(([key, field]) => ({
       key,
@@ -102,9 +130,17 @@ export function assembleInterviewContext(input: {
       classification: field.originalClassification,
       confidence: field.confidence,
     })),
+    evidenceAllowlist,
     priorQa,
     unresolvedUnknowns,
     remainingSlots: input.remainingSlots,
+    // Strategy cards at most once while strategic research priorities remain
+    // unresolved — gated on material orientation gap, not a bare "Q1" rule.
+    requireStrategicDirection:
+      input.previousQuestions.length === 0 &&
+      !input.previousQuestions.some((q) => q.questionKind === "strategic_direction"),
+    coreResolutions: input.coreResolutions ?? [],
+    unresolvedCoreCategories: input.unresolvedCoreCategories ?? [],
   };
 
   if (measureJsonChars(packet) > CONTEXT_BUDGETS.interviewChars) {

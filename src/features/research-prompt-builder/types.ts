@@ -21,8 +21,6 @@ export type {
   HappyWorkflowState,
 } from "@/features/research-prompt-builder/state/workflow-states";
 
-export type FieldStatus = "confirmed" | "corrected" | "rejected" | "unresolved";
-
 export type ResearchPromptProject = {
   version: 1;
   projectId: string;

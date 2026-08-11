@@ -63,10 +63,58 @@ check("Schema / contract registry", () => {
 });
 
 check("Prompt registry / operations", () => {
-  if (!existsSync(join(root, "src/ai/operations/registry.ts"))) {
+  const registryPath = join(root, "src/ai/operations/registry.ts");
+  if (!existsSync(registryPath)) {
     return fail("src/ai/operations/registry.ts missing");
   }
-  return pass();
+  const source = readFileSync(registryPath, "utf8");
+  const promptPaths = [...source.matchAll(/promptModulePath:\s*\n?\s*"([^"]+)"/g)].map(
+    (m) => m[1],
+  );
+  if (promptPaths.length < 6) {
+    return fail(`Expected ≥6 promptModulePath entries, found ${promptPaths.length}`);
+  }
+  const missing = promptPaths.filter((p) => !existsSync(join(root, p)));
+  if (missing.length) return fail(`Missing prompt modules: ${missing.join(", ")}`);
+
+  const servicesDir = join(
+    root,
+    "src/features/research-prompt-builder/services",
+  );
+  const serviceFiles = [
+    "analyze-company.ts",
+    "generate-next-question.ts",
+    "extract-supporting-context.ts",
+    "build-research-brief.ts",
+    "generate-research-prompt.ts",
+    "structured-openai.ts",
+  ];
+  const serviceBlob = serviceFiles
+    .map((f) => readFileSync(join(servicesDir, f), "utf8"))
+    .join("\n");
+  if (serviceBlob.includes("compile-research-prompt-contract")) {
+    return fail("Phantom operationId compile-research-prompt-contract still present");
+  }
+  const publicOps = [
+    "analyze-company",
+    "generate-next-question",
+    "extract-supporting-context",
+    "build-research-brief",
+    "compile-research-prompt",
+  ];
+  const missingOps = publicOps.filter(
+    (op) => !new RegExp(`operation:\\s*"${op}"`).test(serviceBlob),
+  );
+  if (missingOps.length) {
+    return fail(`Runtime services missing registered ops: ${missingOps.join(", ")}`);
+  }
+  if (!existsSync(join(root, "src/ai/README.md"))) {
+    return fail("src/ai/README.md missing (thin ops map)");
+  }
+  if (existsSync(join(root, "src/config/model-policy.ts"))) {
+    return fail("Dead dual-truth src/config/model-policy.ts must stay deleted");
+  }
+  return pass(`${promptPaths.length} prompt modules; public ops wired`);
 });
 
 check("Project Knowledge", () => {

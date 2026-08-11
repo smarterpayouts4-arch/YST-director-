@@ -1,0 +1,344 @@
+{
+  "fileName": "professional-service.csv",
+  "promptVersion": "rpb-runtime-1.2.0",
+  "companyUnderstanding": {
+    "companyName": {
+      "value": "Clearpath Bookkeeping",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-2",
+          "explanation": "The company name is explicitly provided."
+        }
+      ]
+    },
+    "industry": {
+      "value": "Bookkeeping / professional services for small businesses",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-3",
+          "explanation": "The stated industry and service category are explicit."
+        }
+      ]
+    },
+    "offer": {
+      "value": "Monthly bookkeeping cleanup and cash-flow reporting for owner-operated firms, intended to make financial information easier to understand through a plain-English monthly brief.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-4",
+          "explanation": "Monthly bookkeeping cleanup and cash-flow reporting are explicitly stated."
+        },
+        {
+          "ref": "row-9",
+          "explanation": "The company states that it provides a plain-English monthly brief rather than raw ledger dumps."
+        }
+      ]
+    },
+    "customerProblem": {
+      "value": "Owner-operated business owners may be overwhelmed by receipts and lack month-to-month visibility into whether their business is profitable.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-5",
+          "explanation": "This customer tension is explicitly stated. No current bookkeeping alternative or habit beyond managing receipts is evidenced."
+        }
+      ]
+    },
+    "likelyAudience": {
+      "value": "US small business owners with under $3M in revenue; the offer specifically references owner-operated firms.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-6",
+          "explanation": "US small business owners under $3M revenue are explicitly identified."
+        },
+        {
+          "ref": "row-4",
+          "explanation": "The stated offer is for owner-operated firms."
+        }
+      ]
+    },
+    "websiteAction": {
+      "value": "Schedule a discovery call",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-7",
+          "explanation": "The stated website action is explicit."
+        }
+      ]
+    },
+    "geography": {
+      "value": "United States, remote-first",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-8",
+          "explanation": "The current geographic scope and remote-first delivery model are explicitly stated."
+        }
+      ]
+    },
+    "differentiators": [
+      {
+        "value": "Plain-English monthly brief instead of raw ledger dumps",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "This is an explicit company-stated difference in deliverable format, but the packet provides no independent comparison or customer proof that it is unique or superior."
+          }
+        ]
+      }
+    ],
+    "expertiseSignals": [
+      {
+        "value": "QuickBooks ProAdvisor credential",
+        "classification": "observed_fact",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "The packet states this credential, though no certification record or holder details are supplied."
+          }
+        ]
+      },
+      {
+        "value": "CPA partnership for tax-season handoff",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "A CPA partnership and tax-season handoff are stated, but the partner identity, scope, and formal arrangement are not provided."
+          }
+        ]
+      }
+    ],
+    "claimsAndRestrictions": [
+      {
+        "value": "The company does not provide tax advice or IRS representation.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-11",
+            "explanation": "This explicit service boundary should govern descriptions of the offer and CPA handoff."
+          }
+        ]
+      },
+      {
+        "value": "“Books you can actually understand” is a marketing tagline, not independently substantiated proof of customer outcomes.",
+        "classification": "working_assumption",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-12",
+            "explanation": "The statement is presented as a tagline; no customer evidence, methodology detail, or outcome proof is included."
+          }
+        ]
+      },
+      {
+        "value": "Any implication that cash-flow reporting establishes profitability, provides tax advice, or substitutes for CPA or IRS representation requires verification and must respect the stated boundary.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "Cash-flow reporting is part of the stated offer."
+          },
+          {
+            "ref": "row-5",
+            "explanation": "The customer problem references profitability visibility."
+          },
+          {
+            "ref": "row-11",
+            "explanation": "Tax advice and IRS representation are explicitly excluded."
+          }
+        ]
+      }
+    ],
+    "confirmedFacts": [
+      {
+        "value": "Clearpath Bookkeeping is a bookkeeping professional-services business for small businesses.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-2",
+            "explanation": "Company name."
+          },
+          {
+            "ref": "row-3",
+            "explanation": "Industry statement."
+          }
+        ]
+      },
+      {
+        "value": "Its stated service includes monthly bookkeeping cleanup and cash-flow reporting for owner-operated firms.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "Offer is explicitly stated."
+          }
+        ]
+      },
+      {
+        "value": "Its stated audience is US small business owners under $3M in revenue, and it operates remote-first in the United States.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-6",
+            "explanation": "Audience statement."
+          },
+          {
+            "ref": "row-8",
+            "explanation": "Geography statement."
+          }
+        ]
+      },
+      {
+        "value": "The stated conversion action is to schedule a discovery call.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "Website action is explicit."
+          }
+        ]
+      }
+    ],
+    "workingAssumptions": [
+      {
+        "value": "The plain-English monthly brief is intended to reduce owners’ difficulty interpreting bookkeeping information.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "Owners are said to lack profitability visibility."
+          },
+          {
+            "ref": "row-9",
+            "explanation": "The company contrasts its brief with raw ledger dumps."
+          },
+          {
+            "ref": "row-12",
+            "explanation": "The tagline emphasizes understandable books, but it is not outcome proof."
+          }
+        ]
+      },
+      {
+        "value": "A CPA handoff may support tax-season continuity without Clearpath itself providing tax advice.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "A CPA partnership for tax-season handoff is stated."
+          },
+          {
+            "ref": "row-11",
+            "explanation": "Tax advice and IRS representation are excluded."
+          }
+        ]
+      }
+    ],
+    "importantUnknowns": [
+      {
+        "value": "Whether the stated under-$3M revenue audience is a strict eligibility threshold, a target segment, or an estimate is not established.",
+        "classification": "important_unknown",
+        "confidence": "low",
+        "evidence": [
+          {
+            "ref": "row-6",
+            "explanation": "The revenue level is stated without qualification, qualification criteria, or client evidence."
+          }
+        ]
+      },
+      {
+        "value": "No pricing, service scope, onboarding process, bookkeeping software requirements, reporting cadence beyond monthly, or cleanup depth is provided.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "The offer names monthly cleanup and reporting but provides no operational detail."
+          }
+        ]
+      },
+      {
+        "value": "No evidence identifies current customer alternatives, named competitors, or the extent to which prospects currently rely on raw ledger reports, DIY bookkeeping, spreadsheets, or another method.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "Receipt overload and limited profitability visibility are stated, but no alternative provider or workflow is identified."
+          },
+          {
+            "ref": "row-9",
+            "explanation": "Raw ledger dumps are referenced as a contrast, not as documented customer behavior or a named competitor."
+          }
+        ]
+      },
+      {
+        "value": "No customer testimonials, quantified outcomes, retention data, case studies, or independent validation supports the claimed clarity benefit or financial visibility outcome.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "The plain-English brief is a company claim without outcome evidence."
+          },
+          {
+            "ref": "row-12",
+            "explanation": "The tagline is not independent proof."
+          }
+        ]
+      },
+      {
+        "value": "The CPA partner’s identity, credentials, legal relationship, and responsibility for tax work are not provided.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "Only a general CPA partnership and handoff are stated."
+          },
+          {
+            "ref": "row-11",
+            "explanation": "The stated tax-advice and representation exclusions make role clarity material."
+          }
+        ]
+      }
+    ],
+    "ingestionSummary": "Analyzed 11 retained field/value rows from a CSV evidence packet for Clearpath Bookkeeping. The packet directly states the company identity, bookkeeping offer, target audience, US remote-first scope, discovery-call action, a claimed plain-English reporting distinction, an expertise credential/CPA handoff signal, and a tax/IRS service boundary.",
+    "ingestionWarnings": [
+      "The source reports that one exact duplicate row was removed before analysis.",
+      "The packet contains only company-provided field/value statements; it contains no independent validation, customer outcomes, pricing, service-process detail, or competitor evidence."
+    ]
+  },
+  "evidencePacketMeta": {
+    "fileName": "professional-service.csv",
+    "fileHash": "a7096be74ae3bdeee2801547a36f42464366fc55c35830cca6b91a22972b080e",
+    "retainedRowCount": 11,
+    "warnings": [
+      "Removed 1 exact duplicate row(s)."
+    ],
+    "wasTruncated": false
+  }
+}

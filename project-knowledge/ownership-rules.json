@@ -20,23 +20,5 @@
     "mcp": ["mcp/**"],
     "agent-learning": ["agent-learning/**"],
     "tests": ["tests/**"]
-  },
-  "independenceRules": [
-    {
-      "id": "client-no-server-only",
-      "from": "src/features/**/components/**",
-      "disallow": ["server-only"],
-      "note": "Client UI must not import server-only modules"
-    },
-    {
-      "id": "runtime-no-mcp",
-      "from": "src/**",
-      "disallow": ["mcp/**"],
-      "note": "Next.js runtime must not depend on MCP"
-    },
-    {
-      "id": "knowledge-generated-write-only",
-      "note": "Scripts may write only under project-knowledge/generated/"
-    }
-  ]
+  }
 }

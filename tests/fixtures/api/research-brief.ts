@@ -1,3 +1,4 @@
+import { defaultBriefFieldProvenance } from "@/features/research-prompt-builder/lib/brief-provenance";
 import type { ResearchBrief } from "@/features/research-prompt-builder/schemas";
 
 export function makeResearchBrief(
@@ -5,46 +6,67 @@ export function makeResearchBrief(
 ): ResearchBrief {
   return {
     companyTruth:
-      "Bluebird Plumbing Co. is a licensed residential plumbing company serving the Austin metro area, known for fast emergency response and flat-rate pricing published upfront.",
+      "ZYNAVA is a United States online AI-powered supplement search and price-comparison platform that helps shoppers explore options, build plans, and ask educational questions without selling supplements.",
     customerMoment:
-      "A homeowner discovers an active leak or burst pipe and urgently searches for a trustworthy local plumber.",
+      "An adult shopper has already chosen a supplement category and is overwhelmed by conflicting claims and multiple forms before deciding what to buy.",
     viewerReward:
-      "Viewers learn how to stop damage in the first ten minutes and how to judge whether a plumber is quoting fairly.",
+      "Viewers understand what can be compared on labels and across forms in plain English, without being told which product is medically right for them.",
     businessBridge:
-      "Helpful emergency guidance builds trust that converts panicked searchers into booked service calls.",
+      "Clear form and label education earns trust that leads appropriate shoppers into ZYNAVA’s guided comparison, plan builder, or advisor tools.",
     primaryPlatform: {
       value: "YouTube",
       rationale:
-        "Emergency plumbing questions are heavily searched on YouTube and answers demonstrate expertise visually.",
-      status: "working_hypothesis",
+        "Supplement form and label questions are heavily searched with evergreen educational intent; video can demonstrate comparison logic without medical claims.",
     },
     contentHypothesis:
-      "Short, calm, step-by-step emergency triage videos will out-perform generic company promos because they meet the customer at the moment of crisis.",
+      "Form-decoding education (“compare the form, not the cure”) will out-perform generic wellness tips because it meets shoppers at the confusion moment before purchase.",
     challengeHypothesis:
-      "It is possible emergency searchers convert on speed alone and never watch videos; research must test whether content influences the emergency call decision at all.",
+      "It is possible shoppers prefer clinician, pharmacist, or brand-led sources and never use an independent comparison tool; research must test whether form education drives guided-comparison intent.",
     trustBoundaries: [
-      "Cannot claim to be the cheapest provider in the market.",
-      "No advice that encourages unlicensed gas line work.",
+      "Educational guidance only — not medical advice.",
+      "Do not diagnose, treat, cure, prevent disease, or recommend dosages.",
     ],
     executionContext: [
-      "Owner can film one video per week with a phone.",
-      "No dedicated marketing staff.",
+      "Content must stay compliance-safe and evidence-informed.",
+      "No paid rankings or sponsored placements in product results.",
     ],
     unresolvedUnknowns: [
-      "Which customer segment produces the highest lifetime value.",
+      "Which supplement categories produce the highest guided-comparison intent.",
     ],
     evidenceSummary: [
       {
-        statement: "Serves the Austin metro area only.",
+        statement: "Does not sell supplements; routes to third-party retailers.",
         classification: "observed_fact",
         evidenceRefs: ["row:3"],
       },
       {
-        statement: "Most demand comes from emergency calls.",
+        statement: "Shoppers stop for confusion and trust, not feature lists.",
         classification: "working_hypothesis",
         evidenceRefs: ["row:5"],
       },
     ],
+    fieldProvenance: defaultBriefFieldProvenance({
+      companyTruth: {
+        origin: "confirmed_profile",
+        sourceRefs: ["offer", "companyName"],
+      },
+      trustBoundaries: {
+        origin: "confirmed_profile",
+        sourceRefs: ["claim_0"],
+      },
+      customerMoment: {
+        origin: "owner_answer",
+        sourceRefs: [],
+      },
+      contentHypothesis: {
+        origin: "owner_selected_hypothesis",
+        sourceRefs: ["sg-form-decode"],
+      },
+      challengeHypothesis: {
+        origin: "model_hypothesis",
+        sourceRefs: [],
+      },
+    }),
     ...overrides,
   };
 }

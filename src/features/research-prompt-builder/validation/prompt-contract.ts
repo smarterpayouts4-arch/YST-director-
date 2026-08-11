@@ -1,11 +1,40 @@
 /**
  * Semantic + structural lint for the formatted research-prompt Markdown.
- * Used by the prompt compiler path and format-research-prompt.
+ * Rules live in prompt-contract-rules.ts (single source of truth).
  */
+
+import {
+  ANCHOR_BUCKETS,
+  anchorPhraseMatches,
+  type AnchorBucket,
+  type CompanyAnchors,
+} from "@/features/research-prompt-builder/lib/company-anchors";
+import {
+  PROMPT_CONTRACT_RULES,
+  ruleMatches,
+  type PromptContractRule,
+} from "@/features/research-prompt-builder/validation/prompt-contract-rules";
+
+export type AnchorCoverage = {
+  ruleId: string;
+  requestedBuckets: number;
+  availableBuckets: number;
+  effectiveBuckets: number;
+  matchedTokens: string[];
+  matchedBuckets: AnchorBucket[];
+  degraded: boolean;
+  satisfied: boolean;
+};
 
 export type PromptContractLintResult = {
   ok: boolean;
   issues: string[];
+  anchorCoverage: AnchorCoverage[];
+  sectionCharCounts: Record<string, number>;
+};
+
+export type LintPromptContractOptions = {
+  anchors?: CompanyAnchors;
 };
 
 const REQUIRED_SECTIONS = [
@@ -19,8 +48,138 @@ const REQUIRED_SECTIONS = [
   "## 8. QUALITY CHECK BEFORE SUBMISSION",
 ] as const;
 
-export function lintPromptContract(markdown: string): PromptContractLintResult {
+/** Calibration telemetry only — never shown to the model. */
+export const SECTION_CHAR_BANDS = {
+  evidenceAndRedTeamRequirements: { min: 4500, max: 6500 },
+  requiredReportStructure: { min: 6000, max: 8500 },
+} as const;
+
+function splitParagraphs(markdown: string): string[] {
+  return markdown
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+}
+
+function findMatchingParagraphs(markdown: string, rule: PromptContractRule): string[] {
+  return splitParagraphs(markdown).filter((paragraph) => ruleMatches(rule, paragraph));
+}
+
+function tokenWeight(token: string): number {
+  return token.includes(" ") ? 2 : 1;
+}
+
+function evaluateAnchorCoverage(
+  rule: PromptContractRule,
+  matchingParagraphs: string[],
+  anchors: CompanyAnchors,
+): AnchorCoverage {
+  const policy = rule.anchorPolicy ?? {};
+  const requiredBuckets = policy.requiredBuckets ?? [...ANCHOR_BUCKETS];
+  const requestedBuckets = policy.minDistinctBuckets ?? 1;
+  const requestedTokens = policy.minDistinctTokens ?? 1;
+
+  const availableBucketList = requiredBuckets.filter(
+    (bucket) => (anchors[bucket] ?? []).length > 0,
+  );
+  const availableBuckets = availableBucketList.length;
+  const effectiveBuckets = Math.min(requestedBuckets, availableBuckets);
+  const effectiveTokens = Math.min(
+    requestedTokens,
+    availableBucketList.reduce((sum, b) => sum + anchors[b].length, 0),
+  );
+  const degraded = availableBuckets < requestedBuckets;
+
+  // No distinctive anchors available for this policy: phrase match alone is enough,
+  // but the personalization proof is degraded (thin source material).
+  if (availableBuckets === 0) {
+    return {
+      ruleId: rule.id,
+      requestedBuckets,
+      availableBuckets: 0,
+      effectiveBuckets: 0,
+      matchedTokens: [],
+      matchedBuckets: [],
+      degraded: true,
+      satisfied: true,
+    };
+  }
+
+  const searchText = matchingParagraphs.join("\n\n");
+  const matchedBuckets: AnchorBucket[] = [];
+  const matchedTokens: string[] = [];
+  let tokenScore = 0;
+
+  for (const bucket of availableBucketList) {
+    const hits = (anchors[bucket] ?? []).filter((token) =>
+      anchorPhraseMatches(searchText, token),
+    );
+    if (hits.length === 0) continue;
+    matchedBuckets.push(bucket);
+    for (const hit of hits) {
+      if (!matchedTokens.includes(hit)) {
+        matchedTokens.push(hit);
+        tokenScore += tokenWeight(hit);
+      }
+    }
+  }
+
+  const satisfied =
+    matchedBuckets.length >= effectiveBuckets && tokenScore >= effectiveTokens;
+
+  return {
+    ruleId: rule.id,
+    requestedBuckets,
+    availableBuckets,
+    effectiveBuckets,
+    matchedTokens,
+    matchedBuckets,
+    degraded,
+    satisfied,
+  };
+}
+
+const SECTION_HEADING: Record<
+  Exclude<PromptContractRule["section"], "global">,
+  (typeof REQUIRED_SECTIONS)[number]
+> = {
+  evidenceAndRedTeamRequirements: "## 6. EVIDENCE AND RED-TEAM REQUIREMENTS",
+  requiredReportStructure: "## 7. REQUIRED REPORT STRUCTURE",
+};
+
+export function extractSectionBody(
+  markdown: string,
+  heading: (typeof REQUIRED_SECTIONS)[number],
+): string {
+  const start = markdown.indexOf(heading);
+  if (start < 0) return "";
+  const bodyStart = start + heading.length;
+  const headingIndex = REQUIRED_SECTIONS.indexOf(heading);
+  const nextHeading =
+    headingIndex >= 0 ? REQUIRED_SECTIONS[headingIndex + 1] : undefined;
+  const end = nextHeading ? markdown.indexOf(nextHeading, bodyStart) : markdown.length;
+  return markdown.slice(bodyStart, end < 0 ? markdown.length : end).trim();
+}
+
+export function measureSectionCharCounts(markdown: string): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const heading of REQUIRED_SECTIONS) {
+    counts[heading] = extractSectionBody(markdown, heading).length;
+  }
+  return counts;
+}
+
+function textForRule(rule: PromptContractRule, markdown: string): string {
+  if (rule.section === "global") return markdown;
+  return extractSectionBody(markdown, SECTION_HEADING[rule.section]);
+}
+
+export function lintPromptContract(
+  markdown: string,
+  options: LintPromptContractOptions = {},
+): PromptContractLintResult {
   const issues: string[] = [];
+  const anchorCoverage: AnchorCoverage[] = [];
 
   for (const heading of REQUIRED_SECTIONS) {
     if (!markdown.includes(heading)) {
@@ -32,75 +191,45 @@ export function lintPromptContract(markdown: string): PromptContractLintResult {
     issues.push("Missing top-level title heading.");
   }
 
-  if (!/disconfirm|contradict|challenge|red-?team/i.test(markdown)) {
-    issues.push("Missing disconfirming-evidence / red-team requirement.");
+  for (const rule of PROMPT_CONTRACT_RULES) {
+    const scopeText = textForRule(rule, markdown);
+    const matched = ruleMatches(rule, scopeText);
+
+    if (rule.negative) {
+      // Negative bans still scan the whole prompt (scripts can appear anywhere).
+      if (ruleMatches(rule, markdown)) issues.push(rule.issue);
+      continue;
+    }
+
+    if (!matched) {
+      issues.push(rule.issue);
+      continue;
+    }
+
+    if (rule.anchored && options.anchors) {
+      const paragraphs = findMatchingParagraphs(scopeText, rule);
+      const coverage = evaluateAnchorCoverage(
+        rule,
+        paragraphs.length ? paragraphs : [scopeText],
+        options.anchors,
+      );
+      anchorCoverage.push(coverage);
+      if (!coverage.satisfied) {
+        issues.push(
+          `${rule.issue} (anchor coverage insufficient: need ${coverage.effectiveBuckets} bucket(s) and distinctive company tokens in the same paragraph; matched ${coverage.matchedBuckets.length} bucket(s)` +
+            (coverage.degraded ? "; degraded thin-CSV anchors" : "") +
+            ").",
+        );
+      }
+    }
   }
 
-  if (!/competitor/i.test(markdown)) {
-    issues.push("Missing competitor classification guidance.");
-  }
-
-  if (
-    !/(direct|adjacent|aspirational).{0,40}competitor|competitor.{0,40}(direct|adjacent|aspirational)/i.test(
-      markdown,
-    ) &&
-    !/classif(?:y|ication).{0,60}competitor/i.test(markdown)
-  ) {
-    issues.push("Competitor guidance should ask for classification (e.g. direct/adjacent/aspirational).");
-  }
-
-  if (!/3 content pillars|three content pillars|3 pillars/i.test(markdown)) {
-    issues.push("Missing three content pillars requirement.");
-  }
-
-  if (
-    !/(2 experiments|two experiments|6 experiments|six experiments)/i.test(markdown) &&
-    !/pillars?.{0,40}experiments?/i.test(markdown)
-  ) {
-    issues.push("Missing experiments requirement (3 pillars × 2 experiments / 6 experiments).");
-  }
-
-  if (!/primary platform|one primary platform|1 platform/i.test(markdown)) {
-    issues.push("Missing primary platform requirement.");
-  }
-
-  if (!/\bCTA\b|call to action|call-to-action/i.test(markdown)) {
-    issues.push("Missing CTA hypothesis requirement.");
-  }
-
-  if (!/success.{0,20}failure|failure.{0,20}success|success\/failure|stop criteria/i.test(markdown)) {
-    issues.push("Missing success/failure criteria.");
-  }
-
-  if (
-    !/observed fact|owner[- ]confirmed|working hypothes|research question|restriction/i.test(
-      markdown,
-    )
-  ) {
-    issues.push(
-      "Missing fact vs hypothesis vs restriction labeling guidance.",
-    );
-  }
-
-  if (!/audience|customer moment|viewer (?:value|reward)/i.test(markdown)) {
-    issues.push("Missing audience-first / customer-moment framing.");
-  }
-
-  if (
-    !/return the completed research output only|do not propose additional workflows|stop after/i.test(
-      markdown,
-    )
-  ) {
-    issues.push(
-      'Missing explicit stop line (e.g. "return the completed research output only; do not propose additional workflows").',
-    );
-  }
-
-  if (/seven[- ]scene|scroll[- ]retention|script looping|shot list/i.test(markdown)) {
-    issues.push("Prompt must not include video production instructions.");
-  }
-
-  return { ok: issues.length === 0, issues };
+  return {
+    ok: issues.length === 0,
+    issues,
+    anchorCoverage,
+    sectionCharCounts: measureSectionCharCounts(markdown),
+  };
 }
 
 /** Adapter matching the previous validateFormattedPrompt signature. */

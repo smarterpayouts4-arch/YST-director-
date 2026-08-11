@@ -20,7 +20,6 @@ const brief = {
   primaryPlatform: {
     value: "YouTube",
     rationale: "r".repeat(30),
-    status: "working_hypothesis" as const,
   },
   contentHypothesis: "c".repeat(60),
   challengeHypothesis: "h".repeat(60),
@@ -28,6 +27,18 @@ const brief = {
   executionContext: ["owner can film weekly"],
   unresolvedUnknowns: ["ideal CTA"],
   evidenceSummary: [],
+  fieldProvenance: {
+    customerMoment: { origin: "model_hypothesis", sourceRefs: [] },
+    viewerReward: { origin: "model_hypothesis", sourceRefs: [] },
+    challengeHypothesis: { origin: "model_hypothesis", sourceRefs: [] },
+    contentHypothesis: { origin: "model_hypothesis", sourceRefs: [] },
+    executionContext: { origin: "model_hypothesis", sourceRefs: [] },
+    companyTruth: { origin: "model_hypothesis", sourceRefs: [] },
+    businessBridge: { origin: "model_hypothesis", sourceRefs: [] },
+    primaryPlatform: { origin: "model_hypothesis", sourceRefs: [] },
+    trustBoundaries: { origin: "model_hypothesis", sourceRefs: [] },
+    unresolvedUnknowns: { origin: "model_hypothesis", sourceRefs: [] },
+  },
 } satisfies ResearchBrief;
 
 const finalPrompt = {
@@ -207,5 +218,37 @@ describe("project reducer invalidation", () => {
     expect(state.currentStage).toBe("INTERVIEWING");
     expect(state.researchBrief).toBeUndefined();
     expect(state.formattedPrompt).toBeUndefined();
+  });
+
+  it("reopening an earlier Decide turn drops later questions and that answer", () => {
+    const q1 = { ...question, questionId: "q1", sequenceNumber: 1 } as InterviewQuestion;
+    const q2 = {
+      ...question,
+      questionId: "q2",
+      sequenceNumber: 2,
+    } as InterviewQuestion;
+    let state = atStage("INTERVIEWING", {
+      questions: [q1, q2],
+      answers: [
+        {
+          questionId: "q1",
+          answerText: "Prior strategic choice.",
+          usedSuggestion: false,
+          selectedSuggestionIds: ["a"],
+          customDirection: null,
+          supportingDocuments: [],
+          answeredAt: new Date().toISOString(),
+        },
+      ],
+      currentQuestionIndex: 1,
+      researchBrief: brief,
+    });
+    state = apply(state, { type: "REOPEN_QUESTION", questionIndex: 0 });
+    expect(state.questions).toHaveLength(1);
+    expect(state.questions[0]?.questionId).toBe("q1");
+    expect(state.answers).toHaveLength(0);
+    expect(state.currentQuestionIndex).toBe(0);
+    expect(state.researchBrief).toBeUndefined();
+    expect(state.currentStage).toBe("INTERVIEWING");
   });
 });

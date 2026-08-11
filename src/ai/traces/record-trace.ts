@@ -37,6 +37,8 @@ export function recordTrace(input: TraceRecordInput): AiTrace {
     status: input.status,
     repaired: input.repaired ?? false,
     validationIssueCount: input.validationIssueCount ?? 0,
+    repairAttempts: input.repairAttempts,
+    finalValidation: input.finalValidation,
     charBudgetUsed: input.charBudgetUsed,
     truncationWarningCount: input.truncationWarningCount,
     errorCode: input.errorCode,

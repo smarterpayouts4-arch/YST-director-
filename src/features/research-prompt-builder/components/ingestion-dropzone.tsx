@@ -5,10 +5,9 @@ import { Button } from "@/components/ui/button";
 
 const STEPS = [
   "Reading file",
-  "Checking structure",
-  "Identifying company signals",
-  "Separating facts from assumptions",
-  "Preparing your company understanding",
+  "Finding company signals",
+  "Separating facts from guesses",
+  "Ready to confirm",
 ];
 
 export function IngestionDropzone({
@@ -44,17 +43,16 @@ export function IngestionDropzone({
   };
 
   return (
-    <div className="mx-auto max-w-[1040px] space-y-8">
+    <div className="mx-auto max-w-[1040px] space-y-7">
       <div>
-        <p className="text-sm uppercase tracking-[0.16em] text-stone-500">
+        <p className="text-xs font-medium uppercase tracking-[0.12em] text-stone-500">
           Step 1 of 5
         </p>
-        <h1 className="editorial mt-3 text-4xl leading-tight text-stone-900 md:text-5xl">
+        <h1 className="editorial mt-2 text-4xl leading-tight text-stone-900 md:text-5xl">
           Upload your company information
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-stone-600">
-          Upload a company CSV, confirm what we understand, answer a few questions
-          worth answering, and receive one professional ChatGPT research prompt.
+        <p className="mt-3 max-w-xl text-base text-stone-600">
+          One CSV in. One ChatGPT research prompt out.
         </p>
       </div>
 
@@ -66,10 +64,8 @@ export function IngestionDropzone({
           pick(e.dataTransfer.files?.[0] ?? null);
         }}
       >
-        <p className="text-base text-stone-700">Drop a CSV here, or browse.</p>
-        <p className="mt-2 text-sm text-stone-500">
-          Accepted: .csv · Max 5 MB · Processed in memory, not stored as the raw file
-        </p>
+        <p className="text-base text-stone-800">Drop a CSV here</p>
+        <p className="mt-1 text-sm text-stone-500">.csv · max 5 MB · not stored as the raw file</p>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           <Button type="button" variant="secondary" onClick={() => inputRef.current?.click()}>
             Browse CSV
@@ -92,9 +88,8 @@ export function IngestionDropzone({
         ) : null}
       </div>
 
-      <p className="text-sm text-stone-500">
-        Privacy note: uploaded files are processed to generate this project’s understanding
-        and are not stored by this MVP. Do not upload secrets, regulated records, or personal data.
+      <p className="text-xs text-stone-500">
+        Do not upload secrets, regulated records, or personal data.
       </p>
 
       {busy ? (

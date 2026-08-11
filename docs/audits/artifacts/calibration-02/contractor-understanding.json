@@ -1,0 +1,302 @@
+{
+  "fileName": "contractor.csv",
+  "promptVersion": "rpb-runtime-1.2.0",
+  "companyUnderstanding": {
+    "companyName": {
+      "value": "Ridge Line Remodeling",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-2",
+          "explanation": "Company name is explicitly provided."
+        }
+      ]
+    },
+    "industry": {
+      "value": "Residential remodeling / general contractor",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-3",
+          "explanation": "Industry/category is explicitly provided."
+        }
+      ]
+    },
+    "offer": {
+      "value": "Kitchen and bath remodels for homeowners, using fixed-scope proposals intended to define the work before it begins.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-4",
+          "explanation": "The stated offer is kitchen and bath remodels with fixed-scope proposals for homeowners."
+        },
+        {
+          "ref": "row-9",
+          "explanation": "Line-item fixed scopes and photo progress updates describe the stated delivery/value mechanism."
+        }
+      ]
+    },
+    "customerProblem": {
+      "value": "Homeowners planning a major remodel may be trying to reduce uncertainty about scope, potential change orders, and project timing; the stated tension is fear of surprise change orders and unclear timelines.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-5",
+          "explanation": "The customer problem is explicitly stated as fear of surprise change orders and unclear timelines."
+        },
+        {
+          "ref": "row-6",
+          "explanation": "The supported audience context is owner-occupied households planning a major remodel."
+        }
+      ]
+    },
+    "likelyAudience": {
+      "value": "Owner-occupied households planning a major kitchen or bath remodel.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-6",
+          "explanation": "Likely audience is explicitly stated as owner-occupied households planning a major remodel."
+        },
+        {
+          "ref": "row-4",
+          "explanation": "The stated service narrows the remodel type to kitchens and baths."
+        }
+      ]
+    },
+    "websiteAction": {
+      "value": "Book a free on-site estimate.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-7",
+          "explanation": "The stated website action is to book a free on-site estimate."
+        }
+      ]
+    },
+    "geography": {
+      "value": "Greater Denver metro.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-8",
+          "explanation": "Service geography is explicitly stated."
+        }
+      ]
+    },
+    "differentiators": [
+      {
+        "value": "Line-item fixed scopes with photo progress updates.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "This is an explicit company-provided differentiator and describes a mechanism for scope clarity and project visibility, but the packet provides no independent evidence that it is unique, consistently delivered, or superior to alternatives."
+          }
+        ]
+      }
+    ],
+    "expertiseSignals": [
+      {
+        "value": "Licensed and bonded.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "The company asserts it is licensed and bonded; the packet contains no license, bond, jurisdiction, or verification details."
+          }
+        ]
+      },
+      {
+        "value": "200+ completed kitchens.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "The company claims more than 200 completed kitchens, but the packet provides no completion records, dates, customer references, or third-party verification."
+          }
+        ]
+      }
+    ],
+    "claimsAndRestrictions": [
+      {
+        "value": "Permits must not be represented as always included before the project scope is established.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-11",
+            "explanation": "An explicit restriction states that permits are not always included until scoped."
+          }
+        ]
+      },
+      {
+        "value": "“Remodels without the headaches” is a slogan, not a substantiated outcome claim.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-12",
+            "explanation": "The phrase appears only as a slogan; no evidence defines or proves headache-free remodeling."
+          }
+        ]
+      },
+      {
+        "value": "Fixed scopes should not be interpreted as a guarantee that no change orders, delays, or scope changes can occur.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "The company offers fixed-scope proposals."
+          },
+          {
+            "ref": "row-5",
+            "explanation": "The stated customer concern includes surprise change orders and unclear timelines, but no absolute guarantee or process for changes/delays is provided."
+          }
+        ]
+      }
+    ],
+    "confirmedFacts": [
+      {
+        "value": "Ridge Line Remodeling identifies as a residential remodeling/general contractor business.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-2",
+            "explanation": "Company name is stated."
+          },
+          {
+            "ref": "row-3",
+            "explanation": "Industry is stated."
+          }
+        ]
+      },
+      {
+        "value": "The stated service is kitchen and bath remodeling with fixed-scope proposals for homeowners.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "Offer is explicitly stated."
+          }
+        ]
+      },
+      {
+        "value": "The stated service area is Greater Denver metro.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-8",
+            "explanation": "Geography is explicitly stated."
+          }
+        ]
+      },
+      {
+        "value": "The stated conversion action is a free on-site estimate.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "Website action is explicitly stated."
+          }
+        ]
+      }
+    ],
+    "workingAssumptions": [
+      {
+        "value": "Line-item fixed scopes and photo progress updates are intended to reduce homeowner uncertainty around project scope and visibility.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "Homeowners' stated concerns are surprise change orders and unclear timelines."
+          },
+          {
+            "ref": "row-9",
+            "explanation": "The company states it provides line-item fixed scopes and photo progress updates; intended customer impact is not directly documented."
+          }
+        ]
+      }
+    ],
+    "importantUnknowns": [
+      {
+        "value": "Whether fixed-scope proposals include explicit allowances, exclusions, change-order procedures, or protections against cost increases is not provided.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "Fixed-scope proposals are named, but their terms and boundaries are absent."
+          }
+        ]
+      },
+      {
+        "value": "How timelines are estimated, communicated, updated, or handled when delays occur is not provided.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "Unclear timelines are identified as a customer concern, but no timeline-management process is described."
+          },
+          {
+            "ref": "row-9",
+            "explanation": "Photo updates are stated, but do not establish how schedules are communicated."
+          }
+        ]
+      },
+      {
+        "value": "Permit responsibility, permit inclusion, and applicable permit conditions are unknown until a project is scoped.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-11",
+            "explanation": "The explicit restriction says permits cannot always be claimed as included until scoped."
+          }
+        ]
+      },
+      {
+        "value": "The evidence packet contains no named competitors, customer testimonials, portfolio evidence, review data, pricing information, or independent verification of licensing, bonding, or completed-project volume.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "Licensing, bonding, and completed-kitchen volume are asserted without supporting documentation; no competitor, testimonial, portfolio, review, or pricing evidence appears in the packet."
+          }
+        ]
+      }
+    ],
+    "ingestionSummary": "CSV-only evidence packet with 11 retained field-value rows. It establishes the company identity, service category, kitchen-and-bath offer, Greater Denver scope, homeowner audience, estimate action, stated scope/communication features, claimed credentials, and a permit-related claim boundary.",
+    "ingestionWarnings": [
+      "One exact duplicate row was removed during ingestion.",
+      "Evidence consists of company-provided CSV statements only; claims of licensing, bonding, completed-project volume, and differentiation are not independently verified."
+    ]
+  },
+  "evidencePacketMeta": {
+    "fileName": "contractor.csv",
+    "fileHash": "1f08e024475be55f53814c93841f7f8596c76758b66ae6df8b9de48f675211ba",
+    "retainedRowCount": 11,
+    "warnings": [
+      "Removed 1 exact duplicate row(s)."
+    ],
+    "wasTruncated": false
+  }
+}

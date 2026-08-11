@@ -5,16 +5,11 @@
   --rail-muted: #9fb0c5;
   --canvas: #f7f4ef;
   --ink: #171412;
-  --accent: #3730a3;
   --border: #e4ddd3;
-  --ok: #166534;
-  --warn: #b45309;
-  --danger: #b91c1c;
 }
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
-  --font-serif: var(--font-instrument);
 }
 
 * {

@@ -1,6 +1,9 @@
 import "server-only";
 
 import { randomUUID } from "node:crypto";
+import { z } from "zod";
+import { CONTEXT_BUDGETS, truncateString } from "@/ai/context/budgets";
+import { redactDeep } from "@/ai/context/redact";
 import {
   assertSupportingUpload,
   getExtension,
@@ -11,23 +14,45 @@ import { getUploadLimits } from "@/features/research-prompt-builder/config/limit
 import { SupportingContextSchema } from "@/features/research-prompt-builder/schemas";
 import { buildSupportingContextPrompt } from "@/features/research-prompt-builder/prompts/supporting-context";
 import { parseStructuredOutput } from "@/features/research-prompt-builder/services/structured-openai";
+import { getContractSchemaVersion } from "@/ai/contracts/registry";
+
+const ExtractInputSchema = z.object({
+  questionId: z.string().min(1).max(120),
+  question: z.string().min(1).max(2000),
+});
 
 export async function extractSupportingContext(input: {
   file: File;
   questionId: string;
   question: string;
 }) {
+  const { questionId, question } = ExtractInputSchema.parse({
+    questionId: input.questionId,
+    question: input.question,
+  });
+
   const limits = getUploadLimits();
   const safeName = sanitizeFileName(input.file.name);
   const bytes = Buffer.from(await input.file.arrayBuffer());
   assertSupportingUpload(safeName, bytes.byteLength, limits.maxSupportingFileBytes);
 
   const extracted = await extractDocumentText(safeName, bytes);
-  const prompt = buildSupportingContextPrompt({
+  const truncated = truncateString(
+    extracted.text,
+    CONTEXT_BUDGETS.supportingExtractChars,
+  );
+  const redactedPayload = redactDeep({
+    question,
     fileName: safeName,
     documentType: getExtension(safeName).replace(".", "") || "unknown",
-    question: input.question,
-    extractedText: extracted.text,
+    extractedText: truncated.value,
+  });
+
+  const prompt = buildSupportingContextPrompt({
+    fileName: redactedPayload.value.fileName,
+    documentType: redactedPayload.value.documentType,
+    question: redactedPayload.value.question,
+    extractedText: redactedPayload.value.extractedText,
   });
 
   const supportingContext = await parseStructuredOutput({
@@ -36,6 +61,14 @@ export async function extractSupportingContext(input: {
     schema: SupportingContextSchema,
     instructions: prompt.instructions,
     input: prompt.input,
+    inputSchemaVersion: getContractSchemaVersion("interview-question"),
+    outputSchemaVersion: getContractSchemaVersion("supporting-context"),
+    charBudgetUsed: prompt.input.length,
+    truncationWarningCount: truncated.truncated ? 1 : 0,
+    meta: {
+      redactionCount: redactedPayload.redactions.length,
+      extractTruncated: truncated.truncated,
+    },
   });
 
   return {
@@ -43,9 +76,18 @@ export async function extractSupportingContext(input: {
       ...supportingContext,
       documentId: supportingContext.documentId || randomUUID(),
       fileName: safeName,
-      warnings: [...supportingContext.warnings, ...extracted.warnings].slice(0, 12),
+      warnings: [
+        ...supportingContext.warnings,
+        ...extracted.warnings,
+        ...(truncated.truncated
+          ? ["Supporting document text was truncated to the context budget."]
+          : []),
+        ...(redactedPayload.redactions.length
+          ? [`Redacted sensitive patterns: ${redactedPayload.redactions.join(", ")}`]
+          : []),
+      ].slice(0, 12),
     },
     extractedCharCount: extracted.text.length,
-    questionId: input.questionId,
+    questionId,
   };
 }

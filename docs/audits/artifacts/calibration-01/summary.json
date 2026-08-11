@@ -1,0 +1,56 @@
+{
+  "ranAt": "2026-08-07T01:01:24.328Z",
+  "promptVersion": "rpb-runtime-1.1.0",
+  "results": [
+    {
+      "file": "supplement.csv",
+      "status": "ok",
+      "companyName": "ZYNAVA",
+      "audience": "Adult supplement shoppers in the United States who are researching and comparing products before purchase.",
+      "classificationAudience": "observed_fact",
+      "claimsCount": 5,
+      "unknownsCount": 6,
+      "outPath": "C:\\Users\\ofran\\Desktop\\YTS Prompt Director\\docs\\audits\\artifacts\\calibration-01\\supplement-understanding.json"
+    },
+    {
+      "file": "restaurant.csv",
+      "status": "ok",
+      "companyName": "Harbor Table",
+      "audience": "Neighborhood diners are the clearest primary audience; weekend visitors near the harbor are also named, though their needs may differ from local weeknight diners.",
+      "classificationAudience": "observed_fact",
+      "claimsCount": 3,
+      "unknownsCount": 5,
+      "outPath": "C:\\Users\\ofran\\Desktop\\YTS Prompt Director\\docs\\audits\\artifacts\\calibration-01\\restaurant-understanding.json"
+    },
+    {
+      "file": "contractor.csv",
+      "status": "ok",
+      "companyName": "Ridge Line Remodeling",
+      "audience": "Owner-occupied households planning a major kitchen or bathroom remodel in the Greater Denver metro.",
+      "classificationAudience": "observed_fact",
+      "claimsCount": 3,
+      "unknownsCount": 5,
+      "outPath": "C:\\Users\\ofran\\Desktop\\YTS Prompt Director\\docs\\audits\\artifacts\\calibration-01\\contractor-understanding.json"
+    },
+    {
+      "file": "professional-service.csv",
+      "status": "ok",
+      "companyName": "Clearpath Bookkeeping",
+      "audience": "U.S. small-business owners, particularly owner-operated firms under $3M in revenue.",
+      "classificationAudience": "observed_fact",
+      "claimsCount": 3,
+      "unknownsCount": 5,
+      "outPath": "C:\\Users\\ofran\\Desktop\\YTS Prompt Director\\docs\\audits\\artifacts\\calibration-01\\professional-service-understanding.json"
+    },
+    {
+      "file": "ecommerce.csv",
+      "status": "ok",
+      "companyName": "Parcel & Pine",
+      "audience": "U.S. homeowners furnishing patios and small yards, particularly those evaluating outdoor furniture or planters online.",
+      "classificationAudience": "observed_fact",
+      "claimsCount": 3,
+      "unknownsCount": 5,
+      "outPath": "C:\\Users\\ofran\\Desktop\\YTS Prompt Director\\docs\\audits\\artifacts\\calibration-01\\ecommerce-understanding.json"
+    }
+  ]
+}

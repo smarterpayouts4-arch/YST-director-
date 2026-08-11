@@ -32,7 +32,7 @@ describe("POST /api/documents/extract", () => {
     const res = await POST(formRequest(validEntries()));
     expect(res.status).toBe(200);
     const body = await res.json();
-    expect(body.supportingContext.fileName).toBe("service-area-notes.pdf");
+    expect(body.supportingContext.fileName).toBe("zynava-trust-boundaries.pdf");
     expect(body.questionId).toBe("q1");
   });
 

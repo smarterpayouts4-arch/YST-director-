@@ -8,7 +8,9 @@ export type DecisionOrigin =
   | "observed"
   | "owner_confirmed"
   | "owner_corrected"
-  | "interview_answer"
+  | "owner_authored_answer"
+  | "suggestion_accepted"
+  | "owner_selected_suggestion"
   | "working_hypothesis"
   | "restriction";
 
@@ -38,6 +40,17 @@ function fieldOrigin(
   if (classification === "observed_fact") return "observed";
   if (classification === "working_assumption") return "working_hypothesis";
   return "working_hypothesis";
+}
+
+/** Distinguish owner-authored text from accepted model suggestions. */
+export function interviewAnswerOrigin(answer: InterviewAnswer): DecisionOrigin {
+  if ((answer.selectedSuggestionIds?.length ?? 0) > 0) {
+    return "owner_selected_suggestion";
+  }
+  if (answer.usedSuggestion) {
+    return "suggestion_accepted";
+  }
+  return "owner_authored_answer";
 }
 
 export function buildDecisionLedger(input: {
@@ -75,7 +88,7 @@ export function buildDecisionLedger(input: {
       decisionId: `answer:${answer.questionId}`,
       category: question?.decisionCategory ?? "interview_answer",
       value: answer.answerText,
-      origin: "interview_answer",
+      origin: interviewAnswerOrigin(answer),
       evidenceRefs: question?.evidenceRefs ?? [],
       sourceQuestionId: answer.questionId,
       confidence: "n/a",
@@ -105,7 +118,9 @@ export function summarizeDecisionLedger(ledger: DecisionLedger): {
     observed: 0,
     owner_confirmed: 0,
     owner_corrected: 0,
-    interview_answer: 0,
+    owner_authored_answer: 0,
+    suggestion_accepted: 0,
+    owner_selected_suggestion: 0,
     working_hypothesis: 0,
     restriction: 0,
   };

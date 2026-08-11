@@ -14,11 +14,13 @@ import {
 export function useResearchPromptProject() {
   const [state, dispatch] = useReducer(projectReducer, undefined, createEmptyProject);
   const [hydrated, setHydrated] = useState(false);
+  const [restoredFromStorage, setRestoredFromStorage] = useState(false);
 
   useEffect(() => {
     const existing = loadProject();
     if (existing) {
       dispatch({ type: "HYDRATE", project: existing });
+      setRestoredFromStorage(true);
     }
     setHydrated(true);
   }, []);
@@ -30,8 +32,9 @@ export function useResearchPromptProject() {
 
   const reset = () => {
     clearProject();
+    setRestoredFromStorage(false);
     dispatch({ type: "RESET" });
   };
 
-  return { state, dispatch, hydrated, reset };
+  return { state, dispatch, hydrated, restoredFromStorage, reset };
 }

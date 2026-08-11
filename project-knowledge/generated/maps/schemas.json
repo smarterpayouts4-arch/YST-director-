@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-06T03:10:52.467Z",
-  "commitSha": "9248331e4f9ca2797296f7e5ed30763435f72408",
+  "generatedAt": "2026-08-11T03:14:18.815Z",
+  "commitSha": "b26e6afc0c152e06f362688937812613bb4f628f",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "src/features"
@@ -10,7 +10,7 @@
   "schemas": [
     {
       "path": "src/features/research-prompt-builder/schemas/index.ts",
-      "lines": 231
+      "lines": 290
     }
   ]
 }

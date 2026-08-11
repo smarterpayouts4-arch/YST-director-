@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Validate APS inventory and Cursor adapter sync.
+ * Validate APS inventory, pointer targets, fixtures, and Cursor adapter sync.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const apsRoot = path.dirname(path.dirname(__filename));
 const repoRoot = path.dirname(apsRoot);
+const pkRoot = path.join(repoRoot, "project-knowledge");
 
 let errors = 0;
 function fail(msg) {
@@ -76,12 +77,34 @@ for (const c of manifest.core || []) {
 }
 ok("core files present");
 
+for (const t of manifest.templates || []) {
+  if (!fs.existsSync(path.join(apsRoot, t))) fail("missing template " + t);
+}
+if ((manifest.templates || []).length) ok("templates present");
+
 for (const c of manifest.projectContext || []) {
-  if (!fs.existsSync(path.join(apsRoot, "project-context", c))) {
+  const stubPath = path.join(apsRoot, "project-context", c);
+  if (!fs.existsSync(stubPath)) {
     fail("missing project-context/" + c);
+    continue;
+  }
+  const stub = fs.readFileSync(stubPath, "utf8");
+  const match = stub.match(/Canonical:\s*`([^`]+)`/);
+  if (!match) {
+    fail(`project-context/${c} missing Canonical: \`...\` pointer`);
+    continue;
+  }
+  const rel = match[1].replace(/\\/g, "/");
+  if (rel.includes("..") || path.isAbsolute(rel)) {
+    fail(`project-context/${c} bad Canonical path: ${rel}`);
+    continue;
+  }
+  const target = path.join(repoRoot, rel);
+  if (!fs.existsSync(target)) {
+    fail(`pointer target missing for ${c}: ${rel}`);
   }
 }
-ok("project-context files present");
+ok("project-context files present and pointer targets resolve");
 
 const adapter = manifest.adapter?.cursor;
 if (!adapter?.template || !fs.existsSync(path.join(apsRoot, adapter.template))) {
@@ -90,7 +113,6 @@ if (!adapter?.template || !fs.existsSync(path.join(apsRoot, adapter.template))) 
   ok("cursor adapter template present");
 }
 
-// Sync check if installed
 const pairs = [
   [
     path.join(apsRoot, adapter.template),
@@ -121,8 +143,59 @@ for (const [src, dest] of pairs) {
 }
 if (syncChecked) ok(`${syncChecked} installed adapter file(s) in sync`);
 
+for (const t of manifest.tests || []) {
+  const tp = path.join(apsRoot, t);
+  if (!fs.existsSync(tp)) {
+    fail("missing test artifact " + t);
+    continue;
+  }
+  if (t.endsWith(".json")) {
+    let data;
+    try {
+      data = JSON.parse(fs.readFileSync(tp, "utf8"));
+    } catch (e) {
+      fail(`fixtures parse ${t}: ${e.message}`);
+      continue;
+    }
+    const fixtures = data.fixtures;
+    if (!Array.isArray(fixtures) || fixtures.length < 10) {
+      fail(`${t} needs ≥10 fixtures with deterministic invariants`);
+      continue;
+    }
+    const requiredKeys = [
+      "id",
+      "input",
+      "expectedTaskType",
+      "expectedQuestionCount",
+    ];
+    const taskTypes = new Set([
+      "investigate",
+      "plan",
+      "implement",
+      "verify",
+      "audit",
+      "security",
+      "closeout",
+    ]);
+    for (const f of fixtures) {
+      for (const k of requiredKeys) {
+        if (f[k] === undefined || f[k] === null || f[k] === "") {
+          fail(`fixture ${f.id || "?"} missing ${k}`);
+        }
+      }
+      if (f.expectedTaskType && !taskTypes.has(f.expectedTaskType)) {
+        fail(`fixture ${f.id} bad expectedTaskType: ${f.expectedTaskType}`);
+      }
+      if (typeof f.expectedQuestionCount !== "number" || f.expectedQuestionCount < 0) {
+        fail(`fixture ${f.id} expectedQuestionCount must be ≥0 number`);
+      }
+    }
+    ok(`${fixtures.length} intent-contract fixtures structurally valid`);
+  }
+}
+
 // No MarketMonth product doctrine in portable layers
-const portableDirs = ["core", "workflows", "adapters"];
+const portableDirs = ["core", "workflows", "adapters", "templates"];
 for (const d of portableDirs) {
   const dir = path.join(apsRoot, d);
   if (!fs.existsSync(dir)) continue;
@@ -141,6 +214,10 @@ for (const d of portableDirs) {
   walk(dir);
 }
 ok("no MarketMonth product doctrine in portable layers");
+
+if (!fs.existsSync(pkRoot)) {
+  fail("project-knowledge/ missing at repo root");
+}
 
 if (errors) {
   console.error(`\nagent:validate failed (${errors} error(s))`);

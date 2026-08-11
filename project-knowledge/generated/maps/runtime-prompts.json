@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-06T03:10:52.791Z",
-  "commitSha": "9248331e4f9ca2797296f7e5ed30763435f72408",
+  "generatedAt": "2026-08-11T03:14:18.902Z",
+  "commitSha": "b26e6afc0c152e06f362688937812613bb4f628f",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "src/features"
@@ -12,37 +12,37 @@
   "prompts": [
     {
       "path": "src/features/research-prompt-builder/prompts/company-analyst.ts",
-      "lines": 31,
+      "lines": 73,
       "exportsVersion": false,
       "versionLiteral": null
     },
     {
       "path": "src/features/research-prompt-builder/prompts/next-question.ts",
-      "lines": 50,
+      "lines": 93,
       "exportsVersion": false,
       "versionLiteral": null
     },
     {
       "path": "src/features/research-prompt-builder/prompts/prompt-version.ts",
-      "lines": 2,
+      "lines": 6,
       "exportsVersion": true,
-      "versionLiteral": "rpb-runtime-1.0.0"
+      "versionLiteral": "rpb-runtime-1.4.0"
     },
     {
       "path": "src/features/research-prompt-builder/prompts/repair-output.ts",
-      "lines": 20,
+      "lines": 56,
       "exportsVersion": false,
       "versionLiteral": null
     },
     {
       "path": "src/features/research-prompt-builder/prompts/research-brief.ts",
-      "lines": 33,
+      "lines": 50,
       "exportsVersion": false,
       "versionLiteral": null
     },
     {
       "path": "src/features/research-prompt-builder/prompts/research-prompt.ts",
-      "lines": 46,
+      "lines": 71,
       "exportsVersion": false,
       "versionLiteral": null
     },
@@ -54,7 +54,7 @@
     },
     {
       "path": "src/features/research-prompt-builder/prompts/supporting-context.ts",
-      "lines": 33,
+      "lines": 34,
       "exportsVersion": false,
       "versionLiteral": null
     }

@@ -1,35 +1,40 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useInterviewFlow } from "@/features/research-prompt-builder/components/app-shell/interview-flow";
+import { stageWhy } from "@/features/research-prompt-builder/components/app-shell/stage-copy";
+import {
+  getInterviewStatus,
+  getInterviewStatusMessage,
+  interviewQuestionProgress,
+} from "@/features/research-prompt-builder/components/app-shell/stage-status";
 import { StageRail } from "@/features/research-prompt-builder/components/stage-rail";
 import { IngestionDropzone } from "@/features/research-prompt-builder/components/ingestion-dropzone";
 import { CompanyUnderstandingView } from "@/features/research-prompt-builder/components/company-understanding";
-import { InterviewQuestionView } from "@/features/research-prompt-builder/components/interview-question";
+import { InterviewWorkspace } from "@/features/research-prompt-builder/components/interview-workspace";
 import { ResearchBriefEditor } from "@/features/research-prompt-builder/components/research-brief-editor";
 import { FinalPromptViewer } from "@/features/research-prompt-builder/components/final-prompt-viewer";
+import { PromptCompileProgress } from "@/features/research-prompt-builder/components/prompt-compile-progress";
 import { useResearchPromptProject } from "@/features/research-prompt-builder/hooks/use-research-prompt-project";
+import { canCompleteInterview } from "@/features/research-prompt-builder/lib/can-complete-interview";
 import { toAppStage } from "@/features/research-prompt-builder/state/workflow-states";
-import type {
-  ConfirmedCompanyProfile,
-  InterviewAnswer,
-  SupportingContext,
-} from "@/features/research-prompt-builder/types";
-
-async function readError(res: Response): Promise<string> {
-  try {
-    const data = await res.json();
-    return data?.error?.message || `Request failed (${res.status})`;
-  } catch {
-    return `Request failed (${res.status})`;
-  }
-}
+import type { InterviewAnswer } from "@/features/research-prompt-builder/types";
 
 export function AppShell() {
-  const { state, dispatch, hydrated, reset } = useResearchPromptProject();
+  const {
+    state,
+    dispatch,
+    hydrated,
+    restoredFromStorage,
+    reset: resetProject,
+  } = useResearchPromptProject();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [awaitingQuestion, setAwaitingQuestion] = useState(false);
+  const [seedAnswer, setSeedAnswer] = useState<InterviewAnswer | null>(null);
+  const interviewGenRef = useRef(0);
+  const autoResumeDoneRef = useRef(false);
 
   const currentQuestion = state.questions[state.currentQuestionIndex];
   const unanswered =
@@ -41,172 +46,80 @@ export function AppShell() {
     hasFinalPrompt: !!state.finalPrompt,
   });
 
-  const why = useMemo(() => {
-    if (uiStage === "interview" && currentQuestion) {
-      return currentQuestion.whyThisMatters;
-    }
-    if (uiStage === "understanding") {
-      return "Owner confirmation prevents invented strategy from entering the research prompt.";
-    }
-    if (uiStage === "brief") {
-      return "The brief is the contract for the final prompt. Edit anything that feels wrong.";
-    }
-    if (uiStage === "prompt") {
-      return "Copy this into ChatGPT or another capable research model.";
-    }
-    return undefined;
-  }, [uiStage, currentQuestion]);
+  const interviewMayComplete =
+    !!state.confirmedProfile &&
+    canCompleteInterview({
+      confirmedProfile: state.confirmedProfile,
+      previousQuestions: state.questions,
+      previousAnswers: state.answers,
+    }).ok;
 
-  const analyze = async (file: File) => {
-    setBusy(true);
+  const interviewIncomplete =
+    uiStage === "interview" &&
+    !!state.confirmedProfile &&
+    (state.currentStage === "INTERVIEWING" ||
+      state.currentStage === "MODEL_OUTPUT_INVALID" ||
+      state.currentStage === "DOCUMENT_EXTRACTION_FAILED");
+
+  const needsNextQuestion =
+    interviewIncomplete &&
+    (state.questions.length === 0 ||
+      (!!currentQuestion &&
+        state.answers.some((a) => a.questionId === currentQuestion.questionId)));
+
+  const why = useMemo(() => stageWhy(uiStage), [uiStage]);
+
+  const {
+    analyze,
+    useSample,
+    fetchNextQuestion,
+    createBrief,
+    retryNextQuestion,
+    reopenQuestion,
+    generatePrompt,
+    extractSupporting,
+  } = useInterviewFlow({
+    state,
+    dispatch,
+    busy,
+    awaitingQuestion,
+    setBusy,
+    setError,
+    setAwaitingQuestion,
+    setSeedAnswer,
+    interviewGenRef,
+    autoResumeDoneRef,
+    hydrated,
+    restoredFromStorage,
+    needsNextQuestion,
+  });
+
+  const reset = () => {
+    interviewGenRef.current += 1;
+    autoResumeDoneRef.current = false;
+    setBusy(false);
     setError(null);
-    try {
-      const form = new FormData();
-      form.append("file", file);
-      const res = await fetch("/api/company/understand", { method: "POST", body: form });
-      if (!res.ok) throw new Error(await readError(res));
-      const data = await res.json();
-      dispatch({
-        type: "INGESTION_SUCCESS",
-        meta: {
-          ...data.evidencePacketMeta,
-          fileHash: data.evidencePacketMeta.fileHash,
-          importedAt: data.evidencePacketMeta.importedAt,
-        },
-        understanding: data.companyUnderstanding,
-      });
-    } catch (err) {
-      dispatch({
-        type: "SET_FAILURE",
-        state: "INGESTION_FAILED",
-        code: "INGESTION_FAILED",
-      });
-      setError(err instanceof Error ? err.message : "Analysis failed");
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  const useSample = async () => {
-    const res = await fetch("/samples/zynava-company.csv");
-    const blob = await res.blob();
-    const file = new File([blob], "zynava-company.csv", { type: "text/csv" });
-    await analyze(file);
-  };
-
-  const fetchNextQuestion = async (
-    profile: ConfirmedCompanyProfile,
-    answers: InterviewAnswer[] = state.answers,
-    questions = state.questions,
-  ) => {
-    setBusy(true);
-    setError(null);
-    setAwaitingQuestion(true);
-    try {
-      const unresolvedUnknowns = Object.entries(profile.fields)
-        .filter(([, field]) => field.status === "unresolved")
-        .map(([key, field]) => `${key}: ${field.value}`);
-
-      const res = await fetch("/api/interview/next", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          confirmedProfile: profile,
-          previousQuestions: questions,
-          previousAnswers: answers,
-          unresolvedUnknowns,
-        }),
-      });
-      if (!res.ok) throw new Error(await readError(res));
-      const data = await res.json();
-      if (data.done) {
-        dispatch({ type: "INTERVIEW_COMPLETE" });
-        await createBrief(profile, questions, answers);
-      } else {
-        dispatch({ type: "ADD_QUESTION", question: data.question });
-      }
-    } catch (err) {
-      dispatch({
-        type: "SET_FAILURE",
-        state: "MODEL_OUTPUT_INVALID",
-        code: "MODEL_OUTPUT_INVALID",
-      });
-      setError(err instanceof Error ? err.message : "Interview failed");
-    } finally {
-      setBusy(false);
-      setAwaitingQuestion(false);
-    }
-  };
-
-  const createBrief = async (
-    profile = state.confirmedProfile!,
-    questions = state.questions,
-    answers = state.answers,
-  ) => {
-    setBusy(true);
-    setError(null);
-    try {
-      const res = await fetch("/api/research-brief", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          confirmedProfile: profile,
-          questions,
-          answers,
-        }),
-      });
-      if (!res.ok) throw new Error(await readError(res));
-      const data = await res.json();
-      dispatch({ type: "SET_BRIEF", brief: data.researchBrief });
-    } catch (err) {
-      dispatch({
-        type: "SET_FAILURE",
-        state: "MODEL_OUTPUT_INVALID",
-        code: "MODEL_OUTPUT_INVALID",
-      });
-      setError(err instanceof Error ? err.message : "Brief generation failed");
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  const generatePrompt = async () => {
-    if (!state.confirmedProfile || !state.researchBrief) return;
-    setBusy(true);
-    setError(null);
-    dispatch({ type: "BEGIN_PROMPT_GENERATION" });
-    try {
-      const res = await fetch("/api/research-prompt", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          confirmedProfile: state.confirmedProfile,
-          researchBrief: state.researchBrief,
-        }),
-      });
-      if (!res.ok) throw new Error(await readError(res));
-      const data = await res.json();
-      dispatch({
-        type: "SET_FINAL_PROMPT",
-        prompt: data.structuredPrompt,
-        formattedPrompt: data.formattedPrompt,
-      });
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Prompt generation failed";
-      const failure =
-        /PROMPT_VALIDATION_FAILED|Prompt contract/i.test(message)
-          ? ("PROMPT_VALIDATION_FAILED" as const)
-          : ("MODEL_OUTPUT_INVALID" as const);
-      dispatch({ type: "SET_FAILURE", state: failure, code: failure });
-      setError(message);
-    } finally {
-      setBusy(false);
-    }
+    setAwaitingQuestion(false);
+    setSeedAnswer(null);
+    resetProject();
   };
 
   if (!hydrated) {
     return <div className="p-8 text-stone-600">Restoring project…</div>;
   }
+
+  const interviewStatus = getInterviewStatus({
+    awaitingQuestion,
+    busy,
+    needsNextQuestion,
+    error,
+  });
+  const interviewStatusMessage = getInterviewStatusMessage({
+    interviewStatus,
+    error,
+    answerCount: state.answers.length,
+    needsNextQuestion,
+  });
 
   return (
     <div className="min-h-screen md:flex">
@@ -214,17 +127,19 @@ export function AppShell() {
         stage={uiStage}
         whyThisMatters={why}
         questionProgress={
-          uiStage === "interview" && currentQuestion
-            ? `Question ${currentQuestion.sequenceNumber}`
+          uiStage === "interview"
+            ? interviewQuestionProgress(state.answers.length)
             : undefined
         }
       />
       <main className="relative flex-1 px-5 py-6 md:px-10 md:py-10">
-        <div className="mb-8 flex items-center justify-between gap-3">
+        <div className="mb-6 flex items-center justify-between gap-3">
           <p className="text-sm text-stone-500">
             {state.ingestion.fileName
               ? `Project: ${state.ingestion.fileName}`
-              : "New research prompt project"}
+              : uiStage === "understanding"
+                ? "Company understanding"
+                : "New research prompt project"}
           </p>
           <Button variant="ghost" size="sm" onClick={reset}>
             Reset
@@ -252,59 +167,75 @@ export function AppShell() {
         ) : null}
 
         {uiStage === "interview" ? (
-          unanswered && currentQuestion ? (
-            <InterviewQuestionView
-              question={currentQuestion}
-              totalHint={`${currentQuestion.sequenceNumber} of up to 7`}
+          currentQuestion ? (
+            <InterviewWorkspace
+              questions={state.questions}
+              answers={state.answers}
+              currentQuestionIndex={state.currentQuestionIndex}
+              currentQuestion={currentQuestion}
+              seedAnswer={seedAnswer}
               busy={busy}
+              locked={!unanswered}
+              statusMessage={!unanswered ? interviewStatusMessage : null}
               error={error}
-              onExtract={async (file) => {
-                const form = new FormData();
-                form.append("file", file);
-                form.append("questionId", currentQuestion.questionId);
-                form.append("question", currentQuestion.question);
-                const res = await fetch("/api/documents/extract", {
-                  method: "POST",
-                  body: form,
-                });
-                if (!res.ok) {
-                  dispatch({
-                    type: "SET_FAILURE",
-                    state: "DOCUMENT_EXTRACTION_FAILED",
-                    code: "DOCUMENT_EXTRACTION_FAILED",
-                  });
-                  throw new Error(await readError(res));
-                }
-                const data = await res.json();
-                return {
-                  ...(data.supportingContext as SupportingContext),
-                  extractedCharCount: data.extractedCharCount,
-                };
-              }}
+              onRetry={
+                !unanswered && interviewStatus === "blocked" && state.confirmedProfile
+                  ? retryNextQuestion
+                  : undefined
+              }
+              canBuildBrief={!unanswered && interviewMayComplete}
+              onBuildBrief={
+                !unanswered && interviewMayComplete
+                  ? () => {
+                      dispatch({ type: "INTERVIEW_COMPLETE" });
+                      void createBrief();
+                    }
+                  : undefined
+              }
+              onReopen={reopenQuestion}
+              onExtract={(file) => extractSupporting(file, currentQuestion)}
               onSave={async (answer) => {
+                setSeedAnswer(null);
                 const nextAnswers = [
                   ...state.answers.filter((a) => a.questionId !== answer.questionId),
                   answer,
                 ];
+                const questionsForNext = state.questions.slice(
+                  0,
+                  state.currentQuestionIndex + 1,
+                );
                 dispatch({ type: "SAVE_ANSWER", answer });
                 if (!state.confirmedProfile) return;
+                if (
+                  state.currentStage === "MODEL_OUTPUT_INVALID" ||
+                  state.currentStage === "DOCUMENT_EXTRACTION_FAILED"
+                ) {
+                  dispatch({ type: "SET_STAGE", stage: "INTERVIEWING" });
+                }
                 await fetchNextQuestion(
                   state.confirmedProfile,
                   nextAnswers,
-                  state.questions,
+                  questionsForNext,
                 );
               }}
             />
           ) : (
-            <div className="space-y-4">
-              <p className="text-stone-700">
+            <div className="mx-auto max-w-xl space-y-4 rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+              <p className="text-base font-medium text-stone-900">
                 {awaitingQuestion || busy
-                  ? "Preparing the next question…"
-                  : "Interview complete. Building your research brief…"}
+                  ? "Starting the interview…"
+                  : "Couldn’t start the interview"}
+              </p>
+              <p className="text-sm text-stone-600">
+                {awaitingQuestion || busy
+                  ? "First question loading…"
+                  : "Retry to continue from your confirmed facts."}
               </p>
               {error ? <p className="text-sm text-red-700">{error}</p> : null}
               {!busy && state.confirmedProfile ? (
-                <Button onClick={() => createBrief()}>Build research brief</Button>
+                <div className="flex flex-wrap gap-2">
+                  <Button onClick={retryNextQuestion}>Retry next question</Button>
+                </div>
               ) : null}
             </div>
           )
@@ -331,22 +262,25 @@ export function AppShell() {
         ) : null}
 
         {uiStage === "prompt" && state.currentStage === "GENERATING_PROMPT" ? (
-          <div className="space-y-4">
-            <p className="text-stone-700">Compiling your research prompt…</p>
-            {error ? <p className="text-sm text-red-700">{error}</p> : null}
-          </div>
+          <PromptCompileProgress error={error} />
         ) : null}
 
         {uiStage === "prompt" &&
         state.currentStage === "PROMPT_EXPORTED" &&
         state.finalPrompt &&
-        state.formattedPrompt ? (
+        state.formattedPrompt &&
+        state.confirmedProfile &&
+        state.researchBrief ? (
           <FinalPromptViewer
             prompt={state.finalPrompt}
             formatted={state.formattedPrompt}
             busy={busy}
             error={error}
             onRegenerate={generatePrompt}
+            confirmedProfile={state.confirmedProfile}
+            questions={state.questions}
+            answers={state.answers}
+            researchBrief={state.researchBrief}
           />
         ) : null}
       </main>

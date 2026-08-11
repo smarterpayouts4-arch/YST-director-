@@ -5,4 +5,4 @@ alwaysApply: true
 
 # Agent cold-start routing
 
-Before nontrivial implementation or audit work: (1) Read `AGENTS.md`. (2) Bootstrap via `rpb_get_agent_bootstrap` or `project-knowledge/generated/indexes/agent-bootstrap.json`. (3) Read `project-knowledge/CURRENT_STATE.md`. (4) Load only one task-specific canonical document. (5) Treat Live/Partial/Mocked/Planned literally. (6) If MCP unavailable, use those file paths. (7) State which canonical sources informed the plan. No doctrine here.
+Before nontrivial implementation or audit work: (1) Read `AGENTS.md`. (2) Bootstrap via `rpb_get_agent_bootstrap` or `project-knowledge/generated/indexes/agent-bootstrap.json`. (3) Read `project-knowledge/CURRENT_STATE.md`. (4) Load only one task-specific canonical document. (5) Treat Live/Partial/Mocked/Planned literally. (6) If MCP unavailable, use those file paths. (7) For substantial work, use the `aps-router` Skill to compile an IntentContract before large edits. (8) State which canonical sources informed the plan. No doctrine here.

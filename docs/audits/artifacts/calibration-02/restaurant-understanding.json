@@ -1,0 +1,308 @@
+{
+  "fileName": "restaurant.csv",
+  "promptVersion": "rpb-runtime-1.2.0",
+  "companyUnderstanding": {
+    "companyName": {
+      "value": "Harbor Table",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-2",
+          "explanation": "Company name is supplied directly in the CSV."
+        }
+      ]
+    },
+    "industry": {
+      "value": "Coastal restaurant / hospitality",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-3",
+          "explanation": "Industry is supplied directly in the CSV."
+        }
+      ]
+    },
+    "offer": {
+      "value": "Seasonal seafood and neighborhood dining with weekly chef menus; the stated value mechanism is providing a reliable dining option with freshness information through same-day sourcing posted on a chalkboard.",
+      "classification": "working_assumption",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "ref": "row-4",
+          "explanation": "The company describes seasonal seafood, neighborhood dining, and weekly chef menus."
+        },
+        {
+          "ref": "row-9",
+          "explanation": "The company states that same-day boat-to-table sourcing is posted on a chalkboard; this supports an intended freshness-transparency mechanism but is not independently verified."
+        },
+        {
+          "ref": "row-5",
+          "explanation": "The stated customer problem connects reliability and uncertainty about freshness to the offer, but this is company-provided audience framing rather than independent customer evidence."
+        }
+      ]
+    },
+    "customerProblem": {
+      "value": "Locals are stated to seek a reliable weeknight dining option without tourist markup or uncertainty about seafood freshness.",
+      "classification": "working_assumption",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "ref": "row-5",
+          "explanation": "This customer tension, including the implied alternative of tourist-priced harbor dining, is explicitly stated by the company but is not independently validated."
+        }
+      ]
+    },
+    "likelyAudience": {
+      "value": "Neighborhood diners and weekend visitors near the harbor.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-6",
+          "explanation": "Likely audience is supplied directly in the CSV."
+        }
+      ]
+    },
+    "websiteAction": {
+      "value": "Reserve a table or join the waitlist.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-7",
+          "explanation": "The stated website action is to reserve a table or join the waitlist."
+        }
+      ]
+    },
+    "geography": {
+      "value": "Portland, Maine waterfront.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-8",
+          "explanation": "Geography is supplied directly as 'Portland ME waterfront.'"
+        }
+      ]
+    },
+    "differentiators": [
+      {
+        "value": "The company claims same-day boat-to-table sourcing and posts that sourcing on a chalkboard.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "This is an explicit company differentiator claim. No supplier records, catch details, or independent verification are provided."
+          }
+        ]
+      }
+    ],
+    "expertiseSignals": [
+      {
+        "value": "Chef-owned; 12 years on the waterfront.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "The company presents ownership and waterfront tenure as an expertise signal; no biographical or third-party supporting evidence is included."
+          }
+        ]
+      }
+    ],
+    "claimsAndRestrictions": [
+      {
+        "value": "Do not promise an allergen-free kitchen; shared fryer use must be disclosed.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-11",
+            "explanation": "This is an explicit food-safety and customer-disclosure restriction."
+          }
+        ]
+      },
+      {
+        "value": "“Fresh fish done right” is a tagline, not substantiated proof of freshness, quality, sourcing, or safety.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-12",
+            "explanation": "The phrase is explicitly labeled as a tagline and should not be treated as independently supported performance evidence."
+          }
+        ]
+      },
+      {
+        "value": "Same-day boat-to-table sourcing is a company claim that requires verification before being represented as a factual quality or freshness guarantee.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "The sourcing statement is supplied by the company with no independent corroboration."
+          }
+        ]
+      }
+    ],
+    "confirmedFacts": [
+      {
+        "value": "Harbor Table is identified as a coastal restaurant / hospitality business.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-2",
+            "explanation": "Company name supplied directly."
+          },
+          {
+            "ref": "row-3",
+            "explanation": "Industry supplied directly."
+          }
+        ]
+      },
+      {
+        "value": "The stated offer includes seasonal seafood, neighborhood dining, and weekly chef menus.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "Offer supplied directly in the CSV."
+          }
+        ]
+      },
+      {
+        "value": "The stated current audience is neighborhood diners and weekend visitors near the harbor.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-6",
+            "explanation": "Audience supplied directly in the CSV."
+          }
+        ]
+      },
+      {
+        "value": "The stated customer action is table reservation or waitlist enrollment.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "Website action supplied directly in the CSV."
+          }
+        ]
+      },
+      {
+        "value": "The stated location is the Portland, Maine waterfront.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-8",
+            "explanation": "Geography supplied directly in the CSV."
+          }
+        ]
+      }
+    ],
+    "workingAssumptions": [
+      {
+        "value": "Reliability on weeknights, avoidance of tourist markup, and confidence in seafood freshness are material decision factors for local diners.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "These are asserted as local customer needs, but no customer research, pricing evidence, or reviews are provided."
+          }
+        ]
+      },
+      {
+        "value": "Posting same-day sourcing on a chalkboard helps reduce diners' uncertainty about freshness.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "The practice is stated, while its effect on customer confidence is inferred from the stated freshness concern in row-5 rather than measured."
+          }
+        ]
+      }
+    ],
+    "importantUnknowns": [
+      {
+        "value": "Independent evidence that same-day boat-to-table sourcing occurs consistently, including what seafood is covered and how sourcing is documented.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "Only a company-supplied sourcing claim is available."
+          }
+        ]
+      },
+      {
+        "value": "Evidence for the stated customer problem, including whether local diners perceive tourist markup, how they evaluate freshness, and what alternatives they currently use.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "The packet contains no customer interviews, reviews, pricing comparisons, or behavioral evidence."
+          }
+        ]
+      },
+      {
+        "value": "Specific allergen procedures beyond the shared-fryer disclosure, including menu-item-level allergen information and cross-contact controls.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-11",
+            "explanation": "The packet establishes that an allergen-free promise must not be made, but provides no broader allergen-control details."
+          }
+        ]
+      },
+      {
+        "value": "Proof and scope of the chef's ownership and 12 years of waterfront experience.",
+        "classification": "important_unknown",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "The expertise signal is asserted without supporting biography or external documentation."
+          }
+        ]
+      },
+      {
+        "value": "Reservation and waitlist availability, platform, operating hours, menu cadence, price points, and capacity.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "Only the desired website actions are supplied; operational details are absent."
+          }
+        ]
+      }
+    ],
+    "ingestionSummary": "CSV-only packet with 11 retained evidence rows describing Harbor Table's identity, offer, stated audience and customer tension, geography, website actions, one sourcing differentiator claim, one expertise claim, an allergen restriction, and a tagline.",
+    "ingestionWarnings": [
+      "Removed 1 exact duplicate row(s).",
+      "All substantive information is company-supplied CSV content; no independent validation, customer evidence, operational documentation, or third-party proof was provided."
+    ]
+  },
+  "evidencePacketMeta": {
+    "fileName": "restaurant.csv",
+    "fileHash": "0f514ce5c15972c9afb145e35b3acde18c17f2685011f7ad95f8b9350b5be000",
+    "retainedRowCount": 11,
+    "warnings": [
+      "Removed 1 exact duplicate row(s)."
+    ],
+    "wasTruncated": false
+  }
+}

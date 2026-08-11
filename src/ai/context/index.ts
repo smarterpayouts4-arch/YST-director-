@@ -9,10 +9,18 @@ export {
   type InterviewContextPacket,
 } from "@/ai/context/assemble-interview-context";
 export {
+  buildEvidenceAllowlist,
+  evidenceAllowlistKeySet,
+  labelForEvidenceRef,
+  type EvidenceAllowlistEntry,
+} from "@/ai/context/evidence-allowlist";
+export {
   assembleBriefContext,
   type BriefContextPacket,
 } from "@/ai/context/assemble-brief-context";
 export {
   assemblePromptContext,
+  buildSuppliedAssumptions,
   type PromptContextPacket,
+  type SuppliedAssumption,
 } from "@/ai/context/assemble-prompt-context";

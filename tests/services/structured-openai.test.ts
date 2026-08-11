@@ -21,8 +21,8 @@ const schema = z.object({ answer: z.string() });
 
 function baseArgs(validate?: (value: { answer: string }) => string[]) {
   return {
-    operation: "test-op",
-    schemaName: "test_schema",
+    operation: "analyze-company" as const,
+    schemaName: "company_understanding" as const,
     schema,
     instructions: "Return an answer.",
     input: "input",
@@ -55,8 +55,19 @@ describe("parseStructuredOutput", () => {
     const value = await parseStructuredOutput(baseArgs(validate));
     expect(value).toEqual({ answer: "good" });
     expect(parseMock).toHaveBeenCalledTimes(2);
+    const repairCall = parseMock.mock.calls[1]![0] as {
+      instructions: string;
+      input: string;
+    };
+    expect(repairCall.instructions).toMatch(/Prompt version:/);
+    expect(repairCall.input).toContain("BEGIN_UNTRUSTED_REPAIR_PREVIOUS_OUTPUT");
     expect(recordTraceMock).toHaveBeenCalledWith(
-      expect.objectContaining({ status: "repaired", repaired: true }),
+      expect.objectContaining({
+        status: "repaired",
+        repaired: true,
+        repairAttempts: 1,
+        finalValidation: "passed",
+      }),
     );
   });
 
@@ -66,9 +77,28 @@ describe("parseStructuredOutput", () => {
     await expect(parseStructuredOutput(baseArgs(validate))).rejects.toMatchObject({
       code: "MODEL_OUTPUT_INVALID",
     });
+    // Non-compiler schemas get exactly one repair attempt (initial + 1).
     expect(parseMock).toHaveBeenCalledTimes(2);
     expect(recordTraceMock).toHaveBeenCalledWith(
       expect.objectContaining({ status: "validation_failed" }),
+    );
+  });
+
+  it("allows two repair attempts for final_research_prompt", async () => {
+    parseMock
+      .mockResolvedValueOnce({ output_parsed: { answer: "bad1" } })
+      .mockResolvedValueOnce({ output_parsed: { answer: "bad2" } })
+      .mockResolvedValueOnce({ output_parsed: { answer: "good" } });
+    const validate = (value: { answer: string }) =>
+      value.answer === "good" ? [] : ["still invalid"];
+    const value = await parseStructuredOutput({
+      ...baseArgs(validate),
+      schemaName: "final_research_prompt",
+    });
+    expect(value).toEqual({ answer: "good" });
+    expect(parseMock).toHaveBeenCalledTimes(3);
+    expect(recordTraceMock).toHaveBeenCalledWith(
+      expect.objectContaining({ status: "repaired", repaired: true }),
     );
   });
 

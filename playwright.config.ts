@@ -12,6 +12,9 @@ const E2E_PORT = 3100;
  */
 export default defineConfig({
   testDir: "./e2e",
+  // Live smoke has its own config (playwright.smoke.config.ts) and must not
+  // run under the mocked suite even if SMOKE_LIVE happens to be set.
+  testIgnore: ["**/owner-smoke-live.spec.ts"],
   timeout: 60_000,
   fullyParallel: false,
   forbidOnly: isCI,

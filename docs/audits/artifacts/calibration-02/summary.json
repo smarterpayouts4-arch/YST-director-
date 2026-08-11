@@ -1,0 +1,56 @@
+{
+  "ranAt": "2026-08-07T01:15:54.366Z",
+  "promptVersion": "rpb-runtime-1.2.0",
+  "results": [
+    {
+      "file": "supplement.csv",
+      "status": "ok",
+      "companyName": "ZYNAVA",
+      "audience": "US adult shoppers researching supplements.",
+      "classificationAudience": "observed_fact",
+      "claimsCount": 4,
+      "unknownsCount": 4,
+      "outPath": "C:\\Users\\ofran\\Desktop\\YTS Prompt Director\\docs\\audits\\artifacts\\calibration-02\\supplement-understanding.json"
+    },
+    {
+      "file": "restaurant.csv",
+      "status": "ok",
+      "companyName": "Harbor Table",
+      "audience": "Neighborhood diners and weekend visitors near the harbor.",
+      "classificationAudience": "observed_fact",
+      "claimsCount": 3,
+      "unknownsCount": 5,
+      "outPath": "C:\\Users\\ofran\\Desktop\\YTS Prompt Director\\docs\\audits\\artifacts\\calibration-02\\restaurant-understanding.json"
+    },
+    {
+      "file": "contractor.csv",
+      "status": "ok",
+      "companyName": "Ridge Line Remodeling",
+      "audience": "Owner-occupied households planning a major kitchen or bath remodel.",
+      "classificationAudience": "observed_fact",
+      "claimsCount": 3,
+      "unknownsCount": 4,
+      "outPath": "C:\\Users\\ofran\\Desktop\\YTS Prompt Director\\docs\\audits\\artifacts\\calibration-02\\contractor-understanding.json"
+    },
+    {
+      "file": "professional-service.csv",
+      "status": "ok",
+      "companyName": "Clearpath Bookkeeping",
+      "audience": "US small business owners with under $3M in revenue; the offer specifically references owner-operated firms.",
+      "classificationAudience": "observed_fact",
+      "claimsCount": 3,
+      "unknownsCount": 5,
+      "outPath": "C:\\Users\\ofran\\Desktop\\YTS Prompt Director\\docs\\audits\\artifacts\\calibration-02\\professional-service-understanding.json"
+    },
+    {
+      "file": "ecommerce.csv",
+      "status": "ok",
+      "companyName": "Parcel & Pine",
+      "audience": "US homeowners furnishing patios and small yards.",
+      "classificationAudience": "observed_fact",
+      "claimsCount": 3,
+      "unknownsCount": 5,
+      "outPath": "C:\\Users\\ofran\\Desktop\\YTS Prompt Director\\docs\\audits\\artifacts\\calibration-02\\ecommerce-understanding.json"
+    }
+  ]
+}

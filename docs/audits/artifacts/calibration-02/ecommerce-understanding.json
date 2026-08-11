@@ -1,0 +1,313 @@
+{
+  "fileName": "ecommerce.csv",
+  "promptVersion": "rpb-runtime-1.2.0",
+  "companyUnderstanding": {
+    "companyName": {
+      "value": "Parcel & Pine",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-2",
+          "explanation": "Listed as the company name in the evidence packet."
+        }
+      ]
+    },
+    "industry": {
+      "value": "E-commerce home goods",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-3",
+          "explanation": "Listed as the industry in the evidence packet."
+        }
+      ]
+    },
+    "offer": {
+      "value": "Direct-to-consumer online sales of durable outdoor furniture and planters.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-4",
+          "explanation": "The packet describes the offer as durable outdoor furniture and planters sold direct-to-consumer online."
+        }
+      ]
+    },
+    "customerProblem": {
+      "value": "Shoppers have difficulty judging product durability and shipping risk from lifestyle photos alone.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-5",
+          "explanation": "Explicitly stated customer problem. This supports a need for clearer product-condition and shipping-risk information; it does not establish the prevalence of the problem."
+        }
+      ]
+    },
+    "likelyAudience": {
+      "value": "US homeowners furnishing patios and small yards.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-6",
+          "explanation": "Explicitly identified as the likely audience."
+        }
+      ]
+    },
+    "websiteAction": {
+      "value": "Shop bestsellers or start the patio quiz.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-7",
+          "explanation": "Explicitly listed website actions."
+        }
+      ]
+    },
+    "geography": {
+      "value": "United States online shipping.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-8",
+          "explanation": "Explicitly listed geographic and fulfillment scope."
+        }
+      ]
+    },
+    "differentiators": [
+      {
+        "value": "The company states that it publishes weather-test ratings and return photos for each SKU.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "This is presented as a differentiator, but the packet provides no independent product-page or testing documentation to verify coverage, methodology, or comparison with alternatives."
+          }
+        ]
+      }
+    ],
+    "expertiseSignals": [
+      {
+        "value": "In-house materials lab notes shared on product pages.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "This is a stated expertise signal. The packet does not provide the lab's qualifications, methods, independence, or example notes."
+          }
+        ]
+      }
+    ],
+    "claimsAndRestrictions": [
+      {
+        "value": "Do not claim lifetime warranties unless the warranty is specified for the individual SKU.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-11",
+            "explanation": "Explicit claim restriction in the packet."
+          }
+        ]
+      },
+      {
+        "value": "“Built for real weather” is a marketing slogan, not independently substantiated proof of durability or weather performance.",
+        "classification": "working_assumption",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-12",
+            "explanation": "The phrase is supplied as a slogan only; no testing standard, results, or conditions are provided."
+          }
+        ]
+      },
+      {
+        "value": "Weather-test ratings, return photos, and in-house lab notes should not be treated as independently verified performance proof without supporting documentation.",
+        "classification": "working_assumption",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "The stated ratings and photos lack methodology, sample coverage, and verification in the provided packet."
+          },
+          {
+            "ref": "row-10",
+            "explanation": "The stated lab notes lack credentials, process details, and independent validation in the provided packet."
+          }
+        ]
+      }
+    ],
+    "confirmedFacts": [
+      {
+        "value": "Parcel & Pine is identified as an e-commerce home-goods company.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-2",
+            "explanation": "Company name."
+          },
+          {
+            "ref": "row-3",
+            "explanation": "Industry."
+          }
+        ]
+      },
+      {
+        "value": "The stated product offer is durable outdoor furniture and planters sold direct-to-consumer online.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "Explicit offer description."
+          }
+        ]
+      },
+      {
+        "value": "The stated audience is US homeowners furnishing patios and small yards.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-6",
+            "explanation": "Explicit likely-audience description."
+          }
+        ]
+      },
+      {
+        "value": "The site directs visitors to shop bestsellers or begin a patio quiz.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "Explicit website-action description."
+          }
+        ]
+      },
+      {
+        "value": "The stated fulfillment geography is United States online shipping.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-8",
+            "explanation": "Explicit geography description."
+          }
+        ]
+      }
+    ],
+    "workingAssumptions": [
+      {
+        "value": "Product-level weather-test ratings and return photos may help reduce uncertainty about durability and shipping risk.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "The stated problem concerns judging durability and shipping risk."
+          },
+          {
+            "ref": "row-9",
+            "explanation": "The stated differentiator supplies weather-test ratings and return photos, but the packet does not show customer use or outcome evidence."
+          }
+        ]
+      },
+      {
+        "value": "The patio quiz may help visitors choose products for their patio or small-yard needs.",
+        "classification": "working_assumption",
+        "confidence": "low",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "A patio quiz is named as a website action, but its questions, recommendations, and customer benefit are not described."
+          }
+        ]
+      }
+    ],
+    "importantUnknowns": [
+      {
+        "value": "The specific weather-testing methodology, rating scale, tested conditions, SKU coverage, and whether results are independently validated are not provided.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "Only the existence of per-SKU weather-test ratings is stated."
+          }
+        ]
+      },
+      {
+        "value": "The content, selection criteria, and authenticity or representativeness of return photos are not provided.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "Return photos are named without supporting details."
+          }
+        ]
+      },
+      {
+        "value": "The materials lab's qualifications, procedures, and relationship between its notes and product claims are not provided.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "Only the existence of in-house lab notes is stated."
+          }
+        ]
+      },
+      {
+        "value": "SKU-specific warranty terms, return policy, shipping protections, delivery timeframes, and handling of shipping damage are not provided.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "Shipping risk is identified as a customer concern."
+          },
+          {
+            "ref": "row-11",
+            "explanation": "The packet limits lifetime-warranty claims but provides no actual warranty terms."
+          }
+        ]
+      },
+      {
+        "value": "No named competitors, customer purchasing alternatives, pricing information, customer reviews, sales evidence, or independently verified performance outcomes are provided.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-2",
+            "explanation": "The packet contains only company-supplied CSV fields and no competitor, market, pricing, review, or outcome evidence."
+          }
+        ]
+      }
+    ],
+    "ingestionSummary": "One CSV evidence packet was analyzed. It provides company-stated identity, category, offer, audience, customer tension, website actions, US shipping scope, a claimed product-information differentiator, an in-house expertise signal, a warranty-claim restriction, and a durability slogan. No independent substantiation or external market evidence is included.",
+    "ingestionWarnings": [
+      "Source is a company-supplied CSV evidence packet only; its statements are not independent verification.",
+      "One exact duplicate row was removed before analysis, per the packet warning.",
+      "No truncation was reported."
+    ]
+  },
+  "evidencePacketMeta": {
+    "fileName": "ecommerce.csv",
+    "fileHash": "a1fa1eef63cda90df87a76c275cc5ccd8fbbf80889b84df0a3faba004dad3870",
+    "retainedRowCount": 11,
+    "warnings": [
+      "Removed 1 exact duplicate row(s)."
+    ],
+    "wasTruncated": false
+  }
+}

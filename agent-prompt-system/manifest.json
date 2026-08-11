@@ -1,14 +1,23 @@
 {
   "name": "Agent Prompt System",
-  "systemVersion": "1.0.0",
+  "systemVersion": "1.1.0",
   "schemaVersion": 1,
-  "description": "Lean RPB Cursor task-routing kit. Distinct from runtime product prompts and Next.js APIs.",
+  "description": "Intent compiler for Cursor: semantic IntentContract + Skill orchestration. Distinct from runtime product prompts and Next.js APIs. Soft enforce; hooks Gate C only.",
   "core": [
     "core/request-router.md",
     "core/spec-builder.md",
+    "core/intent-contract.md",
+    "core/clarification-gate.md",
     "core/verification-contract.md",
     "core/context-selection.md",
-    "core/safety-and-scope.md"
+    "core/safety-and-scope.md",
+    "core/enforcement-deferred.md"
+  ],
+  "templates": [
+    "templates/cursor-instruction.md"
+  ],
+  "tests": [
+    "tests/intent-contract-fixtures.json"
   ],
   "projectContext": [
     "PRODUCT.md",

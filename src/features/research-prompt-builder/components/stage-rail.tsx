@@ -10,6 +10,19 @@ const ORDER: AppStage[] = [
   "prompt",
 ];
 
+function railBeat(text: string, max = 110): string {
+  const clean = text
+    .replace(/[\u2014\u2015\u2E3A\u2E3B]/g, ", ")
+    .replace(/\u2013/g, "-")
+    .replace(/\s+-\s+/g, ", ")
+    .replace(/^(observed fact|working hypothesis|confirmed decision|restriction)\s*:\s*/i, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+  const sentence = clean.match(/^[^.!?]+[.!?]?/)?.[0]?.trim() || clean;
+  if (sentence.length <= max) return sentence;
+  return `${sentence.slice(0, max - 1).trimEnd()}…`;
+}
+
 export function StageRail({
   stage,
   whyThisMatters,
@@ -20,6 +33,10 @@ export function StageRail({
   questionProgress?: string;
 }) {
   const index = ORDER.indexOf(stage) + 1;
+  const beat = railBeat(
+    whyThisMatters ?? "Keep the research prompt specific.",
+  );
+
   return (
     <aside className="flex w-full flex-col justify-between bg-[var(--rail)] px-5 py-6 text-white md:min-h-screen md:w-[240px] md:shrink-0">
       <div className="space-y-8">
@@ -37,12 +54,9 @@ export function StageRail({
         </div>
         <div>
           <p className="text-xs uppercase tracking-[0.16em] text-[var(--rail-muted)]">
-            Why this matters
+            Why it matters
           </p>
-          <p className="mt-3 text-sm leading-relaxed text-white/85">
-            {whyThisMatters ??
-              "A precise research prompt starts with confirmed business truth and a few material decisions."}
-          </p>
+          <p className="mt-3 text-sm leading-snug text-white/85">{beat}</p>
         </div>
       </div>
       <ol className="mt-10 space-y-2 text-xs text-[var(--rail-muted)] md:mt-0">

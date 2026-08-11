@@ -7,6 +7,7 @@ import type {
   ResearchBrief,
   ResearchPromptProject,
 } from "@/features/research-prompt-builder/types";
+import { applyBriefEditProvenance } from "@/features/research-prompt-builder/lib/brief-provenance";
 import {
   canTransition,
   COMPLETE,
@@ -89,6 +90,8 @@ export type ProjectAction =
   | { type: "SET_CONFIRMED_PROFILE"; profile: ConfirmedCompanyProfile }
   | { type: "ADD_QUESTION"; question: InterviewQuestion }
   | { type: "SAVE_ANSWER"; answer: InterviewAnswer }
+  /** Reopen an earlier Decide turn; drops later questions/answers so they regenerate. */
+  | { type: "REOPEN_QUESTION"; questionIndex: number }
   | { type: "SET_BRIEF"; brief: ResearchBrief }
   | { type: "EDIT_BRIEF"; brief: ResearchBrief }
   | {
@@ -189,6 +192,41 @@ export function projectReducer(
         updatedAt: now(),
       };
     }
+    case "REOPEN_QUESTION": {
+      const { questionIndex } = action;
+      const interviewOpen =
+        state.currentStage === "INTERVIEWING" ||
+        state.currentStage === "MODEL_OUTPUT_INVALID" ||
+        state.currentStage === "DOCUMENT_EXTRACTION_FAILED";
+      if (
+        !interviewOpen ||
+        questionIndex < 0 ||
+        questionIndex >= state.questions.length
+      ) {
+        return state;
+      }
+      const questions = state.questions.slice(0, questionIndex + 1);
+      const reopenId = questions[questionIndex]?.questionId;
+      const answers = state.answers.filter(
+        (a) =>
+          questions.some((q) => q.questionId === a.questionId) &&
+          a.questionId !== reopenId,
+      );
+      return {
+        ...state,
+        questions,
+        answers,
+        currentQuestionIndex: questionIndex,
+        currentStage: "INTERVIEWING",
+        ...clearDownstream(state, ["researchBrief", "finalPrompt", "formattedPrompt"]),
+        researchBrief: undefined,
+        finalPrompt: undefined,
+        formattedPrompt: undefined,
+        lastFailureCode: undefined,
+        lastDiagnostic: undefined,
+        updatedAt: now(),
+      };
+    }
     case "INTERVIEW_COMPLETE": {
       const gate = gateTransition(state, "BRIEF_REVIEW", action.type);
       if (!gate.ok) return gate.rejected;
@@ -213,14 +251,19 @@ export function projectReducer(
         updatedAt: now(),
       };
     }
-    case "EDIT_BRIEF":
+    case "EDIT_BRIEF": {
+      const previous = state.researchBrief;
+      const brief = previous
+        ? applyBriefEditProvenance(previous, action.brief)
+        : action.brief;
       return {
         ...state,
-        researchBrief: action.brief,
+        researchBrief: brief,
         finalPrompt: undefined,
         formattedPrompt: undefined,
         updatedAt: now(),
       };
+    }
     case "BEGIN_PROMPT_GENERATION": {
       const gate = gateTransition(state, "GENERATING_PROMPT", action.type);
       if (!gate.ok) return gate.rejected;

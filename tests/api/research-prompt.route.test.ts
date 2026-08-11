@@ -27,14 +27,14 @@ describe("POST /api/research-prompt", () => {
   it("returns the structured and formatted prompt", async () => {
     mockedGenerate.mockResolvedValue({
       structuredPrompt: makeFinalPrompt(),
-      formattedPrompt: "# Bluebird Plumbing Co. — YouTube Strategy Research Prompt",
+      formattedPrompt: "# ZYNAVA US Supplement-Comparison Content Market Research Prompt",
       promptVersion: "1.0.0",
     } as never);
     const res = await POST(jsonRequest(validBody()));
     expect(res.status).toBe(200);
     const body = await res.json();
-    expect(body.structuredPrompt.metadata.promptVersion).toBe("1.0.0");
-    expect(body.formattedPrompt).toContain("# Bluebird");
+    expect(body.structuredPrompt.metadata.promptVersion).toBe("1.1.0");
+    expect(body.formattedPrompt).toContain("# ZYNAVA");
   });
 
   it("maps prompt-contract validation failures to 400 MODEL_OUTPUT_INVALID", async () => {

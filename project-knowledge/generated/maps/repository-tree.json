@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-06T03:10:52.229Z",
-  "commitSha": "9248331e4f9ca2797296f7e5ed30763435f72408",
+  "generatedAt": "2026-08-11T03:14:18.731Z",
+  "commitSha": "b26e6afc0c152e06f362688937812613bb4f628f",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "."
@@ -16,6 +16,10 @@
         "name": ".cursor",
         "children": [
           {
+            "name": "mcp.json",
+            "file": true
+          },
+          {
             "name": "mcp.json.example",
             "file": true
           },
@@ -28,6 +32,10 @@
               },
               {
                 "name": "agent-prompt-router.mdc",
+                "file": true
+              },
+              {
+                "name": "no-code-debt.mdc",
                 "file": true
               },
               {
@@ -179,7 +187,19 @@
             "name": "core",
             "children": [
               {
+                "name": "clarification-gate.md",
+                "file": true
+              },
+              {
                 "name": "context-selection.md",
+                "file": true
+              },
+              {
+                "name": "enforcement-deferred.md",
+                "file": true
+              },
+              {
+                "name": "intent-contract.md",
                 "file": true
               },
               {
@@ -261,6 +281,24 @@
           {
             "name": "SYSTEM.md",
             "file": true
+          },
+          {
+            "name": "templates",
+            "children": [
+              {
+                "name": "cursor-instruction.md",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "tests",
+            "children": [
+              {
+                "name": "intent-contract-fixtures.json",
+                "file": true
+              }
+            ]
           },
           {
             "name": "workflows",
@@ -364,7 +402,44 @@
             "name": "audits",
             "children": [
               {
+                "name": "APS_INTENT_COMPILER_AUDIT.md",
+                "file": true
+              },
+              {
+                "name": "artifacts",
+                "children": [
+                  {
+                    "name": "calibration-01",
+                    "truncated": true
+                  },
+                  {
+                    "name": "calibration-02",
+                    "truncated": true
+                  },
+                  {
+                    "name": "owner-smoke-01-prompt.md",
+                    "file": true
+                  },
+                  {
+                    "name": "owner-smoke-01.json",
+                    "file": true
+                  },
+                  {
+                    "name": "ZYNAVA US Supplement-Comparison Content Market Research Prompt.md",
+                    "file": true
+                  }
+                ]
+              },
+              {
                 "name": "FOUNDATION_READINESS_AUDIT.md",
+                "file": true
+              },
+              {
+                "name": "OWNER_SMOKE_TEST_01.md",
+                "file": true
+              },
+              {
+                "name": "PROMPT_QUALITY_CALIBRATION_01.md",
                 "file": true
               }
             ]
@@ -372,6 +447,44 @@
           {
             "name": "FOUNDATION_DEFINITION_OF_DONE.md",
             "file": true
+          },
+          {
+            "name": "portability",
+            "children": [
+              {
+                "name": "AI_ENGINEERING_FOUNDATIONS_PLAYBOOK.md",
+                "file": true
+              },
+              {
+                "name": "README.md",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "working",
+            "children": [
+              {
+                "name": "CALIBRATION_PROGRESSIVE_VALUE.md",
+                "file": true
+              },
+              {
+                "name": "INTERVIEW_CORE_EVIDENCE_AMENDMENT.md",
+                "file": true
+              },
+              {
+                "name": "INTERVIEW_UX_WORKING.md",
+                "file": true
+              },
+              {
+                "name": "RESEARCH_CONTROLS_AMENDMENT.md",
+                "file": true
+              },
+              {
+                "name": "STAGE_FLOW_DECISION.md",
+                "file": true
+              }
+            ]
           }
         ]
       },
@@ -380,6 +493,10 @@
         "children": [
           {
             "name": "happy-path.spec.ts",
+            "file": true
+          },
+          {
+            "name": "owner-smoke-live.spec.ts",
             "file": true
           }
         ]
@@ -494,6 +611,10 @@
       },
       {
         "name": "playwright.config.ts",
+        "file": true
+      },
+      {
+        "name": "playwright.smoke.config.ts",
         "file": true
       },
       {
@@ -781,7 +902,35 @@
             "file": true
           },
           {
+            "name": "live-compile-zynava.mjs",
+            "file": true
+          },
+          {
             "name": "precommit-fast.mjs",
+            "file": true
+          },
+          {
+            "name": "preload-server-only.cjs",
+            "file": true
+          },
+          {
+            "name": "run-calibration-ingest.mjs",
+            "file": true
+          },
+          {
+            "name": "run-legal-dba-probe.mjs",
+            "file": true
+          },
+          {
+            "name": "server-only-shim.mjs",
+            "file": true
+          },
+          {
+            "name": "stub-server-only-hook.mjs",
+            "file": true
+          },
+          {
+            "name": "stub-server-only.mjs",
             "file": true
           }
         ]
@@ -816,6 +965,10 @@
                     "file": true
                   },
                   {
+                    "name": "evidence-allowlist.ts",
+                    "file": true
+                  },
+                  {
                     "name": "index.ts",
                     "file": true
                   },
@@ -846,10 +999,22 @@
                     "file": true
                   },
                   {
+                    "name": "repair-policy.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "schema-names.ts",
+                    "file": true
+                  },
+                  {
                     "name": "types.ts",
                     "file": true
                   }
                 ]
+              },
+              {
+                "name": "README.md",
+                "file": true
               },
               {
                 "name": "traces",
@@ -925,22 +1090,6 @@
           {
             "name": "config",
             "children": [
-              {
-                "name": "architecture-policy.ts",
-                "file": true
-              },
-              {
-                "name": "feature-policy.ts",
-                "file": true
-              },
-              {
-                "name": "model-policy.ts",
-                "file": true
-              },
-              {
-                "name": "retention-policy.ts",
-                "file": true
-              },
               {
                 "name": "upload-policy.ts",
                 "file": true
@@ -1048,7 +1197,23 @@
             "name": "ai",
             "children": [
               {
+                "name": "assemble-prompt-context.test.ts",
+                "file": true
+              },
+              {
                 "name": "decision-ledger-context.test.ts",
+                "file": true
+              },
+              {
+                "name": "evidence-allowlist.test.ts",
+                "file": true
+              },
+              {
+                "name": "operations-registry.test.ts",
+                "file": true
+              },
+              {
+                "name": "strategy-leakage.test.ts",
                 "file": true
               }
             ]
@@ -1083,14 +1248,31 @@
             ]
           },
           {
+            "name": "calibration",
+            "children": [
+              {
+                "name": "strategy-card-expectations.test.ts",
+                "file": true
+              }
+            ]
+          },
+          {
             "name": "evals",
             "children": [
+              {
+                "name": "company-analyst-contract.test.ts",
+                "file": true
+              },
               {
                 "name": "fixtures",
                 "children": [
                   {
                     "name": "b2b-software.ts",
                     "file": true
+                  },
+                  {
+                    "name": "calibration-csvs",
+                    "truncated": true
                   },
                   {
                     "name": "contractor.ts",
@@ -1115,7 +1297,28 @@
                 ]
               },
               {
+                "name": "golden",
+                "children": [
+                  {
+                    "name": "properties.json",
+                    "file": true
+                  },
+                  {
+                    "name": "properties.test.ts",
+                    "file": true
+                  },
+                  {
+                    "name": "README.md",
+                    "file": true
+                  }
+                ]
+              },
+              {
                 "name": "injection-redteam.test.ts",
+                "file": true
+              },
+              {
+                "name": "next-question-contract.test.ts",
                 "file": true
               },
               {
@@ -1123,7 +1326,19 @@
                 "file": true
               },
               {
+                "name": "repair-output-contract.test.ts",
+                "file": true
+              },
+              {
+                "name": "research-brief-contract.test.ts",
+                "file": true
+              },
+              {
                 "name": "scope-boundary.test.ts",
+                "file": true
+              },
+              {
+                "name": "supporting-context-contract.test.ts",
                 "file": true
               }
             ]
@@ -1176,6 +1391,19 @@
             ]
           },
           {
+            "name": "helpers",
+            "children": [
+              {
+                "name": "anchor-test-archetypes.ts",
+                "file": true
+              },
+              {
+                "name": "synthesize-from-hints.ts",
+                "file": true
+              }
+            ]
+          },
+          {
             "name": "ingestion",
             "children": [
               {
@@ -1185,8 +1413,49 @@
             ]
           },
           {
+            "name": "lib",
+            "children": [
+              {
+                "name": "brief-provenance.test.ts",
+                "file": true
+              },
+              {
+                "name": "can-complete-interview.test.ts",
+                "file": true
+              },
+              {
+                "name": "company-anchors.test.ts",
+                "file": true
+              },
+              {
+                "name": "compose-strategy-answer.test.ts",
+                "file": true
+              },
+              {
+                "name": "core-coverage.test.ts",
+                "file": true
+              },
+              {
+                "name": "profile-sections.test.ts",
+                "file": true
+              },
+              {
+                "name": "recognition-summary.test.ts",
+                "file": true
+              }
+            ]
+          },
+          {
             "name": "services",
             "children": [
+              {
+                "name": "build-research-brief.auth.test.ts",
+                "file": true
+              },
+              {
+                "name": "generate-next-question.auth.test.ts",
+                "file": true
+              },
               {
                 "name": "structured-openai.test.ts",
                 "file": true
@@ -1202,6 +1471,31 @@
             "children": [
               {
                 "name": "project-reducer.test.ts",
+                "file": true
+              }
+            ]
+          },
+          {
+            "name": "validation",
+            "children": [
+              {
+                "name": "interview-shortform.test.ts",
+                "file": true
+              },
+              {
+                "name": "prompt-contract-anchors.test.ts",
+                "file": true
+              },
+              {
+                "name": "prompt-contract-hint-following.test.ts",
+                "file": true
+              },
+              {
+                "name": "prompt-contract-opportunity-families.test.ts",
+                "file": true
+              },
+              {
+                "name": "research-prompt-opportunity-contract.test.ts",
                 "file": true
               }
             ]

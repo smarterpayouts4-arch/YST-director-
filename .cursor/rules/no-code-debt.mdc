@@ -1,0 +1,20 @@
+---
+description: Zero code debt — delete superseded UI/code immediately; never leave dead paths beside replacements
+alwaysApply: true
+---
+
+# No code debt
+
+This product is in active UI and foundation build. Do not accumulate transitional leftovers.
+
+## Hard rules
+
+1. When replacing a UI pattern, **delete the old implementation in the same change**. Do not keep the previous layout "just in case," behind a flag, or commented out.
+2. Do not add `// TODO: remove`, unused props, dead CSS classes, duplicate components, or parallel "v1/v2" files for the same screen.
+3. If a helper only served the deleted UI, remove it or rewrite it for the new UI — no orphan helpers.
+4. Prefer one clear path: one component, one layout, one state model per screen responsibility.
+5. Temporary scaffolding is allowed only when it ships in the same PR that deletes it, or is explicitly time-boxed and removed before merge.
+
+## Review check
+
+Before finishing a UI change, ask: *If I delete the old code now, does anything break?* If no — delete it now.

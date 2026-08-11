@@ -1,0 +1,340 @@
+{
+  "fileName": "supplement.csv",
+  "promptVersion": "rpb-runtime-1.2.0",
+  "companyUnderstanding": {
+    "companyName": {
+      "value": "ZYNAVA",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-2",
+          "explanation": "Company name is explicitly provided."
+        }
+      ]
+    },
+    "industry": {
+      "value": "Dietary supplements search, comparison, and educational guidance",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-3",
+          "explanation": "The stated industry is dietary supplements with AI-powered search and price comparison."
+        },
+        {
+          "ref": "row-4",
+          "explanation": "The company describes a supplement search, comparison, and educational-advisor service."
+        }
+      ]
+    },
+    "offer": {
+      "value": "A free AI-powered tool to search and compare supplements by ingredient form, dietary needs, and budget; build a plan; and ask non-medical educational questions. The company states that it does not sell supplements.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-4",
+          "explanation": "States the service is free, AI-powered, educational, and does not sell supplements."
+        },
+        {
+          "ref": "row-5",
+          "explanation": "Lists search, comparison, plan-building, and non-medical educational-question functions."
+        }
+      ]
+    },
+    "customerProblem": {
+      "value": "Supplement shoppers may feel confused by conflicting claims and aggressive marketing while trying to compare options by ingredient form, dietary needs, and budget.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-6",
+          "explanation": "Explicitly identifies confusion from conflicting claims and aggressive marketing."
+        },
+        {
+          "ref": "row-5",
+          "explanation": "The comparison criteria indicate the decision factors the service is designed to help users assess."
+        }
+      ]
+    },
+    "likelyAudience": {
+      "value": "US adult shoppers researching supplements.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-7",
+          "explanation": "Likely audience is explicitly stated."
+        }
+      ]
+    },
+    "websiteAction": {
+      "value": "Start Saving, Explore Options, or Get Started.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-8",
+          "explanation": "These stated calls to action are the only supported website actions."
+        }
+      ]
+    },
+    "geography": {
+      "value": "United States online.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-9",
+          "explanation": "Geographic scope is explicitly stated."
+        }
+      ]
+    },
+    "differentiators": [
+      {
+        "value": "The company claims its search rankings are never paid.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "This is an explicit company claim of independent, non-paid ranking, but the packet provides no methodology or independent verification."
+          }
+        ]
+      },
+      {
+        "value": "The company claims form-aware education, including comparisons such as glycinate versus oxide.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-11",
+            "explanation": "This states a service distinction, but the packet contains no example guide or evidence of the comparison quality."
+          }
+        ]
+      },
+      {
+        "value": "The company states it does not sell supplements.",
+        "classification": "observed_fact",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "The company explicitly states it does not sell supplements; the packet provides no external verification."
+          }
+        ]
+      }
+    ],
+    "expertiseSignals": [
+      {
+        "value": "The company states that its guides are evidence-informed and cite NIH Office of Dietary Supplements, PubMed, and NCCIH sources.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-15",
+            "explanation": "Named source types are an authority signal, but no actual guides, citations, expert credentials, or editorial-review process are provided."
+          }
+        ]
+      }
+    ],
+    "claimsAndRestrictions": [
+      {
+        "value": "Educational guidance only; not medical advice.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-14",
+            "explanation": "Explicitly stated claim boundary."
+          }
+        ]
+      },
+      {
+        "value": "The service must not diagnose, treat, cure, or prevent disease, and must not recommend dosages.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-16",
+            "explanation": "Explicit restriction governing medical and dosage-related content."
+          }
+        ]
+      },
+      {
+        "value": "“Clarity before you buy” is a marketing slogan, not substantiated proof of outcomes.",
+        "classification": "working_assumption",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-12",
+            "explanation": "The phrase is presented as a slogan; no evidence packet material demonstrates that users achieve clarity or better purchase outcomes."
+          }
+        ]
+      },
+      {
+        "value": "Claims about non-paid ranking, evidence-informed guidance, and ingredient-form education require verification before being presented as independently proven.",
+        "classification": "working_assumption",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "No ranking methodology, conflict-of-interest policy, or audit is provided."
+          },
+          {
+            "ref": "row-11",
+            "explanation": "No sample educational material or quality evidence is provided."
+          },
+          {
+            "ref": "row-15",
+            "explanation": "No individual citations, editorial standards, or qualified reviewer information is provided."
+          }
+        ]
+      }
+    ],
+    "confirmedFacts": [
+      {
+        "value": "ZYNAVA is presented as a dietary-supplement search, comparison, and educational-guidance service.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-2",
+            "explanation": "Identifies the company."
+          },
+          {
+            "ref": "row-3",
+            "explanation": "Identifies the stated industry."
+          },
+          {
+            "ref": "row-4",
+            "explanation": "Describes the stated service."
+          }
+        ]
+      },
+      {
+        "value": "The stated service is free and does not sell supplements.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "Both points are explicitly stated in the company description."
+          }
+        ]
+      },
+      {
+        "value": "The stated audience is US adult supplement shoppers, and the stated market scope is online in the United States.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "States the audience."
+          },
+          {
+            "ref": "row-9",
+            "explanation": "States the geographic scope."
+          }
+        ]
+      }
+    ],
+    "workingAssumptions": [
+      {
+        "value": "The service can provide the search, comparison, planning, and educational functions described in the packet.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "Functions are described by the company, but the packet contains no product demonstration, user documentation, or operational evidence."
+          }
+        ]
+      },
+      {
+        "value": "Supplement shoppers experience the stated confusion from conflicting claims and aggressive marketing.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-6",
+            "explanation": "This is the company’s characterization of the customer problem; no customer research or behavioral evidence is supplied."
+          }
+        ]
+      }
+    ],
+    "importantUnknowns": [
+      {
+        "value": "Whether the service is currently live and what supplement products, retailers, brands, or data sources it covers.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "The packet describes the service but provides no product availability, catalog coverage, retailer coverage, or data-source details."
+          }
+        ]
+      },
+      {
+        "value": "How rankings, price comparisons, and any affiliate, referral, advertising, or other commercial relationships are governed.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "The company claims rankings are never paid, but provides no methodology, disclosure, monetization, or conflict-of-interest information."
+          }
+        ]
+      },
+      {
+        "value": "Whether educational content is reviewed by qualified professionals, how sources are selected, and how medical-safety boundaries are enforced in AI responses.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-14",
+            "explanation": "A non-medical boundary is stated, but enforcement processes are not described."
+          },
+          {
+            "ref": "row-15",
+            "explanation": "Sources are named, but reviewer credentials and editorial process are absent."
+          },
+          {
+            "ref": "row-16",
+            "explanation": "Restrictions are stated, but no safeguards or moderation approach is provided."
+          }
+        ]
+      },
+      {
+        "value": "Evidence of user outcomes, accuracy, savings, clarity, trust, or comparative decision quality.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-12",
+            "explanation": "The slogan implies clarity, but no outcomes evidence is supplied."
+          },
+          {
+            "ref": "row-4",
+            "explanation": "No user results, validation, or performance data accompanies the offer description."
+          }
+        ]
+      }
+    ],
+    "ingestionSummary": "CSV-only packet with 14 retained evidence rows. It identifies ZYNAVA as a US online, free AI-powered supplement search, comparison, planning, and educational-guidance service for adult supplement shoppers. The material states a customer tension around confusing claims and asserts independent rankings, form-aware education, evidence-informed sources, and explicit non-medical boundaries.",
+    "ingestionWarnings": [
+      "One exact duplicate row was removed during ingestion.",
+      "The packet contains company-provided assertions only; it includes no independent validation, product demonstration, user research, outcome data, methodology, or professional-review documentation."
+    ]
+  },
+  "evidencePacketMeta": {
+    "fileName": "supplement.csv",
+    "fileHash": "49fbab042fddfae53e990a036865086410af8f60961f9491ecc0839a63adb8bf",
+    "retainedRowCount": 14,
+    "warnings": [
+      "Removed 1 exact duplicate row(s)."
+    ],
+    "wasTruncated": false
+  }
+}

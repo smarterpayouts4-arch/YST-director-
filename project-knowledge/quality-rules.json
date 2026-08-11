@@ -18,9 +18,5 @@
     "ownership-rules.json",
     "quality-rules.json"
   ],
-  "generatedMarker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
-  "promptVersionHeuristics": {
-    "runtimePromptGlob": "src/features/**/prompts/**/*.{ts,tsx}",
-    "expectVersionExport": true
-  }
+  "generatedMarker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update"
 }

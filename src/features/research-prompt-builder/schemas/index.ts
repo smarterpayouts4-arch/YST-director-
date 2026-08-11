@@ -52,10 +52,35 @@ export const ConfirmedCompanyProfileSchema = z.object({
   ownerNotes: z.string().default(""),
 });
 
+export const BriefFieldKeySchema = z.enum([
+  "customerMoment",
+  "viewerReward",
+  "challengeHypothesis",
+  "contentHypothesis",
+  "executionContext",
+  "companyTruth",
+  "businessBridge",
+  "primaryPlatform",
+  "trustBoundaries",
+  "unresolvedUnknowns",
+]);
+
+export const StrategicSuggestionSchema = z.object({
+  suggestionId: z.string().min(1).max(64),
+  title: z.string().min(3).max(80),
+  description: z.string().min(20).max(280),
+  rationale: z.string().min(20).max(280),
+  researchFocus: z.string().min(20).max(280),
+  classification: z.literal("working_hypothesis"),
+  evidenceRefs: z.array(z.string().max(64)).max(3),
+});
+
 export const InterviewQuestionSchema = z.object({
   questionId: z.string().min(1).max(100),
   sequenceNumber: z.number().int().min(1).max(7),
+  questionKind: z.enum(["strategic_direction", "standard"]),
   decisionCategory: z.enum([
+    "strategic_direction",
     "customer_moment",
     "viewer_reward",
     "business_bridge",
@@ -70,11 +95,14 @@ export const InterviewQuestionSchema = z.object({
   ]),
   whatWeNoticed: z.string().min(30).max(700),
   question: z.string().min(20).max(400),
-  suggestedAnswer: z.string().min(20).max(1200),
+  /** Null for strategic_direction; required non-null for standard. */
+  suggestedAnswer: z.string().min(20).max(1200).nullable(),
   whyThisMatters: z.string().min(20).max(500),
   evidenceRefs: z.array(z.string().max(100)).max(12),
+  /** Empty for standard; 3–5 cards enforced in semantic validation for strategic_direction. */
+  strategicSuggestions: z.array(StrategicSuggestionSchema).max(5),
   isConditional: z.boolean(),
-  resolvesUnknownIds: z.array(z.string().max(100)).max(10),
+  resolvesBriefFields: z.array(BriefFieldKeySchema).max(10),
   qualityScores: z.object({
     evidenceBased: z.number().int().min(1).max(5),
     material: z.number().int().min(1).max(5),
@@ -96,6 +124,8 @@ export const InterviewAnswerSchema = z.object({
   questionId: z.string(),
   answerText: z.string().min(1).max(5000),
   usedSuggestion: z.boolean(),
+  selectedSuggestionIds: z.array(z.string().max(64)).max(5),
+  customDirection: z.string().max(500).nullable(),
   supportingDocuments: z.array(SupportingDocumentAnswerSchema).max(3),
   answeredAt: z.string(),
 });
@@ -113,6 +143,31 @@ export const SupportingContextSchema = z.object({
   warnings: z.array(z.string().max(500)).max(12),
 });
 
+export const FieldOriginSchema = z.object({
+  origin: z.enum([
+    "confirmed_profile",
+    "owner_answer",
+    "owner_selected_hypothesis",
+    "owner_brief_edit",
+    "model_hypothesis",
+  ]),
+  sourceRefs: z.array(z.string().max(64)).max(3),
+});
+
+/** Exhaustive sidecar — every legal brief field required; unknown keys rejected. */
+export const BriefFieldProvenanceSchema = z.object({
+  customerMoment: FieldOriginSchema,
+  viewerReward: FieldOriginSchema,
+  challengeHypothesis: FieldOriginSchema,
+  contentHypothesis: FieldOriginSchema,
+  executionContext: FieldOriginSchema,
+  companyTruth: FieldOriginSchema,
+  businessBridge: FieldOriginSchema,
+  primaryPlatform: FieldOriginSchema,
+  trustBoundaries: FieldOriginSchema,
+  unresolvedUnknowns: FieldOriginSchema,
+});
+
 export const ResearchBriefSchema = z.object({
   companyTruth: z.string().min(50).max(2500),
   customerMoment: z.string().min(30).max(1800),
@@ -121,7 +176,6 @@ export const ResearchBriefSchema = z.object({
   primaryPlatform: z.object({
     value: z.string().min(1).max(200),
     rationale: z.string().min(20).max(1000),
-    status: z.enum(["owner_confirmed", "working_hypothesis"]),
   }),
   contentHypothesis: z.string().min(50).max(2500),
   challengeHypothesis: z.string().min(50).max(2500),
@@ -142,6 +196,7 @@ export const ResearchBriefSchema = z.object({
       }),
     )
     .max(60),
+  fieldProvenance: BriefFieldProvenanceSchema,
 });
 
 export const FinalResearchPromptSchema = z.object({
@@ -151,8 +206,8 @@ export const FinalResearchPromptSchema = z.object({
   ownerConfirmedDecisions: z.string().min(100).max(5000),
   workingHypotheses: z.string().min(100).max(5000),
   researchQuestions: z.string().min(200).max(7000),
-  evidenceAndRedTeamRequirements: z.string().min(200).max(7000),
-  requiredReportStructure: z.string().min(300).max(9000),
+  evidenceAndRedTeamRequirements: z.string().min(200).max(9000),
+  requiredReportStructure: z.string().min(300).max(11000),
   qualityCheckBeforeSubmission: z.string().min(150).max(5000),
   metadata: z.object({
     promptVersion: z.string(),
@@ -220,6 +275,10 @@ export const CsvEvidencePacketSchema = z.object({
 
 export type CompanyUnderstanding = z.infer<typeof CompanyUnderstandingSchema>;
 export type ConfirmedCompanyProfile = z.infer<typeof ConfirmedCompanyProfileSchema>;
+export type BriefFieldKey = z.infer<typeof BriefFieldKeySchema>;
+export type FieldOrigin = z.infer<typeof FieldOriginSchema>;
+export type BriefFieldProvenance = z.infer<typeof BriefFieldProvenanceSchema>;
+export type StrategicSuggestion = z.infer<typeof StrategicSuggestionSchema>;
 export type InterviewQuestion = z.infer<typeof InterviewQuestionSchema>;
 export type InterviewAnswer = z.infer<typeof InterviewAnswerSchema>;
 export type SupportingContext = z.infer<typeof SupportingContextSchema>;

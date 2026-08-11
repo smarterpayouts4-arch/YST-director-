@@ -1,10 +1,18 @@
-# Agent Prompt System (RPB lean)
+# Agent Prompt System — Intent Compiler
 
-Portable Cursor task-routing kit for **Research Prompt Builder**.
+Portable Cursor kit that compiles messy developer intent into a small **IntentContract** and a boring task instruction. Distinct from runtime product prompts and Next.js APIs.
+
+APS is a **compiler, not an agent**. Soft enforcement today (Skill + rules). Hooks are deferred until correction-cost evidence proves need.
 
 ## Overview
 
-Classify substantial requests → pick ≤3 workflows → resolve `project-context/` pointers into canonical `project-knowledge/` → write a short task spec → verify with evidence labels.
+1. Preserve user intent  
+2. Discover relevant project evidence  
+3. Build IntentContract (eight semantic fields; markdown-first)  
+4. Ask only if the clarification gate fires  
+5. Render the contract  
+6. Hand off — Cursor agent executes under selected workflow(s)  
+7. Verify against acceptance criteria + evidence labels  
 
 ## Quick start
 
@@ -21,13 +29,15 @@ npm run agent:validate
 | `.cursor/rules/agent-bootstrap.mdc` | `adapters/cursor/agent-bootstrap.mdc` |
 | `.cursor/skills/aps-router/SKILL.md` | `adapters/cursor/skills/aps-router/SKILL.md` |
 
-Do not hand-edit installed copies — edit adapters, then re-run `agent:install`.
+**Primary Phase-1 entry:** the `aps-router` Skill. Do not hand-edit installed copies — edit adapters, then re-run `agent:install`.
 
 ## Folder reference
 
-- `core/` — router, spec builder, context selection, verification, safety
-- `workflows/` — focused playbooks
-- `project-context/` — **pointers** to `project-knowledge/*` (not doctrine copies)
+- `core/` — invariants, router, IntentContract, clarification gate, context, verification, safety
+- `templates/` — boring Cursor instruction render
+- `tests/` — Gate A fixtures (JSON for invariants only; not runtime interchange)
+- `workflows/` — focused playbooks (not inlined into the Skill)
+- `project-context/` — **pointers** to `project-knowledge/*`
 - `adapters/cursor/` — Cursor bridge SoT
 - `scripts/` — install / validate
 
@@ -44,7 +54,7 @@ Edit pointer stubs only. Canonical truth stays in `project-knowledge/`.
 
 ## Portability
 
-Core + workflows must not embed MarketMonth product doctrine or absolute host paths.
+Core + workflows must not embed MarketMonth product doctrine or absolute host paths. Product north star resolves via pointers.
 
 ## Safety and privacy
 
@@ -54,10 +64,8 @@ APS is Cursor-only. Never merge into Next.js runtime or product prompts.
 
 After adapter edits: `npm run agent:install && npm run agent:validate`.
 
+Audit snapshot (scores): `docs/audits/APS_INTENT_COMPILER_AUDIT.md`.
+
 ## Troubleshooting
 
-If validate fails on sync: re-run install. If workflows missing context stubs: create pointer files.
-
-## Uninstalling
-
-Delete installed `.cursor/rules/agent-*.mdc` and `.cursor/skills/aps-router/` (optional). Keep `agent-prompt-system/` as SoT.
+If validate fails on sync: re-run install. If workflows missing context stubs: create pointer files. If pointer targets missing under `project-knowledge/`: fix the stub or add the canon doc.

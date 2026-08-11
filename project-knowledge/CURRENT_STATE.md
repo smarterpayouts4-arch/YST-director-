@@ -1,6 +1,6 @@
 # CURRENT_STATE — Research Prompt Builder MVP
 
-Freshness: `current` · Last reviewed: 2026-08-06 (foundation-9 hardening pass)
+Freshness: `current` · Last reviewed: 2026-08-10 (Living Architecture Guardian P0)
 
 Use vocabulary literally: Live · Partial · Prototype · Mocked · Planned · Blocked · Deprecated.
 
@@ -13,10 +13,10 @@ The current product ends after generating, validating, and exporting one company
 | Area | Status | Notes |
 |------|--------|-------|
 | CSV / document ingestion | Live | Allowlisted extract + evidence packet; sanitize + limits |
-| Company understanding | Live | Structured analyst + owner confirm/correct/reject |
-| Adaptive interview (one question) | Live | Next-question API + ethical TARI UX |
+| Company understanding | Live | Structured analyst + five-section Looks right confirmation |
+| Adaptive interview (one question) | Live | Next-question API + ethical TARI UX; no target question count; strategy cards when strategic priorities unresolved (at most once) |
 | Research brief | Live | Build + owner edit path |
-| Final prompt generate/validate/export | Live | Eight-section formatter + prompt-contract lint |
+| Final prompt generate/validate/export | Live | Eight-section formatter + Prompt Contract 1.1 lint (anchored research controls; section-7 opportunity-shaped experiments). Product still ends at export — ChatGPT research results are not ingested. |
 | Workflow state machine | Live | Reducer hard-enforces `canTransition`; illegal moves rejected with `WorkflowDiagnostic` (tested) |
 | Auth / multi-user / DB | Planned | Explicit non-goal for MVP |
 | Research execution / topics / video | Planned / Out of MVP | Owner runs prompt in ChatGPT |
@@ -26,13 +26,15 @@ The current product ends after generating, validating, and exporting one company
 | Area | Status | Notes |
 |------|--------|-------|
 | Runtime prompts under `prompts/` | Live | Narrative governance + versioned |
-| Zod schemas + structured OpenAI | Live | Repair-once path present |
+| Zod schemas + structured OpenAI | Live | Repair policy via `getRepairPolicy` (≤2 for final compile; ≤1 otherwise); null-parse not repaired |
 | Versioned contract registry | Live | `src/ai/contracts/` |
 | Context compiler | Live | `src/ai/context/` assemblers + budgets + redact |
-| AI operation registry + AiTrace | Live | `src/ai/operations/` + `src/ai/traces/` |
+| AI operation registry + AiTrace | Live (catalog + mechanical doctor) | `AiOperationId` derived from registry keys; public ops declare `schemaName`; doctor/tests fail on drift. AiTrace typed (`repairAttempts`/`finalValidation`); in-memory only (no product UI) |
+| Interview→brief authority | Live | Shared `canCompleteInterview`; server enforces on next-question **and** brief build |
 | Decision ledger | Live (derived) | Rebuilt-on-read inside brief + prompt context compilers; never persisted separately (tested) |
-| Config modules + storage migrations | Live | `src/config/` + envelope migrations |
-| Prompt contract lint | Live | Semantic validators on formatted Markdown |
+| Brief fieldProvenance sidecar | Live | Exhaustive per-field origins on `ResearchBrief`; `EDIT_BRIEF` → `owner_brief_edit` |
+| Config modules + storage migrations | Live | `src/config/upload-policy.ts` + envelope migrations (unused parallel policy modules removed) |
+| Prompt contract lint | Live | Rule-table checklist + bucketed distinctive-anchor coverage for six research controls; thin-CSV degradation reported in traces |
 | Industry eval fixtures (6) | Live | `tests/evals/` |
 | Prompt injection defenses | Partial | Instruction/data separation; red-team fixture; detection advisory |
 
@@ -41,9 +43,9 @@ The current product ends after generating, validating, and exporting one company
 | Area | Status | Notes |
 |------|--------|-------|
 | Live `project-knowledge/` doctrine | Live | This tree |
-| Knowledge update/check/guardian | Live | Writes only under `generated/` |
+| Knowledge update/check/guardian | Live | Writes only under `generated/`; living maps are **inventory**, not an AI Control authority verifier (see `TOOLING.md`) |
 | Lean RPB MCP (`rpb_*`) | Live in repo / Partial in Cursor | Smoke + allowlist tests pass; connect via `.cursor/mcp.json` (copy example) |
-| Agent Prompt System (lean) | Live | Cursor adapters via `agent:install` |
+| Agent Prompt System (intent compiler) | Live packaging / Partial compile fidelity | Install/validate Live; semantic IntentContract + Skill orchestrator shipped; clarification gate docs Live; hooks/enforcement Planned (Gate C, correction-cost gated). Snapshot scores live only in `docs/audits/APS_INTENT_COMPILER_AUDIT.md` |
 | `agent-learning/` approval path | Partial | Propose/review scripts only; approval is manual (by design), no approve automation |
 | MCP profiles (`docs/ai/mcp-profiles.yaml`) | Live (policy) | `rpb-development` on paper; owner must align Cursor MCP settings |
 | CI three-tier | Partial | GitHub Actions verify + generated-maps bot PR are Live; precommit-fast exists but is not hook-wired |

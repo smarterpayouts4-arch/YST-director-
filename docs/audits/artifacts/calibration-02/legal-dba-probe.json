@@ -1,0 +1,326 @@
+{
+  "report": {
+    "promptVersion": "rpb-runtime-1.2.1",
+    "companyNameValue": "DR.B WELLNESS & CARE LLC, doing business as ZYNAVA",
+    "hasLegalEntitySignal": true,
+    "hasDbaOrBrandSignal": true,
+    "pass": true,
+    "classification": "observed_fact",
+    "evidence": [
+      {
+        "ref": "row-2",
+        "explanation": "Explicitly identifies the company and its DBA."
+      },
+      {
+        "ref": "row-3",
+        "explanation": "Lists the legal name as DR.B WELLNESS & CARE LLC."
+      },
+      {
+        "ref": "row-4",
+        "explanation": "Lists ZYNAVA as the DBA."
+      },
+      {
+        "ref": "row-5",
+        "explanation": "Lists ZYNAVA as the brand name."
+      }
+    ]
+  },
+  "companyUnderstanding": {
+    "companyName": {
+      "value": "DR.B WELLNESS & CARE LLC, doing business as ZYNAVA",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-2",
+          "explanation": "Explicitly identifies the company and its DBA."
+        },
+        {
+          "ref": "row-3",
+          "explanation": "Lists the legal name as DR.B WELLNESS & CARE LLC."
+        },
+        {
+          "ref": "row-4",
+          "explanation": "Lists ZYNAVA as the DBA."
+        },
+        {
+          "ref": "row-5",
+          "explanation": "Lists ZYNAVA as the brand name."
+        }
+      ]
+    },
+    "industry": {
+      "value": "Dietary supplements; AI-powered supplement search and price comparison",
+      "classification": "observed_fact",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "ref": "row-6",
+          "explanation": "The packet explicitly describes this category; the AI-powered characterization is a company-provided category claim rather than independently verified technical proof."
+        }
+      ]
+    },
+    "offer": {
+      "value": "Free tools for shoppers to search and compare supplements by ingredient form, dietary needs, and budget.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-7",
+          "explanation": "Explicitly describes free search and comparison tools and the stated comparison criteria."
+        }
+      ]
+    },
+    "customerProblem": {
+      "value": "Supplement shoppers may experience confusion from conflicting claims and aggressive marketing while trying to compare options suited to ingredient-form, dietary-need, and budget preferences.",
+      "classification": "working_assumption",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "ref": "row-8",
+          "explanation": "States the claimed shopper tension: confusion amid conflicting claims and aggressive marketing."
+        },
+        {
+          "ref": "row-7",
+          "explanation": "The available comparison criteria indicate the stated decision factors, but do not independently establish shopper behavior or the scale of the problem."
+        }
+      ]
+    },
+    "likelyAudience": {
+      "value": "US adult shoppers researching dietary supplements.",
+      "classification": "working_assumption",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "ref": "row-9",
+          "explanation": "Explicitly identifies this intended audience, but provides no independent audience or usage evidence."
+        }
+      ]
+    },
+    "websiteAction": {
+      "value": "Start Saving, Explore Options, or Get Started.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-10",
+          "explanation": "Explicitly lists these website calls to action; the packet does not establish the destination or completion action for each."
+        }
+      ]
+    },
+    "geography": {
+      "value": "United States online.",
+      "classification": "working_assumption",
+      "confidence": "medium",
+      "evidence": [
+        {
+          "ref": "row-11",
+          "explanation": "States United States online as the market scope, without operational, availability, or regulatory documentation."
+        }
+      ]
+    },
+    "differentiators": [
+      {
+        "value": "Free supplement search and comparison across ingredient form, dietary needs, and budget.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "This is the stated functional offer. The packet does not show that these capabilities are unique relative to alternatives."
+          }
+        ]
+      },
+      {
+        "value": "AI-powered search and price comparison.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-6",
+            "explanation": "Presented as a category descriptor, but no evidence explains the AI functionality, comparison coverage, price-update method, or resulting advantage."
+          }
+        ]
+      }
+    ],
+    "expertiseSignals": [],
+    "claimsAndRestrictions": [
+      {
+        "value": "Educational guidance only; not medical advice.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-12",
+            "explanation": "Explicitly states the medical-advice boundary."
+          }
+        ]
+      },
+      {
+        "value": "The descriptions of AI-powered capability, ability to reduce confusion, and savings-related calls to action are company claims and are not independently substantiated in the packet.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-6",
+            "explanation": "Uses the term AI-powered without supporting technical or performance evidence."
+          },
+          {
+            "ref": "row-8",
+            "explanation": "States shopper confusion as a problem but supplies no independent validation or outcome evidence."
+          },
+          {
+            "ref": "row-10",
+            "explanation": "Includes “Start Saving,” but supplies no price data, savings calculation, or proof of savings."
+          }
+        ]
+      }
+    ],
+    "confirmedFacts": [
+      {
+        "value": "The legal entity is DR.B WELLNESS & CARE LLC and ZYNAVA is its DBA/brand.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-2",
+            "explanation": "Provides the combined legal-name and DBA identification."
+          },
+          {
+            "ref": "row-3",
+            "explanation": "Provides the legal name."
+          },
+          {
+            "ref": "row-4",
+            "explanation": "Provides the DBA."
+          },
+          {
+            "ref": "row-5",
+            "explanation": "Provides the brand name."
+          }
+        ]
+      },
+      {
+        "value": "The stated offer is free supplement search and comparison tools using ingredient form, dietary needs, and budget as comparison criteria.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "Explicitly describes the tools and criteria."
+          }
+        ]
+      },
+      {
+        "value": "The company states that its guidance is educational and not medical advice.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-12",
+            "explanation": "Explicitly states this boundary."
+          }
+        ]
+      }
+    ],
+    "workingAssumptions": [
+      {
+        "value": "ZYNAVA is intended for US adult supplement shoppers.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "This is stated in the packet, but evidence does not validate actual users or eligibility requirements."
+          },
+          {
+            "ref": "row-11",
+            "explanation": "States a US online scope, but does not verify availability or geographic restrictions."
+          }
+        ]
+      },
+      {
+        "value": "The service seeks to help shoppers navigate supplement choices amid marketing and claim-related confusion.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-8",
+            "explanation": "States this customer tension."
+          },
+          {
+            "ref": "row-7",
+            "explanation": "The comparison offer is consistent with this purpose, though no user outcomes are supplied."
+          }
+        ]
+      }
+    ],
+    "importantUnknowns": [
+      {
+        "value": "Whether the tools are live, how search and comparison results are generated, what products or retailers are covered, and how frequently price information is updated.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-6",
+            "explanation": "The AI-powered and price-comparison descriptions lack methodology, coverage, and validation details."
+          },
+          {
+            "ref": "row-7",
+            "explanation": "Lists comparison criteria but does not describe data sources or operating mechanics."
+          }
+        ]
+      },
+      {
+        "value": "Whether ZYNAVA earns affiliate commissions, receives retailer or brand compensation, or has other commercial relationships that could affect comparison neutrality.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "A comparison service is described, but no business model, disclosure, or conflict-of-interest information is provided."
+          }
+        ]
+      },
+      {
+        "value": "Any evidence of product-quality review standards, ingredient verification, clinical expertise, professional credentials, regulatory review, or consumer outcomes.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-6",
+            "explanation": "The supplement and AI category description provides no substantiating quality, expertise, or performance evidence."
+          },
+          {
+            "ref": "row-12",
+            "explanation": "The non-medical-advice disclaimer establishes a boundary, not expertise or quality proof."
+          }
+        ]
+      },
+      {
+        "value": "The precise customer action after selecting a website CTA, including whether users compare results, purchase through third parties, or receive personalized guidance.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "Only CTA labels are supplied; no user flow or transaction information is present."
+          }
+        ]
+      },
+      {
+        "value": "Whether the stated US scope reflects actual access, fulfillment, eligibility, and applicable dietary-supplement compliance practices.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-11",
+            "explanation": "States US online scope without corroborating operational or compliance details."
+          }
+        ]
+      }
+    ],
+    "ingestionSummary": "Analyzed 11 retained CSV rows. The packet establishes the legal/brand identity, a stated free supplement search-and-comparison offer, intended US adult shopper audience, listed CTAs, US-online scope, and an educational/non-medical boundary. It does not provide independent proof of AI functionality, comparison coverage, savings, neutrality, expertise, or customer outcomes.",
+    "ingestionWarnings": []
+  }
+}

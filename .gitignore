@@ -25,6 +25,10 @@
 *.pem
 Thumbs.db
 
+# investigation scratch files
+tmp-*
+**/tmp-*
+
 # debug
 npm-debug.log*
 yarn-debug.log*

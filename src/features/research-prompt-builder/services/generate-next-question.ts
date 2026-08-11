@@ -1,7 +1,10 @@
 import "server-only";
 
 import { z } from "zod";
-import { assembleInterviewContext } from "@/ai/context";
+import {
+  assembleInterviewContext,
+  evidenceAllowlistKeySet,
+} from "@/ai/context";
 import { getContractSchemaVersion } from "@/ai/contracts/registry";
 import {
   ConfirmedCompanyProfileSchema,
@@ -14,6 +17,11 @@ import {
 import { buildNextQuestionPrompt } from "@/features/research-prompt-builder/prompts/next-question";
 import { parseStructuredOutput } from "@/features/research-prompt-builder/services/structured-openai";
 import { validateInterviewQuestion } from "@/features/research-prompt-builder/validation/interview";
+import { canCompleteInterview } from "@/features/research-prompt-builder/lib/can-complete-interview";
+import {
+  allCoreResolved,
+  resolveCoreCoverage,
+} from "@/features/research-prompt-builder/lib/core-coverage";
 import {
   MAX_CONDITIONAL_QUESTIONS,
   MAX_TOTAL_QUESTIONS,
@@ -29,14 +37,6 @@ const NextQuestionResponseSchema = z.object({
   question: InterviewQuestionSchema.nullable(),
 });
 
-const CORE = [
-  "customer_moment",
-  "viewer_reward",
-  "business_bridge",
-  "trust_boundaries",
-  "challenge_assumption",
-] as const;
-
 export async function generateNextQuestion(input: {
   confirmedProfile: ConfirmedCompanyProfile;
   previousQuestions: InterviewQuestion[];
@@ -47,21 +47,17 @@ export async function generateNextQuestion(input: {
   input.previousQuestions.forEach((q) => InterviewQuestionSchema.parse(q));
   input.previousAnswers.forEach((a) => InterviewAnswerSchema.parse(a));
 
-  if (input.previousQuestions.length >= MAX_TOTAL_QUESTIONS) {
+  const completion = canCompleteInterview(input);
+  if (completion.ok) {
     return {
       done: true as const,
-      completionReason: "Reached the maximum of seven interview questions.",
+      completionReason: completion.completionReason,
     };
   }
 
+  const { covered: coreCovered, resolutions } = resolveCoreCoverage(input);
+  const coresResolved = allCoreResolved(coreCovered);
   const covered = new Set(input.previousQuestions.map((q) => q.decisionCategory));
-  const coresResolved = CORE.every((c) => covered.has(c));
-  if (coresResolved && input.previousQuestions.length >= 4) {
-    return {
-      done: true as const,
-      completionReason: "Required strategic decisions are resolved.",
-    };
-  }
 
   const conditionalCount = input.previousQuestions.filter(
     (q) => q.isConditional,
@@ -72,8 +68,18 @@ export async function generateNextQuestion(input: {
   const contextPacket = assembleInterviewContext({
     ...input,
     remainingSlots,
+    coreResolutions: resolutions,
+    unresolvedCoreCategories: completion.unresolvedCoreCategories,
   });
   const prompt = buildNextQuestionPrompt({ contextPacket });
+  const allowlist = evidenceAllowlistKeySet(input.confirmedProfile);
+  // At most one strategic_direction turn, only while strategic research
+  // priorities remain unresolved (interview start). Not a generic Q1 ritual.
+  const hasStrategicDirection = input.previousQuestions.some(
+    (q) => q.questionKind === "strategic_direction",
+  );
+  const requireStrategic =
+    !hasStrategicDirection && input.previousQuestions.length === 0;
 
   let result: z.infer<typeof NextQuestionResponseSchema>;
   try {
@@ -89,10 +95,30 @@ export async function generateNextQuestion(input: {
       truncationWarningCount: contextPacket.truncationWarnings.length,
       validate: (value) => {
         if (value.done) {
-          return value.completionReason ? [] : ["completionReason is required when done."];
+          const issues: string[] = [];
+          if (!value.completionReason) {
+            issues.push("completionReason is required when done.");
+          }
+          const allowed = canCompleteInterview(input);
+          if (!allowed.ok) {
+            issues.push(
+              `Cannot complete interview while core decisions are unresolved: ${allowed.unresolvedCoreCategories.join(", ")}.`,
+            );
+          }
+          return issues;
         }
         if (!value.question) return ["question is required when done is false."];
-        const issues = validateInterviewQuestion(value.question);
+        const issues = validateInterviewQuestion(value.question, {
+          evidenceAllowlist: allowlist,
+        });
+        if (requireStrategic && value.question.questionKind !== "strategic_direction") {
+          issues.push(
+            "Strategic research priorities are unresolved — questionKind must be strategic_direction.",
+          );
+        }
+        if (!requireStrategic && value.question.questionKind === "strategic_direction") {
+          issues.push("strategic_direction may be asked at most once.");
+        }
         if (
           covered.has(value.question.decisionCategory) &&
           !value.question.isConditional
@@ -114,20 +140,32 @@ export async function generateNextQuestion(input: {
     // model output stays invalid — never silently end an incomplete interview.
     const message = error instanceof Error ? error.message : "";
     if (message.includes(CONDITIONAL_CAP_ISSUE) && coresResolved) {
-      return {
-        done: true as const,
-        completionReason:
-          "Core decisions are resolved and the conditional question limit was reached.",
-      };
+      const allowed = canCompleteInterview(input);
+      if (allowed.ok) {
+        return {
+          done: true as const,
+          completionReason:
+            "Core decisions are resolved and the conditional question limit was reached.",
+        };
+      }
     }
     throw error;
   }
 
   if (result.done) {
+    const allowed = canCompleteInterview(input);
+    if (!allowed.ok) {
+      throw Object.assign(
+        new Error(
+          `Interview model returned done:true but cores remain unresolved: ${allowed.unresolvedCoreCategories.join(", ")}.`,
+        ),
+        { code: "MODEL_OUTPUT_INVALID" as const },
+      );
+    }
     return {
       done: true as const,
       completionReason:
-        result.completionReason ?? "Interview complete based on resolved decisions.",
+        result.completionReason ?? allowed.completionReason,
     };
   }
 

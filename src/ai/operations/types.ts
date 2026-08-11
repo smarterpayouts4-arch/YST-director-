@@ -1,17 +1,17 @@
 import type { ContractId } from "@/ai/contracts/types";
+import type { AiSchemaName } from "@/ai/operations/schema-names";
 
-export type AiOperationId =
-  | "analyze-company"
-  | "generate-next-question"
-  | "extract-supporting-context"
-  | "build-research-brief"
-  | "compile-research-prompt"
-  | "repair-invalid-output";
+export type { AiSchemaName } from "@/ai/operations/schema-names";
 
+/**
+ * Relationship fields for one AI operation.
+ * `operationId` is the registry key (see AiOperationId derived from operationRegistry).
+ */
 export type AiOperationDefinition = {
-  operationId: AiOperationId;
   displayName: string;
   description: string;
+  /** public = product route; nested = internal helper (e.g. repair under parent op). */
+  visibility: "public" | "nested";
   inputContracts: ContractId[];
   outputContracts: ContractId[];
   promptModule:
@@ -27,6 +27,15 @@ export type AiOperationDefinition = {
     | "assemble-brief-context"
     | "assemble-prompt-context"
     | "none";
+  /** Relative path from repo root for mechanical doctor checks. */
+  promptModulePath: string;
+  /**
+   * OpenAI structured schema name for public ops.
+   * Null for nested helpers that inherit the parent call's schema.
+   */
+  schemaName: AiSchemaName | null;
+  /** Primary eval file path (public ops) or null for nested helpers. */
+  evalPath: string | null;
   retryable: boolean;
   failureStates: Array<
     | "INGESTION_FAILED"

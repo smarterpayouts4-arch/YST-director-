@@ -12,6 +12,14 @@ Live
 
 `rpb-final-prompt`, `rpb-prompts`
 
+## AI operation
+
+- `operationId`: `compile-research-prompt`
+- Prompt module: `src/features/research-prompt-builder/prompts/research-prompt.ts`
+- Runtime version: `rpb-runtime-1.4.0`
+- Export `PROMPT_VERSION`: `1.1.0`
+- Map: [`src/ai/README.md`](../../src/ai/README.md) (pointer only)
+
 ## Key paths
 
 - `src/features/research-prompt-builder/services/generate-research-prompt.ts`
@@ -24,7 +32,7 @@ Live
 
 - See `PROMPT_CONTRACT.md`
 - Deterministic heading order
-- Repair once on validation failure
+- Final compile allows ≤2 repair attempts on validation failure, then a post-lint with no further repair
 
 ## Non-goals
 

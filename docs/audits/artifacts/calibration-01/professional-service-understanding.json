@@ -1,0 +1,333 @@
+{
+  "fileName": "professional-service.csv",
+  "promptVersion": "rpb-runtime-1.1.0",
+  "companyUnderstanding": {
+    "companyName": {
+      "value": "Clearpath Bookkeeping",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-2",
+          "explanation": "The company_name field identifies the business as Clearpath Bookkeeping."
+        }
+      ]
+    },
+    "industry": {
+      "value": "Bookkeeping professional services for small businesses",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-3",
+          "explanation": "The industry field describes bookkeeping/professional services for small businesses."
+        }
+      ]
+    },
+    "offer": {
+      "value": "Monthly bookkeeping cleanup and cash-flow reporting that helps owner-operated firms turn financial records into understandable monthly information.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-4",
+          "explanation": "The stated offer is monthly bookkeeping cleanup and cash-flow reporting for owner-operated firms."
+        },
+        {
+          "ref": "row-9",
+          "explanation": "The company describes delivering a plain-English monthly brief rather than raw ledger dumps."
+        },
+        {
+          "ref": "row-12",
+          "explanation": "The tagline reinforces an emphasis on understandable books, but is a company claim rather than independent proof."
+        }
+      ]
+    },
+    "customerProblem": {
+      "value": "Owner-operated small-business owners may be overwhelmed by receipts and lack a clear month-to-month view of profitability.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-5",
+          "explanation": "The stated customer problem is that owners drown in receipts and cannot see whether they are profitable month to month."
+        }
+      ]
+    },
+    "likelyAudience": {
+      "value": "U.S. small-business owners, particularly owner-operated firms under $3M in revenue.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-6",
+          "explanation": "The likely_audience field specifies U.S. small-business owners under $3M revenue."
+        },
+        {
+          "ref": "row-4",
+          "explanation": "The offer is explicitly for owner-operated firms."
+        }
+      ]
+    },
+    "websiteAction": {
+      "value": "Schedule a discovery call.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-7",
+          "explanation": "The website_action field specifies scheduling a discovery call."
+        }
+      ]
+    },
+    "geography": {
+      "value": "United States; remote-first delivery.",
+      "classification": "observed_fact",
+      "confidence": "high",
+      "evidence": [
+        {
+          "ref": "row-8",
+          "explanation": "The geography field states United States remote-first."
+        }
+      ]
+    },
+    "differentiators": [
+      {
+        "value": "Plain-English monthly briefs rather than raw ledger dumps, positioning the service around financial clarity for owners.",
+        "classification": "observed_fact",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-9",
+            "explanation": "This is the stated differentiator; the packet does not independently establish how distinctive it is in the market."
+          },
+          {
+            "ref": "row-12",
+            "explanation": "The tagline is consistent with the stated emphasis on understandable financial information."
+          }
+        ]
+      }
+    ],
+    "expertiseSignals": [
+      {
+        "value": "QuickBooks ProAdvisor credential.",
+        "classification": "observed_fact",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "The packet lists QuickBooks ProAdvisor as an expertise signal, but provides no credential verification."
+          }
+        ]
+      },
+      {
+        "value": "CPA partnership for tax-season handoff.",
+        "classification": "observed_fact",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "The packet states a CPA partnership supports tax-season handoff, without naming or independently verifying the partner."
+          }
+        ]
+      }
+    ],
+    "claimsAndRestrictions": [
+      {
+        "value": "The company states it does not provide tax advice or IRS representation.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-11",
+            "explanation": "The restriction explicitly excludes tax advice and IRS representation."
+          }
+        ]
+      },
+      {
+        "value": "Financial-service communications should not imply tax advice, tax preparation, IRS representation, or outcomes requiring CPA/tax-professional authority.",
+        "classification": "working_assumption",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-11",
+            "explanation": "The explicit restriction establishes these as claim and scope boundaries for company communications."
+          }
+        ]
+      },
+      {
+        "value": "Claims that the service improves profitability, ensures cash-flow outcomes, or is uniquely differentiated require substantiation; the packet only states that it improves clarity and reporting.",
+        "classification": "working_assumption",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "The customer problem concerns visibility into profitability, not a promise to improve profitability."
+          },
+          {
+            "ref": "row-9",
+            "explanation": "The differentiator is a company-stated presentation approach, not independent comparative proof."
+          }
+        ]
+      }
+    ],
+    "confirmedFacts": [
+      {
+        "value": "The business provides monthly bookkeeping cleanup and cash-flow reporting.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "Directly stated offer."
+          }
+        ]
+      },
+      {
+        "value": "Its stated customer tension is receipt overload and poor month-to-month profitability visibility.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "Directly stated customer problem."
+          }
+        ]
+      },
+      {
+        "value": "It targets U.S. small-business owners under $3M in revenue and operates remote-first.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-6",
+            "explanation": "Audience is directly specified."
+          },
+          {
+            "ref": "row-8",
+            "explanation": "Geography and delivery approach are directly specified."
+          }
+        ]
+      },
+      {
+        "value": "The intended next action is a discovery call.",
+        "classification": "observed_fact",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "Directly stated website action."
+          }
+        ]
+      }
+    ],
+    "workingAssumptions": [
+      {
+        "value": "The primary educational opportunity is helping owners understand the financial signals needed to assess monthly business performance, before inviting them to discuss bookkeeping support.",
+        "classification": "working_assumption",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-5",
+            "explanation": "The stated problem centers on owners' inability to see month-to-month profitability."
+          },
+          {
+            "ref": "row-9",
+            "explanation": "The stated differentiator emphasizes plain-English explanation over raw records."
+          }
+        ]
+      },
+      {
+        "value": "Research should focus on the U.S. market for owner-operated small businesses below $3M in revenue that need bookkeeping clarity and cash-flow reporting, rather than on tax advisory or IRS-representation needs.",
+        "classification": "working_assumption",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-6",
+            "explanation": "The audience is specified as U.S. small-business owners under $3M revenue."
+          },
+          {
+            "ref": "row-11",
+            "explanation": "Tax advice and IRS representation are explicitly outside scope."
+          }
+        ]
+      }
+    ],
+    "importantUnknowns": [
+      {
+        "value": "Which business types, revenue bands within the under-$3M range, bookkeeping maturity levels, and decision-maker circumstances are highest priority.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-6",
+            "explanation": "The audience gives a broad size and country definition but no industry, maturity, or prioritization detail."
+          }
+        ]
+      },
+      {
+        "value": "Whether services include ongoing transaction categorization, reconciliations, financial statements, bill pay, payroll coordination, accounting-system setup, historical cleanup scope, or advisory beyond the stated monthly cleanup and cash-flow reporting.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-4",
+            "explanation": "The offer is concise and does not define service inclusions, exclusions, or operating model."
+          }
+        ]
+      },
+      {
+        "value": "What a discovery call qualifies for, including pricing, minimum engagement, onboarding process, service capacity, and client fit criteria.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-7",
+            "explanation": "A discovery-call action is stated without qualification or conversion details."
+          }
+        ]
+      },
+      {
+        "value": "Whether the QuickBooks credential and CPA partnership are current, what the partnership entails, and what independent proof, client outcomes, reviews, or case studies support trust claims.",
+        "classification": "important_unknown",
+        "confidence": "high",
+        "evidence": [
+          {
+            "ref": "row-10",
+            "explanation": "The packet provides stated expertise signals but no verification or outcome evidence."
+          }
+        ]
+      },
+      {
+        "value": "Whether the company serves all U.S. jurisdictions remotely and how it handles state-specific compliance, sales-tax, payroll, or regulated-industry bookkeeping boundaries.",
+        "classification": "important_unknown",
+        "confidence": "medium",
+        "evidence": [
+          {
+            "ref": "row-8",
+            "explanation": "Remote-first U.S. delivery is stated, but jurisdictional scope and compliance handling are not."
+          },
+          {
+            "ref": "row-11",
+            "explanation": "A tax-related scope restriction is stated, indicating a sensitive financial-services boundary."
+          }
+        ]
+      }
+    ],
+    "ingestionSummary": "CSV-only evidence identifies Clearpath Bookkeeping as a remote-first U.S. bookkeeping provider for owner-operated small businesses under $3M in revenue. Its stated value is monthly bookkeeping cleanup and cash-flow reporting presented through a plain-English monthly brief, addressing owners' receipt overload and lack of month-to-month profitability visibility. The stated next step is a discovery call. Tax advice and IRS representation are explicitly out of scope.",
+    "ingestionWarnings": [
+      "Source is a CSV evidence packet only; all company statements are self-reported and no independent verification was provided.",
+      "One exact duplicate row was removed during ingestion; repeated evidence was not treated as corroboration.",
+      "No packet truncation was reported."
+    ]
+  },
+  "evidencePacketMeta": {
+    "fileName": "professional-service.csv",
+    "fileHash": "a7096be74ae3bdeee2801547a36f42464366fc55c35830cca6b91a22972b080e",
+    "retainedRowCount": 11,
+    "warnings": [
+      "Removed 1 exact duplicate row(s)."
+    ],
+    "wasTruncated": false
+  }
+}

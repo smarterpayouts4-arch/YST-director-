@@ -1,15 +1,17 @@
-import type { AiOperationId } from "@/ai/operations/types";
+import type { AiOperationId } from "@/ai/operations/registry";
 
 export type AiTraceStatus = "ok" | "validation_failed" | "error" | "repaired";
 
+export type FinalValidation = "passed" | "failed" | "n/a";
+
 /**
- * Behavioral tuple versions for an AI call.
+ * Behavioral tuple for an AI call.
  * Never store raw secrets, API keys, or full untrusted CSV dumps here.
  */
 export type AiTrace = {
   traceId: string;
   projectId?: string;
-  operationId: AiOperationId | string;
+  operationId: AiOperationId;
   model: string;
   promptVersion: string;
   inputSchemaVersion: string;
@@ -22,15 +24,18 @@ export type AiTrace = {
   status: AiTraceStatus;
   repaired: boolean;
   validationIssueCount: number;
+  /** Architecturally meaningful — not buried in meta. */
+  repairAttempts?: number;
+  finalValidation?: FinalValidation;
   charBudgetUsed?: number;
   truncationWarningCount?: number;
   errorCode?: string;
-  /** Safe metadata only — no prompt bodies or PII dumps. */
+  /** Optional diagnostic leftovers only — not hidden architecture. */
   meta?: Record<string, string | number | boolean | null>;
 };
 
 export type TraceRecordInput = {
-  operationId: AiOperationId | string;
+  operationId: AiOperationId;
   model: string;
   promptVersion: string;
   inputSchemaVersion: string;
@@ -41,6 +46,8 @@ export type TraceRecordInput = {
   status: AiTraceStatus;
   repaired?: boolean;
   validationIssueCount?: number;
+  repairAttempts?: number;
+  finalValidation?: FinalValidation;
   charBudgetUsed?: number;
   truncationWarningCount?: number;
   errorCode?: string;

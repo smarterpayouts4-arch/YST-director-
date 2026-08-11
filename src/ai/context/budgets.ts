@@ -11,6 +11,8 @@ export const CONTEXT_BUDGETS = {
   unresolvedUnknownsMax: 12,
   answerExcerptChars: 900,
   documentSummaryChars: 1200,
+  /** Max chars of extracted supporting-document text sent to the model. */
+  supportingExtractChars: 12_000,
 } as const;
 
 export type ContextBudgetKey = keyof typeof CONTEXT_BUDGETS;

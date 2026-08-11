@@ -31,31 +31,36 @@ test("owner smoke: ZYNAVA sample through export", async ({ page, context }) => {
   mark = Date.now();
   await page.getByRole("button", { name: "Use sample ZYNAVA CSV" }).click();
   await expect(
-    page.getByRole("heading", { name: "Confirm what we understood" }),
+    page.getByRole("heading", {
+      name: "Confirm the facts",
+    }),
   ).toBeVisible({ timeout: 180_000 });
   timings.analyzeCompanyMs = Date.now() - mark;
 
   const understandingSummary = await page
     .locator("p")
-    .filter({ hasText: /Analyzed|ZYNAVA|supplement/i })
+    .filter({ hasText: /ZYNAVA|supplement|Review what we found/i })
     .first()
     .innerText()
     .catch(() => "(summary not captured)");
 
-  // Stage 2 — confirm material fields; keep one correction already in audience if present;
-  // reject the last claim field for rejection coverage.
-  const confirmButtons = page.getByRole("button", { name: "Confirm", exact: true });
-  const count = await confirmButtons.count();
-  for (let i = 0; i < count; i += 1) {
-    await confirmButtons.nth(i).click();
+  // Stage 2 — sequential Looks right through five strategy sections.
+  const continueBtn = page.getByRole("button", {
+    name: "Everything looks right. Continue",
+  });
+  await expect(page.getByTestId("profile-progress")).toHaveText(
+    "0 of 5 reviewed",
+  );
+  for (let i = 0; i < 5; i += 1) {
+    const openTopic = page.locator(
+      '[data-testid="profile-topic"][data-state="open"]',
+    );
+    await expect(openTopic).toHaveCount(1);
+    await page.getByRole("button", { name: "Looks right", exact: true }).click();
   }
-  const rejectButtons = page.getByRole("button", { name: "Reject", exact: true });
-  const rejectCount = await rejectButtons.count();
-  if (rejectCount > 0) {
-    await rejectButtons.nth(rejectCount - 1).click();
-  }
-
-  const continueBtn = page.getByRole("button", { name: "Continue to interview" });
+  await expect(page.getByTestId("profile-progress")).toHaveText(
+    "5 of 5 reviewed",
+  );
   await expect(continueBtn).toBeEnabled({ timeout: 10_000 });
 
   mark = Date.now();
@@ -114,7 +119,6 @@ test("owner smoke: ZYNAVA sample through export", async ({ page, context }) => {
       }
     }
 
-    await page.getByRole("button", { name: "Use this suggestion" }).click();
     await page.getByRole("button", { name: "Save answer & continue" }).click();
   }
 

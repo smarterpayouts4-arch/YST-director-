@@ -67,4 +67,12 @@ describe("prompt compiler scope boundary", () => {
     expect(text).toMatch(/do not include video production/i);
     expect(text).toMatch(/do not dump raw csv/i);
   });
+
+  it("compiler instructions include the export-gate must-include checklist", () => {
+    const text = compilerPrompt.instructions;
+    expect(text).toMatch(/Must-include checklist/i);
+    expect(text).toMatch(/3 content pillars/i);
+    expect(text).toMatch(/primary platform/i);
+    expect(text).toMatch(/success\/failure/i);
+  });
 });

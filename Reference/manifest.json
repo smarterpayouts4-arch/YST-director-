@@ -2,8 +2,19 @@
   "schemaVersion": 1,
   "authority": "advisory",
   "generated": false,
-  "updatedAt": "2026-08-05",
+  "updatedAt": "2026-08-06",
   "records": [
+    {
+      "id": "ref-fixture-zynava-001",
+      "title": "ZYNAVA Company CSV (design fixture)",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": ["fixtures", "interview", "ingestion"],
+      "applies_to": ["research-prompt-builder"],
+      "date_added": "2026-08-06",
+      "source_file": "product-specs/fixtures/zynava-company.csv",
+      "notes": "Converted from Reference/approved.csv into field,value sample format. Byte-identical to public/samples/zynava-company.csv; live app sample remains under public/samples/."
+    },
     {
       "id": "ref-agent-loop-001",
       "title": "Observe–Think–Act Agent Loop",

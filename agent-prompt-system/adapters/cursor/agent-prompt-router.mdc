@@ -1,13 +1,13 @@
 ---
-description: USE WHEN any Cursor Agent task starts — Agent Prompt System preflight before substantial edits
+description: USE WHEN any Cursor Agent task starts — APS intent-compiler preflight before substantial edits
 alwaysApply: true
 ---
 
 <!-- BEGIN GENERATED: agent-prompt-system/adapters/cursor/agent-prompt-router.mdc — do not hand-edit; re-run scripts/install.mjs -->
 
-# Agent Prompt System — preflight
+# Agent Prompt System — intent compiler preflight
 
-For **substantial** tasks complete this checklist before large edits:
+For **substantial** tasks, compile an IntentContract before large edits. Prefer the `aps-router` Skill. Soft enforcement (advisory) unless Gate C hooks are later earned.
 
 ## APS brief (first user-visible paragraph)
 
@@ -15,23 +15,25 @@ For **substantial** tasks complete this checklist before large edits:
 Selected workflows: <id-1>, <id-2?>
 ```
 
-Then a short task-spec block (goal / in-out / acceptance / verification).
+Then the rendered `APS INTENT CONTRACT` (see `agent-prompt-system/templates/cursor-instruction.md`).
 
 ## Preflight checklist
 
-1. Read `agent-prompt-system/core/request-router.md` and `manifest.json`.
-2. Select **1–3** workflow IDs.
-3. Resolve `project-context/` pointers → read canonical `project-knowledge/` (or `rpb_read_project_doc`).
-4. Implement only within that scope.
-5. End with evidence labels: **Verified** / **Partially verified** / **Not verified** / **Blocked** / **Assumed**.
+1. Preserve user intent; increase precision, never ambition.
+2. Read `agent-prompt-system/core/request-router.md` + `manifest.json` → ≤3 workflows / `taskType`.
+3. Discover project evidence; resolve `project-context/` pointers → `project-knowledge/` (or `rpb_read_project_doc`).
+4. Ask only if `core/clarification-gate.md` three conditions hold.
+5. Emit eight-field IntentContract; never promote model inference into requirements.
+6. Hand off — Cursor agent executes under selected workflows; APS does not execute.
+7. End with evidence labels: **Verified** / **Partially verified** / **Not verified** / **Blocked** / **Assumed**.
 
 ## Bypass
 
-Simple explanations, locate-a-file, isolated typos, one-line fixes → no full routing.
+Simple explanations, locate-a-file, isolated typos, one-line fixes → no full compile.
 
-## Precedence
+## Precedence (process, not a verified Cursor global order)
 
-User instruction → safety/security → product boundaries → this router → selected workflows.
+User instruction → safety/security → product boundaries (via north-star / PRODUCT canon) → this router → selected workflows → discovered project evidence.
 
 ## Not this system
 

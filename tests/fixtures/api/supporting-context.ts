@@ -5,15 +5,24 @@ export function makeSupportingContext(
 ): SupportingContext {
   return {
     documentId: "doc-1",
-    fileName: "service-area-notes.pdf",
+    fileName: "zynava-trust-boundaries.pdf",
     documentType: "pdf",
-    relevantFacts: ["The company completed 1,214 emergency jobs last year."],
-    ownerStatements: ["We answer emergency calls within 15 minutes, day or night."],
-    assumptions: ["Emergency volume is assumed to peak in winter."],
+    relevantFacts: [
+      "ZYNAVA does not sell, manufacture, or distribute supplements.",
+      "Guidance is educational only and cites public sources such as NIH ODS.",
+    ],
+    ownerStatements: [
+      "We want content to decode form comparisons without telling anyone what to take.",
+    ],
+    assumptions: [
+      "Form comparison is a common pre-purchase confusion point for US shoppers.",
+    ],
     contradictions: [],
-    risksOrRestrictions: ["Cannot claim to be the cheapest provider."],
+    risksOrRestrictions: [
+      "Cannot diagnose, treat, cure, or prevent disease; cannot recommend dosages.",
+    ],
     suggestedAnswerAdditions: [
-      "Mention the 15-minute emergency response commitment.",
+      "Mention that education stops before medical recommendation.",
     ],
     warnings: [],
     ...overrides,

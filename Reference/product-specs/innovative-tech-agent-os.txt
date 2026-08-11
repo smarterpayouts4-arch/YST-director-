@@ -3,56 +3,67 @@ title: Innovations Transfer Guide — Agent OS Patterns
 status: active
 authority: supporting
 owner: engineering
-last_verified: 2026-08-03
+last_verified: 2026-08-10
 related_paths:
   - AGENTS.md
   - agent-prompt-system/**
   - project-knowledge/**
+  - project-knowledge/TOOLING.md
   - mcp/**
-  - docs/ai/agent-toolchain.md
-  - docs/ai/mcp.md
-  - docs/ai/cursor-context-and-indexing-policy.md
+  - src/ai/**
+  - tests/ai/operations-registry.test.ts
+  - docs/portability/AI_ENGINEERING_FOUNDATIONS_PLAYBOOK.md
+  - docs/ai/MCP_LOCKDOWN.md
+  - docs/ai/mcp-profiles.yaml
 ---
 
 # Innovations Transfer Guide — Agent OS Patterns
 
-Portable reference for recreating MarketMonth’s **agent / developer operating system** in another product. Copy this file into a new repo and treat MarketMonth paths below as a reference implementation.
+Portable blueprint for recreating this repo’s **agent / developer operating system** and **AI Control** patterns in another product. Copy this file into a new repo and treat **Research Prompt Builder (RPB)** paths below as the reference implementation.
+
+**Origin:** patterns distilled from MarketMonth’s Agent OS, then hardened in RPB (AI Control freeze + Living Architecture Guardian P0). MarketMonth product features are not part of this guide.
+
+For mechanism deep-dives, use [`docs/portability/AI_ENGINEERING_FOUNDATIONS_PLAYBOOK.md`](../../docs/portability/AI_ENGINEERING_FOUNDATIONS_PLAYBOOK.md).
 
 ## 0. Purpose and non-goals
 
 ### Purpose
 
-Inventory the reusable innovations that make AI-assisted work reliable here:
+Inventory the reusable innovations that make AI-assisted product work reliable:
 
-- one layer for **what is true**
-- one layer for **how agents work**
-- one layer for **safe tool access**
+- one layer for **what is true** (Project Knowledge)
+- one layer for **how agents work** (APS)
+- one layer for **safe tool access** (read-only product MCP)
+- one plane for **how the product calls models** (AI Control)
 - soft gates so maps stay fresh and claims stay honest
+- **constitution tests** so existence of a registry/map is not mistaken for legitimacy
 
 ### Non-goals
 
-Do **not** port MarketMonth product features as part of this guide:
+Do **not** port host-product features as “foundation”:
 
-- Discovery crawl / LEARN business pipeline
-- Content Brain / Content Universe product loop
-- Idea Lab product surfaces
-- Brand / strategy doctrine content
+- Research execution, topics, scripts, video pipelines
+- Auth / multi-user / DB / CMS as MVP defaults
+- Write MCP, filesystem/shell MCP as product intelligence
+- Auto-rewriting `AGENTS.md` or canonical doctrine
+- LangChain / orchestration buses / prompt CMS
+- CI-blocking LLM “architecture auditors” as source of truth
 
 ### Hard separation (keep this invariant)
 
-| Layer | Role | MarketMonth home |
-|-------|------|------------------|
+| Layer | Role | RPB home |
+|-------|------|----------|
 | **Project Knowledge** | What is true (canonical SoT) | `project-knowledge/` |
-| **APS** | How agents work (routing, specs, evidence) | `agent-prompt-system/` |
-| **Product MCP** | Allowlisted reads + domain ops | `mcp/` |
-| **Helper MCP / research** | Advisory tooling (Playwright, Context7, …) | Docker profile / external MCP |
-| **Product prompts** | Runtime LLM strings inside the app | e.g. `src/brain/**` — **not** APS |
+| **APS** | How agents work (routing, IntentContract, evidence) | `agent-prompt-system/` |
+| **Product MCP** | Allowlisted read-only project intelligence | `mcp/` (`rpb_*`) |
+| **Helper MCP / research** | Advisory tooling (Context7, Playwright, …) | Cursor profile / external — never product SoT |
+| **AI Control / product prompts** | Runtime LLM ops, schemas, compilers, traces | `src/ai/**`, feature `prompts/`, `schemas/`, `services/` — **not** APS |
 
 ```text
-APS ≠ product prompts ≠ MCP ≠ Knowledge SoT
+Project Knowledge ≠ APS ≠ Product MCP ≠ Runtime Product Prompts
 ```
 
-Never merge process docs into product doctrine. Never treat helper MCPs as source of truth.
+AI Control is a **product runtime plane**, not a process docs folder. Never merge APS into app prompts. Never treat helper MCPs or generated maps as doctrine.
 
 ---
 
@@ -60,31 +71,39 @@ Never merge process docs into product doctrine. Never treat helper MCPs as sourc
 
 ```mermaid
 flowchart TB
-  knowledge[project-knowledge Truth]
-  mcp[Product_MCP Ops_and_reads]
-  aps[APS How_agents_work]
-  hooks[Cursor_hooks Soft_gates]
+  product["Product plane UI state export"]
+  aiControl["AI Control ops prompts schemas"]
+  knowledge["Project Knowledge canon"]
+  generated["generated maps inventory"]
+  constitution["constitution tests authority"]
+  aps["APS process routing"]
+  mcp["RPB MCP read-only"]
+  product --> aiControl
+  knowledge --> generated
+  constitution -->|"verifies"| aiControl
+  generated -.->|"derived only"| mcp
   aps --> knowledge
   mcp --> knowledge
-  hooks --> aps
-  hooks --> knowledge
 ```
 
-**Cold start for agents:** `AGENTS.md` → knowledge README → `CURRENT_STATE` → task-specific canonical doc → only then MCP LEARN / code edits.
+**Cold start for agents:** `AGENTS.md` → `project-knowledge/README.md` → `CURRENT_STATE.md` → task-specific canonical doc → only then MCP / code edits. Prefer `rpb_get_agent_bootstrap` when MCP is available.
 
 **Authority hierarchy (narrowest first):**
 
 1. Canonical knowledge doc (or allowlisted MCP read of that doc)
-2. Spanning Q&A over allowlisted excerpts (optional; only if a server is already running)
-3. Sole docs index → direct file read (when Q&A unavailable)
-4. Generated maps + source for live implementation detail
-5. External web / research MCP (advisory only)
+2. Executable AI Control: `src/ai/operations/registry.ts` + `tests/ai/operations-registry.test.ts` (for ops truth)
+3. Sole docs index → direct file read (when MCP unavailable)
+4. Generated maps + doctor inventory (**derived navigation only**)
+5. README operation tables (**pointers**, not a second registry)
+6. External web / research MCP (advisory only)
+
+**Living Architecture Guardian lesson:** scaffold scanners and `knowledge:update` maps can look green while unused registries, dead `*-policy` twins, phantom op ids, and generated inventories compete as truths — because they checked **existence**, not **authority relationships**. Constitution tests close that gap for AI Control. See `project-knowledge/TOOLING.md`.
 
 ---
 
 ## 2. Innovation catalog
 
-Maturity uses MarketMonth vocabulary: **Live** | **Partial** | **Experimental**.
+Maturity vocabulary: **Live** | **Partial** | **Experimental** | **Planned**.
 
 For each item: **what**, **why transfer**, **key paths**, **maturity**, **strip when porting**.
 
@@ -93,50 +112,50 @@ For each item: **what**, **why transfer**, **key paths**, **maturity**, **strip 
 | | |
 |--|--|
 | **What** | Canonical human/agent doctrine under a knowledge root; scripts write **only** under `generated/` (maps, indexes, reports). Doctrine is never auto-rewritten by scanners. |
-| **Why** | Agents and humans share one reality layer; maps regenerate from code; stale doctrine is detectable. |
-| **Key paths** | `project-knowledge/README.md`, `CURRENT_STATE.md`, `PRODUCT.md`, `ARCHITECTURE.md`, `FEATURES/`, `DECISIONS/`, `templates/`, `scripts/update.mjs`, `scripts/check.mjs`, `generated/maps/`, `generated/indexes/`, `generated/reports/` |
+| **Why** | Agents and humans share one reality layer; maps regenerate from code. |
+| **Key paths** | `project-knowledge/README.md`, `CURRENT_STATE.md`, `PRODUCT.md`, `ARCHITECTURE.md`, `PROMPT_CONTRACT.md`, `TOOLING.md`, `DECISIONS/`, `scripts/update.mjs`, `scripts/check.mjs`, `generated/` |
 | **Maturity** | Live |
-| **Strip** | MarketMonth product doctrine content; keep layout, frontmatter authority, update/check contract, templates. |
+| **Strip** | Host product doctrine content; keep layout, update/check contract, generated-only write boundary. |
 
 ### 2.2 Sole docs-index + agent-bootstrap
 
 | | |
 |--|--|
-| **What** | One authoritative `docs-index.json`. Cold-start `agent-bootstrap.json` lists required first reads, status vocabulary, and MCP tool names for docs access. |
+| **What** | One authoritative `docs-index.json`. Cold-start `agent-bootstrap.json` lists required first reads, status vocabulary, and MCP tool names. |
 | **Why** | Token-efficient cold start; no competing indexes. |
-| **Key paths** | `project-knowledge/generated/indexes/docs-index.json`, `agent-bootstrap.json`, `manifest.json` |
+| **Key paths** | `project-knowledge/generated/indexes/docs-index.json`, `agent-bootstrap.json`, `project-knowledge/manifest.json` |
 | **Maturity** | Live |
-| **Strip** | MM-specific doc ids; keep “one index + bootstrap pointers” pattern. |
+| **Strip** | Product-specific doc ids; keep “one index + bootstrap pointers.” |
 
 ### 2.3 CURRENT_STATE status vocabulary
 
 | | |
 |--|--|
-| **What** | Strict statuses: Live / Partial / Prototype / Mocked / Planned / Blocked / Deprecated. Freshness: current / stale / historical / superseded. Hard-stop building on ghost features. |
+| **What** | Strict statuses: Live / Partial / Prototype / Mocked / Planned / Blocked / Deprecated. Treat literally. |
 | **Why** | Highest-ROI anti-hallucination pattern for partially shipped products. |
-| **Key paths** | `project-knowledge/CURRENT_STATE.md`, `templates/CURRENT_STATE_AREA.md`, `docs/ai/agent-auditor-playbook.md` |
+| **Key paths** | `project-knowledge/CURRENT_STATE.md` |
 | **Maturity** | Live |
-| **Strip** | Area rows that describe MM features; keep vocabulary + template. |
+| **Strip** | Feature rows; keep vocabulary + honesty discipline. |
 
 ### 2.4 Agent Prompt System (APS)
 
 | | |
 |--|--|
-| **What** | Portable Cursor task-routing kit: classify → ≤3 workflows → resolve `project-context/` **pointers** into canonical knowledge → task spec → evidence labels. Machine `manifest.json` + install/validate scripts. |
-| **Why** | Designed to copy to a new repo (`onboard-new-project`). Core + workflows are portable; only pointer stubs are product-specific. |
-| **Key paths** | `agent-prompt-system/README.md`, `SYSTEM.md`, `manifest.json`, `core/`, `workflows/`, `project-context/`, `templates/`, `scripts/install.mjs`, `validate.mjs`, `initialize-project-context.mjs` |
-| **Maturity** | Live |
-| **Strip** | MM-specific `required_context` extras; re-point stubs to the new product’s knowledge docs. |
+| **What** | Portable Cursor intent compiler: classify → ≤3 workflows → resolve `project-context/` **pointers** → IntentContract → evidence labels. Machine `manifest.json` + install/validate. |
+| **Why** | Process layer stays portable; only pointer stubs are product-specific. |
+| **Key paths** | `agent-prompt-system/README.md`, `manifest.json`, `core/`, `workflows/`, `project-context/`, `scripts/install.mjs`, `validate.mjs` |
+| **Maturity** | Live packaging / Partial compile fidelity (soft enforce; Gate C hooks Planned) |
+| **Strip** | Product-only `required_context`; re-point stubs. |
 
 ### 2.5 Pointer stubs vs doctrine
 
 | | |
 |--|--|
-| **What** | APS `project-context/` files are short pointers, not copies of PRODUCT/ARCHITECTURE. Agents must resolve and read the canonical file. |
+| **What** | APS `project-context/` files are short pointers, not copies of PRODUCT/ARCHITECTURE. |
 | **Why** | Prevents forked SoT inside the process layer. |
 | **Key paths** | `agent-prompt-system/project-context/` |
 | **Maturity** | Live |
-| **Strip** | Stub targets that name MM-only docs; keep the pointer rule. |
+| **Strip** | Stub targets; keep the pointer rule. |
 
 ### 2.6 Cursor adapter: bridge rule + bootstrap + skill
 
@@ -145,99 +164,182 @@ For each item: **what**, **why transfer**, **key paths**, **maturity**, **strip 
 | **What** | Adapters under `adapters/cursor/` are SoT. `install.mjs` copies into `.cursor/`; `validate.mjs` fails on drift. Do not hand-edit installed copies. |
 | **Key paths** | `agent-prompt-system/adapters/cursor/agent-prompt-router.mdc`, `agent-bootstrap.mdc`, `skills/aps-router/SKILL.md`, installed `.cursor/rules/`, `.cursor/skills/aps-router/` |
 | **Maturity** | Live |
-| **Strip** | Product name in bridge text if desired; keep thin always-on bridge + on-demand skill. |
+| **Strip** | Product name in bridge text; keep thin always-on bridge + on-demand skill. |
 
 ### 2.7 Soft-enforcement Cursor hooks
 
 | | |
 |--|--|
-| **What** | Fail-open hooks: substantial-prompt heuristic → session marker → remind before Write/StrReplace → on stop run knowledge update/check for structural paths + evidence reminder. |
-| **Why** | Mechanical compliance lift without hard-blocking the model. Honesty bound: packaging sync ≠ agent obedience. |
-| **Key paths** | `agent-prompt-system/adapters/cursor/hooks.json`, `hooks/aps-before-submit.mjs`, `aps-pre-tool-use.mjs`, `aps-stop.mjs`, `hooks/lib/substantial-prompt.mjs`, `knowledge-structural.mjs` |
-| **Maturity** | Live (soft) |
-| **Strip** | Path lists that are MM-specific; keep fail-open + structural refresh pattern. |
+| **What** | Fail-open hooks for substantial prompts / structural refresh. Honesty: packaging sync ≠ agent obedience. |
+| **Key paths** | APS adapter hooks (when installed); RPB: Gate C **Planned**, correction-cost gated |
+| **Maturity** | Planned in RPB (soft enforcement not Live as hard gate) |
+| **Strip** | Do not claim hooks exist when only advisory. Port fail-open pattern later. |
 
 ### 2.8 APS brief + evidence-label contract
 
 | | |
 |--|--|
 | **What** | User-visible opener `Selected workflows: …`. Completion labels: Verified / Partially verified / Not verified / Blocked / Assumed. |
-| **Key paths** | `agent-prompt-system/core/verification-contract.md`, `core/spec-builder.md`, `templates/task-spec-template.md` |
-| **Maturity** | Live (process); soft via hooks |
+| **Key paths** | `agent-prompt-system/core/verification-contract.md`, `core/intent-contract.md`, `AGENTS.md` |
+| **Maturity** | Live (process) |
 | **Strip** | Nothing material — fully portable. |
 
 ### 2.9 Repo-local stdio MCP (modular registration)
 
 | | |
 |--|--|
-| **What** | Thin MCP server: register tool groups (context / domain / status). Cursor wires via gitignored `mcp.json` from a tracked example. |
-| **Why** | Product MCP wraps ops without becoming doctrine. |
-| **Key paths** | `mcp/src/create-server.ts`, `create-server/reg-context.ts`, `reg-discovery.ts`, `reg-seo.ts`, `stdio-server.ts`, `.cursor/mcp.json.example`, `docs/ai/mcp.md`, `mcp/README.md` |
-| **Maturity** | Live (stdio); Docker catalog packaging Partial |
-| **Strip** | `reg-discovery.ts` and MM LEARN tools; keep context tools + registrar pattern. |
+| **What** | Thin MCP server: register allowlisted context tools. Cursor wires via gitignored `mcp.json` from a tracked example. |
+| **Why** | Product intelligence without becoming doctrine or app runtime. |
+| **Key paths** | `mcp/src/create-server.ts`, `stdio-server.ts`, `.cursor/mcp.json.example`, `docs/ai/MCP_LOCKDOWN.md`, `docs/ai/mcp-profiles.yaml` |
+| **Maturity** | Live in repo / Partial in Cursor session (owner lockdown required) |
+| **Strip** | Domain crawl/SEO tool farms; keep context tools + registrar + path jail. |
 
 ### 2.10 Allowlisted document registry
 
 | | |
 |--|--|
-| **What** | Tools accept **document IDs** only; arbitrary filesystem reads/writes of knowledge/src/APS trees forbidden. Unknown IDs → `DOCUMENT_NOT_REGISTERED` + alternatives. |
-| **Key paths** | `mcp/src/security/docs-registry.ts`, `security/paths.ts`, `tools/context/read-doc.ts`, `list-docs.ts`, `find-doc.ts` |
+| **What** | Tools accept **document IDs** only; arbitrary filesystem reads/writes of knowledge/src/APS trees forbidden. |
+| **Key paths** | `mcp/src/security/docs-registry.ts`, `security/paths.ts` |
 | **Maturity** | Live |
-| **Strip** | MM doc ids; keep ID→path registry + rejection semantics. |
+| **Strip** | Doc ids; keep ID→path registry + rejection semantics. |
 
 ### 2.11 Status envelopes + secret hygiene
 
 | | |
 |--|--|
-| **What** | Uniform `complete | partial | failed` responses with warnings/uncertainty; stderr-only logging; SSRF / private IP policy for outbound URL tools. |
-| **Key paths** | `mcp/src/contracts/envelope.ts`, `lib/log.ts`, `security/url-policy.ts` |
+| **What** | Uniform envelopes with warnings/uncertainty; stderr-only logging; no secret dumps in MCP responses. |
+| **Key paths** | `mcp/src/contracts/`, logging helpers |
 | **Maturity** | Live |
-| **Strip** | Domain-specific URL allowlists; keep envelope + logging rules. |
+| **Strip** | Domain URL allowlists; keep envelope + logging rules. |
 
-### 2.12 MCP smoke suite + doctor + capability matrix
+### 2.12 MCP smoke suite + doctor + profiles
 
 | | |
 |--|--|
-| **What** | Protocol/security tests spawn a fresh stdio server (not Cursor’s cached schema). Allowlist drift + nav drift tests. Doctor checks required tools + registry hash. Living capability matrix documents R/W scope and **non-capabilities**. |
-| **Key paths** | `mcp/test/smoke.ts`, `test/smoke/allowlist-drift.ts`, `nav-drift.ts`, `security.ts`, `mcp/scripts/doctor.mjs`, `docs/ai/mcp-capability-matrix.md` |
-| **Maturity** | Live |
-| **Strip** | Discovery-tool matrix rows; keep drift tests for context registry. |
+| **What** | Smoke + allowlist-drift tests spawn a fresh stdio server. Doctor checks required `rpb_*` tools + registry hash. Profiles document always / on-demand / disabled MCP. |
+| **Key paths** | `mcp/test/smoke.ts`, `mcp/test/allowlist-drift.ts`, `mcp/scripts/doctor.mjs`, `docs/ai/mcp-profiles.yaml`, `docs/ai/MCP_LOCKDOWN.md` |
+| **Maturity** | Live (repo); Cursor session alignment Partial |
+| **Strip** | Product-specific tool rows; keep drift tests + profile honesty. |
 
-### 2.13 Guardian + ownership + dual quality scores
+### 2.13 Living maps + Guardian (honest scope)
 
 | | |
 |--|--|
-| **What** | Guardian emits `PK-HARD-*` (block closeout) and `PK-WARN-*` (acknowledge with reason). Ownership rules as JSON (UI≠engine, etc.). Dual scores: internal engineering rubric vs external baseline; `--fast` ≠ official; advisory AI audit cannot change score. |
-| **Key paths** | `project-knowledge/scripts/guardian.mjs`, `guardian/hard.mjs`, `soft.mjs`, `codes.mjs`, `ownership-rules.json`, `quality-rules.json`, `QUALITY_RUBRIC.md`, `scripts/quality.mjs`, `generated/reports/STRUCTURE_WARNINGS.md` |
-| **Maturity** | Live |
-| **Strip** | MM path literals in ownership rules; keep code taxonomy + dual-score idea. |
+| **What** | `knowledge:update` writes derived inventories. Guardian emits `PK-HARD-*` / `PK-WARN-*` for scaffold hygiene (generated markers, extreme file size, server-only in client components, required docs). Ownership map lists owners; **do not** ship unread “independenceRules” or decorative heuristics that look like SoT. |
+| **Why** | Fresh navigation + hard hygiene — **not** AI Control authority verification. |
+| **Key paths** | `project-knowledge/scripts/guardian.mjs`, `ownership-rules.json`, `quality-rules.json`, `TOOLING.md`, `generated/maps/runtime-prompts.json` |
+| **Maturity** | Live (inventory + HARD/WARN) |
+| **Strip** | Host path literals; keep code taxonomy. **Do not** port dual quality-score theaters or unread JSON “rules.” |
+| **Lesson** | Existence of `registry.ts` / maps / `*-policy.ts` looked legitimate while unused. Authority relationships belong in constitution tests (see 2.19). |
 
 ### 2.14 Agent toolchain map + thin bootstrap rule
 
 | | |
 |--|--|
-| **What** | When-to-use table for knowledge / product MCP / Docker helpers / external research. Thin always-on bootstrap rule points at bootstrap JSON — no doctrine inline. |
-| **Key paths** | `docs/ai/agent-toolchain.md`, `AGENTS.md`, `workflows/use-agent-toolchain/WORKFLOW.md`, `adapters/cursor/agent-bootstrap.mdc`, `scripts/agent-preflight.mjs` |
+| **What** | When-to-use table: knowledge / RPB MCP / Context7 / external research. Thin always-on bootstrap rule points at bootstrap JSON — no doctrine inline. |
+| **Key paths** | `AGENTS.md`, `.cursor/rules/agent-bootstrap.mdc`, `project-knowledge/TOOLING.md` |
 | **Maturity** | Live |
-| **Strip** | MM LEARN / YouTube narrative; keep authority table + preflight. |
+| **Strip** | Host narratives; keep authority table + cold-start order. |
 
-### 2.15 Cursor context and indexing policy
+### 2.15 Cursor context and indexing hygiene
 
 | | |
 |--|--|
-| **What** | Separates Indexing vs Context vs Security. `.cursorignore` hygiene; structural validator. |
-| **Key paths** | `docs/ai/cursor-context-and-indexing-policy.md`, `scripts/validate-cursor-context.mjs`, `.cursorignore` |
-| **Maturity** | Live (structure checks); semantic retrieval eval Partial/manual |
-| **Strip** | MM-specific ignore globs; keep the three-way separation. |
+| **What** | Separates Indexing vs Context vs Security. `.cursorignore` hygiene. |
+| **Key paths** | `.cursorignore`, `docs/ai/MCP_LOCKDOWN.md` |
+| **Maturity** | Live (hygiene); semantic retrieval eval Partial/manual |
+| **Strip** | Host-specific ignore globs; keep the three-way separation. |
 
-### 2.16 Optional later (port after P0/P1)
+### 2.16 Optional later (true Partials / Planned in RPB)
 
-| Innovation | Paths | Maturity | Notes |
-|------------|-------|----------|-------|
-| Read-only spanning ask API | `src/app/api/project-knowledge/ask/`, `src/lib/project-knowledge/` | Live | Only if the host app already has auth + rate limits; never writes doctrine |
-| Docker helper MCP profile | `docs/ai/marketmonth_development.profile.yaml` | Live (operator-activated) | Advisory research/eng helpers ≠ product SoT |
-| Thinking personas | `agent-prompt-system/personas/` | Experimental | Not installed into Cursor; workflows remain spine |
-| Change-based freshness pilot | `project-knowledge/scripts/guardian/freshness-pilot.mjs` | Partial | Warn-only |
+| Innovation | Maturity | Notes |
+|------------|----------|-------|
+| APS Gate C hard hooks | Planned | Correction-cost gated; do not claim Live |
+| Owner Cursor MCP lockdown | Partial | Policy Live; session often still has write/gateway tools until owner acts |
+| Agent-learning approve automation | Partial | Propose/review only; human approval required |
+| Docker packaging of product MCP | Planned | Host stdio preferred |
+| Advisory offline architecture semantic audit | Deferred | Diff packet only; never CI SoT |
+
+---
+
+### 2.17 Three-plane separation
+
+| | |
+|--|--|
+| **What** | **Product** (UI, state, export) · **AI Control** (prompts, schemas, ops, traces) · **Engineering Intelligence** (knowledge, APS, MCP, learning). ADR in knowledge. |
+| **Why** | Stops process docs, runtime prompts, and doctrine from collapsing into one mush. |
+| **Key paths** | `AGENTS.md`, `project-knowledge/ARCHITECTURE.md`, `project-knowledge/DECISIONS/0001-three-plane-separation.md` |
+| **Maturity** | Live |
+| **Strip** | Product nouns; keep the three-plane invariant. |
+
+### 2.18 AI operation registry + typed identity
+
+| | |
+|--|--|
+| **What** | Single `operationRegistry`; `AiOperationId = keyof typeof operationRegistry`. Public ops declare `promptModulePath`, `schemaName`, `evalPath`. Nested repair is visibility=`nested` with `schemaName: null`. |
+| **Why** | Phantom op ids and dual taxonomies die at the type boundary. |
+| **Key paths** | `src/ai/operations/registry.ts`, `schema-names.ts`, `src/ai/README.md` |
+| **Maturity** | Live |
+| **Strip** | Op list; keep typed identity + public/nested split. |
+| **Honesty** | Services may pass **typed literals**; `getOperation()` need not be a runtime orchestration bus. Declare-site + constitution is enough for MVP. |
+
+### 2.19 AI Control constitution tests
+
+| | |
+|--|--|
+| **What** | Vitest suite verifies relationships: public op ↔ prompt file ↔ schemaName ↔ eval ↔ repair policy; README mentions public ids; unknown ids rejected; generated `runtime-prompts.json` `versionLiteral` for `prompt-version.ts` matches `RUNTIME_PROMPT_VERSION`; `src/config/*-policy.ts` allowlist = `upload-policy.ts` only. |
+| **Why** | This is the fix for “green inventory, wrong architecture.” |
+| **Key paths** | `tests/ai/operations-registry.test.ts`, `project-knowledge/TOOLING.md` |
+| **Maturity** | Live (in `npm test` / `verify`) |
+| **Strip** | Product paths; keep relationship matrix idea. |
+
+### 2.20 Repair policy by schemaName
+
+| | |
+|--|--|
+| **What** | `getRepairPolicy(schemaName)` sets maxAttempts (e.g. ≤1 default, ≤2 for final compile). Null/missing structured parse is **not** repaired. Repair prompt is fenced instruction, not a second product SoT. |
+| **Why** | Highest-ROI structured-LLM reliability without opaque retry loops. |
+| **Key paths** | `src/ai/operations/repair-policy.ts`, feature `prompts/repair-output.ts`, `structured-openai` service |
+| **Maturity** | Live |
+| **Strip** | Schema names; keep policy table + null-parse rule. |
+
+### 2.21 Context compilers + decision ledger + AiTrace
+
+| | |
+|--|--|
+| **What** | Per-op context assemblers with budgets + deep redact. Decision ledger rebuild-on-read (not a second persisted SoT). AiTrace: typed `operationId`, versions, hashes, latency, `repairAttempts`, `finalValidation` — no prompt bodies/PII. |
+| **Key paths** | `src/ai/context/`, `src/ai/traces/`, brief/prompt assemblers |
+| **Maturity** | Live |
+| **Strip** | Domain fields; keep compiler + ledger + trace shapes. |
+
+### 2.22 Single invariant owners
+
+| | |
+|--|--|
+| **What** | Business gates that matter (e.g. interview → brief) have **one** deterministic function enforced on the **server**, shared by UI for UX only. Example: `canCompleteInterview` on next-question **and** brief build. |
+| **Why** | Stops LLM/UI/API bypass paths from disagreeing. |
+| **Key paths** | `src/features/.../lib/can-complete-interview.ts`, auth-boundary tests under `tests/services/` |
+| **Maturity** | Live |
+| **Strip** | Domain categories; keep “one owner, server enforces.” |
+
+### 2.23 Deterministic export lint / evals
+
+| | |
+|--|--|
+| **What** | Merge-gate quality via deterministic contract lint + offline eval fixtures — not live-LLM judges in CI. |
+| **Why** | Repeatability without flaky model spend. |
+| **Key paths** | feature `validation/`, `tests/evals/`, Prompt Contract docs |
+| **Maturity** | Live |
+| **Strip** | Domain rules; keep “deterministic gate + offline fixtures” pattern. |
+
+### 2.24 Doctor → verify ladder
+
+| | |
+|--|--|
+| **What** | `doctor` = human-facing scaffold + light wiring checks. `verify` = doctor + lint + typecheck + test (incl. constitution) + knowledge + APS + MCP + build + E2E. Doctor does **not** duplicate the full AI relationship matrix. |
+| **Key paths** | `scripts/doctor.mjs`, `package.json` scripts, `project-knowledge/TOOLING.md` |
+| **Maturity** | Live |
+| **Strip** | Host checks; keep ladder separation (scaffold vs constitution). |
 
 ---
 
@@ -245,12 +347,15 @@ For each item: **what**, **why transfer**, **key paths**, **maturity**, **strip 
 
 | Keep pattern | Drop / replace |
 |--------------|----------------|
-| MCP context tools (list / find / read / bootstrap) | `mm_crawl_*`, brand/SEO/social/competitors/strategy LEARN wrappers |
-| APS `core/` + most `workflows/` | Product-only required_context extras |
-| Knowledge scripts + guardian codes | PRODUCT loop doctrine prose |
-| Ownership independence **idea** | Concrete `src/engine/discovery` paths |
-| Docker profile **shape** | YouTube-as-Content-Universe narrative |
-| Status + freshness vocabulary | MM feature rows in CURRENT_STATE |
+| MCP context tools (`rpb_*` / rename prefix) | Crawl/SEO/LEARN tool farms, write MCP |
+| APS `core/` + lean workflows | Bloated product-only workflow kits claimed as universal |
+| Knowledge scripts + Guardian HARD/WARN | Unread decorative JSON “rules,” dual score theaters |
+| Typed op registry + constitution tests | Parallel model-policy modules; registry-as-orchestration-bus |
+| Repair policy by schemaName | Opaque infinite repair; repair prompt as product SoT |
+| Single server invariant owners | Multi-path completion (UI vs API vs LLM disagree) |
+| Status + freshness vocabulary | Ghost “Live” rows without code |
+| Doctor scaffold + verify ladder | Doctor that pretends to be semantic architecture proof |
+| Evidence labels | “100% transferred” claims |
 
 ---
 
@@ -259,159 +364,162 @@ For each item: **what**, **why transfer**, **key paths**, **maturity**, **strip 
 Ordered for a greenfield or existing product repo:
 
 1. **Scaffold knowledge**
-   - Create `project-knowledge/` (or rename) with README, PRODUCT, ARCHITECTURE, CURRENT_STATE, templates.
-   - Create empty `generated/{maps,indexes,reports}/` and decide “scripts write only here.”
+   - `project-knowledge/` with README, PRODUCT, ARCHITECTURE, CURRENT_STATE, TOOLING.
+   - Empty `generated/{maps,indexes,reports}/`; scripts write only here.
 
-2. **Port update / check / guardian**
-   - Adapt scanners to the new `src/` layout.
-   - Wire `knowledge:update`, `knowledge:check`, `knowledge:guardian` (and optional `knowledge:sync` on predev/prebuild).
-   - Define ownership-rules and guardian hard/soft codes for the new boundaries.
+2. **Cold-start**
+   - Root `AGENTS.md` with planes + evidence labels + cold-start order.
+   - Bootstrap JSON after first `knowledge:update`.
 
-3. **Copy APS**
-   - Copy `agent-prompt-system/` (core, workflows, adapters, scripts, templates).
-   - Run `initialize-project-context.mjs` (or rewrite stubs) to point at the new knowledge docs.
-   - Run `node agent-prompt-system/scripts/install.mjs` then `validate.mjs`.
-   - Confirm `.cursor/rules/agent-prompt-router.mdc`, `agent-bootstrap.mdc`, skill, and hooks are installed from adapters (not hand-edited).
+3. **Lean APS**
+   - Copy `agent-prompt-system/` core + workflows + adapters.
+   - Point `project-context/` stubs at new knowledge docs.
+   - `install.mjs` then `validate.mjs`. Do not hand-edit `.cursor` copies.
 
-4. **Build allowlisted context MCP**
-   - Keep registrar pattern + docs-registry + envelopes.
-   - Register context tools first; add domain ops later behind the same security wrappers.
-   - Track `.cursor/mcp.json.example`; gitignore live `mcp.json`.
-   - Add smoke tests for allowlist drift + `mcp:doctor`.
+4. **Read-only product MCP**
+   - Registrar + docs-registry + envelopes + allowlist-drift + doctor.
+   - Track `mcp.json.example`; gitignore live `mcp.json`.
+   - Owner lockdown: disable write/filesystem/shell MCP for the workspace.
 
-5. **Wire npm scripts + CI**
-   - Minimum: `knowledge:check`, APS `validate.mjs`, `mcp:test` (or doctor), cursor-context validate.
-   - Document authority hierarchy in root `AGENTS.md`.
+5. **AI Control before the second LLM call**
+   - Contract registry + operation registry with typed ids.
+   - Constitution tests for op ↔ prompt ↔ schema ↔ eval ↔ repair.
+   - Context compilers + redact/budgets + repair policy + AiTrace.
+   - One server-owned invariant for any critical transition.
+   - **Do not** wire `getOperation()` as an orchestration bus unless a real need appears.
 
-6. **Verify**
+6. **Guardian + doctor + verify**
+   - HARD codes for generated markers / dangerous crossings.
+   - Doctor for scaffold; vitest for relationships.
+   - CI runs the verify umbrella.
+
+7. **Verify**
    ```bash
-   node agent-prompt-system/scripts/validate.mjs
+   npm run doctor
+   npm run test
+   npm run knowledge:update
    npm run knowledge:check
+   npm run knowledge:guardian
+   npm run agent:validate
    npm run mcp:test
    npm run mcp:doctor
-   npm run validate:cursor-context
+   npm run verify
    ```
 
-Suggested priority: **P0** Knowledge OS + CURRENT_STATE + APS → **P1** MCP context allowlist + guardian/ownership + indexing policy → **P2** Docker helpers / ask API → **P3** personas.
+Suggested priority: **P0** Knowledge + CURRENT_STATE + AGENTS + lean APS → **P1** read-only MCP + owner lockdown → **P2** AI Control registry + constitution + repair → **P3** Guardian HARD + doctor/verify → **later** soft hooks / learning / advisory audits.
 
 ---
 
 ## 5. Anti-patterns
 
-- Treating **packaging sync** (`validate.mjs`) as proof of **agent compliance**
-- Hand-editing `generated/` maps or installed `.cursor` APS copies (edit adapters → reinstall)
-- Letting MCP **write** doctrine or orchestrate whole product workflows
+- Treating **packaging sync** (`agent:validate`) as proof of **agent compliance**
+- Hand-editing `generated/` maps or installed `.cursor` APS copies
+- Letting MCP **write** doctrine or orchestrate product workflows
 - Merging APS into app runtime / product prompt modules
-- Starting the whole app merely to answer a docs question
-- Letting research vaults / RepoBrain / reference libraries override PRODUCT / ARCHITECTURE / CURRENT_STATE
-- Inventing MCP capabilities not listed in the capability matrix
-- Treating `quality:update --fast` as the official quality score
+- Letting research vaults / RepoBrain / Reference override PRODUCT / ARCHITECTURE / CURRENT_STATE
+- **Existence of a registry, map, or `*-policy.ts` file ≠ legitimacy**
+- Decorative JSON that looks like policy but is never executed
+- Competing `src/config/*-policy.ts` twins (keep a single real SoT; RPB: upload-policy only)
+- Phantom operation ids in traces / APIs
+- Multiple completion gates (UI vs API vs LLM) for the same invariant
+- Treating `runtime-prompts.json` or README tables as a second ops registry
+- CI-blocking LLM architecture auditors as SoT
+- Claiming APS IDE hard hooks exist when only soft/Planned
+- Using Context7 (or any docs/web MCP) as product truth
 
 ---
 
 ## 6. Appendix
 
-### 6.1 Command cheat sheet (MarketMonth reference)
+### 6.1 Command cheat sheet (RPB reference)
 
 ```bash
+npm run doctor
+npm run dev                 # doctor then Next.js
+npm run verify              # full merge gate
 npm run knowledge:update
 npm run knowledge:check
 npm run knowledge:guardian
-npm run knowledge:sync
-npm run quality:update          # official score (full probes)
-npm run quality:update:fast     # not official
+npm run agent:install
+npm run agent:validate
 npm run mcp:server
 npm run mcp:test
 npm run mcp:doctor
-npm run agent:preflight -- --workflow audit-existing-system
-npm run validate:cursor-context
-node agent-prompt-system/scripts/install.mjs
-node agent-prompt-system/scripts/validate.mjs
+npm run test                # includes AI Control constitution
 ```
 
-### 6.2 APS workflow IDs
+### 6.2 APS workflow IDs (lean RPB set)
 
-From `agent-prompt-system/manifest.json` (v1.0.5):
+From `agent-prompt-system/manifest.json` (v1.1.0):
 
 | ID | Role |
 |----|------|
-| `use-agent-toolchain` | Pick narrowest authoritative tool/source |
 | `investigate-codebase` | Map owners, SoT, risks |
-| `plan-feature` | Scope + task spec before code |
-| `implement-feature` | Implement inside an accepted spec |
-| `debug-runtime-problem` | Evidence-first runtime debug |
-| `refine-ui-ux` | UI/UX refinement |
-| `refactor-safely` | Safe structural change |
-| `test-and-verify` | Verification plan + evidence |
-| `audit-existing-system` | Readiness / reality audit |
-| `improve-seo-and-llm-readiness` | SEO / LLM readiness |
-| `review-security-and-privacy` | Security / privacy review |
-| `optimize-performance` | Performance work |
-| `onboard-new-project` | Port APS into a new project |
-| `daily-project-closeout` | End-of-day gate |
+| `plan-feature` | Scope + acceptance before code |
+| `implement-feature` | Ship inside an accepted spec |
+| `test-and-verify` | Verification + evidence labels |
+| `audit-existing-system` | Findings-first audit |
+| `review-security-and-privacy` | Uploads, classification, MCP boundaries |
+| `daily-project-closeout` | End-of-day gates |
 
-### 6.3 MCP tools — keep vs strip
-
-**Port first (context / cold-start):**
+### 6.3 MCP tools (RPB `rpb_*` — port / rename)
 
 | Tool | Role |
 |------|------|
-| `mm_get_agent_bootstrap` | Cold-start pointers |
-| `mm_list_project_docs` | Allowlisted doc catalog |
-| `mm_find_project_doc` | Query → candidate ids |
-| `mm_read_project_doc` | Read by id |
-| `mm_product_overview` | Parse PRODUCT |
-| `mm_architecture_map` | Parse ARCHITECTURE |
-| `mm_route_inventory` | Live app routes |
-| `mm_stage_for_request` | Stage recommendation (guide, not authority) |
+| `rpb_get_agent_bootstrap` | Cold-start pointers |
+| `rpb_list_project_docs` | Allowlisted doc catalog |
+| `rpb_find_project_doc` | Query → candidate ids |
+| `rpb_read_project_doc` | Read by id |
+| `rpb_product_overview` | Parse PRODUCT |
+| `rpb_architecture_map` | Parse ARCHITECTURE |
+| `rpb_current_state` | Parse CURRENT_STATE |
+| `rpb_get_repository_tree` | Generated tree inventory |
+| `rpb_get_route_inventory` | Routes map |
+| `rpb_get_prompt_inventory` | Derived prompt file inventory (**not** ops registry) |
+| `rpb_get_schema_inventory` | Schema inventory |
+| `rpb_get_guardian_report` | Latest Guardian findings |
+| `rpb_get_reference_concept` | Allowlisted Reference concept |
 
-**Strip or replace with your domain ops:**
-
-| Tool | Role |
-|------|------|
-| `mm_crawl_website` | Bounded crawl |
-| `mm_extract_brand` | Brand signals |
-| `mm_analyze_seo` | Customer-site SEO |
-| `mm_discover_social` | Social links |
-| `mm_suggest_competitors` | Competitor hints |
-| `mm_draft_strategy` | Strategy draft (human review) |
-| `mm_analyze_website` | Full analyze pipeline |
-| `mm_seo_status` | Product-site SEO status |
-
-Rename the `mm_` prefix to your product when porting; keep the **context vs domain-ops** split.
+Rename the `rpb_` prefix when porting; keep **context-only** until a domain need is proven. Never add write tools as “foundation.”
 
 ### 6.4 Reference path index (this repo)
 
 | Concern | Path |
 |---------|------|
 | Agent entry | `AGENTS.md` |
-| Toolchain map | `docs/ai/agent-toolchain.md` |
-| MCP doctrine | `docs/ai/mcp.md` |
-| MCP capability matrix | `docs/ai/mcp-capability-matrix.md` |
-| Cursor indexing policy | `docs/ai/cursor-context-and-indexing-policy.md` |
-| Auditor playbook | `docs/ai/agent-auditor-playbook.md` |
-| APS root | `agent-prompt-system/` |
-| APS core SOP | `agent-prompt-system/core/request-router.md` |
-| Knowledge OS | `project-knowledge/README.md` |
+| Inventory vs authority | `project-knowledge/TOOLING.md` |
 | Live/partial truth | `project-knowledge/CURRENT_STATE.md` |
+| Knowledge OS | `project-knowledge/README.md` |
+| Foundations playbook | `docs/portability/AI_ENGINEERING_FOUNDATIONS_PLAYBOOK.md` |
+| MCP lockdown | `docs/ai/MCP_LOCKDOWN.md` |
+| MCP profiles | `docs/ai/mcp-profiles.yaml` |
+| APS root | `agent-prompt-system/` |
+| AI Control map | `src/ai/README.md` |
+| Op registry | `src/ai/operations/registry.ts` |
+| Constitution tests | `tests/ai/operations-registry.test.ts` |
+| Repair policy | `src/ai/operations/repair-policy.ts` |
 | Bootstrap JSON | `project-knowledge/generated/indexes/agent-bootstrap.json` |
 | Docs index | `project-knowledge/generated/indexes/docs-index.json` |
-| MCP server | `mcp/src/stdio-server.ts` |
+| MCP server | `mcp/src/create-server.ts` |
 | Docs allowlist | `mcp/src/security/docs-registry.ts` |
 | Cursor MCP example | `.cursor/mcp.json.example` |
-| Docker helper profile | `docs/ai/marketmonth_development.profile.yaml` |
+| Doctor | `scripts/doctor.mjs` |
 
 ### 6.5 Deeper reading order (when implementing)
 
 1. `AGENTS.md`
-2. `project-knowledge/README.md` + `CURRENT_STATE.md`
-3. `agent-prompt-system/README.md` + `onboard-new-project` workflow
-4. `docs/ai/mcp.md` + `mcp-capability-matrix.md`
-5. `docs/ai/agent-toolchain.md`
-6. `docs/ai/cursor-context-and-indexing-policy.md`
+2. `project-knowledge/README.md` + `CURRENT_STATE.md` + `TOOLING.md`
+3. `docs/portability/AI_ENGINEERING_FOUNDATIONS_PLAYBOOK.md`
+4. `src/ai/README.md` + `tests/ai/operations-registry.test.ts`
+5. `agent-prompt-system/README.md` + lean workflows
+6. `docs/ai/MCP_LOCKDOWN.md` + `mcp-profiles.yaml`
+
+### 6.6 Origin note
+
+MarketMonth contributed the Agent OS shape (Knowledge / APS / MCP separation, Guardian codes, allowlisted docs MCP). RPB proved the AI Control plane (typed ops, constitution, repair policy, invariant owners) and the Guardian failure mode (inventory ≠ authority). Prefer RPB paths as the living reference; treat `Reference/archives/marketmonth/` as pattern mining only — never product SoT.
 
 ---
 
 ## Honesty bound
 
-This guide describes patterns that are **Live** in MarketMonth’s docs and trees. Soft hooks and advisory rules raise compliance; they do not create mathematical certainty that every agent turn followed APS. Prefer evidence labels over “100% transferred.”
+This guide describes patterns that are **Live or Partial** in RPB with evidence labels. Soft APS routing and owner MCP lockdown raise compliance; they do not create mathematical certainty that every agent turn followed process. Prefer evidence labels over “100% transferred.” Product truth remains `project-knowledge/`; this file is **supporting** authority only.
