@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-11T03:14:18.731Z",
-  "commitSha": "b26e6afc0c152e06f362688937812613bb4f628f",
+  "generatedAt": "2026-08-11T03:44:08.801Z",
+  "commitSha": "df8bbbe0730eb40cdae26b5df60ea9b028b03446",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "."
@@ -10,15 +10,11 @@
   ],
   "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
   "tree": {
-    "name": "YTS Prompt Director",
+    "name": "YST-director-",
     "children": [
       {
         "name": ".cursor",
         "children": [
-          {
-            "name": "mcp.json",
-            "file": true
-          },
           {
             "name": "mcp.json.example",
             "file": true
@@ -65,10 +61,6 @@
         "file": true
       },
       {
-        "name": ".env.local",
-        "file": true
-      },
-      {
         "name": ".github",
         "children": [
           {
@@ -95,8 +87,32 @@
         "file": true
       },
       {
+        "name": "AGENTS.md",
+        "file": true
+      },
+      {
+        "name": "ARCHITECTURE.md",
+        "file": true
+      },
+      {
+        "name": "README.md",
+        "file": true
+      },
+      {
+        "name": "REFERENCE_PORTING_NOTES.md",
+        "file": true
+      },
+      {
+        "name": "Reference",
+        "note": "advisory — not expanded"
+      },
+      {
         "name": "agent-learning",
         "children": [
+          {
+            "name": "README.md",
+            "file": true
+          },
           {
             "name": "approved",
             "children": [
@@ -120,10 +136,6 @@
           },
           {
             "name": "candidates.ndjson",
-            "file": true
-          },
-          {
-            "name": "README.md",
             "file": true
           },
           {
@@ -161,6 +173,14 @@
       {
         "name": "agent-prompt-system",
         "children": [
+          {
+            "name": "README.md",
+            "file": true
+          },
+          {
+            "name": "SYSTEM.md",
+            "file": true
+          },
           {
             "name": "adapters",
             "children": [
@@ -262,10 +282,6 @@
             ]
           },
           {
-            "name": "README.md",
-            "file": true
-          },
-          {
             "name": "scripts",
             "children": [
               {
@@ -277,10 +293,6 @@
                 "file": true
               }
             ]
-          },
-          {
-            "name": "SYSTEM.md",
-            "file": true
           },
           {
             "name": "templates",
@@ -371,16 +383,12 @@
         ]
       },
       {
-        "name": "AGENTS.md",
-        "file": true
-      },
-      {
-        "name": "ARCHITECTURE.md",
-        "file": true
-      },
-      {
         "name": "docs",
         "children": [
+          {
+            "name": "FOUNDATION_DEFINITION_OF_DONE.md",
+            "file": true
+          },
           {
             "name": "ai",
             "children": [
@@ -389,11 +397,11 @@
                 "file": true
               },
               {
-                "name": "mcp-profiles.yaml",
+                "name": "MCP_LOCKDOWN.md",
                 "file": true
               },
               {
-                "name": "MCP_LOCKDOWN.md",
+                "name": "mcp-profiles.yaml",
                 "file": true
               }
             ]
@@ -406,8 +414,24 @@
                 "file": true
               },
               {
+                "name": "FOUNDATION_READINESS_AUDIT.md",
+                "file": true
+              },
+              {
+                "name": "OWNER_SMOKE_TEST_01.md",
+                "file": true
+              },
+              {
+                "name": "PROMPT_QUALITY_CALIBRATION_01.md",
+                "file": true
+              },
+              {
                 "name": "artifacts",
                 "children": [
+                  {
+                    "name": "ZYNAVA US Supplement-Comparison Content Market Research Prompt.md",
+                    "file": true
+                  },
                   {
                     "name": "calibration-01",
                     "truncated": true
@@ -423,30 +447,10 @@
                   {
                     "name": "owner-smoke-01.json",
                     "file": true
-                  },
-                  {
-                    "name": "ZYNAVA US Supplement-Comparison Content Market Research Prompt.md",
-                    "file": true
                   }
                 ]
-              },
-              {
-                "name": "FOUNDATION_READINESS_AUDIT.md",
-                "file": true
-              },
-              {
-                "name": "OWNER_SMOKE_TEST_01.md",
-                "file": true
-              },
-              {
-                "name": "PROMPT_QUALITY_CALIBRATION_01.md",
-                "file": true
               }
             ]
-          },
-          {
-            "name": "FOUNDATION_DEFINITION_OF_DONE.md",
-            "file": true
           },
           {
             "name": "portability",
@@ -594,10 +598,6 @@
         ]
       },
       {
-        "name": "next-env.d.ts",
-        "file": true
-      },
-      {
         "name": "next.config.ts",
         "file": true
       },
@@ -683,6 +683,30 @@
             ]
           },
           {
+            "name": "PRODUCT.md",
+            "file": true
+          },
+          {
+            "name": "PROMPT_CONTRACT.md",
+            "file": true
+          },
+          {
+            "name": "README.md",
+            "file": true
+          },
+          {
+            "name": "SECURITY.md",
+            "file": true
+          },
+          {
+            "name": "TOOLING.md",
+            "file": true
+          },
+          {
+            "name": "UX.md",
+            "file": true
+          },
+          {
             "name": "generated",
             "children": [
               {
@@ -763,14 +787,6 @@
                     "file": true
                   },
                   {
-                    "name": "foundation-readiness.json",
-                    "file": true
-                  },
-                  {
-                    "name": "guardian.json",
-                    "file": true
-                  },
-                  {
                     "name": "GUARDIAN.md",
                     "file": true
                   },
@@ -780,6 +796,14 @@
                   },
                   {
                     "name": "STRUCTURE_WARNINGS.md",
+                    "file": true
+                  },
+                  {
+                    "name": "foundation-readiness.json",
+                    "file": true
+                  },
+                  {
+                    "name": "guardian.json",
                     "file": true
                   },
                   {
@@ -795,19 +819,7 @@
             "file": true
           },
           {
-            "name": "PRODUCT.md",
-            "file": true
-          },
-          {
-            "name": "PROMPT_CONTRACT.md",
-            "file": true
-          },
-          {
             "name": "quality-rules.json",
-            "file": true
-          },
-          {
-            "name": "README.md",
             "file": true
           },
           {
@@ -846,10 +858,6 @@
             ]
           },
           {
-            "name": "SECURITY.md",
-            "file": true
-          },
-          {
             "name": "templates",
             "children": [
               {
@@ -857,14 +865,6 @@
                 "file": true
               }
             ]
-          },
-          {
-            "name": "TOOLING.md",
-            "file": true
-          },
-          {
-            "name": "UX.md",
-            "file": true
           }
         ]
       },
@@ -881,18 +881,6 @@
             ]
           }
         ]
-      },
-      {
-        "name": "README.md",
-        "file": true
-      },
-      {
-        "name": "Reference",
-        "note": "advisory — not expanded"
-      },
-      {
-        "name": "REFERENCE_PORTING_NOTES.md",
-        "file": true
       },
       {
         "name": "scripts",
@@ -941,6 +929,10 @@
           {
             "name": "ai",
             "children": [
+              {
+                "name": "README.md",
+                "file": true
+              },
               {
                 "name": "context",
                 "children": [
@@ -1011,10 +1003,6 @@
                     "file": true
                   }
                 ]
-              },
-              {
-                "name": "README.md",
-                "file": true
               },
               {
                 "name": "traces",
@@ -1182,15 +1170,6 @@
         ]
       },
       {
-        "name": "test-results",
-        "children": [
-          {
-            "name": ".last-run.json",
-            "file": true
-          }
-        ]
-      },
-      {
         "name": "tests",
         "children": [
           {
@@ -1300,15 +1279,15 @@
                 "name": "golden",
                 "children": [
                   {
+                    "name": "README.md",
+                    "file": true
+                  },
+                  {
                     "name": "properties.json",
                     "file": true
                   },
                   {
                     "name": "properties.test.ts",
-                    "file": true
-                  },
-                  {
-                    "name": "README.md",
                     "file": true
                   }
                 ]
@@ -1504,10 +1483,6 @@
       },
       {
         "name": "tsconfig.json",
-        "file": true
-      },
-      {
-        "name": "tsconfig.tsbuildinfo",
         "file": true
       },
       {
