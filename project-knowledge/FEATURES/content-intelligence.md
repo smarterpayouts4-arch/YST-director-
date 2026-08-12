@@ -1,21 +1,23 @@
 # FEATURE — Content Intelligence
 
-Status: **Partial** (Librarian vertical slice)  
+Status: **Live** (Librarian MVP frozen) · Topic Engine **Planned**  
 Owner: product
 
 ## Purpose
 
 Independent domain after Research Prompt Builder export. Librarian ingests completed external research into a governed Content Intelligence Library. Topic Engine (Planned) consumes only `PublishedLibraryDto`.
 
-## Live now (PR1)
+## Live now
 
 - Domain at `src/features/content-intelligence/{library,contracts}/`
 - Step 5 thin paste handoff (local component state only → CI ownership on Send)
-- Immutable `ResearchArtifact` (raw source only — no extract metadata)
-- Separate `ExtractionRun` records (model, promptVersion, extractedAt, validationResult)
-- Op `extract-content-intelligence` via shared structured-output gateway
-- Deterministic `curate-library` + owner review (`needs_review` / `accepted` / `rejected`)
-- Publish accepted items to `PublishedLibraryDto`
+- Immutable `ResearchArtifact` + separate `ExtractionRun`
+- Op `extract-content-intelligence` (`ci-librarian-1.1.1`) via shared gateway
+- Deterministic curate with **stricter auto-stage** + exception queue
+- Owner UI: summary + needs attention + technical details (advanced records secondary)
+- **Research intelligence ready** is a status; `PublishedLibraryDto` auto-builds when no exceptions remain, scoped to the active artifact (accepted items only; no raw research, rejected items, or extraction internals)
+- Hard max research input from `research-input-limits.ts` (`MAX_RESEARCH_INPUT_CHARS`, JS `string.length`) — **no silent truncation**; capacity counter only at ≥85% of max
+- Acceptance of a full research report does **not** guarantee every fact becomes a Librarian artifact; extraction output limits (e.g. ≤80 items) are a separate downstream policy
 - Storage key `content-intelligence:v1`
 
 ## Locked kinds
@@ -25,30 +27,17 @@ Independent domain after Research Prompt Builder export. Librarian ingests compl
 Evidence/source/confidence are item metadata, not kinds.  
 Origin: `extracted` | `owner_edited` | `owner_added` (distinct from provenance).
 
-## Acceptance gate before Librarian freeze
+## Auto-stage (clean → accepted)
 
-PR1 structure is accepted. Before Topic Engine work, smoke-test intelligence quality on:
+All of: statement present · confidence medium/high · verified verbatim `evidenceQuote` · non-empty provenance · not `unresolved` · not `quoteCleared`.  
+Hypotheses may auto-accept only when `isHypothesis: true` and otherwise clean.  
+Else → `needs_review` (Needs your attention).
 
-1. Actual ZYNAVA completed research response  
-2. 2–3 very different completed research reports  
+## Freeze
 
-Check only:
+Librarian MVP frozen 2026-08-12 on `ci-librarian-1.1.1` + `gpt-5.6-terra` at medium reasoning. Do not change extract/repair prompts, model, curator, quote verifier, kinds, or 150k input without a new freeze decision. Sol was not required.
 
-| Check | Pass means |
-|-------|------------|
-| Intelligence vs summary | Terra extracts reusable items, not a report paraphrase |
-| Kind usage | Locked kinds used naturally (no platform/evidence kinds) |
-| Quote integrity | `evidenceQuote` ⊆ raw `ResearchArtifact` (or cleared + needs_review) |
-| Hypothesis | Uncertainty / hypothesis preserved via `isHypothesis` + kind choices |
-| Edit origin | Edit → `owner_edited` |
-| Add origin | Owner-added item stays `owner_added`, distinct from extracted |
-| Publish filter | `PublishedLibraryDto` = accepted items only |
-| Weak evidence | Missing/weak → `needs_review` / omit — not invention |
-| Agnostic | No industry/platform hardcoding in extracted structure |
-
-If those pass → **freeze Librarian**. Next domain piece: Topic Engine discovery/design consuming only `PublishedLibraryDto`.
-
-Do **not** start before freeze: upload, freshness, RAG, agents, refresh.
+P2 (recorded, not in this freeze): “What we learned” caps each group at 6, so `isHypothesis: true` items stored as `kind: other` can be hidden under Facts & limitations.
 
 ## Not shipped yet
 

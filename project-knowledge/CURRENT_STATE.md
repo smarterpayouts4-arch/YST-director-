@@ -6,7 +6,7 @@ Use vocabulary literally: Live · Partial · Prototype · Mocked · Planned · B
 
 ## Governing sentence
 
-Research Prompt Builder remains Live through research-prompt export. Content Intelligence is the next independent domain (Partial foundation): completed external research will be ingested by a Librarian into a governed library; Topic Engine is Planned and must consume only the published library DTO.
+Research Prompt Builder remains Live through research-prompt export. Content Intelligence Librarian MVP is frozen: completed external research is ingested into a governed library. Topic Engine is Planned and must consume only `PublishedLibraryDto`.
 
 ## Product journey
 
@@ -17,8 +17,8 @@ Research Prompt Builder remains Live through research-prompt export. Content Int
 | Adaptive interview (one question) | Live | Next-question API + ethical TARI UX; no target question count; strategy cards when strategic priorities unresolved (at most once) |
 | Research brief | Live | Build + owner edit path |
 | Final prompt generate/validate/export | Live | Eight-section formatter + Prompt Contract 1.1 lint (anchored research controls; section-7 opportunity-shaped experiments). Hard stage boundary before Content Intelligence. |
-| Content Intelligence Librarian | Partial | PR1 structure accepted. Pipeline Live for paste→artifact→ExtractionRun→extract→curate→review→publish. **Acceptance smoke pending** (ZYNAVA + 2–3 diverse reports) before freeze. No upload/freshness yet. |
-| Topic Engine | Planned | Blocked on Librarian freeze after smoke. Consumes only `PublishedLibraryDto`; do not build yet; no empty `topics/` scaffold |
+| Content Intelligence Librarian | Live | **MVP frozen** on `ci-librarian-1.1.1` + `gpt-5.6-terra` (medium). ZYNAVA published DTO smoke passed (equivalence-first opportunity, evaluated hypotheses, moment/tension, competitors/restrictions/limitations; DTO scoped to active artifact). Do not change extract prompt, model, curator, or kinds without a new freeze. P2: summary 6-item cap can hide `isHypothesis` items filed as `other`. |
+| Topic Engine | Planned | Librarian freeze complete. Consumes only `PublishedLibraryDto`; discovery next; do not build yet; no empty `topics/` scaffold |
 | Workflow state machine (RPB) | Live | Reducer hard-enforces `canTransition`; illegal moves rejected with `WorkflowDiagnostic` (tested) |
 | Auth / multi-user / cloud DB | Planned | Explicit non-goal for current MVP development |
 | Research execution / video | Planned / Out of MVP | Owner runs prompt in ChatGPT externally |
