@@ -252,14 +252,16 @@ test("owner completes the full journey to an exported research prompt", async ({
   await expect(page.getByText("It will investigate")).toBeVisible();
   await page.getByRole("button", { name: "View full prompt" }).click();
   const formatted = page.locator("pre");
+  await expect(formatted).toContainText("EXECUTE THIS RESEARCH NOW.");
   await expect(formatted).toContainText("## 1. ROLE AND EXPERTISE");
   await expect(formatted).toContainText("## 8. QUALITY CHECK BEFORE SUBMISSION");
-  await expect(formatted).toContainText(
-    "Return the completed research output only; do not propose additional workflows.",
-  );
+  await expect(formatted).toContainText("Return the completed research output only.");
+  await expect(formatted).toContainText("Do not ask follow-up questions.");
 
   await page.getByRole("button", { name: "Copy research prompt" }).click();
   await expect(page.getByRole("button", { name: "Copied" })).toBeVisible();
   const clipboard = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clipboard.startsWith("EXECUTE THIS RESEARCH NOW.")).toBe(true);
   expect(clipboard).toContain("## 5. RESEARCH QUESTIONS");
+  expect(clipboard).not.toMatch(/48,?000/);
 });

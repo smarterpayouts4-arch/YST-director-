@@ -1,8 +1,19 @@
 import type { FinalResearchPrompt } from "@/features/research-prompt-builder/schemas";
+import {
+  RESEARCH_PROMPT_EXECUTE_PREAMBLE,
+  RESEARCH_PROMPT_STOP_FOOTER,
+} from "@/features/research-prompt-builder/formatters/export-framing";
 import { validatePromptContract } from "@/features/research-prompt-builder/validation/prompt-contract";
+
+export {
+  RESEARCH_PROMPT_EXECUTE_PREAMBLE,
+  RESEARCH_PROMPT_STOP_FOOTER,
+} from "@/features/research-prompt-builder/formatters/export-framing";
 
 export function formatResearchPrompt(prompt: FinalResearchPrompt): string {
   return [
+    RESEARCH_PROMPT_EXECUTE_PREAMBLE,
+    "",
     `# ${prompt.title}`,
     "",
     "## 1. ROLE AND EXPERTISE",
@@ -28,6 +39,8 @@ export function formatResearchPrompt(prompt: FinalResearchPrompt): string {
     "",
     "## 8. QUALITY CHECK BEFORE SUBMISSION",
     prompt.qualityCheckBeforeSubmission,
+    "",
+    RESEARCH_PROMPT_STOP_FOOTER,
     "",
   ].join("\n");
 }

@@ -304,14 +304,14 @@ export const PROMPT_CONTRACT_RULES: PromptContractRule[] = [
     id: "stop_line",
     section: "global",
     requirement:
-      "qualityCheckBeforeSubmission must end with: Return the completed research output only; do not propose additional workflows.",
+      "Formatted export must include: Return the completed research output only (formatter appends the hardened stop footer).",
     repairHint:
-      'Include the stop line: "Return the completed research output only; do not propose additional workflows."',
+      'Include "Return the completed research output only" in qualityCheckBeforeSubmission; the formatter also appends the anti-meta stop footer.',
     issue:
-      'Missing explicit stop line (e.g. "return the completed research output only; do not propose additional workflows").',
+      'Missing explicit stop line (e.g. "return the completed research output only").',
     matcher: {
       pattern:
-        /return the completed research output only|do not propose additional workflows|stop after|completed research output only/i,
+        /return the completed research output only|do not propose additional workflows|do not offer alternative workflows|stop after|completed research output only/i,
     },
   },
   {

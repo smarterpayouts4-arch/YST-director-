@@ -27,17 +27,18 @@ describe("final prompt scope boundary", () => {
   });
 
   it("does not contain raw CSV content", () => {
-    expect(markdown).not.toMatch(/^\s*[\w ]+,[\w ]+,[\w ]+,[\w ]+/m);
+    // Header-like CSV rows only (no spaces / prose). Comma lists in English are fine.
+    expect(markdown).not.toMatch(/^\s*[A-Za-z0-9_]+(?:,[A-Za-z0-9_]+){3,}\s*$/m);
     expect(markdown).not.toMatch(/evidenceRows|columnSummaries|fileHash/);
   });
 
   it("contains the explicit research-output definition of done and stops there", () => {
     expect(markdown).toMatch(/return the completed research output only/i);
-    expect(markdown).toMatch(/do not propose additional workflows/i);
-    // The stop line is part of the final quality-check section — nothing
-    // after the research deliverable.
+    expect(markdown).toMatch(/do not propose additional workflows|do not offer alternative workflows/i);
+    expect(markdown.startsWith("EXECUTE THIS RESEARCH NOW.")).toBe(true);
     const lastSection = markdown.split("## 8. QUALITY CHECK BEFORE SUBMISSION")[1];
     expect(lastSection).toMatch(/return the completed research output only/i);
+    expect(lastSection).toMatch(/do not ask follow-up questions/i);
   });
 });
 

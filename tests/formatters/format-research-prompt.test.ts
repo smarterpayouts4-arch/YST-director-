@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   formatResearchPrompt,
+  RESEARCH_PROMPT_EXECUTE_PREAMBLE,
+  RESEARCH_PROMPT_STOP_FOOTER,
   validateFormattedPrompt,
 } from "@/features/research-prompt-builder/formatters/format-research-prompt";
 import type { FinalResearchPrompt } from "@/features/research-prompt-builder/schemas";
@@ -51,5 +53,30 @@ describe("final prompt formatter", () => {
     expect(idx.every((n) => n >= 0)).toBe(true);
     expect([...idx].sort((a, b) => a - b)).toEqual(idx);
     expect(validateFormattedPrompt(md)).toEqual([]);
+  });
+
+  it("frames clipboard for immediate execution (ask-first regression)", () => {
+    const formatted = formatResearchPrompt(sample);
+
+    expect(formatted.startsWith("EXECUTE THIS RESEARCH NOW.")).toBe(true);
+    expect(formatted.indexOf("EXECUTE THIS RESEARCH NOW.")).toBeLessThan(
+      formatted.indexOf("## 1. ROLE AND EXPERTISE"),
+    );
+    expect(formatted.indexOf("EXECUTE THIS RESEARCH NOW.")).toBeLessThan(
+      formatted.indexOf(`# ${sample.title}`),
+    );
+
+    expect(formatted).toContain("Do not ask clarifying questions.");
+    expect(formatted).toContain("Do not ask what I want you to do with this brief.");
+    expect(formatted).toContain(RESEARCH_PROMPT_EXECUTE_PREAMBLE);
+    expect(formatted).toContain("Return the completed research output only.");
+    expect(formatted).toContain(RESEARCH_PROMPT_STOP_FOOTER);
+    expect(formatted.indexOf("## 8. QUALITY CHECK BEFORE SUBMISSION")).toBeLessThan(
+      formatted.indexOf(RESEARCH_PROMPT_STOP_FOOTER),
+    );
+
+    expect(formatted).not.toMatch(/48,?000/);
+    expect(formatted).not.toMatch(/ask follow-up questions if needed/i);
+    expect(formatted).not.toMatch(/ask clarifying questions if needed/i);
   });
 });
