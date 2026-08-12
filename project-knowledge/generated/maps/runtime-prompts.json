@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-11T21:18:39.543Z",
-  "commitSha": "df8bbbe0730eb40cdae26b5df60ea9b028b03446",
+  "generatedAt": "2026-08-12T17:13:01.302Z",
+  "commitSha": "a237fb866b6121c7a04d2a3ac652fe892490677c",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "src/features"
@@ -12,7 +12,7 @@
   "prompts": [
     {
       "path": "src/features/content-intelligence/library/prompts/extract-content-intelligence.ts",
-      "lines": 29,
+      "lines": 64,
       "exportsVersion": false,
       "versionLiteral": null
     },
@@ -20,11 +20,11 @@
       "path": "src/features/content-intelligence/library/prompts/prompt-version.ts",
       "lines": 3,
       "exportsVersion": true,
-      "versionLiteral": "ci-librarian-1.0.0"
+      "versionLiteral": "ci-librarian-1.1.1"
     },
     {
       "path": "src/features/content-intelligence/library/prompts/repair-output.ts",
-      "lines": 29,
+      "lines": 31,
       "exportsVersion": false,
       "versionLiteral": null
     },

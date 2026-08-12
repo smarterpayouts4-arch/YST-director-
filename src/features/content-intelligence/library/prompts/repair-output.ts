@@ -10,7 +10,9 @@ export function buildLibrarianRepairPrompt(input: {
   const instructions = [
     "Repair the previous structured output so it conforms to the schema and validation errors.",
     "Do not invent new intelligence. Prefer dropping unsupported items or setting null quotes.",
-    "Do not change the Librarian task into topic generation or strategy advice.",
+    "Do not change the Librarian task into topic generation or invented strategy.",
+    "If the previous output already preserved a durable educational opportunity stated in the research, keep it as kind opportunity.",
+    "If the previous output already preserved an evaluated working hypothesis, keep isHypothesis true on that item.",
     `Prompt version: ${LIBRARY_RUNTIME_PROMPT_VERSION}`,
   ].join("\n");
 
