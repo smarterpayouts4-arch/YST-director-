@@ -90,4 +90,21 @@ describe("shared structured-output gateway", () => {
     expect(value).toEqual({ answer: "good" });
     expect(parseMock).toHaveBeenCalledTimes(2);
   });
+
+  it("uses optional model override instead of getOpenAIModel default", async () => {
+    parseMock.mockResolvedValue({ output_parsed: { answer: "ok" } });
+    await parseStructuredOutput({
+      operation: "propose-topic-directions",
+      schemaName: "topic_directions",
+      schema,
+      instructions: "Return an answer.",
+      input: "input",
+      primaryPromptVersion: "ci-topics-1.1.0",
+      model: "gpt-5.6-sol",
+    });
+    expect(parseMock).toHaveBeenCalledTimes(1);
+    const request = parseMock.mock.calls[0]![0] as { model: string };
+    expect(request.model).toBe("gpt-5.6-sol");
+  });
 });
+

@@ -46,7 +46,7 @@ export function IngestionDropzone({
     <div className="mx-auto max-w-[1040px] space-y-7">
       <div>
         <p className="text-xs font-medium uppercase tracking-[0.12em] text-stone-500">
-          Step 1 of 5
+          Step 1 of 8
         </p>
         <h1 className="editorial mt-2 text-4xl leading-tight text-stone-900 md:text-5xl">
           Upload your company information

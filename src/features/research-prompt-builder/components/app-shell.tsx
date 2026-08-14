@@ -1,9 +1,8 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useInterviewFlow } from "@/features/research-prompt-builder/components/app-shell/interview-flow";
-import { stageWhy } from "@/features/research-prompt-builder/components/app-shell/stage-copy";
 import {
   getInterviewStatus,
   getInterviewStatusMessage,
@@ -67,8 +66,6 @@ export function AppShell() {
       (!!currentQuestion &&
         state.answers.some((a) => a.questionId === currentQuestion.questionId)));
 
-  const why = useMemo(() => stageWhy(uiStage), [uiStage]);
-
   const {
     analyze,
     useSample,
@@ -125,7 +122,6 @@ export function AppShell() {
     <div className="min-h-screen md:flex">
       <StageRail
         stage={uiStage}
-        whyThisMatters={why}
         questionProgress={
           uiStage === "interview"
             ? interviewQuestionProgress(state.answers.length)

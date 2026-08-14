@@ -183,8 +183,8 @@ test("owner completes the full journey to an exported research prompt", async ({
   await expect(continueButton).toBeVisible();
   await continueButton.click();
 
-  // Stage 3a: strategic direction cards (still Decide — same workspace).
-  await expect(page.getByText("Decide", { exact: true }).first()).toBeVisible();
+  // Stage 3a: strategic direction cards (still Focus — same workspace).
+  await expect(page.getByText("Focus", { exact: true }).first()).toBeVisible();
   await expect(
     page.getByRole("heading", {
       name: "Which strategic directions should the research investigate for this business?",

@@ -88,7 +88,7 @@ export function SectionPanel({
                 Optional notes
               </summary>
               <textarea
-                className="mt-3 min-h-[96px] w-full rounded-xl border border-stone-200 bg-stone-50/50 p-3.5 text-sm text-stone-800 shadow-sm placeholder:text-stone-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="mt-3 min-h-[96px] w-full rounded-xl border border-stone-200 bg-stone-50/50 p-3.5 text-sm text-stone-800 shadow-sm placeholder:text-stone-400 focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
                 placeholder="Goals, rivals, niches…"
                 value={ownerNotes}
                 onChange={(e) => setOwnerNotes(e.target.value)}
@@ -130,7 +130,7 @@ export function SectionPanel({
               <Button
                 size="sm"
                 onClick={onConfirmEverything}
-                className="h-9 rounded-lg bg-indigo-600 px-5 text-xs font-semibold text-white hover:bg-indigo-700"
+                className="h-9 rounded-lg bg-primary px-5 text-xs font-semibold text-primary-foreground hover:bg-[var(--primary-hover)]"
               >
                 Everything looks right. Continue
               </Button>

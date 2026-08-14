@@ -11,13 +11,16 @@ export const LibrarianStageSchema = z.enum([
   "published",
 ]);
 
+/** Persisted library ceiling — not the extract draft cap (≤80). */
+export const LIBRARY_ITEMS_MAX = 500;
+
 export const ContentIntelligenceLibrarySchema = z.object({
   libraryId: z.string().min(1).max(80),
   stage: LibrarianStageSchema,
   projectId: z.string().min(1).max(80).optional(),
   artifacts: z.array(ResearchArtifactSchema).max(20),
   extractionRuns: z.array(ExtractionRunSchema).max(40),
-  items: z.array(LibraryItemSchema).max(500),
+  items: z.array(LibraryItemSchema).max(LIBRARY_ITEMS_MAX),
   publishedAt: z.string().datetime().nullable(),
   publishedDto: PublishedLibraryDtoSchema.nullable(),
 });

@@ -73,11 +73,11 @@ export function InterviewWorkspace({
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-6">
       <header className="space-y-1">
         <p className="text-xs font-medium uppercase tracking-[0.12em] text-stone-500">
-          Decide
+          Find Your Focus
         </p>
         <p className="text-sm text-stone-600">
           One continuous focus-building step. Earlier decisions stay here so you can change
-          them without leaving Decide.
+          them without leaving this step.
         </p>
       </header>
 

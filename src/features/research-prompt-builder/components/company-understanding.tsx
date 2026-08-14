@@ -25,7 +25,7 @@ export function CompanyUnderstandingView({
     <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-6">
       <header className="space-y-1.5">
         <p className="text-xs font-medium uppercase tracking-[0.12em] text-stone-500">
-          Step 2 of 5 · {review.reviewedCount}/{review.sections.length}
+          Step 2 of 8 · {review.reviewedCount}/{review.sections.length}
         </p>
         <h1 className="editorial text-3xl font-normal leading-tight text-stone-900 md:text-4xl">
           Here’s what we understand

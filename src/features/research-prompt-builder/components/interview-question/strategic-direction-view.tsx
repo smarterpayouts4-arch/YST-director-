@@ -118,14 +118,14 @@ export function StrategicDirectionView({
               key={card.suggestionId}
               className={`block cursor-pointer rounded-2xl border p-4 shadow-sm transition ${
                 checked
-                  ? "border-indigo-400 bg-indigo-50/40"
+                  ? "border-primary bg-success-soft/40"
                   : "border-stone-200 bg-white hover:border-stone-300"
               } ${locked ? "pointer-events-none opacity-80" : ""}`}
             >
               <div className="flex items-start gap-3">
                 <input
                   type="checkbox"
-                  className="mt-1 h-4 w-4 rounded border-stone-300 text-indigo-600 focus:ring-indigo-500"
+                  className="mt-1 h-4 w-4 rounded border-stone-300 text-primary focus:ring-ring"
                   checked={checked}
                   disabled={locked}
                   onChange={() => toggle(card.suggestionId)}
@@ -182,7 +182,7 @@ export function StrategicDirectionView({
             </label>
             <textarea
               id="custom-direction"
-              className="min-h-[72px] w-full rounded-xl border border-stone-200 bg-white p-3 text-sm leading-snug text-stone-800 placeholder:text-stone-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:bg-stone-50"
+              className="min-h-[72px] w-full rounded-xl border border-stone-200 bg-white p-3 text-sm leading-snug text-stone-800 placeholder:text-stone-400 focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring disabled:bg-stone-50"
               placeholder="A research direction only you can name…"
               value={customDirection}
               disabled={locked}

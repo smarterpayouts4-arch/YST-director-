@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-11T21:22:19.118Z",
-  "commitSha": "df8bbbe0730eb40cdae26b5df60ea9b028b03446",
+  "generatedAt": "2026-08-14T02:24:43.497Z",
+  "commitSha": "7a614aa6c4a57b56cd77e1366beb3785781987db",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "project-knowledge/",
@@ -8,9 +8,19 @@
     "mcp/",
     "tests/"
   ],
-  "warnings": [],
+  "warnings": [
+    "PK-WARN-001: 713 lines exceeds warning threshold 500"
+  ],
   "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
   "hardCount": 0,
-  "warnCount": 0,
-  "findings": []
+  "warnCount": 1,
+  "findings": [
+    {
+      "code": "PK-WARN-001",
+      "severity": "warn",
+      "title": "File exceeds warning line threshold",
+      "detail": "713 lines exceeds warning threshold 500",
+      "file": "tests/topics/build-topic-packet.test.ts"
+    }
+  ]
 }

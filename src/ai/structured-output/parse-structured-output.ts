@@ -44,6 +44,8 @@ export type ParseStructuredOutputArgs<T extends z.ZodTypeAny> = {
   input: string;
   /** Feature-owned runtime prompt version stamped into traces. */
   primaryPromptVersion: string;
+  /** Optional per-call model override (e.g. Topic Engine Sol). Defaults to OPENAI_MODEL. */
+  model?: string;
   validate?: (value: z.infer<T>) => string[];
   validationDiagnostics?: (
     value: z.infer<T>,
@@ -66,7 +68,7 @@ export async function parseStructuredOutput<T extends z.ZodTypeAny>(
   args: ParseStructuredOutputArgs<T>,
 ): Promise<z.infer<T>> {
   const client = getOpenAIClient();
-  const model = getOpenAIModel();
+  const model = args.model ?? getOpenAIModel();
   const started = Date.now();
   const startedAt = new Date(started).toISOString();
   let repaired = false;

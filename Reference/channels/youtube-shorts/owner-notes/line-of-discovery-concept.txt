@@ -1,0 +1,417 @@
+You are right. The cleanest version is not to approve and expand scenes one by one.
+
+Scene 1 and Scene 2 are only your reference examples for final output quality. They are not a rule saying the system should process only two scenes at a time.
+
+The simplest workflow is:
+
+1. Enter the topic and research
+2. Generate previews for all seven scenes
+3. Review and edit all seven on one screen
+4. Submit the approved seven-scene outline
+5. Generate all seven full prompts
+The clean high-level design
+┌─────────────────────────────────────┐
+│ 1. PROJECT INPUT                    │
+│                                     │
+│ Area of interest                    │
+│ Topic                               │
+│ Audience                            │
+│ Research / approved information     │
+└─────────────────────────────────────┘
+                  │
+                  ▼
+┌─────────────────────────────────────┐
+│ 2. GENERATE SEVEN-SCENE PREVIEW     │
+│                                     │
+│ 1. Emotional Hook                   │
+│ 2. Curiosity                        │
+│ 3. Discovery                        │
+│ 4. Mistake                          │
+│ 5. Reframe                          │
+│ 6. Framework                        │
+│ 7. Payoff                           │
+└─────────────────────────────────────┘
+                  │
+                  ▼
+┌─────────────────────────────────────┐
+│ 3. REVIEW ALL SEVEN SCENES          │
+│                                     │
+│ Edit voiceover                      │
+│ Edit scene description              │
+│ Regenerate one scene if needed      │
+│ Reorder only if intentionally       │
+└─────────────────────────────────────┘
+                  │
+                  ▼
+┌─────────────────────────────────────┐
+│ 4. APPROVE THE COMPLETE STORY       │
+│                                     │
+│ One button:                         │
+│ “Create Full Scene Prompts”         │
+└─────────────────────────────────────┘
+                  │
+                  ▼
+┌─────────────────────────────────────┐
+│ 5. GENERATE ALL SEVEN FULL PROMPTS  │
+│                                     │
+│ Same detailed structure as          │
+│ your Scene 1 and Scene 2 documents  │
+└─────────────────────────────────────┘
+
+That is the entire system.
+
+What the first AI call creates
+
+The first AI call should create all seven scenes as a lightweight storyboard.
+
+Each scene only needs four things:
+
+Scene role
+Voiceover
+Short scene description
+Emotional or communication purpose
+
+For example:
+
+Scene 1 — Emotional Hook
+
+Voiceover
+
+“You fixed your bedtime routine, but you still wake up feeling exhausted.”
+
+Scene description
+
+The recurring woman sits on the edge of her bed in a calm nighttime bedroom. The room looks peaceful, but her expression shows quiet frustration and tiredness. She looks toward the nightstand as though she is wondering what she may be missing.
+
+Purpose
+
+Make the viewer feel understood and personally connected to the problem.
+
+Scene 2 — Curiosity
+
+Voiceover
+
+“Could the type of magnesium you chose be part of the reason?”
+
+Scene description
+
+The woman studies two small supplement bottles placed beside each other on the nightstand. Her expression changes from frustration to curiosity. The visual introduces the idea that the bottles may not be interchangeable.
+
+Purpose
+
+Open the central question and make the viewer want the answer.
+
+Then the system continues through Scenes 3–7.
+
+This gives you enough information to judge the whole story without reading seven giant production prompts.
+
+What the review screen looks like
+
+All seven scenes appear on one page.
+
+PROJECT: Magnesium Glycinate vs. Citrate
+
+────────────────────────────────
+
+SCENE 1 — EMOTIONAL HOOK
+
+Voiceover:
+[You fixed your bedtime routine, but you still wake up exhausted.]
+
+Scene description:
+[The recurring woman sits awake in a calm bedroom...]
+
+Purpose:
+[Make the viewer feel understood.]
+
+[Regenerate Scene]
+
+────────────────────────────────
+
+SCENE 2 — CURIOSITY
+
+Voiceover:
+[Could the type of magnesium you chose be part of the reason?]
+
+Scene description:
+[The woman compares two supplement bottles...]
+
+Purpose:
+[Open the central knowledge gap.]
+
+[Regenerate Scene]
+
+────────────────────────────────
+
+Scenes 3–7...
+
+────────────────────────────────
+
+[Create Full Scene Prompts]
+
+Every text area should be editable.
+
+You can change:
+
+“You still wake up exhausted”
+
+to:
+
+“You still struggle to feel rested”
+
+Then when you click Create Full Scene Prompts, the AI must use your edited wording exactly.
+
+The important rule
+
+The preview becomes the approved creative plan.
+
+The second AI call should not redesign it.
+
+It should only expand it.
+
+Preview stage:
+Decide what happens.
+
+Expansion stage:
+Describe exactly how to create it.
+
+For example, the approved preview may say:
+
+Voiceover:
+Could the type of magnesium you chose be part of the reason?
+
+Scene description:
+The woman compares two supplement bottles on her nightstand.
+
+The full prompt generator expands this into:
+
+CHARACTER NAME
+Nighttime Woman
+
+CHARACTER IDENTITY
+...
+
+CHARACTER CONTINUITY PROMPT
+...
+
+VISUAL PROMPT
+Create a premium photorealistic vertical 9:16 nighttime wellness scene...
+
+NARRATION
+Could the type of magnesium you chose be part of the reason?
+
+VOICE DIRECTION
+...
+
+ON-SCREEN TEXT
+Not all magnesium
+is the same
+
+ASSET TYPE
+video
+
+MOTION PROMPT
+...
+
+The approved narration must remain unchanged unless a hard character or safety rule prevents it.
+
+Why this is cleaner
+
+This design avoids several problems.
+
+You see the complete story first
+
+You can determine whether:
+
+Scene 1 is emotionally strong.
+Scene 2 naturally creates curiosity.
+Scene 3 provides a real discovery.
+Scene 4 is a genuine mistake.
+Scene 5 reframes the issue.
+Scene 6 gives a useful framework.
+Scene 7 resolves the opening.
+
+Your original six-part flow already establishes the progression from curiosity through payoff. The new version simply places the emotional hook first.
+
+You do not waste work
+
+There is no reason to generate seven highly detailed prompts before you know whether the story is good.
+
+The preview may be a few hundred words total.
+
+The final seven scene documents may be many thousands of words.
+
+You can edit anything directly
+
+You do not need to explain every change to the AI conversationally.
+
+You simply edit the box:
+
+Old:
+Magnesium is not all the same.
+
+New:
+Different forms of magnesium are commonly chosen for different goals.
+
+Then submit the complete edited storyboard.
+
+The scenes remain connected
+
+The AI receives all seven approved previews together when creating the final prompts.
+
+That helps it preserve:
+
+Story progression
+Recurring character
+Visual continuity
+Object continuity
+Narrator voice
+Color and lighting style
+Differences between scenes
+The smallest practical architecture
+
+You only need two AI operations.
+
+Operation 1: Generate storyboard
+
+Input:
+
+{
+  "areaOfInterest": "Supplements, vitamins, and minerals",
+  "topic": "Magnesium glycinate vs. citrate",
+  "audience": "Adults interested in nighttime wellness",
+  "research": "Approved research and notes"
+}
+
+Output:
+
+{
+  "scenes": [
+    {
+      "sceneNumber": 1,
+      "storyRole": "emotional_hook",
+      "voiceover": "...",
+      "sceneDescription": "...",
+      "purpose": "..."
+    },
+    {
+      "sceneNumber": 2,
+      "storyRole": "curiosity",
+      "voiceover": "...",
+      "sceneDescription": "...",
+      "purpose": "..."
+    }
+  ]
+}
+
+The array must contain exactly seven scenes.
+
+Operation 2: Expand approved storyboard
+
+Input:
+
+{
+  "projectContext": {
+    "areaOfInterest": "...",
+    "topic": "...",
+    "audience": "...",
+    "research": "..."
+  },
+  "approvedScenes": [
+    {
+      "sceneNumber": 1,
+      "storyRole": "emotional_hook",
+      "voiceover": "User-approved wording",
+      "sceneDescription": "User-approved description",
+      "purpose": "User-approved purpose"
+    }
+  ]
+}
+
+Output:
+
+{
+  "fullScenes": [
+    {
+      "sceneNumber": 1,
+      "characterName": "...",
+      "characterIdentity": "...",
+      "characterContinuityPrompt": "...",
+      "visualPrompt": "...",
+      "narration": "...",
+      "voiceDirection": "...",
+      "onScreenText": "...",
+      "assetType": "video",
+      "motionPrompt": "...",
+      "outputInstructions": "..."
+    }
+  ]
+}
+
+Then normal TypeScript code formats those objects into the Scene 1/Scene 2 document structure.
+
+Only one optional regeneration feature
+
+To avoid overengineering, give each preview card one button:
+
+Regenerate Scene
+
+When pressed, the AI receives:
+
+The topic
+The complete seven-scene outline
+The selected scene
+The scenes before and after it
+
+It regenerates only that scene without modifying the others.
+
+You do not need complicated approval states.
+
+The preview page can simply maintain the current text. Whatever is on the page when the user clicks Create Full Scene Prompts is treated as approved.
+
+No database is required for the first version
+
+For the first implementation:
+
+User enters project
+        ↓
+Storyboard stored in browser state
+        ↓
+User edits storyboard
+        ↓
+Edited storyboard sent for expansion
+        ↓
+Full prompts displayed
+
+A database can be added later when you need:
+
+Saved projects
+Version history
+Multiple users
+Returning to unfinished work
+
+None of that is necessary to prove the prompt-generation system.
+
+The final simple product
+
+The application only has three screens or states:
+
+1. Enter topic and research
+
+2. Review and edit all seven short scene previews
+
+3. View all seven fully expanded scene prompts
+
+And it only needs these buttons:
+
+Generate Storyboard
+Regenerate Scene
+Create Full Scene Prompts
+Copy Scene
+Copy All
+
+My recommendation is therefore:
+
+Generate all seven previews together, let the user edit all seven directly, and then expand the entire approved story into seven complete prompts in one operation.
+
+That is the cleanest approach. It preserves your ability to review the whole story while keeping the application small, understandable, and focused on one job.

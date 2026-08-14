@@ -1,0 +1,45 @@
+================================================================================
+SCENE 1: THE EMOTIONAL HOOK & CURIOSITY GAP (FRONTAL ENGAGEMENT)
+================================================================================
+
+[CHARACTER IDENTITY & CONTINUITY - GEMINI 2.5 PLATE GENERATION]
+Character: Nighttime Woman, early 30s, warm medium-brown skin with natural texture, almond-shaped brown eyes, dark brown hair gathered in a messy high bun with loose curls framing her face. Delicate gold pendant necklace.
+Wardrobe: Oatmeal draped cardigan over a soft beige camisole.
+
+[ARIJON GEOMETRY & FRAMING SPECIFICATIONS]
+Composition: Vertical 9:16 aspect ratio. Medium Close-Up (Arijon Subjective Direct-Address angle).
+Line of Interest (180° Rule): Subject sits on the right 2/3 of the frame, facing forward directly toward the camera lens. Her visual gaze axis runs straight from the image to the viewer.
+Safe Zone: Upper-Left 1/3 of the frame is a visually clean, warm-shadowed wall reserved strictly for text overlay.
+
+[VISUAL PROMPT - GEMINI 2.5 PLATE]
+Create a premium photorealistic vertical 9:16 editorial wellness scene in a cozy upscale nighttime bedroom.
+Subject: The recurring Nighttime Woman seated naturally on the edge of a neatly made bed.
+Pose: She is seated facing forward toward the camera. Her head is subtly tilted downward as she holds a small dark amber supplement bottle near chest level with realistic hand anatomy. Her eyes are looking up directly into the camera lens with a thoughtful, quiet, and mildly perplexed expression—as if asking the viewer a question.
+Environment: Softly lit wooden nightstand in the background left with a warm glowing bedside lamp, a glass of water, and stacked books. Large window in the background right with deep blue moonlight filtering through soft curtains.
+Lighting: Warm amber key light from the bedside lamp on the left, balanced by cool subtle fill light from the window on the right. High contrast, cinematic depth of field (crisp subject, soft background).
+No text, no logos, no watermarks, no extra limbs.
+
+--------------------------------------------------------------------------------
+[NARRATION & EDITORIAL STACK]
+NARRATION:
+"You fixed your bedtime routine, you took your magnesium... so why are you still waking up exhausted?"
+
+ON-SCREEN TEXT:
+Fixed the routine.
+Still exhausted?
+(Sub-text: Educational only • Not medical advice)
+
+VOICE DIRECTION:
+Empathetic, conversational tone. Speak as if talking one-on-one with a friend. Emphasize "routine" and "exhausted".
+
+ASSET TYPE: Video (Gemini 2.5 Base Image -> Wan 2.1 Motion Model)
+
+--------------------------------------------------------------------------------
+[WAN 2.1 MOTION PROMPT - SINGLE VECTOR DIRECTIVE]
+Use the approved Scene 1 base plate as the exact starting frame.
+Camera: Fixed 9:16 vertical frame, 50mm lens feel. Slow, imperceptible 3% push-in toward the woman's face over 7 seconds.
+Character Action: 
+1. (0.0s - 2.5s): The woman holds the amber bottle still in her hand near chest level, glancing down at it briefly.
+2. (2.5s - 5.5s): She slowly raises her eyes and head, looking directly into the camera lens with a subtle, curious, inquiring expression (lips parting slightly in a moment of quiet realization/questioning).
+3. (5.5s - 8.0s): She holds direct eye contact with the camera with gentle, natural chest breathing.
+Constraints: Lock body position and shoulders. Do NOT turn her head to the side, do NOT place the bottle down, do NOT touch bedding, do NOT alter lighting or background geometry. Preserve exact facial features, hands, and room structure throughout the movement.

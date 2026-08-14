@@ -25,7 +25,7 @@ export function PromptCompileProgress({ error }: { error?: string | null }) {
   return (
     <div className="mx-auto max-w-lg space-y-4 py-10">
       <p className="text-xs font-medium uppercase tracking-[0.12em] text-stone-500">
-        Step 5 of 5
+        Step 5 of 8 · Start the Research
       </p>
       <h1 className="editorial text-3xl text-stone-900">Building your research prompt</h1>
       <ul className="space-y-2 text-sm text-stone-600">

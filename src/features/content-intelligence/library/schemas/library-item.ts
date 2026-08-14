@@ -17,6 +17,8 @@ export const LibraryItemSchema = z.object({
   reviewStatus: ReviewStatusSchema,
   confidence: ConfidenceSchema,
   evidenceQuote: z.string().max(2000).nullable(),
+  /** True when a model quote was stripped because it was not a verbatim span in raw research. */
+  quoteCleared: z.boolean().default(false),
   sourceRefs: z.array(z.string().max(200)).max(12),
   tags: z.array(z.string().max(64)).max(12),
   isHypothesis: z.boolean(),

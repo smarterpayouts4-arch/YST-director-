@@ -14,14 +14,6 @@ export const APP_STAGES = [
 
 export type AppStage = (typeof APP_STAGES)[number];
 
-export const STAGE_LABELS: Record<AppStage, string> = {
-  ingestion: "Upload",
-  understanding: "Confirm",
-  interview: "Decide",
-  brief: "Brief",
-  prompt: "Export",
-};
-
 export const MAX_CORE_QUESTIONS = 5;
 export const MAX_CONDITIONAL_QUESTIONS = 2;
 export const MAX_TOTAL_QUESTIONS = 7;

@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-11T21:18:39.185Z",
-  "commitSha": "df8bbbe0730eb40cdae26b5df60ea9b028b03446",
+  "generatedAt": "2026-08-14T05:13:23.319Z",
+  "commitSha": "7a614aa6c4a57b56cd77e1366beb3785781987db",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "src/app"
@@ -13,8 +13,20 @@
       "sourceFile": "src/app/content-intelligence/page.tsx"
     },
     {
+      "route": "/content-intelligence/topics",
+      "sourceFile": "src/app/content-intelligence/topics/page.tsx"
+    },
+    {
       "route": "/",
       "sourceFile": "src/app/page.tsx"
+    },
+    {
+      "route": "/social-media",
+      "sourceFile": "src/app/social-media/page.tsx"
+    },
+    {
+      "route": "/social-media/youtube-shorts",
+      "sourceFile": "src/app/social-media/youtube-shorts/page.tsx"
     }
   ],
   "api": [
@@ -28,6 +40,20 @@
     {
       "route": "/api/content-intelligence/extract",
       "sourceFile": "src/app/api/content-intelligence/extract/route.ts",
+      "methodHints": [
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/content-intelligence/propose-directions",
+      "sourceFile": "src/app/api/content-intelligence/propose-directions/route.ts",
+      "methodHints": [
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/content-intelligence/propose-topics",
+      "sourceFile": "src/app/api/content-intelligence/propose-topics/route.ts",
       "methodHints": [
         "POST"
       ]

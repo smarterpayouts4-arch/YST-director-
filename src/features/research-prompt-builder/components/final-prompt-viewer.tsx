@@ -68,14 +68,18 @@ export function FinalPromptViewer({
   const { builtFrom } = summary;
 
   return (
-    <div className="mx-auto max-w-[1040px] space-y-6">
+    <div className="mx-auto max-w-[1100px] space-y-6">
       <div className="space-y-2">
         <p className="text-xs font-medium uppercase tracking-[0.12em] text-stone-500">
-          Step 5 of 5
+          Step 5 of 8 · Start the Research
         </p>
         <h1 className="editorial text-3xl leading-tight text-stone-900 md:text-4xl">
           Your research assignment is ready
         </h1>
+        <p className="max-w-2xl text-sm leading-relaxed text-stone-600">
+          Left: copy the prompt into ChatGPT and let it run the full report. Right: paste only
+          ChatGPT’s completed answer — never the prompt itself.
+        </p>
         <p className="text-base font-medium text-stone-700">{prompt.title}</p>
         <p className="text-xs text-stone-500">
           {new Date(prompt.metadata.generatedAt).toLocaleString()} ·{" "}
@@ -83,61 +87,70 @@ export function FinalPromptViewer({
         </p>
       </div>
 
-      <div className="grid gap-4 rounded-2xl border border-stone-200 bg-white p-5 shadow-sm md:grid-cols-2">
-        <div className="space-y-2">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-stone-500">
-            Built from
+      <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
+        <div className="space-y-4">
+          <p className="text-[11px] font-bold uppercase tracking-wider text-primary">
+            1 · Copy into ChatGPT
           </p>
-          <ul className="list-disc space-y-1 pl-4 text-sm text-stone-700">
-            {builtFrom.companyEvidence ? <li>Your company evidence</li> : null}
-            <li>
-              {builtFrom.corrections} correction
-              {builtFrom.corrections === 1 ? "" : "s"}
-            </li>
-            <li>
-              {builtFrom.strategicDirections} strategic direction
-              {builtFrom.strategicDirections === 1 ? "" : "s"}
-            </li>
-            <li>
-              {builtFrom.ownerConstraints} owner constraint
-              {builtFrom.ownerConstraints === 1 ? "" : "s"}
-            </li>
-          </ul>
+          <div className="space-y-5 rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
+            <div className="space-y-2">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-stone-500">
+                Built from
+              </p>
+              <ul className="list-disc space-y-1 pl-4 text-sm text-stone-700">
+                {builtFrom.companyEvidence ? <li>Your company evidence</li> : null}
+                <li>
+                  {builtFrom.corrections} correction
+                  {builtFrom.corrections === 1 ? "" : "s"}
+                </li>
+                <li>
+                  {builtFrom.strategicDirections} strategic direction
+                  {builtFrom.strategicDirections === 1 ? "" : "s"}
+                </li>
+                <li>
+                  {builtFrom.ownerConstraints} owner constraint
+                  {builtFrom.ownerConstraints === 1 ? "" : "s"}
+                </li>
+              </ul>
+            </div>
+            <div className="space-y-2">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-stone-500">
+                It will investigate
+              </p>
+              <ul className="list-disc space-y-1 pl-4 text-sm text-stone-700">
+                {summary.willInvestigate.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            <Button onClick={copy}>{copied ? "Copied" : "Copy research prompt"}</Button>
+            <Button variant="secondary" onClick={download}>
+              Download Markdown
+            </Button>
+            <Button variant="outline" onClick={() => setShowFull((v) => !v)}>
+              {showFull ? "Hide full prompt" : "View full prompt"}
+            </Button>
+            <Button variant="outline" onClick={onRegenerate} disabled={busy}>
+              {busy ? "Regenerating…" : "Regenerate"}
+            </Button>
+          </div>
+
+          {showFull ? (
+            <pre className="max-h-[min(50vh,480px)] overflow-auto whitespace-pre-wrap rounded-md border border-stone-300 bg-white p-5 text-sm leading-relaxed text-stone-800">
+              {formatted}
+            </pre>
+          ) : null}
+
+          {error ? <p className="text-sm text-red-700">{error}</p> : null}
         </div>
-        <div className="space-y-2">
-          <p className="text-[11px] font-bold uppercase tracking-wider text-stone-500">
-            It will investigate
-          </p>
-          <ul className="list-disc space-y-1 pl-4 text-sm text-stone-700">
-            {summary.willInvestigate.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
+
+        <div className="lg:sticky lg:top-4">
+          <ResearchHandoffPanel projectId={projectId} researchPromptText={formatted} />
         </div>
       </div>
-
-      <div className="flex flex-wrap gap-3">
-        <Button onClick={copy}>{copied ? "Copied" : "Copy research prompt"}</Button>
-        <Button variant="secondary" onClick={download}>
-          Download Markdown
-        </Button>
-        <Button variant="outline" onClick={() => setShowFull((v) => !v)}>
-          {showFull ? "Hide full prompt" : "View full prompt"}
-        </Button>
-        <Button variant="outline" onClick={onRegenerate} disabled={busy}>
-          {busy ? "Regenerating…" : "Regenerate"}
-        </Button>
-      </div>
-
-      {showFull ? (
-        <pre className="max-h-[min(60vh,640px)] overflow-auto whitespace-pre-wrap rounded-md border border-stone-300 bg-white p-5 text-sm leading-relaxed text-stone-800">
-          {formatted}
-        </pre>
-      ) : null}
-
-      {error ? <p className="text-sm text-red-700">{error}</p> : null}
-
-      <ResearchHandoffPanel projectId={projectId} />
     </div>
   );
 }

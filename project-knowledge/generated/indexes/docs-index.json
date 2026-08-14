@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-11T21:18:38.889Z",
-  "commitSha": "df8bbbe0730eb40cdae26b5df60ea9b028b03446",
+  "generatedAt": "2026-08-14T05:13:23.047Z",
+  "commitSha": "7a614aa6c4a57b56cd77e1366beb3785781987db",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "project-knowledge/"
@@ -109,6 +109,14 @@
       "path": "project-knowledge/FEATURES/understanding.md",
       "title": "Feature — Company understanding",
       "description": "Feature — Company understanding",
+      "status": "canonical",
+      "authority": "canonical"
+    },
+    {
+      "id": "FEATURES__youtube-shorts",
+      "path": "project-knowledge/FEATURES/youtube-shorts.md",
+      "title": "FEATURE — YouTube Shorts",
+      "description": "FEATURE — YouTube Shorts",
       "status": "canonical",
       "authority": "canonical"
     },

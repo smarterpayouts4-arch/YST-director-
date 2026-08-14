@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-12T17:13:01.302Z",
-  "commitSha": "a237fb866b6121c7a04d2a3ac652fe892490677c",
+  "generatedAt": "2026-08-14T05:13:23.641Z",
+  "commitSha": "7a614aa6c4a57b56cd77e1366beb3785781987db",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "src/features"
@@ -31,6 +31,54 @@
     {
       "path": "src/features/content-intelligence/library/prompts/shared-guardrails.ts",
       "lines": 14,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/content-intelligence/topics/prompts/grounding-contract.ts",
+      "lines": 13,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/content-intelligence/topics/prompts/prompt-version.ts",
+      "lines": 3,
+      "exportsVersion": true,
+      "versionLiteral": "ci-topics-1.1.9"
+    },
+    {
+      "path": "src/features/content-intelligence/topics/prompts/propose-directions.ts",
+      "lines": 60,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/content-intelligence/topics/prompts/propose-topics.ts",
+      "lines": 76,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/content-intelligence/topics/prompts/ranking-contract.ts",
+      "lines": 14,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/content-intelligence/topics/prompts/repair-output.ts",
+      "lines": 52,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/content-intelligence/topics/prompts/shared-guardrails.ts",
+      "lines": 18,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/content-intelligence/topics/prompts/topic-strategy-doctrine.ts",
+      "lines": 18,
       "exportsVersion": false,
       "versionLiteral": null
     },

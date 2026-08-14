@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-11T21:18:38.990Z",
-  "commitSha": "df8bbbe0730eb40cdae26b5df60ea9b028b03446",
+  "generatedAt": "2026-08-14T05:13:23.137Z",
+  "commitSha": "7a614aa6c4a57b56cd77e1366beb3785781987db",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "Reference/manifest.json"
@@ -331,6 +331,125 @@
       "date_added": "2026-08-05",
       "source_file": "advisory-sources/narrative/short-video-workflow.txt",
       "notes": "Story-before-prompts analogy only. Video production is out of MVP."
+    },
+    {
+      "id": "ref-yt-shorts-channel-001",
+      "title": "YouTube Shorts Channel Reference Library",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": [
+        "youtube-shorts",
+        "how",
+        "storytelling",
+        "hooks",
+        "shot-design"
+      ],
+      "applies_to": [
+        "youtube-shorts"
+      ],
+      "date_added": "2026-08-14",
+      "source_file": "channels/youtube-shorts/README.md",
+      "notes": "Shorts-owned HOW namespace. See channels/youtube-shorts/README.md + SOURCE_MAP.md. Working director files: visual-grammar-for-video-prompts.md (Arijon) and scene-direction-for-video-prompts.md (Milne). Drop unreviewed files under incoming/. Never runtime-import. Never localStorage. Distill later into youtube-shorts/prompts/*-doctrine.ts. Canonical Atom always wins. Prior-project material is pattern only. Product emits a prompt; it does not render video."
+    },
+    {
+      "id": "ref-yt-shorts-arijon-grammar",
+      "title": "Visual grammar for video-generation prompts",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": [
+        "youtube-shorts",
+        "cinematography",
+        "continuity",
+        "video-prompts"
+      ],
+      "applies_to": [
+        "youtube-shorts"
+      ],
+      "date_added": "2026-08-14",
+      "source_file": "channels/youtube-shorts/director/visual-grammar-for-video-prompts.md",
+      "notes": "Arijon-derived working crib sheet. Not the book. Not runtime. Named models are historical evidence, not product law."
+    },
+    {
+      "id": "ref-yt-shorts-milne-direction",
+      "title": "Scene direction for video prompts",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": [
+        "youtube-shorts",
+        "directing",
+        "atmosphere",
+        "performance"
+      ],
+      "applies_to": [
+        "youtube-shorts"
+      ],
+      "date_added": "2026-08-14",
+      "source_file": "channels/youtube-shorts/director/scene-direction-for-video-prompts.md",
+      "notes": "Milne-derived working crib sheet. Not the book. Not shot grammar. Not the 7-scene product contract."
+    },
+    {
+      "id": "ref-yt-shorts-lod",
+      "title": "Line of Discovery concept",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": [
+        "youtube-shorts",
+        "storytelling"
+      ],
+      "applies_to": [
+        "youtube-shorts"
+      ],
+      "date_added": "2026-08-14",
+      "source_file": "channels/youtube-shorts/owner-notes/line-of-discovery-concept.txt",
+      "notes": "Optional quality lens. Not a scene-role enum. Filter magnesium claims."
+    },
+    {
+      "id": "ref-yt-shorts-scene1",
+      "title": "Scene 1 production example",
+      "authority": "advisory",
+      "status": "reviewed",
+      "topics": [
+        "youtube-shorts",
+        "video-prompts"
+      ],
+      "applies_to": [
+        "youtube-shorts"
+      ],
+      "date_added": "2026-08-14",
+      "source_file": "channels/youtube-shorts/scene-prompt-examples/scene-1-production-example.txt",
+      "notes": "Gold craft shape only (n=1). Not default talent, topic, or named-model law."
+    },
+    {
+      "id": "ref-yt-shorts-mm-reqs",
+      "title": "MarketMonth scene prompt requirements",
+      "authority": "advisory",
+      "status": "historical",
+      "topics": [
+        "youtube-shorts",
+        "prior-system"
+      ],
+      "applies_to": [
+        "youtube-shorts"
+      ],
+      "date_added": "2026-08-14",
+      "source_file": "channels/youtube-shorts/prior-system/youtube-short-scene-prompt-requirements.md",
+      "notes": "Historical pattern. Not product source of truth. Do not inherit Fill Scene / Veo / src/brain."
+    },
+    {
+      "id": "ref-yt-shorts-mm-brief",
+      "title": "MarketMonth multi-scene prompt brief",
+      "authority": "advisory",
+      "status": "historical",
+      "topics": [
+        "youtube-shorts",
+        "prior-system"
+      ],
+      "applies_to": [
+        "youtube-shorts"
+      ],
+      "date_added": "2026-08-14",
+      "source_file": "channels/youtube-shorts/prior-system/youtube-short-prompt-system-brief.md",
+      "notes": "Historical pattern. Not product source of truth."
     },
     {
       "id": "ref-prompt-quality-001",

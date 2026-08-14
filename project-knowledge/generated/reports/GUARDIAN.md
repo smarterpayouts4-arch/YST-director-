@@ -2,5 +2,6 @@
 # Guardian report
 
 - Hard: 0
-- Warn: 0
+- Warn: 1
 
+- **PK-WARN-001** (warn) File exceeds warning line threshold — `tests/topics/build-topic-packet.test.ts`: 713 lines exceeds warning threshold 500

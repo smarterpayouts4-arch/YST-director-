@@ -1,0 +1,38 @@
+---
+description: One active plan per workstream — do not spawn parallel plans while an unfinished plan exists
+alwaysApply: true
+---
+
+# One active plan per workstream
+
+## Hard rule
+
+If an unfinished plan already exists for the same workstream, **do not create a new plan file**.
+
+Update the existing plan instead: edit scope, locks, todos, and stop gates in place.
+
+## How to decide
+
+1. Before creating any `*.plan.md` (or Plan Mode plan), search `~/.cursor/plans/` and the conversation for an active plan covering the same product slice.
+2. Same workstream examples for this repo:
+   - YouTube Shorts / Social Media / Atom handoff / P1A / P1B / Reference Library for Shorts (`Reference/channels/youtube-shorts/`) → **one plan:** `youtube_shorts_main_build.plan.md`
+   - Research Prompt Builder stages → that domain’s active plan only
+   - Content Intelligence Librarian / Topic Engine → that domain’s active plan only
+3. Name-collision trap: `manual_shorts_*`, MarketMonth / Zynava Shorts, or `src/brain/channels/youtube-short` plans are **not** this workstream — do not execute them for Atom → Shorts.
+4. If an active plan exists and todos are not all completed/cancelled → **edit that plan**. Never open a parallel “foundation”, “tightened”, “v2”, or “investigation” plan for the same goal.
+5. Only create a new plan when:
+   - No active plan covers the workstream, **or**
+   - The prior plan is fully completed (or explicitly marked MERGED / OUT OF SCOPE / cancelled), **and** the user asks for a new phase as a separate plan.
+6. When consolidating duplicates: pick one survivor, mark others `MERGED` or `OUT OF SCOPE` with cancelled todos and a pointer to the survivor. Do not leave two active todo lists for the same build.
+
+## Prefer
+
+- One main build plan with phased todos (P0 → P1A → stop → P1B later)
+- Cancelling obsolete todos in superseded plans
+- Asking the user which plan is canonical if two actives genuinely conflict — then merge immediately
+
+## Do not
+
+- Spawn a new plan because a prior plan feels “stale” or “too long”
+- Spawn investigation + implementation + reference plans in parallel for the same feature
+- Keep executing from MERGED / OUT OF SCOPE plan files

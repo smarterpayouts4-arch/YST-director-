@@ -6,8 +6,8 @@ Independent domain after Research Prompt Builder export.
 
 | Workflow | Path | Status |
 |----------|------|--------|
-| **Librarian** | `library/` | Partial (PR1 paste handoff → extract → curate → review → publish) |
-| **Topic Engine** | `topics/` | Planned — create only when that PR ships; do not scaffold empty |
+| **Librarian** | `library/` | Live (MVP frozen) — paste handoff → extract → curate → review → publish |
+| **Topic Engine** | `topics/` | Live — `ci-topics-1.1.9` (freeze deferred pending smoke); Directions → 6 topics → Canonical Topic Packet; consumes only `PublishedLibraryDto` |
 
 ## Firewall
 

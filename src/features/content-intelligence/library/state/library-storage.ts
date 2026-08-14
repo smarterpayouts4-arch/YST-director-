@@ -18,7 +18,8 @@ export function createEmptyLibrary(input?: {
   projectId?: string;
 }): ContentIntelligenceLibrary {
   return {
-    libraryId: input?.libraryId ?? `lib_${Date.now().toString(36)}`,
+    // UUID so consecutive handoffs never collide on the same millisecond.
+    libraryId: input?.libraryId ?? `lib_${globalThis.crypto.randomUUID()}`,
     stage: "idle",
     projectId: input?.projectId,
     artifacts: [],
@@ -57,9 +58,4 @@ export function saveLibrary(library: ContentIntelligenceLibrary): void {
     library: ContentIntelligenceLibrarySchema.parse(library),
   };
   window.localStorage.setItem(CI_STORAGE_KEY, JSON.stringify(envelope));
-}
-
-export function clearLibrary(): void {
-  if (typeof window === "undefined") return;
-  window.localStorage.removeItem(CI_STORAGE_KEY);
 }

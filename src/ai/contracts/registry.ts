@@ -9,6 +9,9 @@ import {
   SupportingContextSchema,
 } from "@/features/research-prompt-builder/schemas";
 import { ContentIntelligenceExtractSchema } from "@/features/content-intelligence/library/schemas/extract-draft";
+import { PublishedLibraryDtoSchema } from "@/features/content-intelligence/contracts/published-library";
+import { TopicDirectionsDraftSchema } from "@/features/content-intelligence/topics/schemas/direction";
+import { TopicOpportunitiesDraftSchema } from "@/features/content-intelligence/topics/schemas/topic-opportunity";
 import type { ContractDefinition, ContractId, ContractRegistry } from "@/ai/contracts/types";
 
 export const CONTRACT_SCHEMA_VERSION = "1.0.0";
@@ -113,6 +116,40 @@ export const contractRegistry: ContractRegistry = {
     description:
       "Structured Librarian extract draft from completed external research (pre-curation).",
     schema: ContentIntelligenceExtractSchema,
+  },
+  "published-library": {
+    contractId: "published-library",
+    schemaVersion: "1.0.0",
+    owner: "product-plane",
+    producer: "extract-content-intelligence",
+    consumers: [
+      "propose-topic-directions",
+      "propose-topic-opportunities",
+      "ui-topic-engine",
+    ],
+    description:
+      "Accepted-only PublishedLibraryDto handoff from Librarian to Topic Engine (no raw research).",
+    schema: PublishedLibraryDtoSchema,
+  },
+  "topic-directions": {
+    contractId: "topic-directions",
+    // 1.1.0: content-lane Directions + required decisionQuestion
+    schemaVersion: "1.1.0",
+    owner: "ai-control-plane",
+    producer: "propose-topic-directions",
+    consumers: ["propose-topic-opportunities", "ui-topic-engine"],
+    description:
+      "Draft content-lane directions (normally up to 3) from PublishedLibraryDto.",
+    schema: TopicDirectionsDraftSchema,
+  },
+  "topic-opportunities": {
+    contractId: "topic-opportunities",
+    schemaVersion: "1.0.0",
+    owner: "ai-control-plane",
+    producer: "propose-topic-opportunities",
+    consumers: ["ui-topic-engine"],
+    description: "Exactly six grounded topic opportunities inside a selected direction.",
+    schema: TopicOpportunitiesDraftSchema,
   },
 };
 

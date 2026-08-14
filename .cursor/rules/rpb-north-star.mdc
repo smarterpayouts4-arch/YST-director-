@@ -5,16 +5,16 @@ alwaysApply: true
 
 # Research Prompt Builder — North Star
 
-Research Prompt Builder remains Live through research-prompt export. Content Intelligence is the next independent domain: Librarian (Partial) ingests completed external research into a governed library; Topic Engine is Planned and must consume only `PublishedLibraryDto`.
+Research Prompt Builder remains Live through research-prompt export. Content Intelligence: Librarian MVP is frozen (Live); Topic Engine is Live (`ci-topics-1.1.9`; freeze deferred pending smoke) and must consume only `PublishedLibraryDto`. Social Media is organizational hub (nav only); YouTube Shorts is Partial (P1A sole Atom ingest — no storyboard LLM yet).
 
 RPB work must still support Accuracy · Specificity · Research Depth · Repeatability of the exported research prompt.
 
 ## Do not expand into
 
-In-app research execution · Topic Engine (until its PR) · scripts · video · auth · cloud DB · RAG/multi-agent · write MCP · auto-rewriting canon docs · runtime-import of Reference transcripts
+In-app research execution · scripts · video · auth · cloud DB · RAG/multi-agent · write MCP · auto-rewriting canon docs · runtime-import of Reference transcripts · shared Social Media creative brain (`SOCIAL_MEDIA_MODEL`)
 
 ## First steps
 
 1. Prefer `npm run dev` (runs `doctor` then Next.js). Use `npm run doctor` alone for a one-shot check; `npm run verify` before merge.
 2. Read `AGENTS.md` and `project-knowledge/CURRENT_STATE.md`
-3. Prefer the smallest change that improves the exported prompt or the Librarian foundation without co-mingling domains
+3. Prefer the smallest change that improves the exported prompt or the Librarian / Shorts foundation without co-mingling domains

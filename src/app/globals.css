@@ -1,15 +1,61 @@
 @import "tailwindcss";
 
 :root {
-  --rail: #0f1c2e;
-  --rail-muted: #9fb0c5;
-  --canvas: #f7f4ef;
-  --ink: #171412;
-  --border: #e4ddd3;
+  /* Brand anchors (LOGO.pdf) */
+  --brand-green: #09b44d;
+  --brand-yellow: #fbc233;
+  --brand-mint: #d0f1dd;
+  --brand-neutral: #f6f6f6;
+  --brand-charcoal: #262626;
+
+  /* Semantic — light workspace */
+  --canvas: var(--brand-neutral);
+  --ink: var(--brand-charcoal);
+  --border: color-mix(in srgb, var(--brand-charcoal) 12%, white);
+  --primary: var(--brand-green);
+  --primary-foreground: #ffffff;
+  --primary-hover: color-mix(
+    in srgb,
+    var(--brand-green) 82%,
+    var(--brand-charcoal)
+  );
+  --ring: var(--brand-green);
+  --success: var(--brand-green);
+  --success-soft: var(--brand-mint);
+  --accent-emphasis: var(--brand-yellow);
+
+  /* Semantic — dark navigation (journey sidebar) */
+  --rail: color-mix(in srgb, var(--brand-green) 16%, var(--brand-charcoal) 84%);
+  --rail-elevated: color-mix(
+    in srgb,
+    var(--brand-green) 26%,
+    var(--brand-charcoal) 74%
+  );
+  --rail-border: color-mix(in srgb, var(--brand-green) 55%, white 10%);
+  --rail-foreground: #ffffff;
+  --rail-muted: color-mix(in srgb, var(--brand-mint) 40%, white 60%);
+  --rail-accent: var(--brand-green);
+  --rail-connector: color-mix(in srgb, white 18%, transparent);
+
+  /* Active step card — light elevated surface on dark rail */
+  --rail-card: #ffffff;
+  --rail-card-foreground: var(--brand-charcoal);
+  --rail-card-muted: color-mix(in srgb, var(--brand-charcoal) 62%, white);
+  --rail-card-border: color-mix(
+    in srgb,
+    var(--brand-green) 45%,
+    var(--brand-neutral)
+  );
+  --rail-card-accent: var(--brand-green);
 }
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
 }
 
 * {

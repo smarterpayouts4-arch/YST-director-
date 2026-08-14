@@ -12,10 +12,10 @@ Upload company information, confirm what the system understood, answer a few que
 4. Build an owner-approved research brief.
 5. Generate, validate, and export one polished research prompt.
 
-## Content Intelligence (Partial — foundation in progress)
+## Content Intelligence
 
-6. After external ChatGPT research: ingest completed research → Librarian extract/curate/review → published Content Intelligence Library.
-7. Later: Topic Engine consumes only the published library DTO (not built yet).
+6. After external ChatGPT research: ingest completed research → Librarian extract/curate/review → published Content Intelligence Library (Librarian MVP frozen).
+7. Topic Engine (Live — `ci-topics-1.1.9`; freeze deferred pending smoke): Directions → topic opportunities → one Canonical Topic Packet / Atom from `PublishedLibraryDto` only. YouTube Shorts foundation Partial (Atom ingest + resume; no storyboard LLM yet).
 
 Research Prompt Builder export remains a hard stage boundary. Content Intelligence is a separate domain (`src/features/content-intelligence/`), not an unlimited expansion of RPB internals.
 
@@ -33,8 +33,8 @@ Research Prompt Builder export remains a hard stage boundary. Content Intelligen
 Do not build inside this MVP:
 
 - automatic web research / crawling inside the app
-- Topic Engine / topic packages (planned after Librarian)
-- scripts, social posts, storyboards, image/video generation
+- Full channel content generators / scripts / calendars beyond YouTube Shorts P1A foundation (Atom ingest + resume only; no storyboard LLM yet)
+- scripts, social posts, storyboards, image/video generation (Shorts storyboard remains P1B+)
 - CRM, billing, authentication, user accounts
 - cloud database persistence for MVP development (localStorage approved for CI MVP; cloud later)
 - queues, vector search, embeddings, RAG, multi-agent frameworks
@@ -47,8 +47,9 @@ Do not build inside this MVP:
 ```text
 Ingestion → Understanding → Interview → Research Brief → Final Prompt (export)
   → (external ChatGPT research)
-  → Content Intelligence Librarian (Partial)
-  → Topic Engine (Planned)
+  → Content Intelligence Librarian (Live / frozen)
+  → Topic Engine (Live — Atom)
+  → Social Media (org hub / nav) → YouTube Shorts (Partial — P1A sole ingest)
 ```
 
 ## Boundaries

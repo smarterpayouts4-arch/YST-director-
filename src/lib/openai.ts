@@ -20,6 +20,11 @@ export function getOpenAIModel(): string {
   return getEnv().OPENAI_MODEL;
 }
 
+/** Topic Engine directions + topics only. Does not affect Librarian/RPB. */
+export function getTopicEngineModel(): string {
+  return getEnv().TOPIC_ENGINE_MODEL;
+}
+
 export function getReasoningEffort(): string {
   return getEnv().OPENAI_REASONING_EFFORT;
 }

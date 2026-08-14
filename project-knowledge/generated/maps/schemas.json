@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-11T21:18:39.294Z",
-  "commitSha": "df8bbbe0730eb40cdae26b5df60ea9b028b03446",
+  "generatedAt": "2026-08-14T05:13:23.415Z",
+  "commitSha": "7a614aa6c4a57b56cd77e1366beb3785781987db",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "src/features"
@@ -10,7 +10,7 @@
   "schemas": [
     {
       "path": "src/features/content-intelligence/library/schemas/artifact.ts",
-      "lines": 13
+      "lines": 14
     },
     {
       "path": "src/features/content-intelligence/library/schemas/enums.ts",
@@ -18,7 +18,11 @@
     },
     {
       "path": "src/features/content-intelligence/library/schemas/extract-draft.ts",
-      "lines": 28
+      "lines": 30
+    },
+    {
+      "path": "src/features/content-intelligence/library/schemas/extract-request.ts",
+      "lines": 15
     },
     {
       "path": "src/features/content-intelligence/library/schemas/extraction-run.ts",
@@ -30,15 +34,31 @@
     },
     {
       "path": "src/features/content-intelligence/library/schemas/library-item.ts",
-      "lines": 27
+      "lines": 29
     },
     {
       "path": "src/features/content-intelligence/library/schemas/library.ts",
-      "lines": 29
+      "lines": 32
+    },
+    {
+      "path": "src/features/content-intelligence/topics/schemas/direction.ts",
+      "lines": 48
+    },
+    {
+      "path": "src/features/content-intelligence/topics/schemas/topic-opportunity.ts",
+      "lines": 51
+    },
+    {
+      "path": "src/features/content-intelligence/topics/schemas/topic-session.ts",
+      "lines": 39
     },
     {
       "path": "src/features/research-prompt-builder/schemas/index.ts",
       "lines": 290
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/schemas/youtube-shorts-session.ts",
+      "lines": 24
     }
   ]
 }

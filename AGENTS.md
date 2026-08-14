@@ -1,6 +1,6 @@
 # AGENTS.md — Research Prompt Builder + Content Intelligence
 
-Research Prompt Builder remains Live through research-prompt export. Content Intelligence is the next independent domain (Librarian Partial; Topic Engine Planned). Do not expand into agents, RAG, video, or cloud DB during current MVP development.
+Research Prompt Builder remains Live through research-prompt export. Content Intelligence: Librarian MVP frozen; Topic Engine on `ci-topics-1.1.9` + Sol (Topic Strategy Doctrine + support-as-teach-substrate + topic-relative Atom insights; freeze deferred pending owner six-topic smoke). Social Media is org hub (nav only); YouTube Shorts is Partial (P1A sole Atom ingest — no storyboard LLM yet). Do not add an Atom synthesis LLM or Marketing-folder RAG. Do not expand into agents, RAG, video, or cloud DB during current MVP development.
 
 ## Cold-start order
 

@@ -3,6 +3,8 @@ import { z } from "zod";
 const envSchema = z.object({
   OPENAI_API_KEY: z.string().min(1).optional(),
   OPENAI_MODEL: z.string().min(1).default("gpt-5.6-terra"),
+  /** Topic Engine only (directions + topics). Librarian/RPB keep OPENAI_MODEL. */
+  TOPIC_ENGINE_MODEL: z.string().min(1).default("gpt-5.6-sol"),
   OPENAI_REASONING_EFFORT: z
     .enum(["none", "low", "medium", "high", "xhigh", "max"])
     .default("medium"),
@@ -25,6 +27,7 @@ export function getEnv(): AppEnv {
   const parsed = envSchema.safeParse({
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     OPENAI_MODEL: process.env.OPENAI_MODEL,
+    TOPIC_ENGINE_MODEL: process.env.TOPIC_ENGINE_MODEL,
     OPENAI_REASONING_EFFORT: process.env.OPENAI_REASONING_EFFORT,
     NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,
     MAX_CSV_BYTES: process.env.MAX_CSV_BYTES,

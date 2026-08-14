@@ -5,6 +5,8 @@ import {
 } from "@/features/content-intelligence/library/schemas/enums";
 
 /** Structured model output before deterministic curation. */
+export const EXTRACT_DRAFT_ITEMS_MAX = 80;
+
 export const ContentIntelligenceExtractSchema = z.object({
   items: z
     .array(
@@ -19,7 +21,7 @@ export const ContentIntelligenceExtractSchema = z.object({
         isHypothesis: z.boolean(),
       }),
     )
-    .max(80),
+    .max(EXTRACT_DRAFT_ITEMS_MAX),
 });
 
 export type ContentIntelligenceExtract = z.infer<

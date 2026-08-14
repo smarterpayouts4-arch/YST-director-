@@ -1,14 +1,12 @@
-import {
-  CI_HANDOFF_SESSION_KEY,
-  MAX_RESEARCH_PASTE_CHARS,
-} from "@/features/content-intelligence/library/config/constants";
+import { CI_HANDOFF_SESSION_KEY } from "@/features/content-intelligence/library/config/constants";
+import { MAX_RESEARCH_INPUT_CHARS } from "@/features/content-intelligence/library/config/research-input-limits";
 import type { ResearchArtifact } from "@/features/content-intelligence/library/schemas/artifact";
 import { hashText } from "@/features/content-intelligence/library/state/hash-text";
 import {
   createEmptyLibrary,
-  loadLibrary,
   saveLibrary,
 } from "@/features/content-intelligence/library/state/library-storage";
+import { clearTopicSession } from "@/features/content-intelligence/topics/state/topic-storage";
 
 export type ResearchHandoffPayload = {
   artifactId: string;
@@ -20,20 +18,21 @@ export type ResearchHandoffPayload = {
 
 /**
  * CI-owned handoff entrypoint for RPB Step 5.
- * Creates an immutable ResearchArtifact in content-intelligence:v1.
+ * Every Send creates a fresh Library (new libraryId) with one immutable ResearchArtifact.
+ * Prior active library stops being active — no item accumulation across research pastes.
  * Never writes to ResearchPromptProject / RPB storage.
  */
 export async function acceptResearchHandoff(input: {
   researchText: string;
   projectId?: string;
-}): Promise<{ artifactId: string; projectId?: string }> {
+}): Promise<{ artifactId: string; projectId?: string; libraryId: string }> {
   const researchText = input.researchText.trim();
   if (!researchText) {
     throw new Error("Paste the completed research before sending.");
   }
-  if (researchText.length > MAX_RESEARCH_PASTE_CHARS) {
+  if (researchText.length > MAX_RESEARCH_INPUT_CHARS) {
     throw new Error(
-      `Completed research exceeds ${MAX_RESEARCH_PASTE_CHARS.toLocaleString()} characters.`,
+      `Completed research exceeds ${MAX_RESEARCH_INPUT_CHARS.toLocaleString()} characters. Shorten it before sending — Content Intelligence will not silently truncate.`,
     );
   }
 
@@ -48,14 +47,13 @@ export async function acceptResearchHandoff(input: {
     projectId: input.projectId,
   };
 
-  const existing = loadLibrary();
-  const library = existing ?? createEmptyLibrary({ projectId: input.projectId });
-  library.projectId = input.projectId ?? library.projectId;
-  library.artifacts = [...library.artifacts.filter((a) => a.artifactId !== artifactId), artifact];
+  const library = createEmptyLibrary({ projectId: input.projectId });
+  library.artifacts = [artifact];
   library.stage = "pending_extract";
   library.publishedAt = null;
   library.publishedDto = null;
   saveLibrary(library);
+  clearTopicSession();
 
   const payload: ResearchHandoffPayload = {
     artifactId,
@@ -68,7 +66,7 @@ export async function acceptResearchHandoff(input: {
     window.sessionStorage.setItem(CI_HANDOFF_SESSION_KEY, JSON.stringify(payload));
   }
 
-  return { artifactId, projectId: input.projectId };
+  return { artifactId, projectId: input.projectId, libraryId: library.libraryId };
 }
 
 export function peekHandoff(): ResearchHandoffPayload | null {

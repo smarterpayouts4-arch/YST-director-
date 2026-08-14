@@ -1,0 +1,650 @@
+
+Search in video
+Introduction
+0:00
+prompt management 101 with the subtitle boring but highly important Concepts about how to manage promps at scale
+0:06
+without going crazy so this video is going to be for you if you work with proms professionally within your
+0:13
+codebase and want to get a better understanding about how to properly do so so that you can over time improve
+0:19
+your large language model applications so in this video I'm going to share all of the different methods and strategies
+0:25
+that you can use to manage your proms I'm going to cover everything that we've seen from the comp companies that we
+0:30
+work with with data Lumina and now for those of you that are new here my name is Dave eilar I'm the founder of data
+0:36
+Lumina which is a data ni development company so we essentially help companies to get started with data and AI either
+0:42
+assisting their engineering teams or completely done for you projects and next to that I also share all of my
+0:47
+lessons here on YouTube so if that's your thing make sure to subscribe as well but now let's get into what we are
+0:54
+going to cover within this video so we're going to start with an high Lev introduction about prompt management
+1:00
+what is it why is it important we'll cover some common mistakes we cover the methods and then we also highlight our
+1:06
+approach that we use a data Lumina to serve all of the different clients uh in the projects that we're currently
+1:11
+working on and then we'll conclude with some best practices in this video we're not going to cover prompt engineering
+1:17
+we're not going to cover the latest model updates or best practices or Frameworks to improve your applications
+1:24
+no we're really going to talk about prompt management which is a systematic approach to storing versioning and
+1:30
+retrieving prompts in your llm applications and some key aspects of prompt management include Version
+1:36
+Control potentially decoupling your promps from your code monitoring and logging optimizing promps and also
+1:43
+integrating promps all important Concepts that let you systematically
+1:49
+manage and improve your llm application that is using prompts over time why is
+1:56
+this important why am I going to create an entire press presentation on this concept and why should you watch this
+2:03
+well when it comes to building llm apps your prompts are often more important than your code let me highlight this
+2:10
+with the following example and also given the Assumption assumption here
+2:15
+that you don't break your code on the left here we have a very messy function
+2:20
+with an okay prompt where there are some variables in there and we can give some context to the model some guidelines
+2:27
+maximum words maximum length Etc but very like messy code something
+2:33
+that you do not want in your code base on the other hand example two we have a
+2:39
+very clean function but a bad prompt it's just right about product name and this simple example just goes to show
+2:46
+that whenever you're building applications if if it runs if you manage to get it to work like you can refactor
+2:53
+everything that you want but your end user or the client is not going to notice anything about essentially how
+3:00
+your codebase is structured you just of course want to follow best practices for yourself or the team that you're working
+3:05
+with but to be fair the client or end user is not going to notice it whereas a
+3:11
+slight ever so slight change within your prompts which could be a simple as changing like one word can have great
+3:19
+effects on the outputs and outcomes and thus utility of your llm application and
+3:26
+that's why prompt management is really important so now let's first cover some
+Common mistakes
+3:31
+common prompt management mistakes and at least I can say for myself I've made all
+3:37
+of these mistakes in the beginning so first Common mistake prompts scattered
+3:43
+across your project so imagine this you're building an application and you have some functions here you have an
+3:50
+open AI let's say you have an open AI API call somewhere in a function within a file and in there is a prompt and then
+3:57
+in another file you have another prompt and then somewhere else you for a different use case based on some if else
+4:04
+logic you have another prompt over there everything is scattered so now when you come in or a team member comes in and
+4:10
+you want to change something you really have to dig so where is that prompt and what is it affecting then also limited
+4:17
+Version Control so if you store all of your prompts at the within your codebase
+4:23
+So within let's say your python files or as in separate txt files for that matter you have limited Version Control you can
+4:30
+manage that and keep track of that with Git which for a lot of use cases might be enough I will get into that but for
+4:37
+some use cases especially if your applications gets more serious more users or the team get larger you might
+4:45
+want to have an alternative method to managing and fting your prompts other than just plain git because while you
+4:52
+can keep track of everything you cannot very easily roll back that change
+4:57
+because you could go through the commit messages right and then see okay where did we exactly change that prompt but
+5:04
+it's not really where with one click of a button you have version one and version two of your prompt and if it
+5:09
+doesn't work you go back to version one also lack of standardization so not having a clear
+5:17
+like thought out structure or standardized way that you manage prompts within your codebase and within your
+5:23
+projects can also again lead to these inconsistencies harder for team me
+5:28
+members and also yourself to come back later and then adjust them and update them number four no evaluation framework
+5:35
+so adjusting prompts based on just like gut fuel when you are looking typically
+5:42
+at uh solo like isolated examples so you're trying to solve a problem so one
+5:49
+answer should be slightly different for example than you expected you change the prompt let's say in the playground oh it
+5:55
+works on this isolated example let's push that to production without knowing
+6:00
+what the effects of that change are going to be really at the global level of your code base and then prompt
+6:06
+redundancy so having a lot of very similar prompts scattered across your code base each with for example
+6:13
+different nuances or different cases where uh it's going to be hard to keep
+6:18
+track of that so let's say you have two very similar prompts and you find out that on like let's say prompt a you
+6:24
+tweak some things because you ran into an issue and you change that push it to production and then for getting that you
+6:30
+also actually had prompt B which was very similar but just had let's say some different conditional logic or something
+6:36
+in there um that there is no then link to that so prompt redundancy and then
+6:42
+finally mistake common mistake number six is no metadata so just a prompt in a
+6:47
+txt file or in an fstring or just in line within your API call without any
+6:53
+context about who wrote this what version is this on what's the utility what model should we be using this
+7:00
+no metadata so these are some common mistakes that I see a lot of new AI engineers make and like I've said I've
+7:07
+made all these mistakes as well and you should also consider here that depending on where you are at in your like
+7:13
+Learning Journey or development Journey the more serious your project gets the more important it becomes to make sure
+7:20
+you don't make these mistakes so if you're just starting out working on a let's say portfolio project this doesn't
+7:27
+really matter as much when you start to put things into an application that people are actually using or you start
+7:33
+to work with the team this becomes more and more important and a must in order to make sure that things don't get out
+7:41
+of control because it will happen otherwise so now let's cover some of the
+Methods
+7:47
+methods that you can use for prompt man for prompt management and we're going to cover five methods that we've seen that
+7:55
+we've encountered and you could even view these five as kind of like a leveling system as well where level one
+8:02
+the inline promps which we'll go in a bit is like the easiest most straightforward one where everyone starts and as you progress it gets more
+8:10
+complicated to do so let's say but you also get additional benefits uh but each
+8:16
+of these methods here has some trade-offs which we will also get into each have their uh own pros and cons so
+8:24
+high level um we have separate slides for all of these methods which we will now get into so you can determine
+8:30
+which level you are at right now and also decide what makes the most sense for you because I don't recommend level
+8:36
+five custom database storage for everyone it really depends on the project so high level we have inline
+8:42
+prompts C centralized storage structured centralized storage external promp management tools and then finally custom
+8:49
+database storage so now let's get into the first one inline promps so this is
+8:55
+where everyone starts right embedding prompts directly in the codebase typically Within the API calls or
+9:00
+function parameters so here you can see an example generate project description you have to prompt in here and then you
+9:06
+make the API call so Pros simple and quick to implement direct context
+9:12
+availability within the code so a developer can come in here and look at this generate product description
+9:19
+function and can instantly see okay this is the promt that we're dealing with so this is what we're sending to the model
+9:25
+but then some cons it's hard to maintain an updated scale it lacks centralized management uh Version Control and
+9:31
+metadata so when you look at this prompt as is it's very straightforward right
+9:36
+but in production environments especially when your application gets more complex prompts are often not as
+9:43
+simple as this quick like oneliner so usually they can get pretty uh at least like a couple sentences or paragraphs to
+9:50
+give more context on style formatting Chain of Thought F shot examples so this can get
+9:57
+big quite quickly also potentially with more variables and at that point you
+10:03
+most likely want to move it to a place somewhere else where in the function you
+10:08
+can just focus on like the function logic and then decouple that in some way so inline proms this is where everyone
+10:15
+starts it has some pros and cons but it's typically not what you want to do so if you are at this level over here
+10:21
+one easy upgrade fix that you can Implement is switching to centralized
+10:26
+storage where you store prompts in a dedicated folder or profile within the codebase improving your organization but
+10:32
+without enforcing a specific structure so what you could do for example within your project just create a folder
+10:38
+prompts and put it in there and you can even create subfolders in here for example different uh let's say pipelines
+10:44
+workflows or categories but having that centralized place so whenever you know
+10:50
+okay we have to update a prompt you know where to go and you have that overview of everything that is in there so some
+10:56
+of the pros here improved organization compared to inline prompts easier to find and update as well and then we also
+11:03
+of course have some cons there is still no really enforced structure which can lead to inconsistency so there's still
+11:10
+we have some files in here but we it doesn't say how we should structure these files again limited version
+11:16
+capabilities lack of metadata it's a it's a slight change from having them really in line towards a centralized
+11:22
+place where we manage them but there are still some issues with this approach all right and then let's get to level three
+11:28
+which is structured centralized storage which is where you organize your promps
+11:33
+in a central location but now also with a predefined structure or template and
+11:38
+for this you could for example use FST strings or you could use l chain or llama index with for example a prompt
+11:44
+template that you see over here or you could use ginger as a templating engine which is actually what we're using and
+11:51
+I'm going to share in the next section why we use ginger and why we prefer it over using something like uh Lang chain
+11:58
+or using FST strings which additional benefits or you could use something like prompty which is a a
+12:04
+framework um by Microsoft you can see it over here in the left corner it's pretty small but um definitely look into
+12:10
+prompty look into prompt. a and see if if you like it if it resonates with you but the the main ID here is with level
+12:17
+three is that we have C A centralized place but also a predefined structure
+12:22
+whereas with level two we just have one place right but it can be you could put anything in those files maybe it's D
+12:29
+maybe it's python files whatever and here we really get clear on that and probably for 80% of you watching this is
+12:37
+all you need a proper structured centralized storage system to manage your prompts and like I said the next
+12:44
+section our approach I will share some code examples that you can see on the left over here with Ginga and our prompt
+12:49
+manager that you can copy if you like it so make sure to stay around for that but
+12:54
+now uh quickly pros and cons enhances consistency maintainability allows for Dynamic prom generation because we have
+13:01
+these templating files and systems facilitates easily easier easier collaboration among the team members
+13:06
+because it's really clear right this is where where we place the PRS in this structure um and the stru these
+13:12
+structures and templates can also be extended to include metadata because we have that structure uh and then some
+13:18
+cons it requires initial setup and agreement on template and structure so yeah you have to get clear on okay what is it that we're using requires line
+13:25
+learning a templating language or system which to be honest is it's very easy but it's it's uh it it takes some more work
+13:32
+than just okay dump the prompts in here or whatever in line um and then we have versioning is still limited to just G
+13:39
+which might be might be all you need but like I've said sometimes you need a little bit more and that is where we get
+13:46
+into level four and that is external prompt management tools so you can also
+13:52
+manage your prompts utilizing a third-party application such as Lang Smith or Lang fuse to manage your
+13:57
+prompts and here we really decouple our prompts from our code paas so we really take it out of that put it into a
+14:05
+separate storage location and then within our code we query essentially the prompts whenever we need them and with
+14:12
+this we essentially turn it into a Content management system that stores our prompts the pros of this um we can
+14:19
+get into advanced features like versioning rollbacks metadata and analytics also depending on the platform
+14:25
+that you're using so I know that both Langs Smith and Lang fuse offer those types of capabilities where Lang fuse is
+14:31
+fully open source Lang Smith is from from Lang chain and it's closed Source easier to get started Lang fuse also has
+14:38
+a cloud version by the way but you can also fully self host it what is and that is what we're doing and it also provides
+14:45
+a US userfriendly interface for non-technical team members so you can just look at the prompts over here so
+14:51
+this is the prompt for the event planner you can see we have a version we have some variables that we have to put in we
+14:56
+even have a model config and then with in our code is just Lang fuse prompt is Lang fuse. Gap prompt and we get that
+15:02
+event planner but it's it's not within our code base so uh but like I said even
+15:08
+non-technical stakeholders can come in here and maybe for example you're working with a copyright or something like that they can come in here or
+15:14
+you're working with a client um the cons introduces extra overhead to manage this surface because it's somewhere else and
+15:21
+it also uh introduces the this dependency on this third party service which could also kind of like result in
+15:27
+a vendor locking of some sort where if you build your entire code base around having your promps in that system you
+15:35
+are likely going to stick with that and given how quickly everything is changing within the AI landscape this can
+15:43
+sometimes be a drawback as well and this can bottleneck local development because you have this external dependency
+15:49
+sometimes if you quickly want to test things um and you don't want to put a new prompt into the system it it can get
+15:55
+messy with that and this just may be overkill for smaller projects so here
+16:01
+we're definitely talking about more serious applications that are most likely already uh running in Productions
+16:08
+and in production and users are using this system that is really when you should consider upgrading to an external
+16:16
+prompt management if you feel the need to like I've said for some project smaller project this might be all you need but this is where it gets a little
+16:23
+bit more serious and then finally next to using an external promp management tool that's already pre-built you can
+16:28
+also just build a custom one build your own because to be honest it's not that challenging you could just create a
+16:35
+database where you store your promts and have metadata versioning in there everything tailored to your specific
+16:41
+need you could just for example look at all of the variables and data that for example tools like Lang Smith or Lang
+16:47
+fuser using and you just create a simple let's say post gql database put it in there and then make your own API
+16:54
+function to query those prompts so this is also something that you can do and
+17:00
+here uh you can also potentially have easier Integrations within other
+17:05
+applications within let's say your company or your ecosystem or whatever you're using it's more flexible you can
+17:12
+do you can do anything here so it can be tailored to specifically to your project needs allow for dynamic retrieval and
+17:18
+complex querying easier integration like I've said but requires database management setup and management complex
+17:24
+to implement andain also can bottleneck local development and again maybe overkill for smaller projects so those
+17:30
+are the five prompt management methods that we have identified so here finally
+17:35
+again an overview and what you can do for you you can consider where you are at right now and then whenever you feel
+17:42
+like you're running into issues with your current approach when it comes to managing your PRS you could look at you
+17:47
+okay what does the next step look like and improve from there but now let's cover our approach that we use at data
+Our approach
+17:54
+Lumina and this is based on around ginger as a templating engine so Ginga
+18:00
+is a powerful python based template engine ideal for managing proms we found offering flexibility and first ability
+18:07
+and here again I want to stress out for most projects especially when working with small teams a CMS or custom
+18:12
+database setup might be Overkill so in these cases we prefer working with with
+18:17
+ginger and a predefined folder structure so I would say for most of the projects right now this is our approach we are
+18:25
+with one or two project right now considering to set up a custom database because it gets more serious and we want
+18:31
+to have even greater control over our Pros but let's cover why we why we use
+18:36
+ginger some of the benefits and then I'm going to share some code examples with you and show you how this actually comes
+18:42
+together within a project so um why we use it well centralized within the project so we have we can just create a
+18:48
+dedicated folder we have it in the project every developer can come in there and instances okay these are the prompts Ginga offers a unique file
+18:56
+extension and while this might sound very like simple it's a subtle Nuance
+19:01
+where what a lot of uh AI Engineers do is either you like use f strings so you have python files with f strings in
+19:08
+there or use for example Lang chain or what is it llama index and then also
+19:13
+python based files with these prom templates but now what you get if you start to work on an application you have
+19:19
+some files python files that have the promps and they probably have very similar names to let's say product
+19:25
+description prompt or or product description. py but then you also have a product description. py which is the
+19:32
+actual function to call it and this can get messy so it's all python files with this we found solo new on we just know
+19:39
+okay the G G2 files the ginger files that's where our prompts live and we can easily open those up we can also easily
+19:46
+add metadata to these files using front matter we can enforce input validation
+19:52
+which is something that is a little bit trickier to do with FST strings we can also use F logic which is really big I
+20:00
+will give some examples but we can use uh conol control structures like if statements Loop filters macros and even
+20:08
+prompt inheritance which is going to reduce the redundancy and if done well can optimize your token usage with impr
+20:15
+promps and it's also highly flexible so when you are for example using an external promt management tool there are
+20:22
+some design choices in there with this you can basically do everything and
+20:27
+tailor it specifically to to your needs so now let's look at an example so we
+Example using Jinja
+20:34
+created a simple prompt manager class acting as the interface to render prompts from our template folder so this
+20:39
+is the high level overview of everything that uh we're dealing with but I'm going to switch right now to the code editor
+20:46
+Let's see we got everything going on over here so here first of all we have the prompt manager class and if you want
+20:53
+to copy this uh this is the shot for you to do so so you can uh take that and
+20:58
+then for for example in this example project over here we have the app folder and there we have a promps folder and in
+21:03
+there we have the templates so the prompt manager file that you're looking at right now also lives here but then we
+21:09
+also have the templates and you can see that we can specify that template directory so that when we use the prompt
+21:15
+manager class it can just look in here and we can load the files very simple
+21:21
+prom the promp manager it doesn't initialization but we use static methods and a class method so we don't have to
+21:27
+initialize we can just directly call the get prompt and get our prompts and we also get can get the template uh info
+21:34
+from it so it's two simple functions that we can use so now let's have a look
+21:40
+at how that works let's come over here in the playground come over here to the pipeline so in the promps let me zoom in
+21:47
+a little bit for you so you can see what's going on and let's start this
+21:52
+up you can see over here in the prompts we have this ticket analysis. Jinga file
+21:59
+and what we can now do within our project we can say prompt manager. getet prompt we put in the name of the file so
+22:05
+that's ticket analysis and we can also put in various variables in here so this
+22:11
+ticket analysis prompt requires uh the pipeline which is a variable which is a
+22:16
+string and then also the ticket which is a dictionary or Json data um and from
+22:22
+here what we can do is we can load that prompt and now we have it simply here as
+22:28
+uh a python string so we can print this and see here we have the rendered prompt
+22:33
+all right but so far not much different from for example using Len chain or even
+22:38
+using FST strings for that matter but now let's have a quick look at the file
+22:44
+that is in here at the actual Ginger templating language and see what's going on over here so one of the interesting
+22:51
+things that we can do is we can for example here at the front front mener which we can use as metadata in here and
+22:58
+then we get into the prompt itself but with ginger and this is just the like the tip of the iceberg there there is
+23:05
+more utility to this we have much more granular control over how we can really
+23:13
+alter and work with this template because Ginger is really a templating engine a library specifically for that
+23:19
+so we can see that we can put in variables for example but we can also put in default values in here which is
+23:25
+something that could be interesting in some uh cases but and here is here is where it gets really interesting we can
+23:31
+also use conditional logic in here and next to this next to these if statements
+23:37
+we can also use loops and macros and filters but let's let me show you what
+23:43
+what this does over here so here we have conditional logic with have an if statement meaning if the pipeline
+23:49
+variable is set to help desk we render this so additional context for internal
+23:54
+help desk let me show you over here and if not if else the addition this is
+24:00
+going to be the additional context for customer support so this is a very simple uh binary decision over here to
+24:07
+illustrate this but what this now does is if we come back to the proms and if
+24:13
+we run this and we call the support prompt so you can see pipeline we have
+24:19
+support pipeline is help desk here we get the additional context for customer support and here same file same prompt
+24:28
+different input variable we can get additional context for the internal help desk so we can apply conditional Logic
+24:34
+for more granular control over a promps while also validating the input which is something I did not show but here you
+24:40
+can see if for example ticket is not undefined you get an error rendering a template ticket is undefined so you have
+24:48
+have more input control over that which you can probably also do with with other uh approaches but everything together so
+24:56
+having the separate files Within your project with the g2 so you know these are prompts having a separate location
+25:02
+having input validation and control and then also being able to apply this
+25:07
+conditional Logic for while also not being tied to a specific ecosystem or framework like for example L chain or
+25:14
+llama index or even with for example Lang fuse with uh the whole CMS system
+25:20
+for us gives us the flexibility and control that we need to work on a variety of projects and serve a whole
+25:27
+bunch of different clients while maintaining a systematic approach
+25:32
+and this conditional logic I haven't seen it anywhere yet people talking
+25:37
+about this but to me this is really a big thing and something that is really
+25:42
+important to optimize your applications over time really how I see these conditional logic and promps the they
+25:49
+enable the nuanced context aware instructions and responses mirroring natural conversation
+25:55
+adaptability and also can reduce token usage and eliminating the need for similar prompts so imagine this when you
+26:02
+have a conversation with someone based on what that person is saying you are going to slightly alter maybe your tone
+26:09
+or you to give some more examples or you adjust accordingly right whereas with
+26:14
+prompts typically what you see you have these long prompts and you have some if if for example the user is not a
+26:21
+customer then do this and if it is a customer then you should uh I don't know talk about these kind of like things
+26:28
+and within one prompt and then one one level further would already be okay you
+26:34
+create separate prompts um and then route let's say route the user to the specific prompt but then you create a
+26:40
+lot of redundancy right so you might have one prompt file which is like 90% the same a duplicate one and then that
+26:47
+10% has that like different context specific about okay this for customer support oh then you need to be aware of
+26:53
+this with this conditional logic you can easily take care of that so so in my
+26:59
+opinion this is a really cool strategy and this is overtime going to uh improve
+27:05
+the way and change really the way we work with prompts so that is our approach right now we use the prompt
+27:10
+manager class we use ginger templates with metadata and conditional logic we
+27:16
+use a predefined folder structure where we place everything and within the
+27:21
+application itself we just import or we get the prompt with the prompt manager we fill in the variables there we have
+27:28
+put validation and that's how we put these prompts really uh into the AI
+27:33
+system itself now then let's finally cover some best practices so we've
+Best practices
+27:39
+covered a lot here about how to manage prompts different ways different strategies this is a final slide to give
+27:47
+you basically everything that that we know and that that we do right now when it comes to best best practices when
+27:54
+building these large language models applications so really the one sentence summary of this presentation effective
+28:00
+problem management combines structured organization flexible templating and systematic evaluation to create
+28:06
+adaptable efficient and Powerful llm applications that evolve with your
+28:11
+project needs here are nine tips if you are working with llms if
+28:17
+you're working with prompts really do it take one day to study prompt engineering it's not that hard but like really like
+28:23
+one dedicated day couple of hours dive deeper into it it it will get you a long
+28:29
+way just look up all the best practices do some uh look into some research some meta analysis then centralize your
+28:35
+promps within your project structure like doesn't matter which level you are at right now I recommend centralizing
+28:42
+creating some kind of like centralized structure for this so you can easily see where your PRS are coming from then
+28:49
+consider using Ginga uh as a templating engine for flexibility and versatility if you've seen this presentation think
+28:55
+oh this is cool consider it maybe you're already fine with using uh the prom templates if it works for you totally
+29:01
+fine but it has helped us experiment with role-based emotion fuse shot and
+29:07
+Chain of Thought problem if you don't know what it is take one day to study prompt engineering structure your
+29:12
+outputs in markdown format you want to know why take one day to study prompt engineering leverage structured outputs
+29:19
+for routing and logic so I'm a big fan of the instructor Library open AI also recently introduced structured outputs
+29:25
+in the API use structured output to create intermediate steps and metadata
+29:31
+that you can use for routing and conditional logic also at the prompt level so not only for the flow of the
+29:38
+application but also for your prompts so that's also tip number seven Implement
+29:43
+conditional Logic for adaptive PRS Implement Version Control and roll backs
+29:48
+so as your application gets more serious knowing that you store your prompts
+29:55
+within Version Control also figure figure out how to get them back so make sure you have a system in place where
+30:01
+okay it's buried in the commit messages but can you get it back how much hle is that and at least make sure that you
+30:08
+know how to do it if you just rely on Version Control you might need a more
+30:14
+like uh like a smarter approach with like specific like roll backs okay this is our prompt product description
+30:20
+version one we recently went to version two but it turns out it doesn't work actually how can you easily refer it
+30:27
+back to version one and then also something we didn't cover in here because it's actually already Beyond
+30:33
+prompt management but create evaluation data sets to monitor the performance so
+30:39
+create some and this is also something you can do yourself or you could also use Frameworks like Lang Smith l fuse
+30:44
+for this make sure that whenever you you work on changes and you push them let's
+30:51
+say to production that you know that you're not only optimizing locally but evaluate globally as well so that's then
+30:58
+the summary of really how you systematically improve uh llm applications from a prompt perspective
+31:04
+over time you start with defining your methodology based on everything that we covered pick the one that best suits
+31:10
+your needs even if that's inline prompts is if it works for you if that floats your boat totally fine but pick your
+31:16
+methodology and stick to it then optimize locally so refine your prompts on isolated cases or problems so you
+31:24
+might have a a user ticket coming in a user question whatever and and you want to optimize locally that's what I mean
+31:30
+there on an isolated case so tune The Prompt see how the output is changing
+31:35
+validate that so here you can on the local um isolated case you can just follow your intuition uh but you can
+31:42
+also leverage tools like dspi for more efficient optimization but then not only optimize locally but also evaluate
+31:49
+globally meaning that the changes that you test on a local isolated variable make sure that when you uh push those
+31:56
+that you can Al you also have that valuation data set and see how it can affect the entire system uh so you
+32:03
+really should be aware of unexpected effects in other areas if you tweak something here it might go down over
+32:09
+here and this is also why you want to continuously update your data set to prevent model drift this is something
+32:16
+that is common practice within the machine machine learning world but for llms and prompts it's the same so make
+32:23
+sure to do that as well so that's an overall summary some tips and then Define methodology optimize locally and
+32:29
+evaluate globally all right and then that's it for this one and now by the way if you're a data professional AI
+32:35
+engineer someone who's working with data or applications like this promps that we just covered and you consider
+32:41
+freelancing to maybe capitalize on the current AI hype that is going on but you don't really know where to get started
+32:48
+you might want to check out the first link in the description it's a video of me going over how my company data Lumina
+32:54
+can help you with that now in all transparency it's a landing page it's a a funnel designed to get leads for my
+32:59
+company but if you consider freelancing you might want to check it out and then as always thank you for watching
+33:05
+consider liking the video if you found it helpful and subscribe if you want to learn more about building data and AI
+33:12
+applications and then if you're interested in learning more about how we for example use Lang fuse the open
+33:18
+source version so self-hosted then you should check out this video next this is the evaluation framework and tool that
+33:25
+we are using to next to manage the actual proms also manage performance over time and you can set it up
+33:31
+completely for free self-hosted this video will show you how to do so

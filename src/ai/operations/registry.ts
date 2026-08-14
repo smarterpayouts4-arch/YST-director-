@@ -96,6 +96,38 @@ export const operationRegistry = {
     retryable: true,
     failureStates: ["MODEL_OUTPUT_INVALID", "INGESTION_FAILED"],
   },
+  "propose-topic-directions": {
+    displayName: "Propose topic directions",
+    description:
+      "Propose up to 3 strategic content directions from PublishedLibraryDto for Topic Engine.",
+    visibility: "public",
+    inputContracts: ["published-library"],
+    outputContracts: ["topic-directions"],
+    promptModule: "propose-directions",
+    promptModulePath:
+      "src/features/content-intelligence/topics/prompts/propose-directions.ts",
+    contextAssembler: "none",
+    schemaName: "topic_directions",
+    evalPath: "tests/evals/propose-directions-contract.test.ts",
+    retryable: true,
+    failureStates: ["MODEL_OUTPUT_INVALID"],
+  },
+  "propose-topic-opportunities": {
+    displayName: "Propose topic opportunities",
+    description:
+      "Propose exactly 6 grounded topic opportunities inside a selected direction.",
+    visibility: "public",
+    inputContracts: ["published-library", "topic-directions"],
+    outputContracts: ["topic-opportunities"],
+    promptModule: "propose-topics",
+    promptModulePath:
+      "src/features/content-intelligence/topics/prompts/propose-topics.ts",
+    contextAssembler: "none",
+    schemaName: "topic_opportunities",
+    evalPath: "tests/evals/propose-topics-contract.test.ts",
+    retryable: true,
+    failureStates: ["MODEL_OUTPUT_INVALID"],
+  },
   "repair-invalid-output": {
     displayName: "Repair invalid model output",
     description:

@@ -21,7 +21,9 @@ export type AiOperationDefinition = {
     | "research-brief"
     | "research-prompt"
     | "repair-output"
-    | "extract-content-intelligence";
+    | "extract-content-intelligence"
+    | "propose-directions"
+    | "propose-topics";
   contextAssembler:
     | "assemble-company-analysis-context"
     | "assemble-interview-context"

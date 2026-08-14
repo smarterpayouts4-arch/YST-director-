@@ -73,7 +73,7 @@ function fieldText(brief: ResearchBrief, field: FieldDef): string {
 }
 
 const editClassName =
-  "min-h-[88px] max-h-[220px] w-full resize-y rounded-lg border border-stone-300 bg-white p-2.5 text-sm leading-snug text-stone-800 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500";
+  "min-h-[88px] max-h-[220px] w-full resize-y rounded-lg border border-stone-300 bg-white p-2.5 text-sm leading-snug text-stone-800 shadow-inner focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring";
 
 export function ResearchBriefEditor({
   brief,
@@ -115,10 +115,10 @@ export function ResearchBriefEditor({
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl space-y-1.5">
           <p className="text-xs font-medium uppercase tracking-[0.12em] text-stone-500">
-            Step 4 of 5
+            Step 4 of 8 · Shape the Plan
           </p>
           <h1 className="editorial text-3xl font-normal leading-tight text-stone-900 md:text-4xl">
-            Approve the research brief
+            Approve the research plan
           </h1>
           <p className="text-sm text-stone-600">
             One section at a time. Then generate the prompt.

@@ -127,7 +127,7 @@ export function StandardQuestionView({
         </div>
         <textarea
           id="interview-answer"
-          className="min-h-[88px] w-full rounded-xl border border-stone-200 bg-white p-3 text-sm leading-snug text-stone-800 placeholder:text-stone-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 disabled:bg-stone-50"
+          className="min-h-[88px] w-full rounded-xl border border-stone-200 bg-white p-3 text-sm leading-snug text-stone-800 placeholder:text-stone-400 focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring disabled:bg-stone-50"
           placeholder="Your decision in plain words…"
           value={answerText}
           disabled={locked}

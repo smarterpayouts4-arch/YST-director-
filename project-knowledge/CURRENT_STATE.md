@@ -1,12 +1,12 @@
 # CURRENT_STATE — Research Prompt Builder MVP
 
-Freshness: `current` · Last reviewed: 2026-08-10 (Living Architecture Guardian P0)
+Freshness: `current` · Last reviewed: 2026-08-13 (Atom → Social Media hub → Shorts sole ingest)
 
 Use vocabulary literally: Live · Partial · Prototype · Mocked · Planned · Blocked · Deprecated.
 
 ## Governing sentence
 
-Research Prompt Builder remains Live through research-prompt export. Content Intelligence Librarian MVP is frozen: completed external research is ingested into a governed library. Topic Engine is Planned and must consume only `PublishedLibraryDto`.
+Research Prompt Builder remains Live through research-prompt export. Content Intelligence Librarian MVP is frozen: completed external research is ingested into a governed library. Topic Engine is Live (`ci-topics-1.1.9`; freeze deferred pending smoke) and must consume only `PublishedLibraryDto`. Social Media is organizational hub (nav only); YouTube Shorts is Partial (P1A sole Atom ingest + resume; no storyboard LLM yet).
 
 ## Product journey
 
@@ -17,8 +17,10 @@ Research Prompt Builder remains Live through research-prompt export. Content Int
 | Adaptive interview (one question) | Live | Next-question API + ethical TARI UX; no target question count; strategy cards when strategic priorities unresolved (at most once) |
 | Research brief | Live | Build + owner edit path |
 | Final prompt generate/validate/export | Live | Eight-section formatter + Prompt Contract 1.1 lint (anchored research controls; section-7 opportunity-shaped experiments). Hard stage boundary before Content Intelligence. |
-| Content Intelligence Librarian | Live | **MVP frozen** on `ci-librarian-1.1.1` + `gpt-5.6-terra` (medium). ZYNAVA published DTO smoke passed (equivalence-first opportunity, evaluated hypotheses, moment/tension, competitors/restrictions/limitations; DTO scoped to active artifact). Do not change extract prompt, model, curator, or kinds without a new freeze. P2: summary 6-item cap can hide `isHypothesis` items filed as `other`. |
-| Topic Engine | Planned | Librarian freeze complete. Consumes only `PublishedLibraryDto`; discovery next; do not build yet; no empty `topics/` scaffold |
+| Content Intelligence Librarian | Live | **MVP frozen** on `ci-librarian-1.1.1` + `gpt-5.6-terra` (medium). ZYNAVA published DTO smoke passed (equivalence-first opportunity, evaluated hypotheses, moment/tension, competitors/restrictions/limitations; DTO scoped to active artifact). Send replaces active Library with a fresh `libraryId` (no multi-paste item accumulation). Do not change extract prompt, model, curator, or kinds without a new freeze. P2: summary 6-item cap can hide `isHypothesis` items filed as `other`. |
+| Topic Engine | Live | **`ci-topics-1.1.9`** + `TOPIC_ENGINE_MODEL`/`gpt-5.6-sol` (Librarian stays Terra). **Freeze deferred** pending owner six-topic + Atom smoke. Rail: Topics `07` → Atom `08`. 1.1.9: compact Topic Strategy Doctrine (curiosity = unresolved distinction; latent LoD quality lens); supportingItemIds = Atom creator intelligence substrate (non-fact thesis carriers allowed); Atom `supportingInsights` topic-relative over fact\|competitor\|opportunity\|tension\|demand (never audience/moment; score-all-zero fail-open facts then tension\|opportunity). Teaching floor ≥2 + decision-rule extras retained. Curate resolves hypothesis/unresolved itemIds→statements once. Back-to-Topics keeps six topics; re-select mints new `topicPacketId`. **Step 8 handoff UI** exports Canonical Topic Packet JSON/Markdown. No Marketing-folder RAG or Atom synthesis LLM. Ready CTA **Send to Social Media** (IDs only; no channel ingest). |
+| Social Media | Partial | Organizational hub only (`/social-media` — Shorts card; no shared creative brain; no Atom store). |
+| YouTube Shorts | Partial | **P1A foundation** — sole ingest owner on arrival; immutable `ingestedAtom` portfolio (`social-media-youtube-shorts:v1`), identity-safe ingest, resume, 16-field projection contract (compact **Atom received** UI). Zero AI. Route `/social-media/youtube-shorts`. Later output = video-generation-ready **prompt**, not a renderer. Reference HOW at `Reference/channels/youtube-shorts/` (no feature-local raw corpus). |
 | Workflow state machine (RPB) | Live | Reducer hard-enforces `canTransition`; illegal moves rejected with `WorkflowDiagnostic` (tested) |
 | Auth / multi-user / cloud DB | Planned | Explicit non-goal for current MVP development |
 | Research execution / video | Planned / Out of MVP | Owner runs prompt in ChatGPT externally |
@@ -74,3 +76,15 @@ Research Prompt Builder remains Live through research-prompt export. Content Int
 - Branch protection on `main` requires the first remote CI run before the check name can be required (owner-approved action).
 - Root-level duplicate files under `Reference/` are legacy copies; prefer organized paths.
 - Do not treat `Reference/archives/marketmonth` as live product truth.
+
+## Deferred structure (monolith red-team, 2026-08-12)
+
+Living-tree scan: **0** `src/` files at/above LARGE_FILES warn (≥500). No immediate thin-orchestra refactor. Right move: TE 1.1 visual/product review first.
+
+| Item | Status | Trigger to reopen |
+|------|--------|-------------------|
+| Split `topic-engine-shell.tsx` / `librarian-shell.tsx` into folder orchestras | **Parked** | Channel stage, second shell consumer, or file approaching ≥500 via real behavior |
+| Thin `interview-flow.ts` + `interview-flow/` (stage actions) | **P2 Planned** | Post TE freeze; merge friction or stage-action growth |
+| Thin `research-brief-editor.tsx` + stem folder (mirror company-understanding) | **P2 Planned** | Post TE freeze; only if the stage grows again |
+
+Do **not** split for symmetry: `prompt-contract-rules.ts` (rule table), `parse-structured-output.ts`, reducers, Zod/registry barrels. Exemplar when a split is justified: `lib/company-anchors.ts` → `lib/company-anchors/*`.

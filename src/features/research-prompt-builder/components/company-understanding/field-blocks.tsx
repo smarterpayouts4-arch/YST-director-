@@ -50,7 +50,7 @@ export function FieldBlocks({
             </span>
             {editing ? (
               <textarea
-                className="min-h-[96px] w-full rounded-xl border border-stone-300 bg-white p-3.5 text-sm leading-relaxed text-stone-800 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="min-h-[96px] w-full rounded-xl border border-stone-300 bg-white p-3.5 text-sm leading-relaxed text-stone-800 shadow-inner focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
                 value={decisions[item.key]?.value ?? item.field.value}
                 onChange={(e) =>
                   setDecisions((prev) => ({
@@ -92,7 +92,7 @@ export function FieldBlocks({
                     {item.label}
                   </span>
                   <textarea
-                    className="min-h-[72px] w-full rounded-lg border border-stone-300 bg-white p-2.5 text-sm leading-snug text-stone-800 shadow-inner focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    className="min-h-[72px] w-full rounded-lg border border-stone-300 bg-white p-2.5 text-sm leading-snug text-stone-800 shadow-inner focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
                     value={decisions[item.key]?.value ?? item.field.value}
                     onChange={(e) =>
                       setDecisions((prev) => ({
