@@ -4,6 +4,7 @@ import { TE_STORAGE_KEY } from "@/features/content-intelligence/topics/config/co
 import { ingestTopicPacket } from "@/features/social-media/youtube-shorts/contracts/ingest-topic-packet";
 import { resolveShortsIdentity } from "@/features/social-media/youtube-shorts/contracts/resolve-shorts-identity";
 import { YOUTUBE_SHORTS_STORAGE_KEY } from "@/features/social-media/youtube-shorts/config/constants";
+import { loadShortsSessionForPage } from "@/features/social-media/youtube-shorts/state/resume-shorts-session";
 import {
   loadShortsSession,
   persistSession,
@@ -214,7 +215,106 @@ describe("YouTube Shorts ingest + resume", () => {
     expect(persistSession(session).ok).toBe(true);
 
     packet.title = "changed after ingest";
+    packet.supportingInsights.push("injected after ingest");
+    packet.restrictions.push("new restriction");
+    packet.evidenceQuotes.push("quoted after ingest");
     const loaded = loadShortsSession("tp_a");
     expect(loaded.ok && loaded.session.ingestedAtom.title).toBe("Title A");
+    expect(loaded.ok && loaded.session.ingestedAtom.supportingInsights).toEqual([
+      "i",
+    ]);
+    expect(loaded.ok && loaded.session.ingestedAtom.restrictions).toEqual([]);
+    expect(loaded.ok && loaded.session.ingestedAtom.evidenceQuotes).toEqual([]);
+  });
+
+  it("refresh resume restores the same session without TE reread", () => {
+    const { store } = stubBrowserStorage();
+    const packet = makePacket();
+    const identity = resolveShortsIdentity({ packet });
+    expect(identity.ok).toBe(true);
+    if (!identity.ok) return;
+
+    const saved = persistSession(
+      ingestTopicPacket({
+        packet,
+        projectId: identity.projectId,
+        artifactId: identity.artifactId,
+      }),
+    );
+    expect(saved.ok).toBe(true);
+    if (!saved.ok) return;
+
+    store.delete(TE_STORAGE_KEY);
+    const resumed = loadShortsSessionForPage("tp_a");
+    expect(resumed.ok).toBe(true);
+    if (!resumed.ok) return;
+    expect(resumed.session.createdAt).toBe(saved.session.createdAt);
+    expect(resumed.session.updatedAt).toBe(saved.session.updatedAt);
+    expect(resumed.session.ingestedAtom.title).toBe("Title A");
+    expect(resumed.session).toEqual(saved.session);
+  });
+
+  it("read-back failure rolls storage back to the prior envelope", () => {
+    const { store } = stubBrowserStorage();
+    const packetB = makePacket({ topicPacketId: "tp_b", title: "B" });
+    const identityB = resolveShortsIdentity({ packet: packetB });
+    expect(identityB.ok).toBe(true);
+    if (!identityB.ok) return;
+    expect(
+      persistSession(
+        ingestTopicPacket({
+          packet: packetB,
+          projectId: identityB.projectId,
+          artifactId: identityB.artifactId,
+        }),
+      ).ok,
+    ).toBe(true);
+
+    const prior = store.get(YOUTUBE_SHORTS_STORAGE_KEY)!;
+    let writes = 0;
+    const realSet = store.set.bind(store);
+    vi.stubGlobal("window", {
+      localStorage: {
+        getItem: (k: string) => store.get(k) ?? null,
+        setItem: (k: string, v: string) => {
+          writes += 1;
+          if (writes === 1) {
+            realSet(
+              k,
+              JSON.stringify({
+                storageVersion: 1,
+                savedAt: "2026-08-14T00:00:00.000Z",
+                sessionsByTopicPacketId: {},
+              }),
+            );
+            return;
+          }
+          realSet(k, v);
+        },
+        removeItem: (k: string) => {
+          store.delete(k);
+        },
+      },
+    });
+
+    const packetA = makePacket({ topicPacketId: "tp_a", title: "A" });
+    const identityA = resolveShortsIdentity({ packet: packetA });
+    expect(identityA.ok).toBe(true);
+    if (!identityA.ok) return;
+    const attempt = persistSession(
+      ingestTopicPacket({
+        packet: packetA,
+        projectId: identityA.projectId,
+        artifactId: identityA.artifactId,
+      }),
+    );
+    expect(attempt).toEqual({ ok: false, reason: "save_failed" });
+    expect(store.get(YOUTUBE_SHORTS_STORAGE_KEY)).toBe(prior);
+    const b = loadShortsSession("tp_b");
+    expect(b.ok && b.session.ingestedAtom.title).toBe("B");
+    expect(loadShortsSession("tp_a")).toEqual({
+      ok: false,
+      reason: "missing",
+    });
   });
 });

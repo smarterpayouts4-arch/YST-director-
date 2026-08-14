@@ -14,10 +14,19 @@ export const YouTubeShortsSessionSchema = z.object({
 
 export type YouTubeShortsSession = z.infer<typeof YouTubeShortsSessionSchema>;
 
-export const YouTubeShortsEnvelopeSchema = z.object({
-  storageVersion: z.literal(CURRENT_SHORTS_STORAGE_VERSION),
-  savedAt: z.string(),
-  sessionsByTopicPacketId: z.record(z.string(), YouTubeShortsSessionSchema),
-});
+/**
+ * Envelope shell only. Session values stay unknown so one corrupt portfolio
+ * cannot fail the whole key. Parse each id with YouTubeShortsSessionSchema.
+ */
+export const YouTubeShortsEnvelopeSchema = z
+  .object({
+    storageVersion: z.number().int().positive(),
+    savedAt: z.string().min(1),
+    sessionsByTopicPacketId: z.record(z.string(), z.unknown()),
+  })
+  .refine((envelope) => envelope.storageVersion <= CURRENT_SHORTS_STORAGE_VERSION, {
+    message: "storageVersion newer than supported",
+    path: ["storageVersion"],
+  });
 
 export type YouTubeShortsEnvelope = z.infer<typeof YouTubeShortsEnvelopeSchema>;

@@ -1,0 +1,33 @@
+{
+  "topicPacketId": "tp_shorts_fixture_1",
+  "projectId": "proj_1",
+  "artifactId": "art_1",
+  "libraryId": "lib_1",
+  "territoryId": "terr_1",
+  "topicId": "topic_1",
+  "version": 1,
+  "status": "selected",
+  "createdAt": "2026-08-13T00:00:00.000Z",
+  "title": "Compare equivalent products before comparing price",
+  "premise": "A shopper can misread a lower price as better value when the products are not on the same basis.",
+  "audience": "Adults comparing a shortlist of similar products online.",
+  "customerMoment": "The shopper has two options and is about to decide on price alone.",
+  "tension": "Price looks decisive even when serving size or declared amount differs.",
+  "opportunity": "Teach a short sequence: match the basis, then compare price.",
+  "decisionQuestion": "Are these two offers actually the same thing?",
+  "desiredTakeaway": "Price is useful only after the offers are matched.",
+  "whyItMatters": "This prevents a false bargain without adding medical or legal claims.",
+  "supportingInsights": [
+    "Two similar-looking offers can differ on serving basis or declared amount."
+  ],
+  "supportingItemIds": ["item_1"],
+  "sourceRefs": [],
+  "evidenceQuotes": [],
+  "provenanceNotes": [],
+  "confidence": "high",
+  "hypothesisDependencies": [],
+  "unresolvedAssumptions": [],
+  "restrictions": ["Do not give medical advice."],
+  "limitations": ["This packet does not compare specific brands."],
+  "doNotClaim": ["Do not give medical advice."]
+}

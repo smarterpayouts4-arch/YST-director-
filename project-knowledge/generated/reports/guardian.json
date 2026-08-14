@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-14T02:24:43.497Z",
-  "commitSha": "7a614aa6c4a57b56cd77e1366beb3785781987db",
+  "generatedAt": "2026-08-14T12:51:03.118Z",
+  "commitSha": "1a835d51595ede27939afbcd9d42be1ab0748bb3",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "project-knowledge/",
@@ -9,12 +9,20 @@
     "tests/"
   ],
   "warnings": [
+    "PK-WARN-001: 509 lines exceeds warning threshold 500",
     "PK-WARN-001: 713 lines exceeds warning threshold 500"
   ],
   "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
   "hardCount": 0,
-  "warnCount": 1,
+  "warnCount": 2,
   "findings": [
+    {
+      "code": "PK-WARN-001",
+      "severity": "warn",
+      "title": "File exceeds warning line threshold",
+      "detail": "509 lines exceeds warning threshold 500",
+      "file": "src/features/research-prompt-builder/components/journey-rail.tsx"
+    },
     {
       "code": "PK-WARN-001",
       "severity": "warn",

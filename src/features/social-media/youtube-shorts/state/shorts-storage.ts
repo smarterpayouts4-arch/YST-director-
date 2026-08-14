@@ -3,15 +3,11 @@ import {
   YOUTUBE_SHORTS_STORAGE_KEY,
 } from "@/features/social-media/youtube-shorts/config/constants";
 import {
+  YouTubeShortsEnvelopeSchema,
   YouTubeShortsSessionSchema,
+  type YouTubeShortsEnvelope,
   type YouTubeShortsSession,
 } from "@/features/social-media/youtube-shorts/schemas/youtube-shorts-session";
-
-type RawEnvelope = {
-  storageVersion: number;
-  savedAt: string;
-  sessionsByTopicPacketId: Record<string, unknown>;
-};
 
 export type LoadShortsSessionResult =
   | { ok: true; session: YouTubeShortsSession }
@@ -25,24 +21,8 @@ export type PersistSessionResult =
   | { ok: false; reason: "save_failed" };
 
 type LoadEnvelopeResult =
-  | { ok: true; envelope: RawEnvelope }
+  | { ok: true; envelope: YouTubeShortsEnvelope }
   | { ok: false; reason: "missing" | "envelope_unparseable" };
-
-function isEnvelopeShape(value: unknown): value is RawEnvelope {
-  if (typeof value !== "object" || value === null) return false;
-  const record = value as Record<string, unknown>;
-  if (typeof record.storageVersion !== "number") return false;
-  if (record.storageVersion > CURRENT_SHORTS_STORAGE_VERSION) return false;
-  if (typeof record.savedAt !== "string") return false;
-  if (
-    typeof record.sessionsByTopicPacketId !== "object" ||
-    record.sessionsByTopicPacketId === null ||
-    Array.isArray(record.sessionsByTopicPacketId)
-  ) {
-    return false;
-  }
-  return true;
-}
 
 export function loadEnvelope(): LoadEnvelopeResult {
   if (typeof window === "undefined") {
@@ -52,20 +32,22 @@ export function loadEnvelope(): LoadEnvelopeResult {
     const raw = window.localStorage.getItem(YOUTUBE_SHORTS_STORAGE_KEY);
     if (!raw) return { ok: false, reason: "missing" };
     const parsed: unknown = JSON.parse(raw);
-    if (!isEnvelopeShape(parsed)) {
+    const envelope = YouTubeShortsEnvelopeSchema.safeParse(parsed);
+    if (!envelope.success) {
       return { ok: false, reason: "envelope_unparseable" };
     }
-    return { ok: true, envelope: parsed };
+    return { ok: true, envelope: envelope.data };
   } catch {
     return { ok: false, reason: "envelope_unparseable" };
   }
 }
 
-export function saveEnvelope(envelope: RawEnvelope): void {
+export function saveEnvelope(envelope: YouTubeShortsEnvelope): void {
   if (typeof window === "undefined") return;
+  const validated = YouTubeShortsEnvelopeSchema.parse(envelope);
   window.localStorage.setItem(
     YOUTUBE_SHORTS_STORAGE_KEY,
-    JSON.stringify(envelope),
+    JSON.stringify(validated),
   );
 }
 
@@ -105,10 +87,11 @@ export function persistSession(
   if (priorRaw !== null) {
     try {
       const parsed: unknown = JSON.parse(priorRaw);
-      if (!isEnvelopeShape(parsed)) {
+      const envelope = YouTubeShortsEnvelopeSchema.safeParse(parsed);
+      if (!envelope.success) {
         return { ok: false, reason: "save_failed" };
       }
-      map = { ...parsed.sessionsByTopicPacketId };
+      map = { ...envelope.data.sessionsByTopicPacketId };
     } catch {
       return { ok: false, reason: "save_failed" };
     }
@@ -117,11 +100,11 @@ export function persistSession(
   const validated = YouTubeShortsSessionSchema.parse(session);
   map[validated.topicPacketId] = validated;
 
-  const nextEnvelope: RawEnvelope = {
+  const nextEnvelope = YouTubeShortsEnvelopeSchema.parse({
     storageVersion: CURRENT_SHORTS_STORAGE_VERSION,
     savedAt: new Date().toISOString(),
     sessionsByTopicPacketId: map,
-  };
+  });
 
   try {
     saveEnvelope(nextEnvelope);

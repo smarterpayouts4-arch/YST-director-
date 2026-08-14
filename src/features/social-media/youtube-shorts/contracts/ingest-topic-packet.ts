@@ -6,7 +6,12 @@ export function ingestTopicPacket(input: {
   packet: TopicPacket;
   projectId: string;
   artifactId: string;
+  existingSession?: YouTubeShortsSession | null;
 }): YouTubeShortsSession {
+  if (input.existingSession) {
+    return input.existingSession;
+  }
+
   const existing = loadShortsSession(input.packet.topicPacketId);
   if (existing.ok) {
     return existing.session;

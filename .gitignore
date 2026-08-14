@@ -50,6 +50,13 @@ next-env.d.ts
 .cursor/mcp.json
 .cursor/hooks/.aps-routed-ack.json
 .cursor/hooks/.aps-session.json
+.cursor/tmp_arijon*
+.cursor/tmp_extract*
+
+# Shorts-scoped book artifacts (do not hide unrelated Reference PDFs)
+**/*OceanofPDF*
+Reference/channels/youtube-shorts/**/*.pdf
+src/features/social-media/youtube-shorts/**/*.pdf
 
 # local AI traces (optional file sink)
 .rpb-traces/

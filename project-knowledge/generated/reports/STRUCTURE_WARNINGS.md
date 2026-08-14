@@ -9,7 +9,7 @@ _No structural warnings from update scan._
 
 - App files: 15
 - Feature files: 151
-- Test files: 83
+- Test files: 84
 - MCP files: 19
 - Doctrine docs indexed: 23
 - Reference records: 27

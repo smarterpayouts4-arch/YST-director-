@@ -86,6 +86,11 @@ export function YouTubeShortsShell({
       queryArtifactId: artifactId,
     });
     if (!identity.ok) {
+      setError(
+        identity.reason === "missing_projectId"
+          ? "This Atom is missing a project id, so Shorts cannot ingest it."
+          : "Atom identity does not match this Shorts session.",
+      );
       setEmpty(true);
       return;
     }
@@ -94,9 +99,11 @@ export function YouTubeShortsShell({
       packet,
       projectId: identity.projectId,
       artifactId: identity.artifactId,
+      existingSession: null,
     });
     const saved = persistSession(next);
     if (!saved.ok) {
+      setError("Could not save this Shorts session.");
       setEmpty(true);
       return;
     }
