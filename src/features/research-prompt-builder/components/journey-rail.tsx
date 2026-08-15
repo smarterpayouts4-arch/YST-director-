@@ -15,6 +15,7 @@ import {
   railPresentation,
   type ChapterLifecycle,
 } from "@/features/research-prompt-builder/components/rail-presentation";
+import { socialMediaRailCopy } from "@/features/research-prompt-builder/components/social-media-rail-copy";
 
 export type JourneyRailProps = {
   activeId: JourneyStepId;
@@ -33,6 +34,12 @@ export type JourneyRailProps = {
   channelActive?: boolean;
   /** Social Media chapter link; defaults to `/social-media`. Append Atom ids when available. */
   socialMediaHref?: string;
+  /**
+   * When set on a channel page (e.g. YouTube Shorts), header focuses the channel
+   * and the scroll shows Social Media as parent + channel ExpandedCard.
+   * Hub / RPB / CI omit this — Social Media leaf copy stays unchanged.
+   */
+  activeChannelLabel?: string;
 };
 
 type StepState = "completed" | "current" | "upcoming";
@@ -366,6 +373,47 @@ function OpenChapterSteps({
 }
 
 /**
+ * Social Media parent + current channel child — clones OpenChapterSteps,
+ * not the emphasized hub ChapterShell (avoids double elevation).
+ */
+function OpenChannelSurface({
+  parentLabel,
+  parentDescription,
+  channelLabel,
+  socialMediaHref,
+}: {
+  parentLabel: string;
+  parentDescription: string;
+  channelLabel: string;
+  socialMediaHref: string;
+}) {
+  return (
+    <div className="space-y-2">
+      <div>
+        <Link href={socialMediaHref} className="block hover:opacity-90">
+          <ChapterLabel>{parentLabel}</ChapterLabel>
+        </Link>
+        <p className="mt-1 text-[12px] leading-relaxed text-[var(--rail-muted)]">
+          {parentDescription}
+        </p>
+      </div>
+      <div className="relative my-1 overflow-hidden rounded-xl border border-[var(--rail-card-border)] bg-[var(--rail-card)] shadow-sm">
+        <div
+          className="absolute inset-y-0 left-0 w-0.5 bg-[var(--rail-card-accent)]"
+          aria-hidden
+        />
+        <div className="flex items-start justify-between gap-2 px-3.5 py-3 pl-4">
+          <span className="text-[13px] font-semibold leading-snug text-[var(--rail-card-foreground)]">
+            {channelLabel}
+          </span>
+          <Chevron open tone="card" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/**
  * Shared customer journey rail — presentation only.
  * Chapters collapse when complete; only the current step expands.
  */
@@ -375,6 +423,7 @@ export function JourneyRail({
   researchSettled = false,
   channelActive = false,
   socialMediaHref = "/social-media",
+  activeChannelLabel,
 }: JourneyRailProps) {
   const active = journeyStepById(activeId);
   const presentation = railPresentation({
@@ -395,6 +444,9 @@ export function JourneyRail({
   const foundation = journeyChapterById("foundation");
   const research = journeyChapterById("research");
   const social = journeyChapterById("social-media");
+  const socialCopy = socialMediaRailCopy(activeChannelLabel);
+  const channelSurface =
+    socialCopy.channelSurface && headerMode === "chapter";
 
   const [foundationExpanded, setFoundationExpanded] = useState(false);
   const [researchExpanded, setResearchExpanded] = useState(false);
@@ -414,7 +466,11 @@ export function JourneyRail({
         <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--rail-muted)]">
           Your journey
         </p>
-        {headerMode === "next-chapter" || headerMode === "chapter" ? (
+        {channelSurface ? (
+          <p className="mt-2 text-[15px] font-semibold leading-snug text-[var(--rail-foreground)]">
+            {socialCopy.headerTitle}
+          </p>
+        ) : headerMode === "next-chapter" || headerMode === "chapter" ? (
           <>
             {headerMode === "next-chapter" ? (
               <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--rail-muted)]">
@@ -426,11 +482,13 @@ export function JourneyRail({
               </p>
             )}
             <p className="mt-2 text-[15px] font-semibold leading-snug text-[var(--rail-foreground)]">
-              {social.label}
+              {socialCopy.headerTitle}
             </p>
-            <p className="mt-2 text-[12px] leading-relaxed text-[var(--rail-muted)]">
-              {social.description}
-            </p>
+            {socialCopy.headerDescription ? (
+              <p className="mt-2 text-[12px] leading-relaxed text-[var(--rail-muted)]">
+                {socialCopy.headerDescription}
+              </p>
+            ) : null}
           </>
         ) : (
           <>
@@ -477,12 +535,21 @@ export function JourneyRail({
           />
         )}
 
-        <ChapterShell
-          chapter={social}
-          state={socialMedia.state}
-          emphasizedNext={socialMedia.emphasizedNext}
-          socialMediaHref={socialMediaHref}
-        />
+        {channelSurface && socialCopy.channelLabel ? (
+          <OpenChannelSurface
+            parentLabel={socialCopy.parentLabel}
+            parentDescription={socialCopy.parentDescription}
+            channelLabel={socialCopy.channelLabel}
+            socialMediaHref={socialMediaHref}
+          />
+        ) : (
+          <ChapterShell
+            chapter={social}
+            state={socialMedia.state}
+            emphasizedNext={socialMedia.emphasizedNext}
+            socialMediaHref={socialMediaHref}
+          />
+        )}
       </div>
 
       <div className="mt-auto flex items-center justify-between border-t border-white/10 px-5 py-4">

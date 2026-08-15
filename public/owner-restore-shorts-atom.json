@@ -1,0 +1,83 @@
+{
+  "storageVersion": 1,
+  "savedAt": "2026-08-15T00:04:54.814Z",
+  "sessionsByTopicPacketId": {
+    "tp_79e3748f-f3df-488d-911a-62f2512b9682": {
+      "topicPacketId": "tp_79e3748f-f3df-488d-911a-62f2512b9682",
+      "projectId": "proj_mspaim68",
+      "artifactId": "art_5b7de8d7-3b07-448d-ab9f-1a69bed933cd",
+      "ingestedAtom": {
+        "topicPacketId": "tp_79e3748f-f3df-488d-911a-62f2512b9682",
+        "projectId": "proj_mspaim68",
+        "artifactId": "art_5b7de8d7-3b07-448d-ab9f-1a69bed933cd",
+        "libraryId": "lib_msp77sbx",
+        "territoryId": "terr_8fc8ae8f-a3a6-45a6-b711-8900dacd0aed",
+        "topicId": "topic_24cd8825-df5c-4fa5-9e08-7e42b43d5e99",
+        "version": 1,
+        "status": "selected",
+        "createdAt": "2026-08-13T03:18:42.100Z",
+        "title": "Why price per serving can still compare the wrong things",
+        "premise": "Two bottles can have a similar serving count while delivering different declared ingredient amounts per serving.",
+        "audience": "Online supplement shoppers using serving count or price per serving to choose between shortlisted products.",
+        "customerMoment": "The shopper has found a cheaper cost per serving and is ready to treat it as proof of better value.",
+        "tension": "A serving is a label-defined unit, not proof that the amount being compared is equivalent; mineral labels add another source of confusion because they report elemental amounts rather than the total weight of the ingredient compound.",
+        "opportunity": "Show shoppers how to pair price per serving with the declared amount per serving, using magnesium and iron labels to explain why compound names or weights should not replace the Supplement Facts value.",
+        "decisionQuestion": "Which product dimensions must be equivalent before price becomes a meaningful basis for comparison?",
+        "desiredTakeaway": "Match both the serving definition and the declared ingredient amount before deciding which serving costs less.",
+        "whyItMatters": "It preserves the convenience of price-per-serving comparisons while preventing a neat-looking calculation from hiding a mismatched ingredient basis.",
+        "supportingInsights": [
+          "The Supplement Facts panel declares elemental magnesium rather than the total weight of the magnesium-containing compound.",
+          "Different iron forms contain different proportions of elemental iron, while the Supplement Facts panel reports elemental iron."
+        ],
+        "supportingItemIds": [
+          "item_085dadee-f6bc-40ee-a29f-1b6134a27fb9",
+          "item_5e77d381-5e90-423b-9214-4709f2e012c9",
+          "item_18918918-6f77-4627-86bc-af7f223f06e0",
+          "item_5e068a58-e5a8-44c4-9285-360f1a773dd2"
+        ],
+        "sourceRefs": [
+          "NIH ODS — Magnesium: Health Professional Fact Sheet",
+          "NIH ODS — Iron: Health Professional Fact Sheet"
+        ],
+        "evidenceQuotes": [
+          "Shortlist exists → products look broadly similar → shopper cannot tell whether the comparison basis is valid",
+          "Turn a confusing shortlist into a transparent comparison set, then calculate or expose value only on dimensions that are actually comparable.",
+          "It also notes that the Supplement Facts panel declares **elemental magnesium**, not the total weight of the magnesium-containing compound.",
+          "NIH ODS states that ferrous and ferric salts differ, that different iron forms contain different proportions of elemental iron, and that the Supplement Facts panel reports elemental iron."
+        ],
+        "provenanceNotes": [
+          "Neutral market discovery — Ingredient form: consequential sometimes, irrelevant sometimes",
+          "Neutral market discovery — Ingredient form: consequential sometimes, irrelevant sometimes",
+          "Demand, content gaps versus business opportunities, and the evidence-supported customer moment",
+          "Demand, content gaps versus business opportunities"
+        ],
+        "confidence": "high",
+        "hypothesisDependencies": [],
+        "unresolvedAssumptions": [
+          "The compared listings display consistent serving and Supplement Facts information.",
+          "Current product prices can be matched to the same package and serving configuration."
+        ],
+        "restrictions": [
+          "Supplement education must remain non-medical and must not include diagnosis, treatment, dosage recommendations, implied outcomes, or unsupported claims about absorption, value, rankings, affiliate influence, advisory oversight, or evidence-informed guidance.",
+          "Independent quality seals can indicate manufacturing, label-content, or contaminant testing, but do not guarantee safety or effectiveness.",
+          "ZYNAVA's public claim that affiliate commissions never affect rankings is a first-party assertion and lacks independent verification in this research.",
+          "For YouTube content with compensated retailer relationships or endorsements, disclosure in the description alone is insufficient; disclosures must be clear and conspicuous in the video itself."
+        ],
+        "limitations": [
+          "The research did not obtain publicly auditable first-party Google or YouTube keyword-volume data for precise near-checkout queries.",
+          "The reported magnesium form search data do not establish that searchers are near checkout, care about price, or would use ZYNAVA.",
+          "YouTube's primary-platform status is supported by reach and explanatory format, not by proven near-checkout search behavior."
+        ],
+        "doNotClaim": [
+          "Supplement education must remain non-medical and must not include diagnosis, treatment, dosage recommendations, implied outcomes, or unsupported claims about absorption, value, rankings, affiliate influence, advisory oversight, or evidence-informed guidance.",
+          "Independent quality seals can indicate manufacturing, label-content, or contaminant testing, but do not guarantee safety or effectiveness.",
+          "ZYNAVA's public claim that affiliate commissions never affect rankings is a first-party assertion and lacks independent verification in this research.",
+          "For YouTube content with compensated retailer relationships or endorsements, disclosure in the description alone is insufficient; disclosures must be clear and conspicuous in the video itself."
+        ]
+      },
+      "stage": "ready_for_storyboard",
+      "createdAt": "2026-08-15T00:04:54.814Z",
+      "updatedAt": "2026-08-15T00:04:54.814Z"
+    }
+  }
+}

@@ -17,6 +17,8 @@ describe("Topic Engine model routing isolation", () => {
     const envSource = readFileSync(join(process.cwd(), "src/lib/env.ts"), "utf8");
     expect(envSource).toMatch(/OPENAI_MODEL:.*default\("gpt-5\.6-terra"\)/);
     expect(envSource).toMatch(/TOPIC_ENGINE_MODEL:.*default\("gpt-5\.6-sol"\)/);
+    expect(envSource).toMatch(/YOUTUBE_SHORTS_MODEL:.*default\("gpt-5\.6-terra"\)/);
+    expect(envSource).not.toMatch(/SOCIAL_MEDIA_MODEL/);
   });
 
   it("TE services pass model override; Librarian extract does not", () => {

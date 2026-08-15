@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-14T12:51:03.118Z",
-  "commitSha": "1a835d51595ede27939afbcd9d42be1ab0748bb3",
+  "generatedAt": "2026-08-15T03:52:06.693Z",
+  "commitSha": "ef0c9e1a75c97072fad385f87ae72a3263a19fcc",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "project-knowledge/",
@@ -9,19 +9,29 @@
     "tests/"
   ],
   "warnings": [
-    "PK-WARN-001: 509 lines exceeds warning threshold 500",
-    "PK-WARN-001: 713 lines exceeds warning threshold 500"
+    "PK-WARN-001: 576 lines exceeds warning threshold 500",
+    "PK-WARN-001: 600 lines exceeds warning threshold 500",
+    "PK-WARN-001: 713 lines exceeds warning threshold 500",
+    "PK-WARN-001: 609 lines exceeds warning threshold 500",
+    "PK-WARN-001: 576 lines exceeds warning threshold 500"
   ],
   "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
   "hardCount": 0,
-  "warnCount": 2,
+  "warnCount": 5,
   "findings": [
     {
       "code": "PK-WARN-001",
       "severity": "warn",
       "title": "File exceeds warning line threshold",
-      "detail": "509 lines exceeds warning threshold 500",
+      "detail": "576 lines exceeds warning threshold 500",
       "file": "src/features/research-prompt-builder/components/journey-rail.tsx"
+    },
+    {
+      "code": "PK-WARN-001",
+      "severity": "warn",
+      "title": "File exceeds warning line threshold",
+      "detail": "600 lines exceeds warning threshold 500",
+      "file": "src/features/social-media/youtube-shorts/components/storyboard-scene-editor.tsx"
     },
     {
       "code": "PK-WARN-001",
@@ -29,6 +39,20 @@
       "title": "File exceeds warning line threshold",
       "detail": "713 lines exceeds warning threshold 500",
       "file": "tests/topics/build-topic-packet.test.ts"
+    },
+    {
+      "code": "PK-WARN-001",
+      "severity": "warn",
+      "title": "File exceeds warning line threshold",
+      "detail": "609 lines exceeds warning threshold 500",
+      "file": "tests/youtube-shorts/storyboard-semantics.test.ts"
+    },
+    {
+      "code": "PK-WARN-001",
+      "severity": "warn",
+      "title": "File exceeds warning line threshold",
+      "detail": "576 lines exceeds warning threshold 500",
+      "file": "tests/youtube-shorts/storyboard-workspace.test.tsx"
     }
   ]
 }

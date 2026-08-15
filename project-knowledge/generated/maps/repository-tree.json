@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-14T14:33:45.290Z",
-  "commitSha": "1a835d51595ede27939afbcd9d42be1ab0748bb3",
+  "generatedAt": "2026-08-15T03:50:33.267Z",
+  "commitSha": "ef0c9e1a75c97072fad385f87ae72a3263a19fcc",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "."
@@ -892,6 +892,10 @@
         "name": "public",
         "children": [
           {
+            "name": "owner-restore-shorts-atom.json",
+            "file": true
+          },
+          {
             "name": "samples",
             "children": [
               {
@@ -909,6 +913,43 @@
       {
         "name": "Reference",
         "note": "advisory — not expanded"
+      },
+      {
+        "name": "Reference and read only",
+        "children": [
+          {
+            "name": "Line of dicovery conecpt .txt",
+            "file": true
+          },
+          {
+            "name": "Marketing Hook.txt",
+            "file": true
+          },
+          {
+            "name": "motionpicturedir00milnuoft.pdf",
+            "file": true
+          },
+          {
+            "name": "Short Video Work Flow .txt",
+            "file": true
+          },
+          {
+            "name": "StoryTelling .txt",
+            "file": true
+          },
+          {
+            "name": "Stroy telling part 2 .txt",
+            "file": true
+          },
+          {
+            "name": "_hooked_principles_extract.txt",
+            "file": true
+          },
+          {
+            "name": "_OceanofPDF.com_Grammar_of_the_Film_Language_-_Daniel_Arijon.pdf",
+            "file": true
+          }
+        ]
       },
       {
         "name": "REFERENCE_PORTING_NOTES.md",
@@ -970,7 +1011,67 @@
             "file": true
           },
           {
+            "name": "_live-build-cdp-expr.mts",
+            "file": true
+          },
+          {
+            "name": "_live-cdp-payload.json",
+            "file": true
+          },
+          {
+            "name": "_live-p1b-atom-story-smoke.mts",
+            "file": true
+          },
+          {
+            "name": "_live-p1b-smoke-a-only.mts",
+            "file": true
+          },
+          {
+            "name": "_live-p1b-smoke-a.json",
+            "file": true
+          },
+          {
+            "name": "_live-p1b-smoke-b.json",
+            "file": true
+          },
+          {
+            "name": "_live-p1b-storyboard-smoke.mts",
+            "file": true
+          },
+          {
+            "name": "_live-p1b-storyboard.json",
+            "file": true
+          },
+          {
+            "name": "_live-restore-shorts-atom.cdp-expr.js",
+            "file": true
+          },
+          {
+            "name": "_live-restore-shorts-atom.envelope.json",
+            "file": true
+          },
+          {
+            "name": "_live-restore-shorts-atom.mts",
+            "file": true
+          },
+          {
+            "name": "_live-restore-shorts-atom.paste.js",
+            "file": true
+          },
+          {
+            "name": "_live-server-only-stub.cjs",
+            "file": true
+          },
+          {
             "name": "_live-te-lean.json",
+            "file": true
+          },
+          {
+            "name": "_live-write-cdp-payload.mts",
+            "file": true
+          },
+          {
+            "name": "_tmp-mcp-args.json",
             "file": true
           }
         ]
@@ -1108,6 +1209,10 @@
                   },
                   {
                     "name": "research-prompt",
+                    "truncated": true
+                  },
+                  {
+                    "name": "social-media",
                     "truncated": true
                   }
                 ]
@@ -1377,6 +1482,10 @@
               {
                 "name": "research-prompt.route.test.ts",
                 "file": true
+              },
+              {
+                "name": "youtube-shorts-storyboard.route.test.ts",
+                "file": true
               }
             ]
           },
@@ -1398,6 +1507,10 @@
               },
               {
                 "name": "content-intelligence-contract.test.ts",
+                "file": true
+              },
+              {
+                "name": "expand-shorts-production-contract.test.ts",
                 "file": true
               },
               {
@@ -1432,6 +1545,10 @@
                     "file": true
                   }
                 ]
+              },
+              {
+                "name": "generate-shorts-storyboard-contract.test.ts",
+                "file": true
               },
               {
                 "name": "golden",
@@ -1647,6 +1764,10 @@
               {
                 "name": "rail-presentation.test.ts",
                 "file": true
+              },
+              {
+                "name": "social-media-rail-copy.test.ts",
+                "file": true
               }
             ]
           },
@@ -1750,6 +1871,14 @@
                 "file": true
               },
               {
+                "name": "export-format-scene-paste.test.ts",
+                "file": true
+              },
+              {
+                "name": "generate-storyboard.service.test.ts",
+                "file": true
+              },
+              {
                 "name": "identity.test.ts",
                 "file": true
               },
@@ -1758,7 +1887,31 @@
                 "file": true
               },
               {
+                "name": "narration-immutability.test.ts",
+                "file": true
+              },
+              {
+                "name": "owner-restore-atom.test.ts",
+                "file": true
+              },
+              {
                 "name": "projection-keys.test.ts",
+                "file": true
+              },
+              {
+                "name": "storyboard-lifecycle.test.ts",
+                "file": true
+              },
+              {
+                "name": "storyboard-schema.test.ts",
+                "file": true
+              },
+              {
+                "name": "storyboard-semantics.test.ts",
+                "file": true
+              },
+              {
+                "name": "storyboard-workspace.test.tsx",
                 "file": true
               },
               {

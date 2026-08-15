@@ -128,6 +128,38 @@ export const operationRegistry = {
     retryable: true,
     failureStates: ["MODEL_OUTPUT_INVALID"],
   },
+  "generate-shorts-storyboard": {
+    displayName: "Generate YouTube Shorts storyboard",
+    description:
+      "Generate one coherent seven-scene YouTube Shorts storyboard from a Shorts Atom projection.",
+    visibility: "public",
+    inputContracts: [],
+    outputContracts: [],
+    promptModule: "generate-storyboard",
+    promptModulePath:
+      "src/features/social-media/youtube-shorts/prompts/generate-storyboard.ts",
+    contextAssembler: "none",
+    schemaName: "youtube_shorts_storyboard",
+    evalPath: "tests/evals/generate-shorts-storyboard-contract.test.ts",
+    retryable: true,
+    failureStates: ["MODEL_OUTPUT_INVALID"],
+  },
+  "expand-shorts-production": {
+    displayName: "Expand YouTube Shorts production",
+    description:
+      "Expand one approved seven-scene storyboard into seven production prompt packages for external generation.",
+    visibility: "public",
+    inputContracts: [],
+    outputContracts: [],
+    promptModule: "expand-production",
+    promptModulePath:
+      "src/features/social-media/youtube-shorts/prompts/expand-production.ts",
+    contextAssembler: "none",
+    schemaName: "youtube_shorts_production",
+    evalPath: "tests/evals/expand-shorts-production-contract.test.ts",
+    retryable: true,
+    failureStates: ["MODEL_OUTPUT_INVALID"],
+  },
   "repair-invalid-output": {
     displayName: "Repair invalid model output",
     description:

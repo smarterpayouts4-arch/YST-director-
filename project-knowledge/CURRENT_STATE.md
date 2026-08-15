@@ -1,12 +1,12 @@
 # CURRENT_STATE — Research Prompt Builder MVP
 
-Freshness: `current` · Last reviewed: 2026-08-13 (Atom → Social Media hub → Shorts sole ingest)
+Freshness: `current` · Last reviewed: 2026-08-14 (P1A frozen ef0c9e1 · P1B story brain `ci-shorts-1.5.4` + density UI · P1C production)
 
 Use vocabulary literally: Live · Partial · Prototype · Mocked · Planned · Blocked · Deprecated.
 
 ## Governing sentence
 
-Research Prompt Builder remains Live through research-prompt export. Content Intelligence Librarian MVP is frozen: completed external research is ingested into a governed library. Topic Engine is Live (`ci-topics-1.1.9`; freeze deferred pending smoke) and must consume only `PublishedLibraryDto`. Social Media is organizational hub (nav only); YouTube Shorts is Partial (P1A sole Atom ingest + resume; no storyboard LLM yet).
+Research Prompt Builder remains Live through research-prompt export. Content Intelligence Librarian MVP is frozen: completed external research is ingested into a governed library. Topic Engine is Live (`ci-topics-1.1.9`; freeze deferred pending smoke) and must consume only `PublishedLibraryDto`. Social Media is organizational hub (nav only); YouTube Shorts is Partial (P1A frozen; P1B seven-scene storyboard + density UI; P1C production expansion + Copy export).
 
 ## Product journey
 
@@ -20,7 +20,7 @@ Research Prompt Builder remains Live through research-prompt export. Content Int
 | Content Intelligence Librarian | Live | **MVP frozen** on `ci-librarian-1.1.1` + `gpt-5.6-terra` (medium). ZYNAVA published DTO smoke passed (equivalence-first opportunity, evaluated hypotheses, moment/tension, competitors/restrictions/limitations; DTO scoped to active artifact). Send replaces active Library with a fresh `libraryId` (no multi-paste item accumulation). Do not change extract prompt, model, curator, or kinds without a new freeze. P2: summary 6-item cap can hide `isHypothesis` items filed as `other`. |
 | Topic Engine | Live | **`ci-topics-1.1.9`** + `TOPIC_ENGINE_MODEL`/`gpt-5.6-sol` (Librarian stays Terra). **Freeze deferred** pending owner six-topic + Atom smoke. Rail: Topics `07` → Atom `08`. 1.1.9: compact Topic Strategy Doctrine (curiosity = unresolved distinction; latent LoD quality lens); supportingItemIds = Atom creator intelligence substrate (non-fact thesis carriers allowed); Atom `supportingInsights` topic-relative over fact\|competitor\|opportunity\|tension\|demand (never audience/moment; score-all-zero fail-open facts then tension\|opportunity). Teaching floor ≥2 + decision-rule extras retained. Curate resolves hypothesis/unresolved itemIds→statements once. Back-to-Topics keeps six topics; re-select mints new `topicPacketId`. **Step 8 handoff UI** exports Canonical Topic Packet JSON/Markdown. No Marketing-folder RAG or Atom synthesis LLM. Ready CTA **Send to Social Media** (IDs only; no channel ingest). |
 | Social Media | Partial | Organizational hub only (`/social-media` — Shorts card; no shared creative brain; no Atom store). |
-| YouTube Shorts | Partial | **P1A foundation** — sole ingest owner on arrival; immutable `ingestedAtom` portfolio (`social-media-youtube-shorts:v1`), identity-safe ingest, resume, 16-field projection contract (compact **Atom received** UI). Zero AI. Route `/social-media/youtube-shorts`. Later output = video-generation-ready **prompt**, not a renderer. Reference HOW at `Reference/channels/youtube-shorts/` (no feature-local raw corpus). |
+| YouTube Shorts | Partial | **P1A frozen** at `ef0c9e1`. **P1B storyboard** — `YOUTUBE_SHORTS_MODEL` / Terra; Shorts Story Brain (`brain/` MD → `story-brain.ts`); one `generate-shorts-storyboard` locks `storyArchitecture` (`hookWhy`, `beats[].because`) then writes exactly 7 scenes (`ci-shorts-1.5.4`: spoken first-hearing language, Hook procedure, causal beats, 22-word narration budget, spoken rewrite pairs, concept naming / two-beat payoff, repeated-bigram echo check, closed-world locations, spoken-only analyst idioms, payoff compression); owner edit/approve; no AI on mount. **P1C production** — one `expand-shorts-production`; sibling production schema; generated/working production; narration/OST merge-on-export; Copy ×3; no `approvedProduction`; no renderer. Storage `social-media-youtube-shorts:v1`. Reference HOW at `Reference/channels/youtube-shorts/` (no runtime import). |
 | Workflow state machine (RPB) | Live | Reducer hard-enforces `canTransition`; illegal moves rejected with `WorkflowDiagnostic` (tested) |
 | Auth / multi-user / cloud DB | Planned | Explicit non-goal for current MVP development |
 | Research execution / video | Planned / Out of MVP | Owner runs prompt in ChatGPT externally |

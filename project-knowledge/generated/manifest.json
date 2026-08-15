@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-14T14:33:45.137Z",
-  "commitSha": "1a835d51595ede27939afbcd9d42be1ab0748bb3",
+  "generatedAt": "2026-08-15T03:50:32.992Z",
+  "commitSha": "ef0c9e1a75c97072fad385f87ae72a3263a19fcc",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "src/app",
@@ -16,8 +16,8 @@
   "artifactCount": {
     "documents": 23,
     "pages": 5,
-    "apiRoutes": 8,
-    "prompts": 20,
+    "apiRoutes": 10,
+    "prompts": 28,
     "mcpTools": 13
   }
 }

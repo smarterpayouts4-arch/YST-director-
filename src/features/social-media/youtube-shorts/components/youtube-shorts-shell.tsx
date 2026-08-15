@@ -6,16 +6,33 @@ import { JourneyRail } from "@/features/research-prompt-builder/components/journ
 import { atomHandoffHref } from "@/features/social-media/components/atom-handoff-href";
 import { ingestTopicPacket } from "@/features/social-media/youtube-shorts/contracts/ingest-topic-packet";
 import { resolveShortsIdentity } from "@/features/social-media/youtube-shorts/contracts/resolve-shorts-identity";
-import { YouTubeShortsReadyView } from "@/features/social-media/youtube-shorts/components/youtube-shorts-ready-view";
+import { YouTubeShortsStoryboardReview } from "@/features/social-media/youtube-shorts/components/storyboard-review";
+import {
+  applyGeneratedProduction,
+  applyGeneratedStoryboard,
+  applyWorkingProduction,
+  applyWorkingStoryboard,
+  approveWorkingStoryboard,
+  reopenApprovedStoryboard,
+} from "@/features/social-media/youtube-shorts/contracts/storyboard-lifecycle";
+import type { YouTubeShortsProduction } from "@/features/social-media/youtube-shorts/schemas/youtube-shorts-production";
 import type { YouTubeShortsSession } from "@/features/social-media/youtube-shorts/schemas/youtube-shorts-session";
+import type { YouTubeShortsStoryboard } from "@/features/social-media/youtube-shorts/schemas/youtube-shorts-storyboard";
 import {
   loadShortsSessionForPage,
   loadTeSeedPacket,
 } from "@/features/social-media/youtube-shorts/state/resume-shorts-session";
+import {
+  fetchAndPersistOwnerRestore,
+  ownerRestoreIdsMatch,
+} from "@/features/social-media/youtube-shorts/state/owner-restore-atom";
 import { persistSession } from "@/features/social-media/youtube-shorts/state/shorts-storage";
 
 const EMPTY_COPY =
   "No Atom received yet. Send a Ready Atom from Topic Engine via Social Media, then open YouTube Shorts.";
+
+const OWNER_RESTORE_EMPTY_COPY =
+  "This browser has no Shorts session for the frozen test Atom. Restore it here — no Topic Engine rerun.";
 
 export function YouTubeShortsShell({
   topicPacketId,
@@ -32,6 +49,8 @@ export function YouTubeShortsShell({
   const [session, setSession] = useState<YouTubeShortsSession | null>(null);
   const [empty, setEmpty] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [restoring, setRestoring] = useState(false);
 
   const socialMediaHref = atomHandoffHref("/social-media", {
     topicPacketId,
@@ -40,8 +59,15 @@ export function YouTubeShortsShell({
     returnHref,
   });
 
+  const canOwnerRestore = ownerRestoreIdsMatch(topicPacketId, artifactId);
+
   useEffect(() => {
+    let cancelled = false;
     setHydrated(true);
+    setError(null);
+    setEmpty(false);
+    setSession(null);
+    setRestoring(false);
 
     if (!topicPacketId) {
       setEmpty(true);
@@ -75,40 +101,210 @@ export function YouTubeShortsShell({
       expectedTopicPacketId: topicPacketId,
       artifactId,
     });
-    if (!packet) {
+    if (packet) {
+      const identity = resolveShortsIdentity({
+        packet,
+        queryProjectId: projectId,
+        queryArtifactId: artifactId,
+      });
+      if (!identity.ok) {
+        setError(
+          identity.reason === "missing_projectId"
+            ? "This Atom is missing a project id, so Shorts cannot ingest it."
+            : "Atom identity does not match this Shorts session.",
+        );
+        setEmpty(true);
+        return;
+      }
+
+      const next = ingestTopicPacket({
+        packet,
+        projectId: identity.projectId,
+        artifactId: identity.artifactId,
+        existingSession: null,
+      });
+      const saved = persistSession(next);
+      if (!saved.ok) {
+        setError("Could not save this Shorts session.");
+        setEmpty(true);
+        return;
+      }
+      setSession(saved.session);
+      return;
+    }
+
+    // TE seed missing — same-browser owner restore for the frozen fixture URL only.
+    if (!ownerRestoreIdsMatch(topicPacketId, artifactId)) {
       setEmpty(true);
       return;
     }
 
-    const identity = resolveShortsIdentity({
-      packet,
-      queryProjectId: projectId,
-      queryArtifactId: artifactId,
-    });
-    if (!identity.ok) {
+    setRestoring(true);
+    void fetchAndPersistOwnerRestore({ topicPacketId, artifactId }).then(
+      (result) => {
+        if (cancelled) return;
+        setRestoring(false);
+        if (result.ok) {
+          setSession(result.session);
+          setEmpty(false);
+          return;
+        }
+        setEmpty(true);
+        if (result.reason === "save_failed") {
+          setError("Could not save the restored Shorts session.");
+        } else if (result.reason !== "ids_mismatch") {
+          setError("Could not restore this Atom in this browser.");
+        }
+      },
+    );
+
+    return () => {
+      cancelled = true;
+    };
+  }, [topicPacketId, projectId, artifactId]);
+
+  const restoreOwnerAtom = async () => {
+    if (!topicPacketId || !artifactId || restoring || busy) return;
+    if (!ownerRestoreIdsMatch(topicPacketId, artifactId)) return;
+    setRestoring(true);
+    setError(null);
+    try {
+      const result = await fetchAndPersistOwnerRestore({
+        topicPacketId,
+        artifactId,
+      });
+      if (result.ok) {
+        setSession(result.session);
+        setEmpty(false);
+        return;
+      }
+      setEmpty(true);
       setError(
-        identity.reason === "missing_projectId"
-          ? "This Atom is missing a project id, so Shorts cannot ingest it."
-          : "Atom identity does not match this Shorts session.",
+        result.reason === "save_failed"
+          ? "Could not save the restored Shorts session."
+          : "Could not restore this Atom in this browser.",
       );
-      setEmpty(true);
-      return;
+    } finally {
+      setRestoring(false);
     }
+  };
 
-    const next = ingestTopicPacket({
-      packet,
-      projectId: identity.projectId,
-      artifactId: identity.artifactId,
-      existingSession: null,
-    });
+  const persist = (next: YouTubeShortsSession): boolean => {
     const saved = persistSession(next);
     if (!saved.ok) {
       setError("Could not save this Shorts session.");
-      setEmpty(true);
-      return;
+      return false;
     }
     setSession(saved.session);
-  }, [topicPacketId, projectId, artifactId]);
+    return true;
+  };
+
+  const generateStoryboard = async () => {
+    if (!session || busy) return;
+    setBusy(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/social-media/youtube-shorts/storyboard", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ingestedAtom: session.ingestedAtom,
+          topicPacketId: session.topicPacketId,
+          projectId: session.projectId,
+          artifactId: session.artifactId,
+        }),
+      });
+      const body = await res.json();
+      if (!res.ok) {
+        throw new Error(body?.error?.message || "Could not generate storyboard.");
+      }
+      persist(
+        applyGeneratedStoryboard(
+          session,
+          body.storyboard as YouTubeShortsStoryboard,
+          String(body.promptVersion ?? ""),
+        ),
+      );
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Could not generate storyboard.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const changeWorking = (board: YouTubeShortsStoryboard) => {
+    if (!session) return;
+    try {
+      persist(applyWorkingStoryboard(session, board));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not save edits.");
+    }
+  };
+
+  const approveStoryboard = () => {
+    if (!session) return;
+    try {
+      persist(approveWorkingStoryboard(session));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not approve storyboard.");
+    }
+  };
+
+  const reopenStoryboard = () => {
+    if (!session) return;
+    persist(reopenApprovedStoryboard(session));
+  };
+
+  const expandProduction = async () => {
+    if (!session || busy || !session.approvedStoryboard) return;
+    setBusy(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/social-media/youtube-shorts/expand", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ingestedAtom: session.ingestedAtom,
+          approvedStoryboard: session.approvedStoryboard,
+          topicPacketId: session.topicPacketId,
+          projectId: session.projectId,
+          artifactId: session.artifactId,
+          stage: session.stage,
+        }),
+      });
+      const body = await res.json();
+      if (!res.ok) {
+        throw new Error(body?.error?.message || "Could not expand production.");
+      }
+      persist(
+        applyGeneratedProduction(
+          session,
+          body.production as YouTubeShortsProduction,
+          String(body.promptVersion ?? ""),
+          typeof body.generatedAt === "string"
+            ? body.generatedAt
+            : new Date().toISOString(),
+        ),
+      );
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Could not expand production.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const changeWorkingProduction = (board: YouTubeShortsProduction) => {
+    if (!session) return;
+    try {
+      persist(applyWorkingProduction(session, board));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not save production edits.");
+    }
+  };
 
   if (!hydrated) {
     return (
@@ -118,6 +314,7 @@ export function YouTubeShortsShell({
           researchSettled={true}
           channelActive={true}
           socialMediaHref={socialMediaHref}
+          activeChannelLabel="YouTube Shorts"
         />
         <div className="flex-1 px-5 py-6 text-sm text-stone-600 md:px-10 md:py-10">
           Loading YouTube Shorts…
@@ -133,17 +330,18 @@ export function YouTubeShortsShell({
         researchSettled={true}
         channelActive={true}
         socialMediaHref={socialMediaHref}
+        activeChannelLabel="YouTube Shorts"
       />
 
-      <div className="relative flex-1 px-5 py-6 md:px-10 md:py-10">
-        <div className="mx-auto max-w-[1040px] space-y-6">
-          <div className="mb-2 flex items-start justify-between gap-3">
+      <div className="relative flex-1 px-4 py-4 md:px-8 md:py-6">
+        <div className="mx-auto max-w-[1360px] space-y-3">
+          <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-xs font-medium uppercase tracking-[0.12em] text-stone-500">
-                YouTube Shorts
+                Social Media
               </p>
               <h1 className="editorial text-2xl text-stone-900">
-                {session ? "Atom received" : "Waiting for Atom"}
+                {session ? "Storyboard" : "Waiting for Atom"}
               </h1>
             </div>
             <Link
@@ -156,19 +354,53 @@ export function YouTubeShortsShell({
 
           {error ? <p className="text-sm text-red-700">{error}</p> : null}
 
+          {restoring && !session ? (
+            <p className="text-sm text-stone-600">Restoring frozen Atom…</p>
+          ) : null}
+
           {session ? (
-            <YouTubeShortsReadyView packet={session.ingestedAtom} />
+            <YouTubeShortsStoryboardReview
+              session={session}
+              busy={busy}
+              onGenerate={generateStoryboard}
+              onExpand={expandProduction}
+              onChangeWorking={changeWorking}
+              onChangeWorkingProduction={changeWorkingProduction}
+              onApprove={approveStoryboard}
+              onReopen={reopenStoryboard}
+            />
           ) : null}
 
           {empty && !session ? (
-            <section className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
-              <p className="text-sm text-stone-700">{EMPTY_COPY}</p>
-              <Link
-                href="/content-intelligence/topics"
-                className="mt-4 inline-block text-sm font-medium text-primary"
-              >
-                Go to Topic Engine
-              </Link>
+            <section className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm">
+              <p className="text-sm text-stone-700">
+                {canOwnerRestore ? OWNER_RESTORE_EMPTY_COPY : EMPTY_COPY}
+              </p>
+              {canOwnerRestore ? (
+                <div className="mt-3 flex flex-wrap items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => void restoreOwnerAtom()}
+                    disabled={restoring}
+                    className="rounded-lg bg-stone-900 px-3 py-2 text-sm font-medium text-white hover:bg-stone-800 disabled:opacity-60"
+                  >
+                    {restoring ? "Restoring…" : "Restore this Atom"}
+                  </button>
+                  <Link
+                    href="/content-intelligence/topics"
+                    className="text-sm font-medium text-stone-600 hover:text-stone-900"
+                  >
+                    Topic Engine
+                  </Link>
+                </div>
+              ) : (
+                <Link
+                  href="/content-intelligence/topics"
+                  className="mt-3 inline-block text-sm font-medium text-primary"
+                >
+                  Go to Topic Engine
+                </Link>
+              )}
             </section>
           ) : null}
         </div>

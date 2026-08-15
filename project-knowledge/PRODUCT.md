@@ -15,7 +15,7 @@ Upload company information, confirm what the system understood, answer a few que
 ## Content Intelligence
 
 6. After external ChatGPT research: ingest completed research → Librarian extract/curate/review → published Content Intelligence Library (Librarian MVP frozen).
-7. Topic Engine (Live — `ci-topics-1.1.9`; freeze deferred pending smoke): Directions → topic opportunities → one Canonical Topic Packet / Atom from `PublishedLibraryDto` only. YouTube Shorts foundation Partial (Atom ingest + resume; no storyboard LLM yet).
+7. Topic Engine (Live — `ci-topics-1.1.9`; freeze deferred pending smoke): Directions → topic opportunities → one Canonical Topic Packet / Atom from `PublishedLibraryDto` only. YouTube Shorts Partial (P1A ingest + P1B seven-scene storyboard workspace; no P1C).
 
 Research Prompt Builder export remains a hard stage boundary. Content Intelligence is a separate domain (`src/features/content-intelligence/`), not an unlimited expansion of RPB internals.
 
@@ -33,8 +33,8 @@ Research Prompt Builder export remains a hard stage boundary. Content Intelligen
 Do not build inside this MVP:
 
 - automatic web research / crawling inside the app
-- Full channel content generators / scripts / calendars beyond YouTube Shorts P1A foundation (Atom ingest + resume only; no storyboard LLM yet)
-- scripts, social posts, storyboards, image/video generation (Shorts storyboard remains P1B+)
+- Full channel content generators / scripts / calendars beyond YouTube Shorts P1B (Atom ingest + seven-scene storyboard; no production expansion)
+- scripts, social posts, image/video generation (Shorts P1C production prompts remain blocked)
 - CRM, billing, authentication, user accounts
 - cloud database persistence for MVP development (localStorage approved for CI MVP; cloud later)
 - queues, vector search, embeddings, RAG, multi-agent frameworks
@@ -49,7 +49,7 @@ Ingestion → Understanding → Interview → Research Brief → Final Prompt (e
   → (external ChatGPT research)
   → Content Intelligence Librarian (Live / frozen)
   → Topic Engine (Live — Atom)
-  → Social Media (org hub / nav) → YouTube Shorts (Partial — P1A sole ingest)
+  → Social Media (org hub / nav) → YouTube Shorts (Partial — P1A ingest + P1B storyboard workspace)
 ```
 
 ## Boundaries

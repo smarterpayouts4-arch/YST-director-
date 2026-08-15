@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-14T14:33:45.741Z",
-  "commitSha": "1a835d51595ede27939afbcd9d42be1ab0748bb3",
+  "generatedAt": "2026-08-15T03:50:34.176Z",
+  "commitSha": "ef0c9e1a75c97072fad385f87ae72a3263a19fcc",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "src/app",
@@ -14,12 +14,12 @@
   "warnings": [],
   "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
   "counts": {
-    "appFiles": 15,
-    "featureFiles": 151,
-    "testFiles": 84,
+    "appFiles": 17,
+    "featureFiles": 173,
+    "testFiles": 96,
     "mcpFiles": 19,
     "documents": 23,
-    "largeFiles": 2,
+    "largeFiles": 5,
     "missingStateAreas": 0
   }
 }

@@ -23,7 +23,9 @@ export type AiOperationDefinition = {
     | "repair-output"
     | "extract-content-intelligence"
     | "propose-directions"
-    | "propose-topics";
+    | "propose-topics"
+    | "generate-storyboard"
+    | "expand-production";
   contextAssembler:
     | "assemble-company-analysis-context"
     | "assemble-interview-context"

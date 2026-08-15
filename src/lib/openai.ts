@@ -25,6 +25,11 @@ export function getTopicEngineModel(): string {
   return getEnv().TOPIC_ENGINE_MODEL;
 }
 
+/** YouTube Shorts storyboard only. Does not affect TE/Librarian/RPB. */
+export function getYouTubeShortsModel(): string {
+  return getEnv().YOUTUBE_SHORTS_MODEL;
+}
+
 export function getReasoningEffort(): string {
   return getEnv().OPENAI_REASONING_EFFORT;
 }

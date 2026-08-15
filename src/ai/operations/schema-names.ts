@@ -11,6 +11,8 @@ export const AI_SCHEMA_NAMES = [
   "content_intelligence_extract",
   "topic_directions",
   "topic_opportunities",
+  "youtube_shorts_storyboard",
+  "youtube_shorts_production",
 ] as const;
 
 export type AiSchemaName = (typeof AI_SCHEMA_NAMES)[number];
