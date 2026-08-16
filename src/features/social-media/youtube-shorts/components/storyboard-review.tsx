@@ -79,9 +79,14 @@ export function YouTubeShortsStoryboardReview({
     ? scenes.findIndex((scene) => scene.sceneNumber === selected.sceneNumber)
     : -1;
 
+  const patchScene = (sceneNumber: number, patch: StoryboardScenePatch) => {
+    if (!board || approved) return;
+    onChangeWorking(updateWorkingScene(board, sceneNumber, patch));
+  };
+
   const patchSelected = (patch: StoryboardScenePatch) => {
-    if (!board || !selected || approved) return;
-    onChangeWorking(updateWorkingScene(board, selected.sceneNumber, patch));
+    if (!selected) return;
+    patchScene(selected.sceneNumber, patch);
   };
 
   const patchSelectedProduction = (patch: ProductionScenePatch) => {
@@ -101,6 +106,7 @@ export function YouTubeShortsStoryboardReview({
         sceneCount={scenes.length || 7}
         estimatedTotalSeconds={board?.estimatedTotalSeconds ?? null}
         hasStoryboard={Boolean(board)}
+        edited={replaceWarn}
         onViewFullStory={board ? openStoryMap : undefined}
       />
 
@@ -237,6 +243,9 @@ export function YouTubeShortsStoryboardReview({
         scenes={scenes}
         open={storyMapOpen}
         onClose={() => setStoryMapOpen(false)}
+        editable={!approved && !busy}
+        onPatchScene={patchScene}
+        onSelectScene={setSelectedSceneNumber}
       />
     </section>
   );

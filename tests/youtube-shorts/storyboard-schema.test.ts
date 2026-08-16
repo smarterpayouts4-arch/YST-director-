@@ -86,9 +86,12 @@ describe("YouTube Shorts storyboard schema", () => {
     const keys = Object.keys(
       YouTubeShortsStoryboardModelSchema.shape.scenes.element.shape,
     );
+    expect(keys).toContain("situationLock");
     expect(keys).not.toContain("imagePrompt");
     expect(keys).not.toContain("motionPrompt");
     expect(keys).not.toContain("cameraMovement");
     expect(keys).not.toContain("shotSize");
+    expect(keys).not.toContain("actor");
+    expect(keys).not.toContain("physicalAction");
   });
 });

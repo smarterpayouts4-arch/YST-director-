@@ -1,0 +1,15 @@
+export const STORY_SITUATION_LOCK = [
+  "situationLock is a compact semantic contract for later production. It is not a shot card and not a still plate.",
+  "Fill situationLock after Purpose and before Scene Description. Scene Description must stay consistent with it.",
+  "Write eventMode first — physical_comparison, mediated_surface, or dual — then requiredSubjects. Scene 1 opening-pull uses physical_comparison unless Purpose names the listing as the event.",
+  "requiredSubjects = the story-named things that must remain visible. Use semantic names (the two alternatives), never packaging, glass color, brand marks, or invented props.",
+  "On physical_comparison, requiredSubjects are physical story things only. A listing, laptop, phone, or shopping UI may be a subject only on mediated_surface or dual.",
+  "dual is earned when Purpose names both the physical alternatives and the listing. Do not invent dual from audience or assumption wording.",
+  "visibleActionOrState = the story event or held tension (compare the two alternatives). Never lock a staged gesture, crop, or furniture arrangement.",
+  "relationship = what the picture must keep true between those subjects. Do not resolve the beat's open question here.",
+  "locationConstraint defaults to the word open. Write a place constraint only when the Atom or locked story cannot be told without that place. Open means the place staged in Scene Description was your free non-claim choice, not an Atom requirement.",
+  "humanPresenceConstraint is exclusive. none = no human visible. hands = hands and forearms only, no face or body — lock hands only when the story event is literally hands-only. partial = an identifiable person remains visible, face plus connected upper-body context; full body not required. person = that person is a primary scene subject; face and substantial upper-body presence cannot be cropped away. open = production may decide from Scene Description. hands is not an upgrade of open. partial is not a synonym of person.",
+  "When the beat's relationship is a person deciding or comparing, put that person on requiredSubjects and lock person or partial — not open, not hands. Lock none when the beat is object-only.",
+  "Do not lock a gesture, crop, counter, room, MCU, lens, lighting, materials, or glass color. Those are production realization. If the Atom names a form, Scene Description may stage that named form; do not invent a form the Atom did not name.",
+  "Do not add viewerMustPerceive or mustWithhold. Purpose already states the beat job. scene1Withholds and openingQuestion already state Scene 1 withhold.",
+].join("\n");

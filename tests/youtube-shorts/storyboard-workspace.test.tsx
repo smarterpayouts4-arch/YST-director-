@@ -547,10 +547,117 @@ describe("storyboard workspace UI", () => {
     expect(onGenerate).toHaveBeenCalledOnce();
   });
 
-  it("editing narration patches only that scene", async () => {
-    const { container: el, onChangeWorking } = await renderReview(
+  it("Story Map Edit Story patches Scene 4 narration without generate", async () => {
+    const { container: el, onChangeWorking, onGenerate } = await renderReview(
       makeSession(),
     );
+    const toggle = Array.from(el.querySelectorAll("button")).find(
+      (button) => button.textContent?.trim() === "View Story Map",
+    );
+    await act(async () => {
+      toggle!.click();
+    });
+    const region = el.querySelector(
+      '[role="dialog"][aria-label="Story map"]',
+    ) as HTMLElement;
+    expect(region.querySelector("textarea")).toBeNull();
+    const edit = Array.from(region.querySelectorAll("button")).find(
+      (button) => button.textContent?.trim() === "Edit Story",
+    );
+    expect(edit).toBeTruthy();
+    await act(async () => {
+      edit!.click();
+    });
+    const narration = region.querySelector(
+      '[data-story-map-scene="4"] [data-story-map-field="narration"]',
+    ) as HTMLTextAreaElement;
+    expect(narration?.value).toBe("narration-4");
+    await act(async () => {
+      const setter = Object.getOwnPropertyDescriptor(
+        window.HTMLTextAreaElement.prototype,
+        "value",
+      )?.set;
+      setter?.call(narration, "owner-map-4");
+      narration.dispatchEvent(new Event("input", { bubbles: true }));
+      narration.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+    expect(onChangeWorking).toHaveBeenCalled();
+    expect(onGenerate).not.toHaveBeenCalled();
+    const next = onChangeWorking.mock.calls[0][0] as YouTubeShortsStoryboard;
+    expect(next.scenes.find((scene) => scene.sceneNumber === 4)?.narration).toBe(
+      "owner-map-4",
+    );
+    expect(next.scenes.find((scene) => scene.sceneNumber === 3)?.narration).toBe(
+      "narration-3",
+    );
+  });
+
+  it("Story Map row click selects that scene in the inspector", async () => {
+    const { container: el } = await renderReview(makeSession());
+    expect(el.querySelector("input[value='role-1']")).toBeTruthy();
+    const toggle = Array.from(el.querySelectorAll("button")).find(
+      (button) => button.textContent?.trim() === "View Story Map",
+    );
+    await act(async () => {
+      toggle!.click();
+    });
+    const row = el.querySelector(
+      '[data-story-map-scene="4"]',
+    ) as HTMLElement;
+    await act(async () => {
+      row.click();
+    });
+    expect(el.querySelector("input[value='role-4']")).toBeTruthy();
+  });
+
+  it("approved Story Map stays frozen with no Edit Story", async () => {
+    const { container: el } = await renderReview(
+      makeSession("storyboard_approved"),
+    );
+    expect(el.textContent).toContain("Storyboard Approved · Frozen");
+    const toggle = Array.from(el.querySelectorAll("button")).find(
+      (button) => button.textContent?.trim() === "View Story Map",
+    );
+    await act(async () => {
+      toggle!.click();
+    });
+    const region = el.querySelector('[role="dialog"][aria-label="Story map"]');
+    expect(region?.textContent).toContain("read-only");
+    expect(
+      Array.from(region?.querySelectorAll("button") ?? []).map((button) =>
+        button.textContent?.trim(),
+      ),
+    ).not.toContain("Edit Story");
+    expect(region?.querySelector("textarea")).toBeNull();
+  });
+
+  it("dirty draft shows Edited status and regenerate replaces-edits label", async () => {
+    const session = makeSession();
+    const edited = structuredClone(session.workingStoryboard!);
+    edited.scenes[0]!.narration = "owner-changed";
+    session.workingStoryboard = edited;
+    const { container: el, onGenerate } = await renderReview(
+      session,
+      vi.fn(),
+      vi.fn(),
+      vi.fn(),
+      vi.fn(),
+    );
+    expect(el.textContent).toContain("Storyboard Draft · Edited");
+    const regen = Array.from(el.querySelectorAll("button")).find(
+      (button) =>
+        button.textContent?.trim() === "Regenerate Storyboard (replaces edits)",
+    );
+    expect(regen).toBeTruthy();
+    await act(async () => {
+      regen!.click();
+    });
+    expect(onGenerate).toHaveBeenCalledOnce();
+  });
+
+  it("editing narration patches only that scene", async () => {
+    const { container: el, onChangeWorking, onGenerate, onExpand } =
+      await renderReview(makeSession());
     await clickTab(el, "Narration");
     const narration = el.querySelector("textarea") as HTMLTextAreaElement;
     expect(narration?.value).toBe("narration-1");
@@ -571,5 +678,7 @@ describe("storyboard workspace UI", () => {
     expect(next.scenes.find((scene) => scene.sceneNumber === 2)?.narration).toBe(
       "narration-2",
     );
+    expect(onGenerate).not.toHaveBeenCalled();
+    expect(onExpand).not.toHaveBeenCalled();
   });
 });

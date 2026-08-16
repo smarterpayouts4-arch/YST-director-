@@ -212,6 +212,10 @@ describe("storyboard persistence and approval", () => {
     ).toBe("n");
 
     session = approveWorkingStoryboard(session);
+    expect(
+      session.approvedStoryboard?.scenes.find((scene) => scene.sceneNumber === 4)
+        ?.narration,
+    ).toBe("owner-4");
     const approvedFrozen = JSON.stringify(session.approvedStoryboard);
     const reopened = reopenApprovedStoryboard(session);
     const afterReopen = applyWorkingStoryboard(
@@ -250,11 +254,15 @@ describe("storyboard persistence and approval", () => {
     expect(session.workingProduction).toBeTruthy();
     expect(session.productionPromptVersion).toBe("ci-shorts-production-1.0.0");
 
+    const approvedFrozen = JSON.stringify(session.approvedStoryboard);
     const reopened = reopenApprovedStoryboard(session);
     expect(reopened.generatedProduction ?? null).toBeNull();
     expect(reopened.workingProduction ?? null).toBeNull();
     expect(reopened.productionPromptVersion).toBeUndefined();
     expect(reopened.productionGeneratedAt).toBeUndefined();
+    expect(reopened.approvedStoryboard).toBeNull();
+    expect(JSON.stringify(reopened.workingStoryboard)).toBe(approvedFrozen);
+    expect(reopened.workingStoryboard).not.toBe(session.approvedStoryboard);
 
     let again = applyGeneratedStoryboard(reopened, makeBoard("again"), "v2");
     again = approveWorkingStoryboard(again);
@@ -272,5 +280,37 @@ describe("storyboard persistence and approval", () => {
     expect(regenerated.stage).toBe("storyboard_draft");
     expect(regenerated.generatedProduction ?? null).toBeNull();
     expect(regenerated.workingProduction ?? null).toBeNull();
+    expect(regenerated.generatedStoryboard?.scenes[0]?.storyRole).toBe("regen");
+    expect(regenerated.workingStoryboard?.scenes[0]?.storyRole).toBe("regen");
+    expect(regenerated.generatedStoryboard).not.toBe(regenerated.workingStoryboard);
+  });
+
+  it("fresh generate stores independent clones of the same content", () => {
+    let session = ingestTopicPacket({
+      packet: makePacket(),
+      projectId: "proj_1",
+      artifactId: "art_1",
+    });
+    session = applyGeneratedStoryboard(session, makeBoard("generated"), "v");
+    expect(session.generatedStoryboard).not.toBe(session.workingStoryboard);
+    expect(JSON.stringify(session.generatedStoryboard)).toBe(
+      JSON.stringify(session.workingStoryboard),
+    );
+    session.workingStoryboard!.scenes[0]!.storyRole = "mutated-in-place";
+    expect(session.generatedStoryboard?.scenes[0]?.storyRole).toBe("generated");
+  });
+
+  it("approve rejects a working board that fails shape checks", () => {
+    let session = ingestTopicPacket({
+      packet: makePacket(),
+      projectId: "proj_1",
+      artifactId: "art_1",
+    });
+    session = applyGeneratedStoryboard(session, makeBoard("generated"), "v");
+    session = applyWorkingStoryboard(
+      session,
+      updateWorkingScene(session.workingStoryboard!, 4, { narration: "" }),
+    );
+    expect(() => approveWorkingStoryboard(session)).toThrow(/Cannot approve/);
   });
 });

@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-15T03:50:33.691Z",
-  "commitSha": "ef0c9e1a75c97072fad385f87ae72a3263a19fcc",
+  "generatedAt": "2026-08-16T21:03:23.980Z",
+  "commitSha": "f96dbdc6aba29863d2808b3f212c15f8a1b23dad",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "src/features"
@@ -131,8 +131,14 @@
       "versionLiteral": null
     },
     {
+      "path": "src/features/social-media/youtube-shorts/prompts/compile-sections.ts",
+      "lines": 13,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
       "path": "src/features/social-media/youtube-shorts/prompts/expand-production.ts",
-      "lines": 55,
+      "lines": 61,
       "exportsVersion": false,
       "versionLiteral": null
     },
@@ -143,8 +149,86 @@
       "versionLiteral": null
     },
     {
+      "path": "src/features/social-media/youtube-shorts/prompts/production-brain/authority.ts",
+      "lines": 7,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/production-brain/compile-production-brain.ts",
+      "lines": 65,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/production-brain/continuity.ts",
+      "lines": 8,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/production-brain/embodiment.ts",
+      "lines": 15,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/production-brain/field-rules.ts",
+      "lines": 10,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/production-brain/information-craft.ts",
+      "lines": 9,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/production-brain/mission.ts",
+      "lines": 6,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/production-brain/portrait-composition.ts",
+      "lines": 16,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/production-brain/seven-scene-coherence.ts",
+      "lines": 5,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/production-brain/situation-fidelity.ts",
+      "lines": 13,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/production-brain/staging.ts",
+      "lines": 14,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/production-brain/still-motion.ts",
+      "lines": 12,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/production-brain/visual-finish.ts",
+      "lines": 14,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
       "path": "src/features/social-media/youtube-shorts/prompts/production-expansion-doctrine.ts",
-      "lines": 36,
+      "lines": 13,
       "exportsVersion": false,
       "versionLiteral": null
     },
@@ -152,29 +236,83 @@
       "path": "src/features/social-media/youtube-shorts/prompts/prompt-version.ts",
       "lines": 6,
       "exportsVersion": true,
-      "versionLiteral": "ci-shorts-1.5.4"
+      "versionLiteral": "ci-shorts-1.6.6"
     },
     {
       "path": "src/features/social-media/youtube-shorts/prompts/repair-output.ts",
-      "lines": 68,
+      "lines": 101,
       "exportsVersion": false,
       "versionLiteral": null
     },
     {
       "path": "src/features/social-media/youtube-shorts/prompts/shared-guardrails.ts",
-      "lines": 26,
-      "exportsVersion": false,
-      "versionLiteral": null
-    },
-    {
-      "path": "src/features/social-media/youtube-shorts/prompts/story-brain.ts",
       "lines": 28,
       "exportsVersion": false,
       "versionLiteral": null
     },
     {
-      "path": "src/features/social-media/youtube-shorts/prompts/storyboard-doctrine.ts",
-      "lines": 2,
+      "path": "src/features/social-media/youtube-shorts/prompts/story-brain/compile-story-brain.ts",
+      "lines": 73,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/story-brain/guardrails-final-check.ts",
+      "lines": 8,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/story-brain/hook.ts",
+      "lines": 6,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/story-brain/mission-authority.ts",
+      "lines": 10,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/story-brain/operating-sequence.ts",
+      "lines": 8,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/story-brain/progression-payoff.ts",
+      "lines": 6,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/story-brain/scene-realization.ts",
+      "lines": 12,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/story-brain/situation-lock.ts",
+      "lines": 16,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/story-brain/spoken-language.ts",
+      "lines": 11,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/story-brain/story-architecture.ts",
+      "lines": 8,
+      "exportsVersion": false,
+      "versionLiteral": null
+    },
+    {
+      "path": "src/features/social-media/youtube-shorts/prompts/story-brain.ts",
+      "lines": 13,
       "exportsVersion": false,
       "versionLiteral": null
     }

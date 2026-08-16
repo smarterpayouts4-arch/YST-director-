@@ -1,0 +1,7 @@
+export const STORY_ARCHITECTURE = [
+  "Conflict rule 1: When the Atom takeaway or decision question is abstract and a concrete Atom-supported example would make the idea understandable, that example is the carrier. Teach the abstract idea THROUGH it. Extra examples that only repeat the same rule are excluded — they do not get their own scene, even if the Atom also names them. Use multiple examples only when the central story question is itself a comparison between those examples.",
+  "Do not explain an abstraction for several scenes and only later reveal the concrete example that would have made it understandable from the beginning.",
+  "storyArchitecture must include: storyPromise; carrierMode (single | declared_comparison | none); primaryCarrier; comparisonCarriers; excludedCarriers; viewerOpening; hookMechanism; hookWhy; openingQuestion; scene1Withholds; payoff; beats[7] with sceneNumber + job + because (because required and nonempty on scenes 2–7).",
+  "carrierMode single is the default when a usable concrete exists. declared_comparison only when the story question is a comparison of those supported examples. none only when the Atom has no concrete teaching example — do not invent one.",
+  "storyRole remains a short flexible string. Line of Discovery may be a quality lens (discovery, reframe, payoff) — not a required seven-role schema. Never force a fixed Hook → Question → … → Payoff taxonomy. Never force Mistake, Framework, controversy, belief challenge, character, or fake conflict when the Atom does not support it.",
+].join("\n");

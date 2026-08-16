@@ -20,7 +20,7 @@ export function buildGenerateStoryboardPrompt(input: {
     OUTPUT_BANS,
     "",
     "Output storyArchitecture first, then estimatedTotalSeconds, then scenes.",
-    "Output fields per scene: sceneNumber (1–7), storyRole (short flexible string, not a fixed enum), purpose, narration, sceneDescription, onScreenText, durationTargetSeconds (about 7; 5–10 allowed).",
+    "Output fields per scene: sceneNumber (1–7), storyRole (short name — one-sentence definition; at least 40 characters; not a fixed enum), purpose (two to four dense sentences; at least 100 characters), situationLock (eventMode, requiredSubjects, visibleActionOrState, relationship, locationConstraint, humanPresenceConstraint), sceneDescription (typically four to seven staged sentences; at least 200 characters), narration, onScreenText, durationTargetSeconds (about 7; 5–10 allowed).",
     "estimatedTotalSeconds for the whole Short (about 49; 35–70 allowed).",
     "storyRole may be any useful short label. Do not force a Line of Discovery enum.",
     "purpose for each scene must match that scene’s storyArchitecture.beats job.",

@@ -14,6 +14,7 @@ export function YouTubeShortsReadyView({
   sceneCount,
   estimatedTotalSeconds,
   hasStoryboard,
+  edited = false,
   onViewFullStory,
 }: {
   packet: TopicPacket;
@@ -21,14 +22,17 @@ export function YouTubeShortsReadyView({
   sceneCount: number;
   estimatedTotalSeconds: number | null;
   hasStoryboard: boolean;
+  edited?: boolean;
   onViewFullStory?: () => void;
 }) {
   const projection = projectTopicPacketToYouTubeShortsInput(packet);
   const approved = stage === "storyboard_approved";
   const statusLabel = approved
-    ? "Storyboard Approved"
+    ? "Storyboard Approved · Frozen"
     : hasStoryboard
-      ? "Storyboard Draft"
+      ? edited
+        ? "Storyboard Draft · Edited"
+        : "Storyboard Draft · Editable"
       : "Atom Received";
 
   return (

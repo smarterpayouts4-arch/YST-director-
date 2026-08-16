@@ -12,7 +12,10 @@ import {
   formatVisualPromptBody,
 } from "@/features/social-media/youtube-shorts/export/format-scene-paste";
 import type { YouTubeShortsProduction } from "@/features/social-media/youtube-shorts/schemas/youtube-shorts-production";
-import type { YouTubeShortsStoryboardScene } from "@/features/social-media/youtube-shorts/schemas/youtube-shorts-storyboard";
+import {
+  storyRoleDisplayName,
+  type YouTubeShortsStoryboardScene,
+} from "@/features/social-media/youtube-shorts/schemas/youtube-shorts-storyboard";
 import { cn } from "@/lib/utils";
 
 const inputClass =
@@ -217,7 +220,7 @@ export function StoryboardSceneEditor({
         <div className={PANEL_CLASS}>
           <FieldBlock
             label="Scene Description"
-            hint="Creative visual intent for this beat — not a generation-ready Visual Prompt."
+            hint="Visible situation that keeps the scene’s open question visible — not a generation-ready Visual Prompt."
           >
             <textarea
               className={inputClass}
@@ -312,7 +315,7 @@ export function StoryboardSceneEditor({
         <div className={PANEL_CLASS}>
           <FieldBlock
             label="Visual Prompt"
-            hint="Complete 9:16 still-image generation prompt."
+            hint="Approved Role, Purpose, and Scene Description still drive this plate. This field is production treatment, not a story reset."
           >
             <textarea
               className={inputClass}
@@ -455,7 +458,7 @@ export function StoryboardSceneEditor({
     <article className="rounded-xl border border-stone-200 bg-white shadow-sm">
       <div className="flex items-center justify-between gap-2 border-b border-stone-100 px-4 py-2.5">
         <p className="text-sm font-semibold text-stone-900">
-          Scene {scene.sceneNumber} — {scene.storyRole}
+          Scene {scene.sceneNumber} — {storyRoleDisplayName(scene.storyRole)}
         </p>
         <button
           type="button"

@@ -142,6 +142,13 @@ export async function parseStructuredOutput<T extends z.ZodTypeAny>(
         context: args.repair!.context,
       });
       lastRepairPromptVersion = repair.promptVersion;
+      safeLog("openai.structured.repair", {
+        operation: args.operation,
+        model,
+        attempt: repairAttempts + 1,
+        issueCount: issues.length,
+        issues: issues.join("; ").slice(0, 2000),
+      });
       value = await runOnce(repair.instructions, repair.input);
       lastValue = value;
       repaired = true;

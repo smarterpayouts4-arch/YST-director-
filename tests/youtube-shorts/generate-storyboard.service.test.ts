@@ -84,11 +84,14 @@ describe("generateYouTubeShortsStoryboard", () => {
       operation: string;
       model: string;
       input: string;
-      repair: { buildPrompt: unknown };
+      repair: { buildPrompt: unknown; context?: { projection?: unknown } };
     };
     expect(args.operation).toBe("generate-shorts-storyboard");
     expect(args.model).toBe("gpt-5.6-terra");
     expect(args.repair.buildPrompt).toBeTypeOf("function");
+    expect(args.repair.context?.projection).toEqual(
+      expect.objectContaining({ title: "Title A" }),
+    );
     const start = args.input.indexOf(
       "BEGIN_UNTRUSTED_YOUTUBE_SHORTS_ATOM_PROJECTION",
     );

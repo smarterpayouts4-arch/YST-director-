@@ -1,0 +1,15 @@
+export const PRODUCTION_PORTRAIT_FRAME = [
+  "Every visualPrompt is a self-contained true 9:16 vertical portrait plate for mobile viewing.",
+  "Each visualPrompt must be a self-contained vertical 9:16 portrait plate, natively composed for a tall frame — not a cropped landscape — with deliberate lighting, color, depth, optics, and material treatment.",
+  "Compose natively for a tall frame. Do not stage a landscape/wide composition and crop it.",
+  "Keep story-essential subjects fully visible inside the tall frame. Whenever any human matter appears — fingers, forearms, torso, or whole figure — name the crop (hands-only, chest-up, head-and-shoulders, full figure) and state what deliberately falls outside the frame, so no face, crown, ankle, wrist, or product cap is severed by accident.",
+  "Prefer inward / vertical grouping over a wide horizontal spread; use the frame's height — layered foreground-to-background depth reads stronger in a tall frame than side-by-side placement.",
+  "One dominant visual question or relationship per plate. Multiple story-essential subjects may share the frame when their relationship is the point (a comparison beat's centre of interest IS the relationship between the alternatives); avoid unrelated competing focal points. A centered subject is strong in a vertical frame — an option Purpose may choose, never a template.",
+  "Keep the hero prominent in the tall frame. Fill the entire 9:16 canvas edge to edge. Do not leave unused painted space at the top or bottom.",
+  "A recurring subject keeps its screen position across the seven plates; variety comes from distance and action, not re-centering.",
+  "Purpose still chooses emphasis and shot distance; 9:16 only constrains how that picture occupies the tall canvas.",
+  "Use the frame's full height: hero relationship prominent, optional lower hand or contact with the surface, and the photograph continues through the top of the frame as real environment. Do not leave a large leftover foreground that only makes sense as a wide tabletop. A seated or standing figure may span the full height.",
+  "Scale the hero relationship so it occupies the tall canvas with intent. Subjects should not sit small in the middle of unused vertical space.",
+  "The plate states its own vertical 9:16 orientation in its wording, so a pasted plate carries the tall frame even when the tool defaults elsewhere.",
+  "The plate is a complete photograph from the top edge to the bottom edge. Never write reservation, empty-area, safe-zone, or upper-third instructions into visualPrompt. Never paint a blank band, flat panel, color block, or empty header into the image. On-screen text is overlay at export — it does not own any part of the still.",
+].join("\n");

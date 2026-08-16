@@ -5,7 +5,10 @@ import { parseStructuredOutput } from "@/ai/structured-output/parse-structured-o
 import { TopicPacketSchema } from "@/features/content-intelligence/contracts/topic-packet";
 import { resolveAtomIdentity } from "@/features/content-intelligence/contracts/resolve-atom-identity";
 import { projectTopicPacketToYouTubeShortsInput } from "@/features/social-media/youtube-shorts/contracts/project-topic-packet";
-import { buildExpandProductionPrompt } from "@/features/social-media/youtube-shorts/prompts/expand-production";
+import {
+  buildExpandProductionPrompt,
+  toApprovedStoryboardModelInput,
+} from "@/features/social-media/youtube-shorts/prompts/expand-production";
 import { SHORTS_PRODUCTION_PROMPT_VERSION } from "@/features/social-media/youtube-shorts/prompts/prompt-version";
 import { buildShortsRepairPrompt } from "@/features/social-media/youtube-shorts/prompts/repair-output";
 import {
@@ -95,7 +98,15 @@ export async function expandYouTubeShortsProduction(input: {
     input: prompt.input,
     primaryPromptVersion: SHORTS_PRODUCTION_PROMPT_VERSION,
     model: getYouTubeShortsModel(),
-    repair: { buildPrompt: buildShortsRepairPrompt },
+    repair: {
+      buildPrompt: buildShortsRepairPrompt,
+      context: {
+        projection: redactedProjection.value,
+        approvedStoryboard: toApprovedStoryboardModelInput(
+          redactedBoard.value as YouTubeShortsStoryboard,
+        ),
+      },
+    },
     validate: (value) => validateProductionShape(value as YouTubeShortsProduction),
     projectId: identity.projectId,
     inputSchemaVersion: "1.0.0",

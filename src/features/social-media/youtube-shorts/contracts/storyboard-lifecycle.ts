@@ -3,9 +3,10 @@ import type {
   YouTubeShortsProduction,
   YouTubeShortsProductionScene,
 } from "@/features/social-media/youtube-shorts/schemas/youtube-shorts-production";
-import type {
-  YouTubeShortsStoryboard,
-  YouTubeShortsStoryboardScene,
+import {
+  YouTubeShortsStoryboardSchema,
+  type YouTubeShortsStoryboard,
+  type YouTubeShortsStoryboardScene,
 } from "@/features/social-media/youtube-shorts/schemas/youtube-shorts-storyboard";
 
 export type StoryboardScenePatch = Partial<
@@ -153,17 +154,33 @@ export function approveWorkingStoryboard(
       code: "INVALID_INPUT" as const,
     });
   }
+  const parsed = YouTubeShortsStoryboardSchema.safeParse(
+    session.workingStoryboard,
+  );
+  if (!parsed.success) {
+    const detail =
+      parsed.error.issues[0]?.message ?? "Storyboard failed shape checks.";
+    throw Object.assign(new Error(`Cannot approve: ${detail}`), {
+      code: "INVALID_INPUT" as const,
+    });
+  }
   return stamp(session, {
     stage: "storyboard_approved",
-    approvedStoryboard: cloneStoryboard(session.workingStoryboard),
+    approvedStoryboard: cloneStoryboard(parsed.data),
   });
 }
 
 export function reopenApprovedStoryboard(
   session: YouTubeShortsSession,
 ): YouTubeShortsSession {
+  if (!session.approvedStoryboard) {
+    throw Object.assign(new Error("No approved storyboard to reopen."), {
+      code: "INVALID_INPUT" as const,
+    });
+  }
   return stamp(session, {
     stage: "storyboard_draft",
+    workingStoryboard: cloneStoryboard(session.approvedStoryboard),
     approvedStoryboard: null,
     ...clearProductionFields(),
   });

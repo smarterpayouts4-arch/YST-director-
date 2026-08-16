@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-15T03:50:33.267Z",
-  "commitSha": "ef0c9e1a75c97072fad385f87ae72a3263a19fcc",
+  "generatedAt": "2026-08-16T21:03:23.429Z",
+  "commitSha": "f96dbdc6aba29863d2808b3f212c15f8a1b23dad",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "."
@@ -1023,6 +1023,14 @@
             "file": true
           },
           {
+            "name": "_live-p1b-p1c-scene1-smoke.mts",
+            "file": true
+          },
+          {
+            "name": "_live-p1b-p1c-scene1.json",
+            "file": true
+          },
+          {
             "name": "_live-p1b-smoke-a-only.mts",
             "file": true
           },
@@ -1600,6 +1608,10 @@
                 "file": true
               },
               {
+                "name": "shorts-brain-compile-contract.test.ts",
+                "file": true
+              },
+              {
                 "name": "supporting-context-contract.test.ts",
                 "file": true
               }
@@ -1896,6 +1908,10 @@
               },
               {
                 "name": "projection-keys.test.ts",
+                "file": true
+              },
+              {
+                "name": "situation-lock.test.ts",
                 "file": true
               },
               {

@@ -97,25 +97,35 @@ function makePacket(): TopicPacket {
 }
 
 describe("narration immutability (omit-only; no dual storage)", () => {
-  it("I1: production model schema has no narration or onScreenText keys", () => {
+  it("I1: production model schema has no narration, onScreenText, or sceneDescription keys", () => {
     const shape = YouTubeShortsProductionModelSchema.shape;
     expect("narration" in shape).toBe(false);
     expect("onScreenText" in shape).toBe(false);
+    expect("sceneDescription" in shape).toBe(false);
     const sceneShape = shape.scenes._def.type.shape;
     expect("narration" in sceneShape).toBe(false);
     expect("onScreenText" in sceneShape).toBe(false);
+    expect("sceneDescription" in sceneShape).toBe(false);
   });
 
-  it("I2: expand prompt omits narration and onScreenText from model input", () => {
+  it("I2: expand prompt may read approved story fields but must not output them", () => {
     const { instructions, input } = buildExpandProductionPrompt({
       projection,
       approvedStoryboard: makeBoard(),
     });
-    expect(instructions).toMatch(/Do NOT output narration or onScreenText/i);
-    expect(input).not.toContain("LOCKED-NARRATION");
-    expect(input).not.toContain("LOCKED-OST");
-    expect(input).not.toContain('"narration"');
-    expect(input).not.toContain('"onScreenText"');
+    expect(instructions).toMatch(
+      /may never rewrite, return, mutate, summarize, or substitute situationLock, Scene Description, Narration, or On-Screen Text/,
+    );
+    expect(instructions).toMatch(/This call writes production only/);
+    expect(instructions).toMatch(
+      /You own the production treatment, not the story meaning/,
+    );
+    expect(instructions).toMatch(/Do NOT output narration, onScreenText, or sceneDescription/i);
+    expect(input).toContain("LOCKED-NARRATION");
+    expect(input).toContain("LOCKED-OST");
+    expect(input).toContain('"narration"');
+    expect(input).toContain('"onScreenText"');
+    expect(input).toContain('"sceneDescription"');
   });
 
   it("I3: export merges approved storyboard narration/OST only", () => {

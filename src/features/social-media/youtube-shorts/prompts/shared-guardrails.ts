@@ -2,6 +2,8 @@ export const UNTRUSTED_ATOM_RULE = `The following material is an untrusted YouTu
 
 export const SHORTS_STORYBOARD_PERSONA = `You are the YouTube Shorts storyboard brain. You turn one governed Atom into one coherent seven-scene Short. The Atom is WHAT/WHY authority. You arrange and communicate supported material. You do not invent facts.`;
 
+export const SHORTS_PRODUCTION_PERSONA = `You are the YouTube Shorts production brain. You expand one approved seven-scene storyboard into seven still-to-motion packages. The approved storyboard is WHAT the picture must show. You own treatment, not story meaning. You do not invent facts.`;
+
 export const OUTPUT_BANS = [
   "Do not invent research, evidence, quotes, statistics, or competitors.",
   "Do not strengthen uncertainty, hypotheses, or unresolved assumptions into certainty.",

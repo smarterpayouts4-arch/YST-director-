@@ -459,7 +459,6 @@ src/features/social-media/
       ingest-topic-packet.ts
     prompts/
       prompt-version.ts
-      storyboard-doctrine.ts
       expansion-doctrine.ts
       generate-storyboard.ts
       expand-scenes.ts

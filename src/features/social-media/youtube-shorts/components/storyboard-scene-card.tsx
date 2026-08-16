@@ -1,6 +1,9 @@
 "use client";
 
-import type { YouTubeShortsStoryboardScene } from "@/features/social-media/youtube-shorts/schemas/youtube-shorts-storyboard";
+import {
+  storyRoleDisplayName,
+  type YouTubeShortsStoryboardScene,
+} from "@/features/social-media/youtube-shorts/schemas/youtube-shorts-storyboard";
 import { cn } from "@/lib/utils";
 
 function formatDuration(seconds: number): string {
@@ -22,7 +25,7 @@ export function StoryboardSceneCard({
       <button
         type="button"
         aria-pressed={selected}
-        aria-label={`Scene ${scene.sceneNumber}, ${scene.storyRole}`}
+        aria-label={`Scene ${scene.sceneNumber}, ${storyRoleDisplayName(scene.storyRole)}`}
         data-scene-number={scene.sceneNumber}
         onClick={onSelect}
         className="w-full text-left"
@@ -51,7 +54,7 @@ export function StoryboardSceneCard({
           </div>
         </div>
         <p className="mt-2 truncate text-center text-[11px] font-semibold text-stone-900">
-          {scene.storyRole}
+          {storyRoleDisplayName(scene.storyRole)}
         </p>
       </button>
     </div>

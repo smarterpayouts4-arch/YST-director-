@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-08-15T03:52:06.693Z",
-  "commitSha": "ef0c9e1a75c97072fad385f87ae72a3263a19fcc",
+  "generatedAt": "2026-08-16T19:05:24.139Z",
+  "commitSha": "f96dbdc6aba29863d2808b3f212c15f8a1b23dad",
   "generatorVersion": "1.0.0",
   "sourcePaths": [
     "project-knowledge/",
@@ -10,10 +10,10 @@
   ],
   "warnings": [
     "PK-WARN-001: 576 lines exceeds warning threshold 500",
-    "PK-WARN-001: 600 lines exceeds warning threshold 500",
+    "PK-WARN-001: 603 lines exceeds warning threshold 500",
     "PK-WARN-001: 713 lines exceeds warning threshold 500",
     "PK-WARN-001: 609 lines exceeds warning threshold 500",
-    "PK-WARN-001: 576 lines exceeds warning threshold 500"
+    "PK-WARN-001: 685 lines exceeds warning threshold 500"
   ],
   "marker": "GENERATED FILE — do not hand-edit; run npm run knowledge:update",
   "hardCount": 0,
@@ -30,7 +30,7 @@
       "code": "PK-WARN-001",
       "severity": "warn",
       "title": "File exceeds warning line threshold",
-      "detail": "600 lines exceeds warning threshold 500",
+      "detail": "603 lines exceeds warning threshold 500",
       "file": "src/features/social-media/youtube-shorts/components/storyboard-scene-editor.tsx"
     },
     {
@@ -51,7 +51,7 @@
       "code": "PK-WARN-001",
       "severity": "warn",
       "title": "File exceeds warning line threshold",
-      "detail": "576 lines exceeds warning threshold 500",
+      "detail": "685 lines exceeds warning threshold 500",
       "file": "tests/youtube-shorts/storyboard-workspace.test.tsx"
     }
   ]

@@ -14,15 +14,15 @@ seven connected scenes
 
 These Markdown files are the human-readable brain. They are a deliberate distill of approved Reference sources, not a copy of those sources.
 
-Runtime does **not** load `Reference/`. Runtime does **not** RAG this folder. The compact operational extract lives in `prompts/story-brain.ts` and is assembled into `generate-shorts-storyboard`.
+Runtime does **not** load `Reference/`. Runtime does **not** RAG this folder. The compact operational extract compiles from headed modules in `prompts/story-brain/` (facade `prompts/story-brain.ts`) into `generate-shorts-storyboard`. Production compiles separately from `prompts/production-brain/`.
 
 | File | Job |
 |------|-----|
-| `story-principles.md` | High-level HOW, including spoken first-hearing language and the 22-word narration budget |
+| `story-principles.md` | High-level HOW, including spoken first-hearing language, the 22-word narration budget, and Scene Description realization |
 | `hook-strategy.md` | How to choose a truthful Hook (`hookWhy` names the beaten alternative) |
 | `story-architecture.md` | How to lock one story, then write seven causal scenes |
 | `reference-map.md` | Adopted / adapted / rejected sources |
 
 ## Update rule
 
-Edit the Markdown first. Port only operational decision rules into `story-brain.ts` in the same change. Bump `SHORTS_RUNTIME_PROMPT_VERSION`. Do not add worked examples, product names, or topic-specific cases.
+Edit the Markdown first. Port only operational decision rules into the owning `prompts/story-brain/` module in the same change. Bump `SHORTS_RUNTIME_PROMPT_VERSION`. Do not add worked examples, product names, or topic-specific cases.

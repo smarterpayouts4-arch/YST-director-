@@ -69,7 +69,10 @@ export async function generateYouTubeShortsStoryboard(input: {
     input: prompt.input,
     primaryPromptVersion: SHORTS_RUNTIME_PROMPT_VERSION,
     model: getYouTubeShortsModel(),
-    repair: { buildPrompt: buildShortsRepairPrompt },
+    repair: {
+      buildPrompt: buildShortsRepairPrompt,
+      context: { projection: redacted.value },
+    },
     validate: (value) =>
       validateGeneratedStoryboard(value, {
         tension: packet.tension,

@@ -10,6 +10,10 @@ import {
  * UI map: Role→storyRole, Purpose→purpose, Scene Description→sceneDescription,
  * Narration→narration, On-Screen Text→onScreenText, Timing→durationTargetSeconds.
  *
+ * Generation order is intentional (structured-output key order = think order):
+ * sceneNumber → storyRole → purpose → situationLock → sceneDescription →
+ * narration → onScreenText → durationTargetSeconds. Zod validation is key-order independent.
+ *
  * storyArchitecture is the locked story. Scenes are downstream of it.
  * Optional on persisted boards so older sessions still load.
  *
@@ -17,20 +21,73 @@ import {
  * Asset Type (image|video), Motion Prompt, Continuity (internal; export via CHARACTER*
  * fields only — never a generic CONTINUITY paste header).
  *
- * sceneDescription informs Visual Prompt later; it is not a generation-ready still plate.
+ * sceneDescription is the human-readable visible event. situationLock is the
+ * machine semantic contract for P1C. Neither is a generation-ready still plate.
  * Motion Prompt is action/camera/timing only and must not rewrite the still.
+ *
+ * Field map (do not duplicate architecture):
+ * - eventMode = ADD (physical_comparison | mediated_surface | dual; P1C cannot infer)
+ * - requiredSubjects / visibleActionOrState / relationship = ADD (P1C cannot infer)
+ * - locationConstraint / humanPresenceConstraint = ADD, default "open"
+ * - viewerMustPerceive = DROP (restates purpose)
+ * - mustWithhold / hiddenFacts = DROP (restates scene1Withholds / openingQuestion)
+ * - physicalAction = DROP (retired shot-card field; action stays visibleActionOrState)
  *
  * Semantic validation lives in ./yss/semantics.ts. This file stays the public contract.
  */
+export const SITUATION_LOCK_OPEN = "open";
+export const SITUATION_EVENT_MODES = [
+  "physical_comparison",
+  "mediated_surface",
+  "dual",
+] as const;
+export const HUMAN_PRESENCE_CONSTRAINTS = [
+  "open",
+  "none",
+  "hands",
+  "partial",
+  "person",
+] as const;
+
+export const YouTubeShortsSituationLockSchema = z.object({
+  eventMode: z.enum(SITUATION_EVENT_MODES).optional(),
+  requiredSubjects: z.array(z.string().min(1).max(80)).min(1).max(4),
+  visibleActionOrState: z.string().min(1).max(200),
+  relationship: z.string().min(1).max(240),
+  locationConstraint: z.string().min(1).max(160),
+  humanPresenceConstraint: z.enum(HUMAN_PRESENCE_CONSTRAINTS),
+});
+
+/** Model lock requires eventMode so P1C never infers channel from prose. */
+export const YouTubeShortsSituationLockModelSchema =
+  YouTubeShortsSituationLockSchema.extend({
+    eventMode: z.enum(SITUATION_EVENT_MODES),
+  });
+
 export const YouTubeShortsStoryboardSceneSchema = z.object({
   sceneNumber: z.number().int().min(1).max(7),
-  storyRole: z.string().min(1).max(80),
-  purpose: z.string().min(1).max(400),
+  storyRole: z.string().min(1).max(240),
+  purpose: z.string().min(1).max(700),
+  situationLock: YouTubeShortsSituationLockSchema.optional(),
+  sceneDescription: z.string().min(1).max(1200),
   narration: z.string().min(1).max(800),
-  sceneDescription: z.string().min(1).max(800),
   onScreenText: z.string().max(200),
   durationTargetSeconds: z.number().min(5).max(10),
 });
+
+/**
+ * Model contract enforces the robust cascade with floors (density, not
+ * padding): storyRole = short name — one-sentence definition (>=40);
+ * purpose = 2–4 dense sentences (>=100); sceneDescription = staged scene
+ * (>=200). Persist keeps min(1) everywhere so old sessions still load.
+ */
+export const YouTubeShortsStoryboardSceneModelSchema =
+  YouTubeShortsStoryboardSceneSchema.extend({
+    situationLock: YouTubeShortsSituationLockModelSchema,
+    storyRole: z.string().min(40).max(240),
+    purpose: z.string().min(100).max(700),
+    sceneDescription: z.string().min(200).max(1200),
+  });
 
 export const YouTubeShortsStoryArchitectureBeatSchema = z.object({
   sceneNumber: z.number().int().min(1).max(7),
@@ -69,7 +126,7 @@ export const YouTubeShortsStoryArchitectureModelSchema =
 export const YouTubeShortsStoryboardModelSchema = z.object({
   storyArchitecture: YouTubeShortsStoryArchitectureModelSchema,
   estimatedTotalSeconds: z.number().min(35).max(70),
-  scenes: z.array(YouTubeShortsStoryboardSceneSchema).length(7),
+  scenes: z.array(YouTubeShortsStoryboardSceneModelSchema).length(7),
 });
 
 export const YouTubeShortsStoryboardSchema = z
@@ -115,9 +172,36 @@ export type StoryboardPhraseSources = {
   supportingInsights?: string[];
   evidenceQuotes?: string[];
 };
+export type YouTubeShortsSituationLock = z.infer<
+  typeof YouTubeShortsSituationLockSchema
+>;
+export type YouTubeShortsSituationLockModel = z.infer<
+  typeof YouTubeShortsSituationLockModelSchema
+>;
 export type YouTubeShortsStoryboardScene = z.infer<
   typeof YouTubeShortsStoryboardSceneSchema
 >;
+export type YouTubeShortsStoryboardSceneModel = z.infer<
+  typeof YouTubeShortsStoryboardSceneModelSchema
+>;
+
+/** UI display name for a "short name — definition" storyRole. */
+export function storyRoleDisplayName(storyRole: string): string {
+  return storyRole.split("—")[0]?.trim() || storyRole;
+}
+
+export function openSituationLock(
+  requiredSubjects: string[] = ["the beat's required subject"],
+): YouTubeShortsSituationLock {
+  return {
+    eventMode: "physical_comparison",
+    requiredSubjects,
+    visibleActionOrState: "hold the beat's unresolved comparison",
+    relationship: "the decision remains unresolved",
+    locationConstraint: SITUATION_LOCK_OPEN,
+    humanPresenceConstraint: "open",
+  };
+}
 export type YouTubeShortsStoryboard = z.infer<
   typeof YouTubeShortsStoryboardSchema
 >;

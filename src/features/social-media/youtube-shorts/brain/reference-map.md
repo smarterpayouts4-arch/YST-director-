@@ -56,7 +56,9 @@ Owner read of `Reference and read only/` (2026-08-14) corroborates this compact 
 ```text
 these Markdown files
         ↓ hand distill in the same change
-prompts/story-brain.ts
+prompts/story-brain/ modules
+        ↓ compileStoryBrain()
+prompts/story-brain.ts facade
         ↓
 prompts/generate-storyboard.ts
         ↓

@@ -38,13 +38,13 @@ Context before cleverness. Immediate clear situation. One center of attention. A
 
 Lock `hookWhy` as one spoken sentence: why this mechanism fits this Atom’s audience, moment, carrier, and tension, and why it beat a truthful alternative. Mechanism stays a free description — not an enum.
 
-Scene 1 may place the viewer inside the customer moment when the Atom’s moment supports it. That is an option, never a template.
+Scene 1 may place the viewer inside the customer moment when the Atom’s moment supports it. That is an option, never a template — spoken and situation recognition, not a cue to draw the channel implied by audience. A word such as online in audience describes where the viewer decides, not a required visual of a laptop, listing, or phone.
 
 Hook compression: Scene 1 spoken line is at most two clauses. The opening question is the thought the viewer would have in that moment — not a document or label question.
 
 ## Grounding test
 
-Scene 1 must be recognizable as *this* audience in *this* moment, involving *this* carrier when a carrier was selected. If the opening would work for almost any comparison story after swapping nouns, it is too generic. Rebuild it from the four inputs above.
+Scene 1 must be recognizable as *this* audience in *this* moment, involving *this* carrier when a carrier was selected. Recognizable means the spoken situation and the locked eventMode, not a literal drawing of the audience channel. If the opening would work for almost any comparison story after swapping nouns, it is too generic. Rebuild it from the four inputs above.
 
 ## Forbidden
 
